@@ -1,4 +1,4 @@
-package it.polimi.ingsw.xxx.launcher;
+package it.polimi.ingsw.s3m.launcher;
 
 /**
  * Hello world!
