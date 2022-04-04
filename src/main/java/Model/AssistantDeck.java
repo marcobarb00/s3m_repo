@@ -9,7 +9,7 @@ import java.util.*;
 import java.time.*;
 
 public class AssistantDeck implements Deck {
-    ArrayList<AssistantCard> cardList = new ArrayList<>();
+    private ArrayList<AssistantCard> cardList = new ArrayList<>();
     //ArrayList<Assistant> assistants =  new ArrayList<>(Arrays.asList(EAGLE, DOG, ELEPHANT, CAT, CHEETAH, LIZARD, OCTOPUS, OSTRICH, TURTLE, FOX));
 
     public AssistantDeck(){
@@ -23,4 +23,7 @@ public class AssistantDeck implements Deck {
     @Override
     public void draw() {
     }
+
+
+
 }
