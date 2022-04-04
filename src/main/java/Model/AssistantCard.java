@@ -27,16 +27,4 @@ public class AssistantCard {
     private int getMovement() {
         return movement;
     }
-
-    private void setType(Assistant type) {
-        this.type = type;
-    }
-
-    private void setValue(int value) {
-        this.value = value;
-    }
-
-    private void setMovement(int movement) {
-        this.movement = movement;
-    }
 }
