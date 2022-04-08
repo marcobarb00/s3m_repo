@@ -4,25 +4,24 @@
 package Model;
 
 import java.util.*;
-import java.time.*;
 
 public class AssistantDeck{
 
-    //Arryalist for cards max 10 cards
-    private ArrayList<AssistantEnum> cardList;
+    /**
+     * Arraylist for cards max 10 cards
+     */
+    private ArrayList<AssistantCard> cardList;
 
-
-    //Constructor for card generation
+    /**
+     * Constructor. Initializes arraylist with all the cards
+     */
     public AssistantDeck(){
-        this.cardList = new ArrayList<AssistantEnum>(
-                Arrays.asList(AssistantEnum.EAGLE, AssistantEnum.DOG, AssistantEnum.ELEPHANT,
-                        AssistantEnum.CAT, AssistantEnum.CHEETAH, AssistantEnum.LIZARD,
-                        AssistantEnum.OCTOPUS, AssistantEnum.OSTRICH, AssistantEnum.TURTLE, AssistantEnum.FOX)
+        this.cardList = new ArrayList<>(
+                Arrays.asList(AssistantCard.EAGLE, AssistantCard.DOG, AssistantCard.ELEPHANT,
+                        AssistantCard.CAT, AssistantCard.CHEETAH, AssistantCard.LIZARD,
+                        AssistantCard.OCTOPUS, AssistantCard.OSTRICH, AssistantCard.TURTLE, AssistantCard.FOX)
         );
     }
-
-
-
 
 
 }
