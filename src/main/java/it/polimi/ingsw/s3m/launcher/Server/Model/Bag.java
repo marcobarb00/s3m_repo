@@ -34,4 +34,16 @@ public class Bag {
         students.put(color, students.get(color)-1);
         return new Student(color);
     }
+
+    /**
+     * Method that returns the total number of students in the bag
+     * @return actualNumberOfStudents
+     */
+    public int returnNumberOfStudents () {
+        int actualNumberOfStudents = 0;
+        for (PawnColor color : PawnColor.values()) {
+            actualNumberOfStudents += students.get(color);
+        }
+        return actualNumberOfStudents;
+    }
 }

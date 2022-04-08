@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
 
     @Test
-    void professorsNotNullInitialization() {
+    void professorsArrayNotNullInitialization() {
         ArrayList<Player> players = new ArrayList<>();
         Game game = new Game(players);
 
@@ -23,7 +23,7 @@ class GameTest {
     }
 
     @Test
-    void professorsAllColorsInitialization() {
+    void professorsArrayAllColorsInitialization() {
         ArrayList<Player> players = new ArrayList<>();
         Game game = new Game(players);
 
