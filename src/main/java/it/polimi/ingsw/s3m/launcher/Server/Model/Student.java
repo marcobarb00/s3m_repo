@@ -6,4 +6,6 @@ public class Student {
     public Student (PawnColor color) {
         this.color = color;
     }
+
+    public PawnColor getColor () { return color; }
 }

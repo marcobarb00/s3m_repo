@@ -4,33 +4,49 @@ import java.util.HashMap;
 
 public class Bag {
     private HashMap<PawnColor, Integer> students;
-    private PawnColor color;
 
     public Bag () {
         students = new HashMap<PawnColor, Integer>();
-        students.put(PawnColor.BLUE, 10);
-        students.put(PawnColor.GREEN, 10);
-        students.put(PawnColor.PINK, 10);
-        students.put(PawnColor.RED, 10);
-        students.put(PawnColor.YELLOW, 10);
+        students.put(PawnColor.BLUE, 26);
+        students.put(PawnColor.GREEN, 26);
+        students.put(PawnColor.PINK, 26);
+        students.put(PawnColor.RED, 26);
+        students.put(PawnColor.YELLOW, 26);
     }
 
+    public HashMap<PawnColor, Integer> getStudents () { return students; }
+
     /**
-     * Method that extract a random color
-     * @return a color
+     * Method that extract a random color from the bag
+     * @return a color of a student
      */
     private PawnColor extractColor () {
-        return PawnColor.BLUE;
+        float percent = (float) Math.random();
+        if (percent < 0.2) {
+            return PawnColor.BLUE;
+        } else if (percent >= 0.2 && percent < 0.4) {
+            return PawnColor.GREEN;
+        } else if (percent >= 0.4 && percent < 0.6) {
+            return PawnColor.PINK;
+        } else if (percent >= 0.6 && percent < 0.8) {
+            return PawnColor.RED;
+        } else {
+            return PawnColor.YELLOW;
+        }
     }
 
     /**
      * Method that extract a random student from the bag
      * and return it to the game
-     * @return a student
+     * @return Student Object
      */
-    public Student pickStudent () {
-        // prova
-        color = extractColor();
+    //TODO create EmptyBagExcepton in bag
+    public Student pickStudent /*throw EmptyBagException*/ () {
+        PawnColor color = extractColor();
+        while (students.get(color) == 0
+                && returnNumberOfStudents() != 0) {
+            color = extractColor();
+        }
         students.put(color, students.get(color)-1);
         return new Student(color);
     }
