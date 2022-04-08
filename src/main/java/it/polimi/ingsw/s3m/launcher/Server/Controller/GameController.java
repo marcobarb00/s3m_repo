@@ -13,7 +13,7 @@ public class GameController {
      */
     public GameController (int playerNumber) {
         this.playerNumber = playerNumber;
-        game.startGame();
+        game = new Game(playerNumber);
     }
 
     public int getPlayerNumber () { return playerNumber; }
