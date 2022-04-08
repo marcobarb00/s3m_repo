@@ -5,34 +5,20 @@
 */
 package Model;
 
-import java.util.*;
-import java.time.*;
-
-public class CharacterCard {
-    private String type;
+public abstract class CharacterCard {
     private int cost;
 
-    public CharacterCard(String type, int cost) {
-        this.type = type;
+    public CharacterCard(int cost) {
         this.cost = cost;
     }
 
-    private String getType() {
-        return type;
-    }
+    public void activateEffect(){}
 
     private int getCost() {
         return cost;
     }
 
-    private void setType(String type) {
-        this.type = type;
-    }
-
     private void setCost(int cost) {
         this.cost = cost;
-    }
-
-    public void activateEffect() {
     }
 }
