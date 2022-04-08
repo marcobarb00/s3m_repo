@@ -3,7 +3,7 @@
 *
 * Drop us a line or two at feedback@archetypesoftware.com: we would love to hear from you!
 */
-package Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 public class AssistantCard {
     private Assistant type;

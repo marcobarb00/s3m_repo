@@ -1,6 +1,6 @@
-package Controller;
+package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 public class GameController {
     private int playerNumber;
@@ -13,7 +13,6 @@ public class GameController {
      */
     public GameController (int playerNumber) {
         this.playerNumber = playerNumber;
-        game = new Game(playerNumber);
         game.startGame();
     }
 

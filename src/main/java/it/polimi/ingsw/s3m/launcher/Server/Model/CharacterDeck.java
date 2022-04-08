@@ -3,10 +3,7 @@
 *
 * Drop us a line or two at feedback@archetypesoftware.com: we would love to hear from you!
 */
-package Model;
-
-import java.util.*;
-import java.time.*;
+package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 public class CharacterDeck implements Deck {
     @Override

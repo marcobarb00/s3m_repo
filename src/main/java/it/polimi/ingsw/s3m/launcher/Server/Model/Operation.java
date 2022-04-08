@@ -1,4 +1,4 @@
-package Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 public abstract class Operation {
     private String nickname;
