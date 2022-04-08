@@ -5,20 +5,34 @@
 */
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-public abstract class CharacterCard {
+import java.util.*;
+import java.time.*;
+
+public class CharacterCard {
+    private String type;
     private int cost;
 
-    public CharacterCard(int cost) {
+    public CharacterCard(String type, int cost) {
+        this.type = type;
         this.cost = cost;
     }
 
-    public void activateEffect(){}
+    private String getType() {
+        return type;
+    }
 
     private int getCost() {
         return cost;
     }
 
+    private void setType(String type) {
+        this.type = type;
+    }
+
     private void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public void activateEffect() {
     }
 }
