@@ -12,7 +12,6 @@ public class CharacterDeck{
 
     public void shuffle() {
     }
-
     public void draw() {
     }
 }
