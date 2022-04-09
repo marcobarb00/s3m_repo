@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
+import it.polimi.ingsw.s3m.launcher.Server.Communications.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.Client;
 
 import java.io.IOException;
@@ -9,15 +10,15 @@ import java.net.Socket;
 
 public class ClientSocket implements Runnable{
     private final Socket socket;
-    private ObjectInputStream objectIinputStream;
-    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
     private Client client;
 
     public ClientSocket(Socket socket) {
         this.socket = socket;
         try {
-            objectIinputStream = new ObjectInputStream(socket.getInputStream());
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            inputStream = new ObjectInputStream(socket.getInputStream());
+            outputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,16 +28,41 @@ public class ClientSocket implements Runnable{
     public void run() {
         Client client = new Client(this);
         client.setup();
-
     }
 
-    public void notifyClient(){
+    /**
+     * write a message in the outputStream
+     * @param message the message to be sent
+     */
+    public void sendMessage(Message message){
+        try{
+            outputStream.writeObject(message);
+            outputStream.flush();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * read the inputStream of the client
+     * @return message written in the inputStream
+     */
+    public Message readMessage(){
+        try{
+            return (Message) inputStream.readObject();
+        }catch(ClassNotFoundException | IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * closes the streams and the socket
+     */
     public void close(){
         try {
-            objectIinputStream.close();
-            objectOutputStream.close();
+            inputStream.close();
+            outputStream.close();
             socket.close();
             System.out.println("client" + socket.getInetAddress() + "socket closed");
         } catch (IOException e) {

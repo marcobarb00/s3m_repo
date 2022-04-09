@@ -15,7 +15,7 @@ public class Server {
     }
 
     /**
-     * startServer creates the server socket and accepts new clients
+     * startServer creates the server socket and accepts new clients in an infinite loop
      */
     public void startServer() {
         //open the server socket
