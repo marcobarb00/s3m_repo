@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Server.Communications;
+package it.polimi.ingsw.s3m.launcher.Communication;
 
 import java.io.Serializable;
 

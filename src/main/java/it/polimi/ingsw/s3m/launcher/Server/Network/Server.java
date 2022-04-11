@@ -1,18 +1,18 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    private final int PORT;
+    public static final int PORT = 12000;
+    //public static final InetAddress;
     private ServerSocket serverSocket;
 
-    public Server(int PORT) {
-        this.PORT = PORT;
-    }
+    //public Server() {}
 
     /**
      * startServer creates the server socket and accepts new clients in an infinite loop
@@ -20,11 +20,13 @@ public class Server {
     public void startServer() {
         //open the server socket
         try {
-            serverSocket = new ServerSocket(this.PORT);
-            System.out.println("welcome socket opened at port: " + this.PORT);
+            serverSocket = new ServerSocket(PORT);
+            System.out.println("welcome socket opened at port: " + PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //System.out.println(serverSocket.getInetAddress());
 
         //create threadPool for multiple clients
         ExecutorService executor = Executors.newCachedThreadPool();
