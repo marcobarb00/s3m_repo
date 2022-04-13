@@ -9,10 +9,12 @@ import java.util.concurrent.Executors;
 
 public class Server {
     public static final int PORT = 12000;
-    //public static final InetAddress;
     private ServerSocket serverSocket;
 
-    //public Server() {}
+    public static void main(String[] args) {
+        Server server = new Server();
+        server.startServer();
+    }
 
     /**
      * startServer creates the server socket and accepts new clients in an infinite loop

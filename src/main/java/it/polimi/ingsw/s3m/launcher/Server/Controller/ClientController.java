@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Network.ClientSocket;
 
 public class ClientController{
     private ClientSocket ClientSocket;
-    //private Room room;
+    private Room room;
     private Player player;
     //message
 
