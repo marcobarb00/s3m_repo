@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+<<<<<<< HEAD
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 public class Room {
@@ -10,4 +11,7 @@ public class Room {
     // per provare a creare il game tramite room
     public Room (int playersNumber) {
     }
+=======
+public class Room {
+>>>>>>> origin/master
 }
