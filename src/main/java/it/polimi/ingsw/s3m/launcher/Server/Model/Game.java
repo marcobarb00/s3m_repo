@@ -24,6 +24,7 @@ public class Game {
      * Constructor of the game in which is given the state of the game.
      * The game creates the bag,
      * @param playersList
+     * @return
      */
     public Game (ArrayList<Player> playersList) {
         this.playersLists = playersList;
@@ -49,4 +50,9 @@ public class Game {
     public ArrayList<Professor> getProfessorsList() {
         return professorsList;
     }
+
+    /**
+     * @return bag
+     */
+    public Bag getBag () { return bag; }
 }

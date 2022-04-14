@@ -1,5 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+
 import java.util.HashMap;
 
 public class Bag {
@@ -41,10 +43,12 @@ public class Bag {
      * @return Student Object
      */
     //TODO create EmptyBagExcepton in bag
-    public Student pickStudent /*throw EmptyBagException*/ () {
+    public Student pickStudent() throws EmptyBagException {
+        if (getNumberOfStudents() <= 0) {
+            throw new EmptyBagException();
+        }
         PawnColor color = extractColor();
-        while (students.get(color) == 0
-                && returnNumberOfStudents() != 0) {
+        while (students.get(color) == 0) {
             color = extractColor();
         }
         students.put(color, students.get(color)-1);
@@ -55,7 +59,7 @@ public class Bag {
      * Method that returns the total number of students in the bag
      * @return actualNumberOfStudents
      */
-    public int returnNumberOfStudents () {
+    public int getNumberOfStudents () {
         int actualNumberOfStudents = 0;
         for (PawnColor color : PawnColor.values()) {
             actualNumberOfStudents += students.get(color);
