@@ -1,37 +1,38 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Communication.Login;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientSocket;
 
 public class ClientHandler{
-    private ClientSocket ClientSocket;
+    private ClientSocket clientSocket;
     private Room room;
-    private Player player;
-    //message
+    private String nickname;
 
     public ClientSocket getClientSocket() {
-        return ClientSocket;
+        return clientSocket;
     }
 
     public void setClientSocket(ClientSocket clientSocket) {
-        ClientSocket = clientSocket;
+        this.clientSocket = clientSocket;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
+    public String getNickname(){
+        return nickname;
     }
 
     public ClientHandler(ClientSocket clientSocket) {
-        ClientSocket = clientSocket;
+        this.clientSocket = clientSocket;
     }
 
-    public void setup(){}
+    public void login(){
+        Login loginInfo = (Login) clientSocket.readMessage();
+        RoomsController.instance().loginClient(this, loginInfo);
+    }
 
-    public void setPlayersNumber(){}
+    public int askPlayersNumber(){
+        return 0;
+    }
 
     public void activateCharacterCard(){}
 

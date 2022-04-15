@@ -12,8 +12,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Client{
-	private final String SERVERIP = "localhost";
-	private final int PORT = Server.PORT;
+	private final String serverip = Server.SERVERIP;
+	private final int port = Server.PORT;
 	private Socket socket;
 	private ObjectInputStream inputStream;
 	private ObjectOutputStream outPutStream;
@@ -31,7 +31,7 @@ public class Client{
 	 */
 	public void start(){
 		try{
-			socket = new Socket(SERVERIP, PORT);
+			socket = new Socket(serverip, port);
 			inputStream = new ObjectInputStream(socket.getInputStream());
 			outPutStream = new ObjectOutputStream(socket.getOutputStream());
 		}catch(IOException e){

@@ -27,7 +27,7 @@ public class ClientSocket implements Runnable{
     @Override
     public void run() {
         ClientHandler clientHandler = new ClientHandler(this);
-        clientHandler.setup();
+        clientHandler.login();
     }
 
     /**

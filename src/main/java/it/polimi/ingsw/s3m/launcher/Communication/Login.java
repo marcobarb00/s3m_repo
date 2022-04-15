@@ -2,7 +2,6 @@ package it.polimi.ingsw.s3m.launcher.Communication;
 
 public class Login implements Message{
 	private String nickname;
-	private int playerId;
 	private boolean successful;
 	/**
 	 * message is a string from the server that tells if the login is not successful and why
@@ -23,10 +22,6 @@ public class Login implements Message{
 
 	public void setSuccessful(boolean successful){
 		this.successful = successful;
-	}
-
-	public void setPlayerId(int playerId){
-		this.playerId = playerId;
 	}
 
 	public void setMessage(String message){

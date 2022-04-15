@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
+    public static final String SERVERIP = "localhost";
     public static final int PORT = 12000;
     private ServerSocket serverSocket;
 
