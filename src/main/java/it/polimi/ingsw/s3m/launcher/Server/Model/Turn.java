@@ -6,4 +6,9 @@ public class Turn {
     private Phase phase;
     private int winCondition;
 
+    public Turn(Player player, Phase phase, int winCondition) {
+        this.player = player;
+        this.phase = phase;
+        this.winCondition = winCondition;
+    }
 }
