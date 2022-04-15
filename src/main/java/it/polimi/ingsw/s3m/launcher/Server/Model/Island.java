@@ -1,29 +1,21 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotDominatedIslandException;
+
 public class Island{
     private int id;             //from 0 to 11
-    private int previousIslandId;
-    private int nextIslandId;
+    private Island previousIsland;
+    private Island nextIsland;
     private int towers;
     private Player dominator = null;
 
     static private int idGen = 0;
 
+    //TODO Setting next and prev islands for each one (setters)
     public Island() {
         this.id = idGen;
         idGen++;
 
-        if(this.id == 11){
-            this.nextIslandId = 0;
-        }else{
-            this.nextIslandId = this.id + 1;
-        }
-
-        if(this.id == 0){
-            this.previousIslandId = 11;
-        }else{
-            this.nextIslandId = this.id - 1;
-        }
     }
 
     public Player computeDominance(){
@@ -38,12 +30,25 @@ public class Island{
        this.towers += 1;
     }
 
+    //TODO Merging with 3 islands if gets dominated the one in the middle of 2 dominated
     /**
-     * Method to merge islands, how to remove merged island from implementation?
-     * @param islandToMerge
+     * Method to merge islands, how to remove merged island from implementation (in game class)?
+     * Works for 3 islands too.
      */
-    public void mergeIslands(Island islandToMerge){
-        
+    public void mergeIslands() throws NotDominatedIslandException {
+        //Checks if it's the same Island
+
+        if(this.dominator == null)
+            throw new NotDominatedIslandException();
+
+        if(this.dominator == this.nextIsland.getDominator()){
+           this.towers = this.towers + this.nextIsland.getTowers();
+           this.nextIsland = this.nextIsland.getNextIsland();
+         }
+        if(this.dominator == this.previousIsland.getDominator()){
+            this.towers = this.towers + this.previousIsland.getTowers();
+            this.previousIsland = this.previousIsland.getPreviousIsland();
+        }
     }
 
     public int getId() {
@@ -64,5 +69,13 @@ public class Island{
 
     public Player getDominator() {
         return dominator;
+    }
+
+    public Island getPreviousIsland() {
+        return previousIsland;
+    }
+
+    public Island getNextIsland() {
+        return nextIsland;
     }
 }
