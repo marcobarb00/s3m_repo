@@ -15,13 +15,15 @@ public class AssistantDeck{
     /**
      * Constructor. Initializes arraylist with all the cards
      */
-    public AssistantDeck(){
+    public AssistantDeck() {
         this.cardList = new ArrayList<>(
                 Arrays.asList(AssistantCard.EAGLE, AssistantCard.DOG, AssistantCard.ELEPHANT,
                         AssistantCard.CAT, AssistantCard.CHEETAH, AssistantCard.LIZARD,
                         AssistantCard.OCTOPUS, AssistantCard.OSTRICH, AssistantCard.TURTLE, AssistantCard.FOX)
         );
     }
+
+}
 
 
 
