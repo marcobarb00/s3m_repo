@@ -3,7 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientSocket;
 
-public class ClientController{
+public class ClientHandler{
     private ClientSocket ClientSocket;
     private Room room;
     private Player player;
@@ -25,7 +25,7 @@ public class ClientController{
         this.player = player;
     }
 
-    public ClientController(ClientSocket clientSocket) {
+    public ClientHandler(ClientSocket clientSocket) {
         ClientSocket = clientSocket;
     }
 

@@ -1,5 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Client.Network;
 
+import it.polimi.ingsw.s3m.launcher.Client.Controller.ClientController;
+import it.polimi.ingsw.s3m.launcher.Client.View.CLIView;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIView;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
 
 import java.io.IOException;
@@ -15,11 +19,17 @@ public class Client{
 	private ObjectOutputStream outPutStream;
 
 	public static void main(String[] args){
-		//TODO CLIclient/GUIclient
-		Client client = new Client();
+		ClientController clientController;
+		if(args[1].equals("CLI"))
+			 clientController = new ClientController(new CLIView());
+		else
+			clientController = new ClientController(new GUIView());
 	}
 
-	public void startClient(){
+	/**
+	 * creates socket and Input/OutputObjectStream
+	 */
+	public void start(){
 		try{
 			socket = new Socket(SERVERIP, PORT);
 			inputStream = new ObjectInputStream(socket.getInputStream());
@@ -27,5 +37,30 @@ public class Client{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * sends a message to the server
+	 * @param message message to be sent
+	 */
+	public void sendMessage(Message message){
+		try{
+			outPutStream.writeObject(message);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * recieve a message from the server
+	 * @return message recieved
+	 */
+	public Message recieveMessage(){
+		try{
+			return (Message) inputStream.readObject();
+		}catch(IOException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

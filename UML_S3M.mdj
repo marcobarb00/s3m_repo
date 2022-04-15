@@ -377,7 +377,7 @@
 											"top": 3261,
 											"width": 255,
 											"height": 13,
-											"text": "-clientController: Client",
+											"text": "-clientHandler: Client",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1026,7 +1026,7 @@
 											"top": 2683,
 											"width": 348.61328125,
 											"height": 13,
-											"text": "+createRoom(clientController: ClientController): void",
+											"text": "+createRoom(clientHandler: ClientController): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1043,7 +1043,7 @@
 											"top": 2698,
 											"width": 348.61328125,
 											"height": 13,
-											"text": "+assignClientAtRoom(clientController: ClientController): void",
+											"text": "+assignClientAtRoom(clientHandler: ClientController): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1699,7 +1699,7 @@
 											"top": 2683,
 											"width": 439.6640625,
 											"height": 13,
-											"text": "+login(clientController: ClientController): void",
+											"text": "+login(clientHandler: ClientController): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1784,7 +1784,7 @@
 											"top": 2758,
 											"width": 439.6640625,
 											"height": 13,
-											"text": "+addClientToRoom(clientController: ClientController): void",
+											"text": "+addClientToRoom(clientHandler: ClientController): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1818,7 +1818,7 @@
 											"top": 2788,
 											"width": 439.6640625,
 											"height": 13,
-											"text": "+notifyAllButOneClients(notification: String, clientController: ClientController)",
+											"text": "+notifyAllButOneClients(notification: String, clientHandler: ClientController)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -15636,7 +15636,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF/+1OF92ogJWs="
 											},
-											"name": "clientController",
+											"name": "clientHandler",
 											"type": {
 												"$ref": "AAAAAAF/89SE4zaQL08="
 											}
@@ -15657,7 +15657,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF/+1ppwZe3+sE="
 											},
-											"name": "clientController",
+											"name": "clientHandler",
 											"type": {
 												"$ref": "AAAAAAF/89SE4zaQL08="
 											}
@@ -15960,7 +15960,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF/+4GkfEz+D9g="
 											},
-											"name": "clientController",
+											"name": "clientHandler",
 											"type": {
 												"$ref": "AAAAAAF/89SE4zaQL08="
 											}
@@ -16066,7 +16066,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF/+2BSx+oDGG4="
 											},
-											"name": "clientController",
+											"name": "clientHandler",
 											"type": {
 												"$ref": "AAAAAAF/89SE4zaQL08="
 											}
@@ -16133,7 +16133,7 @@
 											"_parent": {
 												"$ref": "AAAAAAF/+2ROWP34qCo="
 											},
-											"name": "clientController",
+											"name": "clientHandler",
 											"type": {
 												"$ref": "AAAAAAF/89SE4zaQL08="
 											}
@@ -16210,7 +16210,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF/86xNNc8NS68="
 									},
-									"name": "clientController",
+									"name": "clientHandler",
 									"visibility": "private",
 									"type": "Client"
 								},
