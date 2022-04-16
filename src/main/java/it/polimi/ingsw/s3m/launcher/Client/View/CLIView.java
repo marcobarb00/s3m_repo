@@ -19,7 +19,7 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void showLoginInfo(Login loginInfo){
-		System.out.println(loginInfo.getMessage());
+	public void showLoginResult(Login loginResult){
+		System.out.println(loginResult.getMessage());
 	}
 }

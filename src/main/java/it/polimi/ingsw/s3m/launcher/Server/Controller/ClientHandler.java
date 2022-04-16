@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Login;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientSocket;
 
@@ -21,17 +22,22 @@ public class ClientHandler{
         return nickname;
     }
 
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+
     public ClientHandler(ClientSocket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
     public void login(){
         Login loginInfo = (Login) clientSocket.readMessage();
-        RoomsController.instance().loginClient(this, loginInfo);
+        Login loginResult = RoomsController.instance().loginClient(this, loginInfo);
+        clientSocket.sendMessage(loginResult);
     }
 
     public int askPlayersNumber(){
-        return 0;
+        return 2;
     }
 
     public void activateCharacterCard(){}

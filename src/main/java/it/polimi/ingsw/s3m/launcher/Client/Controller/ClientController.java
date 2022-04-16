@@ -24,7 +24,7 @@ public class ClientController{
 			loginInfo = view.login();
 			client.sendMessage(loginInfo);
 			loginInfo = (Login) client.recieveMessage();
-			view.showLoginInfo(loginInfo);
-		}while(loginInfo.isSuccessful());
+			view.showLoginResult(loginInfo);
+		}while(!loginInfo.isSuccessful());
 	}
 }

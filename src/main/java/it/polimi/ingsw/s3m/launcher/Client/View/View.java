@@ -14,7 +14,7 @@ public abstract class View{
 
 	/**
 	 * show the response of the server to the login request, set nickname and playerId of the view
-	 * @param loginInfo
+	 * @param loginResult
 	 */
-	public abstract void showLoginInfo(Login loginInfo);
+	public abstract void showLoginResult(Login loginResult);
 }

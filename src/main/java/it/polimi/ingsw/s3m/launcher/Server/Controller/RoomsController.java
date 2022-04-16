@@ -7,11 +7,9 @@ import java.util.Objects;
 
 public class RoomsController {
     private static RoomsController instance = null;
-    private ArrayList<Room> rooms = new ArrayList<>();
+    private static ArrayList<Room> rooms = new ArrayList<>();
 
-    private RoomsController() {
-        instance = new RoomsController();
-    }
+    private RoomsController() {}
 
     public static RoomsController instance(){
         if(instance == null)
@@ -25,25 +23,22 @@ public class RoomsController {
     }
 
     public Login loginClient(ClientHandler client, Login loginInfo){
-        Room lastRoom = getLastRoom();
-        if(lastRoom.isFull()){
+        Login loginResult;
+
+        if(rooms.isEmpty()){
             int playersNumber = client.askPlayersNumber();
-            rooms.add(new Room(playersNumber));
-        }else{
-            if(lastRoom.getClientList().stream()
-                    .map(ClientHandler::getNickname)
-                    .anyMatch(nickname -> Objects.equals(nickname, loginInfo.getNickname()))){
-                loginInfo.setSuccessful(false);
-                loginInfo.setMessage("there is another player with that nickname");
-                /*
-                 * marco
-                  * create a new Login object and send it to the client
-                 */
-            }
+            Room newRoom = new Room(playersNumber);
+            loginResult = newRoom.login(client, loginInfo);
+            rooms.add(newRoom);
         }
-        /*
-         * send the login information to the client
-         * add the client in the room
-         */
+        else if(getLastRoom().isFull()){
+            int playersNumber = client.askPlayersNumber();
+            Room newRoom = new Room(playersNumber);
+            loginResult = newRoom.login(client, loginInfo);
+            rooms.add(newRoom);
+        }else{
+            loginResult = getLastRoom().login(client, loginInfo);
+        }
+        return loginResult;
     }
 }

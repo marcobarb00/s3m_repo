@@ -17,8 +17,8 @@ public class ClientSocket implements Runnable{
     public ClientSocket(Socket socket) {
         this.socket = socket;
         try {
-            inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
+            inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }

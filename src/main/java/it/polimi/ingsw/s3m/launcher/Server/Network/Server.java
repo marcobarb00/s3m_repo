@@ -29,8 +29,6 @@ public class Server {
             e.printStackTrace();
         }
 
-        //System.out.println(serverSocket.getInetAddress());
-
         //create threadPool for multiple clients
         ExecutorService executor = Executors.newCachedThreadPool();
         try {

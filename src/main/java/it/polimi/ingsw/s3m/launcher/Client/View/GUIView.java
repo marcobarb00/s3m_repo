@@ -9,7 +9,7 @@ public class GUIView extends View{
 	}
 
 	@Override
-	public void showLoginInfo(Login loginInfo){
+	public void showLoginResult(Login loginResult){
 
 	}
 }
