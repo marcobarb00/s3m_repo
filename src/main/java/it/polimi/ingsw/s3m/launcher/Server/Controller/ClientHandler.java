@@ -31,9 +31,13 @@ public class ClientHandler{
     }
 
     public void login(){
-        Login loginInfo = (Login) clientSocket.readMessage();
-        Login loginResult = RoomsController.instance().loginClient(this, loginInfo);
-        clientSocket.sendMessage(loginResult);
+        Login loginResult = new Login("");
+        do{
+            Login loginInfo = (Login) clientSocket.readMessage();
+            loginResult = RoomsController.instance().loginClient(this, loginInfo);
+            clientSocket.sendMessage(loginResult);
+        }while(!loginResult.isSuccessful());
+
     }
 
     public int askPlayersNumber(){
