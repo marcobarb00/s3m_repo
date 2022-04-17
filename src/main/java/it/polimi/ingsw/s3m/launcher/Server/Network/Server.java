@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
+    public static final String SERVERIP = "localhost";
     public static final int PORT = 12000;
     private ServerSocket serverSocket;
 
@@ -27,8 +28,6 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //System.out.println(serverSocket.getInetAddress());
 
         //create threadPool for multiple clients
         ExecutorService executor = Executors.newCachedThreadPool();

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Server.Controller.ClientController;
+import it.polimi.ingsw.s3m.launcher.Server.Controller.ClientHandler;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,13 +12,13 @@ public class ClientSocket implements Runnable{
     private final Socket socket;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
-    private ClientController clientController;
+    private ClientHandler clientHandler;
 
     public ClientSocket(Socket socket) {
         this.socket = socket;
         try {
-            inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
+            inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,8 +26,8 @@ public class ClientSocket implements Runnable{
 
     @Override
     public void run() {
-        ClientController clientController = new ClientController(this);
-        clientController.setup();
+        ClientHandler clientHandler = new ClientHandler(this);
+        clientHandler.login();
     }
 
     /**
