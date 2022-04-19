@@ -19,7 +19,7 @@ public class Island{
     }
 
     public Player computeDominance(){
-
+        return null;
     }
 
     /**
