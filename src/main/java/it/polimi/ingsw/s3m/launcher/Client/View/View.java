@@ -1,23 +1,17 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Communication.AskPlayersNumber;
-import it.polimi.ingsw.s3m.launcher.Communication.Login;
+import it.polimi.ingsw.s3m.launcher.Communication.*;
 
 public abstract class View{
 	String nickname;
-	int playerId;
 
-	/**
-	 * show login screen, read login information from user
-	 * @return login information
-	 */
-	public abstract Login login();
+	public abstract RoomMessage roomChoice();
 
-	/**
-	 * show the response of the server to the login request, set nickname and playerId of the view
-	 * @param loginResult
-	 */
-	public abstract void showLoginResult(Login loginResult);
+	public abstract EnterRoomMessage enterRoom();
 
-	public abstract AskPlayersNumber askPlayersNumber();
+	public abstract NewRoomMessage newRoom();
+
+	public abstract void showEnterRoomResult(EnterRoomMessage enterRoomResult);
+
+	public abstract void showNewRoomResult(NewRoomMessage newRoomResult);
 }

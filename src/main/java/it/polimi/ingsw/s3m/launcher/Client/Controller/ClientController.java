@@ -2,11 +2,9 @@ package it.polimi.ingsw.s3m.launcher.Client.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
-import it.polimi.ingsw.s3m.launcher.Communication.AskPlayersNumber;
-import it.polimi.ingsw.s3m.launcher.Communication.Login;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.*;
 
-public class ClientController{
+public class ClientController implements ControllerInterface{
 	Client client;
 	View view;
 
@@ -21,20 +19,29 @@ public class ClientController{
 	 * creates a login request to the server until a successful login
 	 */
 	public void login(){
-		Login loginResult = new Login("");
+		RoomMessage loginResult;
 		do{
-			Login loginInfo = view.login();
-			client.sendMessage(loginInfo);
-
-			Message recievedMessage = (Message) client.recieveMessage();
-			if(recievedMessage instanceof AskPlayersNumber){
-				loginResult.setSuccessful(false);
-				AskPlayersNumber playersNumber = view.askPlayersNumber();
-				client.sendMessage(playersNumber);
-				recievedMessage = (Message) client.recieveMessage();
-			}
-			loginResult = (Login) recievedMessage;
-			view.showLoginResult(loginResult);
+			RoomMessage roomInfo = view.roomChoice();
+			loginResult = roomInfo.execute(this);
 		}while(!loginResult.isSuccessful());
+	}
+
+	@Override
+	public NewRoomMessage executeNewRoom(NewRoomMessage newRoomMessage){
+		NewRoomMessage newRoomInfo = view.newRoom();
+		client.sendMessage(newRoomInfo);
+		NewRoomMessage newRoomResult = (NewRoomMessage) client.recieveMessage();
+		view.showNewRoomResult(newRoomResult);
+		return newRoomResult;
+	}
+
+	@Override
+	public EnterRoomMessage executeEnterRoom(EnterRoomMessage enterRoomMessage){
+		EnterRoomMessage enterRoomResult;
+		EnterRoomMessage enterRoomInfo = view.enterRoom();
+		client.sendMessage(enterRoomInfo);
+		enterRoomResult = (EnterRoomMessage) client.recieveMessage();
+		view.showEnterRoomResult(enterRoomResult);
+		return enterRoomResult;
 	}
 }
