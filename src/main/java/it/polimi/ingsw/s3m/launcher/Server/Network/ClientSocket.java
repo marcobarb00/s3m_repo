@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.ClientHandler;
+import it.polimi.ingsw.s3m.launcher.Server.Controller.RoomsController;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,7 +28,7 @@ public class ClientSocket implements Runnable{
     @Override
     public void run() {
         ClientHandler clientHandler = new ClientHandler(this);
-        clientHandler.login();
+        RoomsController.instance().login(clientHandler);
     }
 
     /**

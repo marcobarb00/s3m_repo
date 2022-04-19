@@ -1,14 +1,12 @@
 package it.polimi.ingsw.s3m.launcher.Communication;
 
-public class Login implements Message{
+public abstract class RoomMessage implements Message{
 	private String nickname;
+	private int roomID;
 	private boolean successful;
-	/**
-	 * message is a string from the server that tells if the login is not successful and why
-	 */
 	private String message;
 
-	public Login(String nickname){
+	public void setNickname(String nickname){
 		this.nickname = nickname;
 	}
 
@@ -16,12 +14,20 @@ public class Login implements Message{
 		return nickname;
 	}
 
-	public boolean isSuccessful(){
-		return successful;
+	public void setRoomID(int roomID){
+		this.roomID = roomID;
+	}
+
+	public int getRoomID(){
+		return roomID;
 	}
 
 	public void setSuccessful(boolean successful){
 		this.successful = successful;
+	}
+
+	public boolean isSuccessful(){
+		return successful;
 	}
 
 	public void setMessage(String message){
@@ -31,4 +37,6 @@ public class Login implements Message{
 	public String getMessage(){
 		return message;
 	}
+
+	public abstract RoomMessage execute(ControllerInterface controller);
 }

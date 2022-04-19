@@ -1,13 +1,14 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Communication.Login;
+import it.polimi.ingsw.s3m.launcher.Communication.*;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class RoomsController {
+public class RoomsController implements ControllerInterface{
     private static RoomsController instance = null;
-    private static ArrayList<Room> rooms = new ArrayList<>();
+    private static HashMap<Integer, Room> rooms = new HashMap<>();
 
     private RoomsController() {}
 
@@ -18,27 +19,62 @@ public class RoomsController {
             return instance;
     }
 
-    public Room getLastRoom(){
-        return rooms.get(rooms.size() - 1);
+    public synchronized void login(ClientHandler client){
+        RoomMessage roomMessageResult;
+        do{
+            RoomMessage roomMessage = (RoomMessage) client.readMessage();
+            roomMessageResult = roomMessage.execute(this);
+            client.sendMessage(roomMessageResult);
+        }while(!roomMessageResult.isSuccessful());
+
+        client.setNickname(roomMessageResult.getNickname());
+        Room room = rooms.get(roomMessageResult.getRoomID());
+        room.addClient(client);
     }
 
-    public Login loginClient(ClientHandler client, Login loginInfo){
-        Login loginResult;
+    @Override
+    public synchronized NewRoomMessage executeNewRoom(NewRoomMessage newRoomMessage){
+        int roomID;
+        do{
+            roomID = ThreadLocalRandom.current().nextInt(0, 100000);
+        }while(rooms.containsKey(roomID));
 
-        if(rooms.isEmpty()){
-            int playersNumber = client.askPlayersNumber();
-            Room newRoom = new Room(playersNumber);
-            loginResult = newRoom.login(client, loginInfo);
-            rooms.add(newRoom);
+        NewRoomMessage newRoomResult = new NewRoomMessage();
+        newRoomResult.setSuccessful(true);
+        newRoomResult.setMessage("room created successfully, room ID is: " + roomID);
+        newRoomResult.setRoomID(roomID);
+        newRoomResult.setNickname(newRoomMessage.getNickname());
+        Room newRoom = new Room(roomID, newRoomMessage.getPlayersNumber());
+        rooms.put(roomID, newRoom);
+        return newRoomResult;
+    }
+
+    @Override
+    public synchronized EnterRoomMessage executeEnterRoom(EnterRoomMessage enterRoomMessage){
+        int roomID = enterRoomMessage.getRoomID();
+        EnterRoomMessage enterRoomResult = new EnterRoomMessage();
+        if(!rooms.containsKey(roomID)){
+            enterRoomResult.setSuccessful(false);
+            enterRoomResult.setMessage("there is no room with ID: " + roomID);
         }
-        else if(getLastRoom().isFull()){
-            int playersNumber = client.askPlayersNumber();
-            Room newRoom = new Room(playersNumber);
-            loginResult = newRoom.login(client, loginInfo);
-            rooms.add(newRoom);
-        }else{
-            loginResult = getLastRoom().login(client, loginInfo);
+        else if(rooms.get(roomID).isFull()){
+            enterRoomResult.setSuccessful(false);
+            enterRoomResult.setMessage("the room is already full");
         }
-        return loginResult;
+        else if(!rooms.get(roomID).isAllowedName(enterRoomMessage.getNickname())){
+            enterRoomResult.setSuccessful(false);
+            enterRoomResult.setMessage("there is another player with that nickname in the room");
+        }
+        else{
+            enterRoomResult.setSuccessful(true);
+            enterRoomResult.setMessage("entered in the room successfully");
+            enterRoomResult.setNickname(enterRoomMessage.getNickname());
+            enterRoomResult.setRoomID(roomID);
+        }
+
+        return enterRoomResult;
+    }
+
+    public void startRoom(int roomID){
     }
 }

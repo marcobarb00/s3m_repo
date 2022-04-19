@@ -1,21 +1,32 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Communication.AskPlayersNumber;
-import it.polimi.ingsw.s3m.launcher.Communication.Login;
+import it.polimi.ingsw.s3m.launcher.Communication.EnterRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.RoomMessage;
 
 public class GUIView extends View{
 	@Override
-	public Login login(){
+	public RoomMessage roomChoice(){
 		return null;
 	}
 
 	@Override
-	public void showLoginResult(Login loginResult){
+	public EnterRoomMessage enterRoom(){
+		return null;
+	}
+
+	@Override
+	public NewRoomMessage newRoom(){
+		return null;
+	}
+
+	@Override
+	public void showEnterRoomResult(EnterRoomMessage enterRoomResult){
 
 	}
 
 	@Override
-	public AskPlayersNumber askPlayersNumber(){
-		return null;
+	public void showNewRoomResult(NewRoomMessage newRoomResult){
+
 	}
 }
