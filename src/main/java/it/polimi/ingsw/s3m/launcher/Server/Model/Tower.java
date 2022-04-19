@@ -6,4 +6,8 @@ public class Tower {
     public Tower (TowerColor color) {
         this.color = color;
     }
+
+    public TowerColor getColor() {
+        return color;
+    }
 }
