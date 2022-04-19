@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
+import it.polimi.ingsw.s3m.launcher.Communication.AskPlayersNumber;
 import it.polimi.ingsw.s3m.launcher.Communication.Login;
 
 public abstract class View{
@@ -17,4 +18,6 @@ public abstract class View{
 	 * @param loginResult
 	 */
 	public abstract void showLoginResult(Login loginResult);
+
+	public abstract AskPlayersNumber askPlayersNumber();
 }

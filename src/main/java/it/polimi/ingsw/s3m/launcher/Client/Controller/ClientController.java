@@ -2,7 +2,9 @@ package it.polimi.ingsw.s3m.launcher.Client.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
+import it.polimi.ingsw.s3m.launcher.Communication.AskPlayersNumber;
 import it.polimi.ingsw.s3m.launcher.Communication.Login;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 public class ClientController{
 	Client client;
@@ -19,12 +21,20 @@ public class ClientController{
 	 * creates a login request to the server until a successful login
 	 */
 	public void login(){
-		Login loginInfo;
+		Login loginResult = new Login("");
 		do{
-			loginInfo = view.login();
+			Login loginInfo = view.login();
 			client.sendMessage(loginInfo);
-			loginInfo = (Login) client.recieveMessage();
-			view.showLoginResult(loginInfo);
-		}while(!loginInfo.isSuccessful());
+
+			Message recievedMessage = (Message) client.recieveMessage();
+			if(recievedMessage instanceof AskPlayersNumber){
+				loginResult.setSuccessful(false);
+				AskPlayersNumber playersNumber = view.askPlayersNumber();
+				client.sendMessage(playersNumber);
+				recievedMessage = (Message) client.recieveMessage();
+			}
+			loginResult = (Login) recievedMessage;
+			view.showLoginResult(loginResult);
+		}while(!loginResult.isSuccessful());
 	}
 }
