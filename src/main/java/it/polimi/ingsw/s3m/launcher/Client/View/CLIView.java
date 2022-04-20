@@ -18,22 +18,22 @@ public class CLIView extends View{
 		System.out.println("2. join an existing room");
 
 		//let player insert their choice
-		int roomChoice;
+		int choiceRoom;
 		try{
-			roomChoice = Integer.parseInt(scanner.nextLine());
+			choiceRoom = Integer.parseInt(scanner.nextLine());
 		}catch (Exception e){
-			roomChoice = 0;
+			choiceRoom = 0;
 		}
-		while(roomChoice != 1 && roomChoice != 2){
+		while(choiceRoom != 1 && choiceRoom != 2){
 			System.out.println("invalid choice, please press press 1 or 2 to choose");
 			try{
-				roomChoice = Integer.parseInt(scanner.nextLine());
+				choiceRoom = Integer.parseInt(scanner.nextLine());
 			}catch (Exception e){
-				roomChoice = 0;
+				choiceRoom = 0;
 			}
 		}
 
-		if(roomChoice == 1){
+		if(choiceRoom == 1){
 			return new NewRoomMessage();
 		}
 		else{
