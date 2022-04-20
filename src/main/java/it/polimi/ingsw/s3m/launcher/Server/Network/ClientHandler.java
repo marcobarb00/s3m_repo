@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
-import it.polimi.ingsw.s3m.launcher.Server.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;
@@ -25,6 +25,9 @@ public class ClientHandler implements Runnable{
         this.playerController = new PlayerController(this);
         try{
             playerController.login();
+            while(true){
+                readMessage();
+            }
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -41,10 +44,6 @@ public class ClientHandler implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void communicate(){
-        Message message = readMessage();
     }
 
     public void sendMessage(Message message){

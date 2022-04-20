@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Server.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;

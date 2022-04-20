@@ -1,4 +1,6 @@
-package it.polimi.ingsw.s3m.launcher.Server.Communication;
+package it.polimi.ingsw.s3m.launcher.Communication;
+
+import it.polimi.ingsw.s3m.launcher.Client.View.View;
 
 public class LoginMessage implements Message{
 	private String nickname;
@@ -54,5 +56,15 @@ public class LoginMessage implements Message{
 
 	public String getMessage(){
 		return message;
+	}
+
+	@Override
+	public Message execute(View view){
+		if(this.isSuccessful()){
+			view.showLoginResult(this);
+			return null;
+		}else{
+			return view.login();
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Server.Communication;
+package it.polimi.ingsw.s3m.launcher.Communication;
 
 public interface ControllerInterface{
 	NewRoomMessage executeNewRoom(NewRoomMessage newRoomMessage);

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Server.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 import java.util.Scanner;
 

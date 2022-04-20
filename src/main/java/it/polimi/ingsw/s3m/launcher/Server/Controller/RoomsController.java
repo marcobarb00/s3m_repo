@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Server.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
 
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,7 +19,8 @@ public class RoomsController{
     }
 
     public synchronized void login(PlayerController player){
-        LoginMessage loginMessageResult;
+        LoginMessage loginMessageResult = new LoginMessage();
+        player.sendMessage(loginMessageResult);
         do{
             LoginMessage loginMessage = (LoginMessage) player.readMessage();
             if(loginMessage.isNewRoom())

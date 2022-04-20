@@ -2,7 +2,9 @@ package it.polimi.ingsw.s3m.launcher.Client.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
-import it.polimi.ingsw.s3m.launcher.Server.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 public class ClientController{
 	Client client;
@@ -12,21 +14,25 @@ public class ClientController{
 		this.view = view;
 		this.client = new Client();
 		client.start();
-		login();
-		startGame();
+		start();
 	}
 
-	/**
-	 * creates a login request to the server until a successful login
-	 */
-	public void login(){
-		LoginMessage loginResult;
-		do{
-			LoginMessage loginInfo = view.login();
-			client.sendMessage(loginInfo);
-			loginResult = (LoginMessage) client.recieveMessage();
-			view.showLoginResult(loginResult);
-		}while(!loginResult.isSuccessful());
+	public void start(){
+		while (true) {
+			try {
+				Message receivedMessage = client.recieveMessage();
+				if(receivedMessage instanceof NotificationMessage){
+					receivedMessage.execute(view);
+				}else{
+					Message toSendMessage = receivedMessage.execute(view);
+					if(toSendMessage != null)
+						client.sendMessage(toSendMessage);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				break;
+			}
+		}
 	}
 
 	public void startGame(){
