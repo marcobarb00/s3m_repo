@@ -1,7 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotDominatedIslandException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,23 +33,11 @@ public class Island{
     }
 
 
-    /*
-    * if(island.getNext() != islands.get(n).getNext())
-    *
-    *
-    * currentIsland
-    * for(1<moves)
-    *   currentIsland = currentIsland.getNext()
-    *
-    * currentIsland
-    *
-    * */
-
     /**
      * Could be called inside Game
      * @param players
      */
-    public void computeDominance(ArrayList<Player> players){
+    public int computeDominance(ArrayList<Player> players){
         Player possibleDominator = null;
         int maxInfluenceIndex = 0;
 
@@ -64,8 +50,7 @@ public class Island{
         }
 
         setDominator(possibleDominator);
-        //mergeIsland call
-
+        return this.mergeIslands();         //exit code of mergeIslands
     }
 
     /**
@@ -95,22 +80,26 @@ public class Island{
      * Method to merge islands, TODO how to remove merged island from implementation (in game class)?
      * Works for 3 islands too.
      */
-    public void mergeIslands() throws NotDominatedIslandException {
-        //Checks if it's the same Island
-
-        if(this.dominator == null)
-            throw new NotDominatedIslandException();
-
-        if(this.dominator == this.nextIsland.getDominator()){
-           this.towers += this.nextIsland.getTowers();
-           this.sumStudentsNextIsland();
-           this.nextIsland = this.nextIsland.getNextIsland();
-         }
+    private int mergeIslands(){
+        int exitCode = 0;   //do nothing case
         if(this.dominator == this.previousIsland.getDominator()){
             this.towers = this.towers + this.previousIsland.getTowers();
             this.sumStudentsPreviousIsland();
             this.previousIsland = this.previousIsland.getPreviousIsland();
+            exitCode = 1;           //only previous island merged
         }
+        if(this.dominator == this.nextIsland.getDominator()){
+            this.towers += this.nextIsland.getTowers();
+            this.sumStudentsNextIsland();
+            this.nextIsland = this.nextIsland.getNextIsland();
+            if(exitCode == 1){
+                exitCode = 3;       //both prev and next merged
+            }else {
+                exitCode = 2;       //only next island merged
+            }
+        }
+
+        return exitCode;
     }
 
     /**
