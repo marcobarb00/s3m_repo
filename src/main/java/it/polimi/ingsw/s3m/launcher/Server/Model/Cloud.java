@@ -3,10 +3,11 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import java.util.ArrayList;
 
 public class Cloud {
+    private final int id;
     private ArrayList<Student> studentList;
 
-    public Cloud (ArrayList<Student> studentList) {
-        this.studentList = studentList;
+    public Cloud (int id) {
+        this.id = id;
     }
 
     /**
