@@ -16,15 +16,15 @@ class GameTest {
 
     @Test
     void professorsArrayNotNullInitialization() {
-        ArrayList<Player> players = new ArrayList<>();
-        Game game = new Game(players);
+        ArrayList<String> playersNames = new ArrayList<>();
+        Game game = new Game(playersNames);
         assertNotEquals(null, game.getProfessorsList());
     }
 
     @Test
     void professorsArrayAllColorsInitialization() {
-        ArrayList<Player> players = new ArrayList<>();
-        Game game = new Game(players);
+        ArrayList<String> playersNames = new ArrayList<>();
+        Game game = new Game(playersNames);
 
         Set<PawnColor> colorList = game.getProfessorsList().stream()
                 .map(Professor::getColor)
@@ -34,8 +34,8 @@ class GameTest {
 
     @Test
     void fullBagInitialization() {
-        ArrayList<Player> players = new ArrayList<>();
-        Game game = new Game(players);
+        ArrayList<String> playersNames = new ArrayList<>();
+        Game game = new Game(playersNames);
         assertEquals(130, game.getBag().getNumberOfStudents());
         assertNotNull(game.getBag());
     }

@@ -12,8 +12,11 @@ public class ActionPhase extends Phase{
 
     }
 
-    private Student getStudentsFromCloud(){
+
+    /*private Student getStudentsFromCloud(){
         return null;
+    private Student getStudentsFromCloud(){
+
     }
 
     private void activateCharacterCard(){
@@ -39,5 +42,7 @@ public class ActionPhase extends Phase{
     private boolean checkWinCondition(){
         return false;
     }
+
+    }*/
 
 }

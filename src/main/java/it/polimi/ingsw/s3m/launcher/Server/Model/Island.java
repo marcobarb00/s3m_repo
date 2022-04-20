@@ -1,31 +1,55 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotDominatedIslandException;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
+
+//TODO Decide where to instantiate
 public class Island{
-    private final int id;               //from 0 to 11
+    private int id;               //from 0 to 11
     private Island previousIsland;
     private Island nextIsland;
-    private int towers;
-    private int blueStudents;               //
-    private int yellowStudents;               //
-    private int greenStudents;               //
-    private int redStudents;               //
-    private int pinkStudents;               //
+    private int towers = 0;
+    private HashMap<PawnColor,Integer> students;
     private Player dominator = null;
 
-    static private int idGen = 0;
-
     //TODO Setting next and prev islands for each one (setters)
-    public Island() {
-        this.id = idGen;
-        idGen++;
+    public Island(int id) {
+        this.id = id;
+        this.students = new HashMap<>();
+        this.students.put(PawnColor.BLUE,0);
+        this.students.put(PawnColor.RED,0);
+        this.students.put(PawnColor.GREEN,0);
+        this.students.put(PawnColor.YELLOW,0);
+        this.students.put(PawnColor.PINK,0);
     }
 
-    public Player computeDominance(){
-        return null;
+    public void setPreviousIsland(Island previousIsland) {
+        this.previousIsland = previousIsland;
+    }
+
+    public void setNextIsland(Island nextIsland) {
+        this.nextIsland = nextIsland;
+    }
+
+    /**
+     * Could be called inside Game
+     * @param players
+     */
+    public int computeDominance(ArrayList<Player> players){
+        Player possibleDominator = null;
+        int maxInfluenceIndex = 0;
+
+        for(Player p : players){
+            int index = this.computeInfluenceIndex(p);
+            if(index > maxInfluenceIndex){
+                maxInfluenceIndex = index;
+                possibleDominator = p;
+            }
+        }
+
+        setDominator(possibleDominator);
+        return this.mergeIslands();         //exit code of mergeIslands
     }
 
     /**
@@ -55,41 +79,42 @@ public class Island{
      * Method to merge islands, TODO how to remove merged island from implementation (in game class)?
      * Works for 3 islands too.
      */
-    public void mergeIslands() throws NotDominatedIslandException {
-        //Checks if it's the same Island
-
-        if(this.dominator == null)
-            throw new NotDominatedIslandException();
-
-        if(this.dominator == this.nextIsland.getDominator()){
-           this.towers = this.towers + this.nextIsland.getTowers();
-           this.sumStudentsNextIsland();
-           this.nextIsland = this.nextIsland.getNextIsland();
-         }
+    private int mergeIslands(){
+        int exitCode = 0;   //do nothing case
         if(this.dominator == this.previousIsland.getDominator()){
             this.towers = this.towers + this.previousIsland.getTowers();
             this.sumStudentsPreviousIsland();
             this.previousIsland = this.previousIsland.getPreviousIsland();
+            exitCode = 1;           //only previous island merged
         }
+        if(this.dominator == this.nextIsland.getDominator()){
+            this.towers += this.nextIsland.getTowers();
+            this.sumStudentsNextIsland();
+            this.nextIsland = this.nextIsland.getNextIsland();
+            if(exitCode == 1){
+                exitCode = 3;       //both prev and next merged
+            }else {
+                exitCode = 2;       //only next island merged
+            }
+        }
+
+        return exitCode;
     }
 
     /**
      * For each color of student the method sums them to merge islands
      */
     private void sumStudentsNextIsland(){
-        this.blueStudents = this.blueStudents + this.nextIsland.getStudents(PawnColor.BLUE);
-        this.greenStudents = this.greenStudents + this.nextIsland.getStudents(PawnColor.GREEN);
-        this.yellowStudents = this.yellowStudents + this.nextIsland.getStudents(PawnColor.YELLOW);
-        this.pinkStudents = this.pinkStudents + this.nextIsland.getStudents(PawnColor.PINK);
-        this.redStudents = this.redStudents + this.nextIsland.getStudents(PawnColor.RED);
+        for (PawnColor color : this.students.keySet()){
+            this.students.replace(color,this.getStudents(color) + this.nextIsland.getStudents(color));
+        }
     }
 
     private void sumStudentsPreviousIsland(){
-        this.blueStudents = this.blueStudents + this.previousIsland.getStudents(PawnColor.BLUE);
-        this.greenStudents = this.greenStudents + this.previousIsland.getStudents(PawnColor.GREEN);
-        this.yellowStudents = this.yellowStudents + this.previousIsland.getStudents(PawnColor.YELLOW);
-        this.pinkStudents = this.pinkStudents + this.previousIsland.getStudents(PawnColor.PINK);
-        this.redStudents = this.redStudents + this.previousIsland.getStudents(PawnColor.RED);
+        for (PawnColor color : this.students.keySet()){
+            this.students.replace(color,this.getStudents(color) + this.previousIsland.getStudents(color));
+
+        }
     }
 
     /**
@@ -119,22 +144,7 @@ public class Island{
      * @return
      */
     public int getStudents(PawnColor pawnColor) {
-        if (pawnColor == PawnColor.BLUE){
-            return blueStudents;
-        }
-        if (pawnColor == PawnColor.YELLOW){
-            return yellowStudents;
-        }
-        if (pawnColor == PawnColor.GREEN){
-            return greenStudents;
-        }
-        if (pawnColor == PawnColor.RED){
-            return redStudents;
-        }
-        if (pawnColor == PawnColor.PINK){
-            return pinkStudents;
-        }
-        return 0;
+        return this.students.get(pawnColor);
     }
 
     public int getTowers() {
