@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -18,17 +19,17 @@ public class RoomsController implements ControllerInterface{
             return instance;
     }
 
-    public synchronized void login(ClientHandler client){
+    public synchronized void login(PlayerController player){
         RoomMessage roomMessageResult;
         do{
-            RoomMessage roomMessage = (RoomMessage) client.readMessage();
+            RoomMessage roomMessage = (RoomMessage) player.readMessage();
             roomMessageResult = roomMessage.execute(this);
-            client.sendMessage(roomMessageResult);
+            player.sendMessage(roomMessageResult);
         }while(!roomMessageResult.isSuccessful());
 
-        client.setNickname(roomMessageResult.getNickname());
+        player.setNickname(roomMessageResult.getNickname());
         Room room = rooms.get(roomMessageResult.getRoomID());
-        room.addClient(client);
+        room.addPlayer(player);
     }
 
     /**

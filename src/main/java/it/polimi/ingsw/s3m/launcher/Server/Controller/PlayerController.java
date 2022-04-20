@@ -1,0 +1,33 @@
+package it.polimi.ingsw.s3m.launcher.Server.Controller;
+
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
+
+public class PlayerController{
+	private ClientHandler client;
+	private String nickname;
+
+	public PlayerController(ClientHandler client){
+		this.client = client;
+	}
+
+	public String getNickname(){
+		return nickname;
+	}
+
+	public void setNickname(String nickname){
+		this.nickname = nickname;
+	}
+
+	public void sendMessage(Message message){
+		client.sendMessage(message);
+	}
+
+	public Message readMessage(){
+		return client.readMessage();
+	}
+
+	public void login(){
+		RoomsController.instance().login(this);
+	}
+}
