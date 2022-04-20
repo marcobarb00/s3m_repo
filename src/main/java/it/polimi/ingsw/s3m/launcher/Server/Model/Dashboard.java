@@ -13,9 +13,10 @@ public class Dashboard {
         this.hall = new ArrayList<>();
         this.towerList = new ArrayList<>();
         this.tables = new HashMap<>();
+        for (PawnColor color : PawnColor.values()) {
+            tables.put(color, 0);
+        }
         this.controlledColors = new ArrayList<>();
-
-        this.initializeTables(tables);
     }
 
     /**
@@ -39,14 +40,6 @@ public class Dashboard {
             colors.add(color);
         }
         return colors;
-    }
-
-    private void initializeTables(HashMap<PawnColor,Integer> tables){
-        tables.put(PawnColor.PINK,0);
-        tables.put(PawnColor.RED,0);
-        tables.put(PawnColor.BLUE,0);
-        tables.put(PawnColor.GREEN,0);
-        tables.put(PawnColor.YELLOW,0);
     }
 
 }
