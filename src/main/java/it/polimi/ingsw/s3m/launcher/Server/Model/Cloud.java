@@ -1,27 +1,32 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+
 import java.util.ArrayList;
 
 public class Cloud {
+    private Game game;
     private final int id;
     private ArrayList<Student> studentList;
 
-    public Cloud (int id) {
+    public Cloud (Game game, int id) {
+        this.game = game;
         this.id = id;
+        this.studentList = new ArrayList<Student>();
     }
 
-    /**
-     * Method that return a list of the students in
-     * the cloud when this is chosen by a player
-     */
-    public ArrayList<Student> giveThreeStudents () {
-        return studentList;
-    }
-
-    /**
-     * Method that takes three students from the bag and
-     * put them on the cloud, refilling the array of students
-     */
     public void refillThreeStudents () {
+        if (studentList.size() != 0) return;
+        for (int i = 0; i < 3; i++) {
+            try {
+                studentList.add(game.getBag().pickStudent());
+            } catch (EmptyBagException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+    public ArrayList<Student> returnThreeStudents() { return studentList; }
+
+    public int getId() { return id; }
 }

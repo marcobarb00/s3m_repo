@@ -13,6 +13,10 @@ public class Game {
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
 
+    /**
+     * Constructor that creates all the necessaries elements for the game
+     * @param playersNicknameList list of the nicknames of the players
+     */
     public Game (ArrayList<String> playersNicknameList) {
         // Setting players and clouds
         this.numberOfPlayers = playersNicknameList.size();
@@ -20,7 +24,7 @@ public class Game {
         this.cloudsList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             playersList.add(new Player(new Dashboard(), playersNicknameList.get(i)));
-            cloudsList.add(new Cloud(i+1));
+            cloudsList.add(new Cloud(this,i+1));
         }
         // Setting professors and character cards
         this.professorsList = new ArrayList<>();
@@ -29,15 +33,12 @@ public class Game {
         this.motherNature = new MotherNature();
         this.bag = new Bag();
         // Creating islands
+        this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             islandsList.add(new Island(i+1));
         }
         this.islandsTotalNumber = 12;
     }
-
-    /* public void startGame () {
-        System.out.println("Game started with " + numberOfPlayers + " players");
-    } */
 
     // Operation
     /* public void moveMotherNature (int jump) {
