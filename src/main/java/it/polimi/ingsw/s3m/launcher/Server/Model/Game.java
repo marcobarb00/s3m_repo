@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Game {
     private final int numberOfPlayers;
-    private int islandsTotalNumber;
     private MotherNature motherNature;
     private Bag bag;
     private ArrayList<Player> playersList;
@@ -37,12 +36,11 @@ public class Game {
         for (int i = 0; i < 12; i++) {
             islandsList.add(new Island(i+1));
         }
-        this.islandsTotalNumber = 12;
     }
 
     // Operation
     /* public void moveMotherNature (int jump) {
-        MotherNature.setPosition(jump); // metodo
+        MotherNature.setCurrentPosition(jump, size.); // metodo
         int numberOfComputeDominance = IslandsList.get(MotherNature.getPosition).computeDominance();
         if (numberOfComputeDominance == 1) {
             IslandsList.get(MotherNature.getPosition-1).remove();
@@ -54,11 +52,11 @@ public class Game {
         } else {
             //errore
         }
+
     } */
 
     // Getter
     public int getNumberOfPlayers () { return numberOfPlayers; }
-    public int getIslandsTotalNumber() { return islandsTotalNumber; }
     public MotherNature getMotherNature() { return motherNature; }
     public Bag getBag () { return bag; }
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
