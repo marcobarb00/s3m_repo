@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Communication.RoomMessage;
+import it.polimi.ingsw.s3m.launcher.Client.Controller.ClientController;
+import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
@@ -41,7 +42,9 @@ public class Room {
         clientList.add(client);
     }
 
-    public void add(ClientHandler client){
-        clientList.add(client);
+    public void sendNotificationToAll(Notification notification){
+        for(ClientHandler client : clientList){
+            client.sendMessage(notification);
+        }
     }
 }

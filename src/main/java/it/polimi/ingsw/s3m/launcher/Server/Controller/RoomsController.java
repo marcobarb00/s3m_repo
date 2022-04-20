@@ -2,7 +2,6 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -30,8 +29,19 @@ public class RoomsController implements ControllerInterface{
         client.setNickname(roomMessageResult.getNickname());
         Room room = rooms.get(roomMessageResult.getRoomID());
         room.addClient(client);
+        if(room.isFull()){
+            Notification notification = new Notification();
+            notification.setMessage("the game is starting");
+            room.sendNotificationToAll(notification);
+            //START GAME
+        }
     }
 
+    /**
+     * create a new room and send the result to the player
+     * @param newRoomMessage info about the creation of the new room
+     * @return results of the room created
+     */
     @Override
     public synchronized NewRoomMessage executeNewRoom(NewRoomMessage newRoomMessage){
         int roomID;
@@ -49,6 +59,11 @@ public class RoomsController implements ControllerInterface{
         return newRoomResult;
     }
 
+    /**
+     * see if the player can enter a room and send the result of the attempt to the player
+     * @param enterRoomMessage info about the request to enter a room
+     * @return result of the attempt to enter a room
+     */
     @Override
     public synchronized EnterRoomMessage executeEnterRoom(EnterRoomMessage enterRoomMessage){
         int roomID = enterRoomMessage.getRoomID();
@@ -73,6 +88,11 @@ public class RoomsController implements ControllerInterface{
         }
 
         return enterRoomResult;
+    }
+
+    @Override
+    public void readNotification(Notification notification){
+
     }
 
     public void startRoom(int roomID){

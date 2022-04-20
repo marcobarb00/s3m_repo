@@ -104,4 +104,14 @@ public class CLIView extends View{
 	public void showNewRoomResult(NewRoomMessage newRoomResult){
 		System.out.println(newRoomResult.getMessage());
 	}
+
+	@Override
+	public void waitingForPlayers(){
+		System.out.println("waiting for other players to join");
+	}
+
+	@Override
+	public void showNotification(Notification notification){
+		System.out.println(notification.getMessage());
+	}
 }
