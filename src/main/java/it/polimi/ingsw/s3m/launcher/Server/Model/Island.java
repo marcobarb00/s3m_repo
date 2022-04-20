@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 //TODO Decide where to instantiate
 public class Island{
+    private Game game;
     private int id;               //from 0 to 11
     private Island previousIsland;
     private Island nextIsland;
@@ -14,7 +15,8 @@ public class Island{
     private Player dominator = null;
 
     //TODO Setting next and prev islands for each one (setters)
-    public Island(int id) {
+    public Island(int id, Game game) {
+        this.game = game;
         this.id = id;
         this.students = new HashMap<>();
         this.students.put(PawnColor.BLUE,0);
@@ -60,7 +62,14 @@ public class Island{
      */
     private int computeInfluenceIndex(Player player){
         int influenceIndex = 0;
-        ArrayList<PawnColor> controlledColors = player.getDashboard().getControlledColors();
+        ArrayList<Professor> professorsList = game.getProfessorsList();
+        ArrayList<PawnColor> controlledColors = new ArrayList<>();
+
+        for (Professor professor : professorsList){
+            if(professor.getPlayer() == player){
+                controlledColors.add(professor.getColor());
+            }
+        }
 
         for (PawnColor color : controlledColors){
             influenceIndex += getStudents(color);
