@@ -29,12 +29,6 @@ public class RoomsController implements ControllerInterface{
         client.setNickname(roomMessageResult.getNickname());
         Room room = rooms.get(roomMessageResult.getRoomID());
         room.addClient(client);
-        if(room.isFull()){
-            Notification notification = new Notification();
-            notification.setMessage("the game is starting");
-            room.sendNotificationToAll(notification);
-            //START GAME
-        }
     }
 
     /**
