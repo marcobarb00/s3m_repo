@@ -14,4 +14,8 @@ public abstract class View{
 	public abstract void showEnterRoomResult(EnterRoomMessage enterRoomResult);
 
 	public abstract void showNewRoomResult(NewRoomMessage newRoomResult);
+
+	public abstract void waitingForPlayers();
+
+	public abstract void showNotification(Notification notification);
 }
