@@ -1,7 +1,7 @@
-package it.polimi.ingsw.s3m.launcher.Communication;
+package it.polimi.ingsw.s3m.launcher.Server.Communication;
 
 public interface ControllerInterface{
 	NewRoomMessage executeNewRoom(NewRoomMessage newRoomMessage);
 	EnterRoomMessage executeEnterRoom(EnterRoomMessage enterRoomMessage);
-	void readNotification(Notification notification);
+	void readNotification(NotificationMessage notification);
 }

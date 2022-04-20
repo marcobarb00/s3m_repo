@@ -1,8 +1,10 @@
-package it.polimi.ingsw.s3m.launcher.Communication;
+package it.polimi.ingsw.s3m.launcher.Server.Communication;
 
-public abstract class RoomMessage implements Message{
+public class LoginMessage implements Message{
 	private String nickname;
 	private int roomID;
+	private boolean newRoom;
+	private int playersNumber;
 	private boolean successful;
 	private String message;
 
@@ -22,6 +24,22 @@ public abstract class RoomMessage implements Message{
 		return roomID;
 	}
 
+	public boolean isNewRoom(){
+		return newRoom;
+	}
+
+	public void setNewRoom(boolean newRoom){
+		this.newRoom = newRoom;
+	}
+
+	public void setPlayersNumber(int playersNumber){
+		this.playersNumber = playersNumber;
+	}
+
+	public int getPlayersNumber(){
+		return playersNumber;
+	}
+
 	public void setSuccessful(boolean successful){
 		this.successful = successful;
 	}
@@ -37,6 +55,4 @@ public abstract class RoomMessage implements Message{
 	public String getMessage(){
 		return message;
 	}
-
-	public abstract RoomMessage execute(ControllerInterface controller);
 }
