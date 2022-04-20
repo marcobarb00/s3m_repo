@@ -134,6 +134,7 @@ public class Island{
         if (pawnColor == PawnColor.PINK){
             return pinkStudents;
         }
+        return 0;
     }
 
     public int getTowers() {
