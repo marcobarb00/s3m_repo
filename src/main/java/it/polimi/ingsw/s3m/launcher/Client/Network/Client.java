@@ -14,7 +14,7 @@ public class Client{
 	private final int port = Server.PORT;
 	private Socket socket;
 	private ObjectInputStream inputStream;
-	private ObjectOutputStream outPutStream;
+	private ObjectOutputStream outputStream;
 
 	public static void main(String[] args){
 		ClientController clientController;
@@ -30,7 +30,7 @@ public class Client{
 	public void start(){
 		try{
 			socket = new Socket(serverip, port);
-			outPutStream = new ObjectOutputStream(socket.getOutputStream());
+			outputStream = new ObjectOutputStream(socket.getOutputStream());
 			inputStream = new ObjectInputStream(socket.getInputStream());
 		}catch(IOException e){
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class Client{
 	 */
 	public void sendMessage(Message message){
 		try{
-			outPutStream.writeObject(message);
+			outputStream.writeObject(message);
 		}catch(IOException e){
 			e.printStackTrace();
 		}

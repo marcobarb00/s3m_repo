@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View;
 
 import it.polimi.ingsw.s3m.launcher.Communication.EnterRoomMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 import it.polimi.ingsw.s3m.launcher.Communication.RoomMessage;
 
 public class GUIView extends View{
@@ -27,6 +28,16 @@ public class GUIView extends View{
 
 	@Override
 	public void showNewRoomResult(NewRoomMessage newRoomResult){
+
+	}
+
+	@Override
+	public void waitingForPlayers(){
+
+	}
+
+	@Override
+	public void showNotification(Notification notification){
 
 	}
 }

@@ -1,11 +1,17 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Server.Network.ClientSocket;
 
-public class ClientHandler{
-    private ClientSocket clientSocket;
-    private Room room;
+import java.io.*;
+import java.net.Socket;
+
+public class ClientHandler implements Runnable{
+    private final Socket socket;
+    private OutputStream outputStream;
+    private ObjectOutputStream objectOutputStream;
+    private InputStream inputStream;
+    private ObjectInputStream objectInputStream;
+    private Room room; //?
     private String nickname;
 
     public String getNickname(){
@@ -16,16 +22,48 @@ public class ClientHandler{
         this.nickname = nickname;
     }
 
-    public ClientHandler(ClientSocket clientSocket) {
-        this.clientSocket = clientSocket;
+    public ClientHandler(Socket socket) {
+        this.socket = socket;
+    }
+
+    @Override
+    public void run(){
+        setupStream();
+        login();
+        //TODO start reading and writing messages
+    }
+
+    public void setupStream(){
+        try {
+            outputStream = socket.getOutputStream();
+            objectOutputStream = new ObjectOutputStream(outputStream);
+            inputStream = socket.getInputStream();
+            objectInputStream = new ObjectInputStream(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void login(){
+        RoomsController.instance().login(this);
     }
 
     public void sendMessage(Message message){
-        clientSocket.sendMessage(message);
+        try{
+            objectOutputStream.writeObject(message);
+            objectOutputStream.flush();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public Message readMessage(){
-        return clientSocket.readMessage();
+        try{
+            return (Message) objectInputStream.readObject();
+        }catch(ClassNotFoundException | IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void activateCharacterCard(){}
@@ -40,5 +78,14 @@ public class ClientHandler{
 
     public void chooseCloud(){}
 
-    public void close(){}
+    public void close(){
+        try {
+            inputStream.close();
+            outputStream.close();
+            socket.close();
+            System.out.println("client" + socket.getInetAddress() + "socket closed");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
