@@ -1,5 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,15 +17,25 @@ public class Island{
     private Player dominator = null;
 
     //TODO Setting next and prev islands for each one (setters)
-    public Island(int id, Game game) {
+    public Island(Game game, int id) {
         this.game = game;
         this.id = id;
         this.students = new HashMap<>();
-        this.students.put(PawnColor.BLUE,0);
-        this.students.put(PawnColor.RED,0);
-        this.students.put(PawnColor.GREEN,0);
-        this.students.put(PawnColor.YELLOW,0);
-        this.students.put(PawnColor.PINK,0);
+        for (PawnColor color : PawnColor.values()) {
+            this.students.put(color, 0);
+        }
+    }
+
+    /**
+     * Method used to put the first student on the island at the beginning of the game
+     */
+    public void initializeFirstStudent () {
+        try {
+            Student student = game.getBag().pickStudent();
+            students.put(student.getColor(), 1);
+        } catch (EmptyBagException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPreviousIsland(Island previousIsland) {
@@ -171,5 +183,9 @@ public class Island{
 
     public Island getNextIsland() {
         return nextIsland;
+    }
+
+    public HashMap<PawnColor, Integer> getStudents() {
+        return students;
     }
 }

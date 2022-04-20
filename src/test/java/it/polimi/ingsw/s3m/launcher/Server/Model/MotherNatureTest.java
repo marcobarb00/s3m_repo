@@ -10,9 +10,11 @@ class MotherNatureTest {
 
     @Test
     void setCurrentPosition() {
+        ArrayList<String> playersNames = new ArrayList<>();
+        Game game = new Game(playersNames);
         ArrayList<Island> islands = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            islands.add(new Island(i+1));
+            islands.add(new Island(game, i+1));
         }
         MotherNature motherNature = new MotherNature();
         assertEquals(0, motherNature.getCurrentPosition());

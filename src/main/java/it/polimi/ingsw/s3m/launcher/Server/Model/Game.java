@@ -11,6 +11,7 @@ public class Game {
     private ArrayList<Cloud> cloudsList;
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
+    private GameInitializer gameInitializer;
 
     /**
      * Constructor that creates all the necessaries elements for the game
@@ -34,8 +35,10 @@ public class Game {
         // Creating islands
         this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            islandsList.add(new Island(i+1));
+            islandsList.add(new Island(this, i+1));
         }
+        this.gameInitializer = new GameInitializer(this);
+        gameInitializer.setup();
     }
 
     // Operation
