@@ -1,6 +1,7 @@
-package it.polimi.ingsw.s3m.launcher.Server.Controller;
+package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,16 +12,8 @@ public class ClientHandler implements Runnable{
     private ObjectOutputStream objectOutputStream;
     private InputStream inputStream;
     private ObjectInputStream objectInputStream;
-    private Room room; //?
-    private String nickname;
 
-    public String getNickname(){
-        return nickname;
-    }
-
-    public void setNickname(String nickname){
-        this.nickname = nickname;
-    }
+    PlayerController playerController;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -29,8 +22,17 @@ public class ClientHandler implements Runnable{
     @Override
     public void run(){
         setupStream();
-        login();
-        //TODO start reading and writing messages
+        this.playerController = new PlayerController(this);
+        try{
+            playerController.login();
+            while(true){
+                readMessage();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            close();
+        }
     }
 
     public void setupStream(){
@@ -42,10 +44,6 @@ public class ClientHandler implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void login(){
-        RoomsController.instance().login(this);
     }
 
     public void sendMessage(Message message){

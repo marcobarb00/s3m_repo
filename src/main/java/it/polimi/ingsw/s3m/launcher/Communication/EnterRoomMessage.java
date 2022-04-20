@@ -1,9 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Communication;
 
-public class EnterRoomMessage extends RoomMessage{
+import it.polimi.ingsw.s3m.launcher.Client.View.View;
 
+public class EnterRoomMessage implements Message{
 	@Override
-	public RoomMessage execute(ControllerInterface controller){
-		return controller.executeEnterRoom(this);
+	public Message execute(View view){
+		return null;
 	}
 }

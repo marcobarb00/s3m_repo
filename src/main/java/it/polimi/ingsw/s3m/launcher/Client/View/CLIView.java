@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public RoomMessage roomChoice(){
+	public LoginMessage login(){
 		System.out.println("do you want to create a new room or join an existing one?");
 		System.out.println("1. create a new room");
 		System.out.println("2. join an existing room");
@@ -34,15 +35,15 @@ public class CLIView extends View{
 		}
 
 		if(choiceRoom == 1){
-			return new NewRoomMessage();
+			return newRoom();
 		}
 		else{
-			return new EnterRoomMessage();
+			return enterRoom();
 		}
 	}
 
 	@Override
-	public EnterRoomMessage enterRoom(){
+	public LoginMessage enterRoom(){
 		System.out.println("please insert the room ID");
 		int roomID;
 		try{
@@ -62,14 +63,15 @@ public class CLIView extends View{
 		System.out.println("please insert your nickname");
 		String nickname = scanner.nextLine();
 
-		EnterRoomMessage enterRoomMessage = new EnterRoomMessage();
-		enterRoomMessage.setNickname(nickname);
-		enterRoomMessage.setRoomID(roomID);
-		return enterRoomMessage;
+		LoginMessage loginInfo = new LoginMessage();
+		loginInfo.setNewRoom(false);
+		loginInfo.setNickname(nickname);
+		loginInfo.setRoomID(roomID);
+		return loginInfo;
 	}
 
 	@Override
-	public NewRoomMessage newRoom(){
+	public LoginMessage newRoom(){
 		System.out.println("please insert the number of players in your room (2 or 3)");
 		int playersNumber;
 		try{
@@ -89,20 +91,16 @@ public class CLIView extends View{
 		System.out.println("please insert your nickname");
 		String nickname = scanner.nextLine();
 
-		NewRoomMessage newRoomMessage = new NewRoomMessage();
-		newRoomMessage.setNickname(nickname);
-		newRoomMessage.setPlayersNumber(playersNumber);
-		return newRoomMessage;
+		LoginMessage loginInfo = new LoginMessage();
+		loginInfo.setNewRoom(true);
+		loginInfo.setNickname(nickname);
+		loginInfo.setPlayersNumber(playersNumber);
+		return loginInfo;
 	}
 
 	@Override
-	public void showEnterRoomResult(EnterRoomMessage enterRoomResult){
-		System.out.println(enterRoomResult.getMessage());
-	}
-
-	@Override
-	public void showNewRoomResult(NewRoomMessage newRoomResult){
-		System.out.println(newRoomResult.getMessage());
+	public void showLoginResult(LoginMessage loginResult){
+		System.out.println(loginResult.getMessage());
 	}
 
 	@Override
@@ -111,7 +109,7 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void showNotification(Notification notification){
+	public void showNotification(NotificationMessage notification){
 		System.out.println(notification.getMessage());
 	}
 }

@@ -1,20 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Communication;
 
-public class NewRoomMessage extends RoomMessage{
-	private int playersNumber;
+import it.polimi.ingsw.s3m.launcher.Client.View.View;
 
-	public void setPlayersNumber(int playersNumber){
-		this.playersNumber = playersNumber;
-	}
-
-	public int getPlayersNumber(){
-		return playersNumber;
-	}
-
-	public NewRoomMessage(){}
-
+public class NewRoomMessage implements Message{
 	@Override
-	public RoomMessage execute(ControllerInterface controller){
-		return controller.executeNewRoom(this);
+	public Message execute(View view){
+		return null;
 	}
 }

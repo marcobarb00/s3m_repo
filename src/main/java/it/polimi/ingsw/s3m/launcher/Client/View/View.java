@@ -1,21 +1,20 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 public abstract class View{
 	String nickname;
 
-	public abstract RoomMessage roomChoice();
+	public abstract LoginMessage login();
 
-	public abstract EnterRoomMessage enterRoom();
+	public abstract LoginMessage enterRoom();
 
-	public abstract NewRoomMessage newRoom();
+	public abstract LoginMessage newRoom();
 
-	public abstract void showEnterRoomResult(EnterRoomMessage enterRoomResult);
-
-	public abstract void showNewRoomResult(NewRoomMessage newRoomResult);
+	public abstract void showLoginResult(LoginMessage loginResult);
 
 	public abstract void waitingForPlayers();
 
-	public abstract void showNotification(Notification notification);
+	public abstract void showNotification(NotificationMessage notification);
 }
