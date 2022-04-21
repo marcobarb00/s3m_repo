@@ -23,7 +23,7 @@ public class Game {
         this.playersList = new ArrayList<>();
         this.cloudsList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            playersList.add(new Player(new Dashboard(), playersNicknameList.get(i)));
+            playersList.add(new Player(playersNicknameList.get(i)));
             cloudsList.add(new Cloud(this,i+1));
         }
         // Setting professors and character cards

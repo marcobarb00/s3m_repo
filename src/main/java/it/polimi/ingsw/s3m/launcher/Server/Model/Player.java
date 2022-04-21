@@ -8,7 +8,16 @@ public class Player {
     private AssistantCard lastCardPlayed;
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
-    private Cloud cloud;
+
+    public Player (String nickname) {
+        this.nickname = nickname;
+        this.coins = 1;
+        this.dashboard = new Dashboard();
+        this.hand = new ArrayList<>();
+        for (AssistantCard card : AssistantCard.values()) {
+            hand.add(card);
+        }
+    }
 
     public String getNickname() {
         return nickname;
@@ -50,21 +59,6 @@ public class Player {
         this.hand = hand;
     }
 
-    public Cloud getCloud() {
-        return cloud;
-    }
-
-    public void setCloud(Cloud cloud) {
-        this.cloud = cloud;
-    }
-
-    public Player (Dashboard dashboard, String nickname) {
-        this.nickname = nickname;
-        this.dashboard = dashboard;
-        this.coins = 1;
-        hand = new ArrayList<AssistantCard>();
-    }
-
     /**
      * Method that return the AssistantCard played
      * by the player
@@ -78,7 +72,7 @@ public class Player {
      *
      * @return
      */
-    public void getStudentsFromCloud () {
+    public void getStudentsFromCloud (Cloud cloud) {
     }
 
     /**
