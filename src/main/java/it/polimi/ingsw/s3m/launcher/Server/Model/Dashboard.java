@@ -7,7 +7,8 @@ public class Dashboard {
     private ArrayList<Student> hall;
     private ArrayList<Tower> towerList;
     private HashMap<PawnColor, Integer> tables;
-    private ArrayList<PawnColor> controlledColors;
+    private int coins;
+
 
     public Dashboard() {
         this.hall = new ArrayList<>();
@@ -16,11 +17,13 @@ public class Dashboard {
         for (PawnColor color : PawnColor.values()) {
             tables.put(color, 0);
         }
-        this.controlledColors = new ArrayList<>();
+        this.coins = 1;
     }
+
 
     /**
      * Every time a tower is moved towerList shrinks
+     *
      * @return
      */
     public Tower moveTower() {
@@ -29,17 +32,33 @@ public class Dashboard {
         return t;
     }
 
-    /**
-     * Needed for computeInfluenceIndex in Island class.
-     * This doesn't screw up the reference of controlledColors
-     * @return
-     */
-    public ArrayList<PawnColor> getControlledColors(){
-        ArrayList<PawnColor> colors = new ArrayList<>();
-        for (PawnColor color : controlledColors){
-            colors.add(color);
+    public void putStudentsInTables(ArrayList<Student> students) {
+        for (Student s : students) {
+            tables.replace(s.getColor(), tables.get(s.getColor()) + 1);
+            if (tables.get(s.getColor()) % 3 == 0) {
+                coins++;
+            }
         }
-        return colors;
     }
 
+    /**
+     * Given an Arraylist
+     *
+     * @param students
+     */
+    public void putStudentsInHall(ArrayList<Student> students) {
+        for (Student s : students) {
+            this.hall.add(s);
+        }
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
+
+    public int getCoins() {
+        return coins;
+    }
 }
+

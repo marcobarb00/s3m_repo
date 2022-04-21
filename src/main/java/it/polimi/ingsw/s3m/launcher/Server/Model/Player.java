@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class Player {
     private String nickname;
-    private int coins;
     private AssistantCard lastCardPlayed;
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
 
     public Player (String nickname) {
         this.nickname = nickname;
-        this.coins = 1;
         this.dashboard = new Dashboard();
         this.hand = new ArrayList<>();
         for (AssistantCard card : AssistantCard.values()) {
@@ -27,13 +25,6 @@ public class Player {
         this.nickname = nickname;
     }
 
-    public int getCoins() {
-        return coins;
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
-    }
 
     public AssistantCard getLastCardPlayed() {
         return lastCardPlayed;
@@ -75,12 +66,6 @@ public class Player {
     public void getStudentsFromCloud (Cloud cloud) {
     }
 
-    /**
-     * Method that update the value of coins (?)
-     */
-    public void addCoins () {
-        coins++;
-    }
 
     /**
      * Method that chooses a CharacterCard and active

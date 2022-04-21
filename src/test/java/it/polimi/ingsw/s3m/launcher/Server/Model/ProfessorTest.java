@@ -10,7 +10,7 @@ class ProfessorTest {
     void changePlayer() {
         Professor professor = new Professor(PawnColor.BLUE);
         assertNull(professor.getPlayer());
-        Player pippo = new Player(new Dashboard(), "Pippo");
+        Player pippo = new Player("Pippo");
         professor.changePlayer(pippo);
         assertEquals(pippo, professor.getPlayer());
         assertNotNull(professor.getPlayer());
