@@ -38,14 +38,9 @@ public class Island{
         }
     }
 
-    public void setPreviousIsland(Island previousIsland) {
-        this.previousIsland = previousIsland;
+    public void setStudent(Student s){
+        students.replace(s.getColor(), students.get(s.getColor()) + 1);
     }
-
-    public void setNextIsland(Island nextIsland) {
-        this.nextIsland = nextIsland;
-    }
-
 
     /**
      * Could be called inside Game
@@ -187,5 +182,13 @@ public class Island{
 
     public HashMap<PawnColor, Integer> getStudents() {
         return students;
+    }
+
+    public void setPreviousIsland(Island previousIsland) {
+        this.previousIsland = previousIsland;
+    }
+
+    public void setNextIsland(Island nextIsland) {
+        this.nextIsland = nextIsland;
     }
 }
