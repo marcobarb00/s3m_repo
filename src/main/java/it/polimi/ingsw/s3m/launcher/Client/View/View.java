@@ -12,4 +12,6 @@ public abstract class View{
 	public abstract void enterRoom(EnterRoomMessage enterRoomMessage);
 
 	public abstract void newRoom(NewRoomMessage newRoomMessage);
+
+	public abstract void notification(NotificationMessage notification);
 }

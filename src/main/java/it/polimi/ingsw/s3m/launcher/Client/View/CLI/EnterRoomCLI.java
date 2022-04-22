@@ -42,7 +42,6 @@ public class EnterRoomCLI implements MessageCLI{
         String nickname = scanner.nextLine();
 
         EnterRoomMessage enterRoomMessage = new EnterRoomMessage();
-
         enterRoomMessage.setNickname(nickname);
         enterRoomMessage.setRoomID(roomID);
         return enterRoomMessage;

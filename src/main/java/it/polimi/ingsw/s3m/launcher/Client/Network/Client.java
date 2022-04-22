@@ -52,9 +52,12 @@ public class Client{
 	 * receive a message from the server
 	 * @return message received
 	 */
-	public Message receiveMessage() throws IOException, ClassNotFoundException {
-		Object x = inputStream.readObject();
-		return (Message) x;
-
+	public Message receiveMessage(){
+		try{
+			return (Message) inputStream.readObject();
+		}catch(IOException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

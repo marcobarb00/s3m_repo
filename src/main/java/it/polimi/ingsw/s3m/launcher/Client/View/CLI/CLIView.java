@@ -23,5 +23,10 @@ public class CLIView extends View{
 	}
 
 	@Override
+	public void notification(NotificationMessage notification){
+		client.setMessage(new NotificationCLI(notification));
+	}
+
+	@Override
 	public void enterRoom(EnterRoomMessage enterRoomMessage){client.setMessage(new EnterRoomCLI(enterRoomMessage));}
 }

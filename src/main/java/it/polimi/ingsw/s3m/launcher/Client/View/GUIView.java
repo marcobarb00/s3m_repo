@@ -12,4 +12,9 @@ public class GUIView extends View{
 
 	@Override
 	public void newRoom(NewRoomMessage newRoomMessage){}
+
+	@Override
+	public void notification(NotificationMessage notification){
+
+	}
 }

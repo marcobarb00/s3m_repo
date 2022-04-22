@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -44,6 +45,7 @@ public class RoomsController{
         rooms.put(roomID, newRoom);
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
+        //TODO insert the player in the room
 
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage("room created successfully, room ID is: " + roomID);
@@ -52,10 +54,13 @@ public class RoomsController{
 
     public synchronized void enterRoom(PlayerController player){
         boolean successful = false;
-
         do{
-            EnterRoomMessage enterRoomMessageInfo = (EnterRoomMessage) player.readMessage();
-            Integer roomID = enterRoomMessageInfo.getRoomID();
+            EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
+            enterRoomMessageInfo.setAvailableRoomsID(new ArrayList<>(rooms.keySet()));
+            player.sendMessage(enterRoomMessageInfo);
+
+            EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.readMessage();
+            Integer roomID = enterRoomMessageResult.getRoomID();
 
             NotificationMessage notification = new NotificationMessage();
             if(!rooms.containsKey(roomID)){
@@ -64,15 +69,16 @@ public class RoomsController{
             else if(rooms.get(roomID).isFull()){
                 notification.setMessage("the room is already full");
             }
-            else if(!rooms.get(roomID).isAllowedName(enterRoomMessageInfo.getNickname())){
+            else if(!rooms.get(roomID).isAllowedName(enterRoomMessageResult.getNickname())){
                 notification.setMessage("there is another player with that nickname in the room");
             }
             else{
                 notification.setMessage("entered in the room successfully");
                 player.sendMessage(notification);
                 successful = true;
+                //TODO insert the player in the room
             }
-        }while(successful);
+        }while(!successful);
     }
 
     public void startRoom(int roomID){
