@@ -20,7 +20,6 @@ public class Dashboard {
         this.coins = 1;
     }
 
-
     /**
      * Every time a tower is moved towerList shrinks
      *
@@ -32,14 +31,36 @@ public class Dashboard {
         return t;
     }
 
-    public void putStudentsInTables(ArrayList<Student> students) {
+    /**
+     * Students can have from 0 to 3 students. Method removes students from hall and puts them
+     *         in tables
+     * @param students
+     * @throws Exception
+     */
+    public void moveStudentsFromHallToTables(ArrayList<Student> students) throws Exception {
+        if(hall.isEmpty() || students.isEmpty()) {
+            throw new Exception("Empty hall or students");
+        }
+        
         for (Student s : students) {
             tables.replace(s.getColor(), tables.get(s.getColor()) + 1);
+            boolean studentFound = false;
+            for(Student studentInHall : hall){
+                if(studentInHall.getColor() == s.getColor()){
+                    hall.remove(studentInHall);
+                    studentFound = true;
+                    break;
+                }
+            }
+            if(!studentFound){
+                throw new Exception("No such student in hall");
+            }
             if (tables.get(s.getColor()) % 3 == 0) {
                 coins++;
             }
         }
     }
+
 
     /**
      * Given an Arraylist
@@ -50,6 +71,14 @@ public class Dashboard {
         for (Student s : students) {
             this.hall.add(s);
         }
+    }
+
+    public ArrayList<Student> getHall() {
+        return hall;
+    }
+
+    public int getTables(PawnColor color) {
+        return tables.get(color);
     }
 
     public void setCoins(int coins) {
