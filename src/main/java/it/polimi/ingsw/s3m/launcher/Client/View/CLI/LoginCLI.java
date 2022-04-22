@@ -7,23 +7,22 @@ import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class LoginCLI implements MessageCLI{
 	private int numberOfAvailableRooms;
-	private ArrayList<Integer> availableRoomsID;
-	private String message;
 
 	LoginCLI(LoginMessage loginMessage){
 		this.numberOfAvailableRooms = loginMessage.getNumberOfRooms();
-		this.availableRoomsID = loginMessage.getAvailableRoomsID();
-		this.message = loginMessage.getMessage();
 	}
 
 	@Override
 	public Message execute(){
-		System.out.println(message);
+		LoginMessage loginInfo = new LoginMessage();
 		if(numberOfAvailableRooms == 0){
-			return newRoom();
+			System.out.println("there are no rooms available, create a new room!");
+			loginInfo.setNewRoom(true);
+			return loginInfo;
 		}
 
 		System.out.println("do you want to create a new room or join an existing one?");
@@ -48,69 +47,11 @@ public class LoginCLI implements MessageCLI{
 		}
 
 		if(choiceRoom == 1){
-			return newRoom();
+			loginInfo.setNewRoom(true);
+			return loginInfo;
 		}else{
-			return enterRoom();
+			loginInfo.setNewRoom(false);
+			return loginInfo;
 		}
-	}
-
-	public NewRoomMessage newRoom(){
-		System.out.println("please insert the number of players in your room (2 or 3)");
-		Scanner scanner = new Scanner(System.in);
-		int numbersOfPlayers;
-		try{
-			numbersOfPlayers = Integer.parseInt(scanner.nextLine());
-		}catch(Exception e){
-			numbersOfPlayers = 0;
-		}
-		while(numbersOfPlayers != 2 && numbersOfPlayers != 3){
-			System.out.println("you inserted an invalid input");
-			try{
-				numbersOfPlayers = Integer.parseInt(scanner.nextLine());
-			}catch(Exception e){
-				numbersOfPlayers = 0;
-			}
-		}
-
-		System.out.println("please insert your nickname");
-		String nickname = scanner.nextLine();
-
-		NewRoomMessage newRoomInfo = new NewRoomMessage();
-		newRoomInfo.setNickname(nickname);
-		newRoomInfo.setNumberOfPlayers(numbersOfPlayers);
-		return newRoomInfo;
-	}
-
-	public EnterRoomMessage enterRoom(){
-		System.out.println("ID's of rooms that are open");
-
-		for(Integer roomID : availableRoomsID){
-			System.out.println(roomID);
-		}
-
-		System.out.println("please insert the room ID to join that room");
-		Scanner scanner = new Scanner(System.in);
-		int roomID;
-		try{
-			roomID = Integer.parseInt(scanner.nextLine());
-		}catch (Exception e){
-			roomID = -1;
-		}
-		while(roomID < 0 || !availableRoomsID.contains(roomID)){
-			System.out.println("invalid room ID");
-			try{
-				roomID = Integer.parseInt(scanner.nextLine());
-			}catch (Exception e){
-				roomID = -1;
-			}
-		}
-
-		System.out.println("please insert your nickname");
-		String nickname = scanner.nextLine();
-
-		EnterRoomMessage enterRoomMessage = new EnterRoomMessage();
-		enterRoomMessage.setNickname(nickname);
-		enterRoomMessage.setRoomID(roomID);
-		return enterRoomMessage;
 	}
 }

@@ -1,36 +1,15 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.*;
 
 public class GUIView extends View{
 
 	@Override
-	public Message login(LoginMessage loginMessage){
-		return null;
-	}
+	public void login(LoginMessage loginMessage){}
 
 	@Override
-	public LoginMessage enterRoom(){
-		return null;
-	}
+	public void enterRoom(EnterRoomMessage enterRoomMessage){}
 
 	@Override
-	public LoginMessage newRoom(){
-		return null;
-	}
-
-	@Override
-	public void showLoginResult(LoginMessage loginResult){}
-
-	@Override
-	public void waitingForPlayers(){
-
-	}
-
-	@Override
-	public void showNotification(NotificationMessage notification){
-
-	}
+	public void newRoom(NewRoomMessage newRoomMessage){}
 }

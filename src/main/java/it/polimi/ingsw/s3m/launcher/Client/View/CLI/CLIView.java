@@ -1,43 +1,27 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
-import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.*;
 
 import java.util.Scanner;
 
 public class CLIView extends View{
-	public CLIView(){}
+	ClientCLI client;
 
-	@Override
-	public Message login(LoginMessage loginMessage){
-		LoginCLI login = new LoginCLI(loginMessage);
-		return login.execute();
+	public CLIView(ClientCLI client){
+		this.client = client;
 	}
 
 	@Override
-	public LoginMessage enterRoom(){
-		return null;
+	public void login(LoginMessage loginMessage){
+		client.setMessage(new LoginCLI(loginMessage));
 	}
 
 	@Override
-	public LoginMessage newRoom(){
-		return null;
+	public void newRoom(NewRoomMessage newRoomMessage){
+		client.setMessage(new NewRoomCLI(newRoomMessage));
 	}
 
 	@Override
-	public void showLoginResult(LoginMessage loginResult){
-		System.out.println(loginResult.getMessage());
-	}
-
-	@Override
-	public void waitingForPlayers(){
-		System.out.println("waiting for other players to join");
-	}
-
-	@Override
-	public void showNotification(NotificationMessage notification){
-		System.out.println(notification.getMessage());
-	}
+	public void enterRoom(EnterRoomMessage enterRoomMessage){client.setMessage(new EnterRoomCLI(enterRoomMessage));}
 }

@@ -2,20 +2,21 @@ package it.polimi.ingsw.s3m.launcher.Communication;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 
-public class EnterRoomMessage implements Message{
-	String nickname;
-	Integer roomID;
+import java.util.ArrayList;
 
-	public void setNickname(String nickname){
-		this.nickname = nickname;
+public class EnterRoomMessage extends RoomMessage{
+	private ArrayList<Integer> availableRoomsID;
+
+	public ArrayList<Integer> getAvailableRoomsID() {
+		return availableRoomsID;
 	}
 
-	public void setRoomID(Integer roomID){
-		this.roomID = roomID;
+	public void setAvailableRoomsID(ArrayList<Integer> availableRoomsID) {
+		this.availableRoomsID = availableRoomsID;
 	}
 
 	@Override
-	public Message execute(View view){
-		return null;
+	public void apply(View view){
+		view.enterRoom(this);
 	}
 }

@@ -14,8 +14,7 @@ public class NotificationMessage implements Message{
 	}
 
 	@Override
-	public Message execute(View view){
-		view.showNotification(this);
-		return null;
+	public void apply(View view){
+		//view.showNotification(this);
 	}
 }

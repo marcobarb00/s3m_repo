@@ -29,6 +29,7 @@ public class PlayerController{
 	}
 
 	public void sendMessage(Message message){
+		System.out.println("XXX"+message);
 		client.sendMessage(message);
 	}
 
