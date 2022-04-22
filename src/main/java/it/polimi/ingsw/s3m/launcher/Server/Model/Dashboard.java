@@ -9,7 +9,6 @@ public class Dashboard {
     private HashMap<PawnColor, Integer> tables;
     private int coins;
 
-
     public Dashboard() {
         this.hall = new ArrayList<>();
         this.towerList = new ArrayList<>();
@@ -41,7 +40,7 @@ public class Dashboard {
         if(hall.isEmpty() || students.isEmpty()) {
             throw new Exception("Empty hall or students");
         }
-        
+
         for (Student s : students) {
             tables.replace(s.getColor(), tables.get(s.getColor()) + 1);
             boolean studentFound = false;
@@ -73,21 +72,13 @@ public class Dashboard {
         }
     }
 
-    public ArrayList<Student> getHall() {
-        return hall;
-    }
-
-    public int getTables(PawnColor color) {
-        return tables.get(color);
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
-    }
+    //setters
+    public void setCoins(int coins) { this.coins = coins; }
 
 
-    public int getCoins() {
-        return coins;
-    }
+    //getters
+    public ArrayList<Student> getHall() { return hall; }
+    public int getCoins() { return coins; }
+    public int getTables(PawnColor color) { return tables.get(color); }
 }
 
