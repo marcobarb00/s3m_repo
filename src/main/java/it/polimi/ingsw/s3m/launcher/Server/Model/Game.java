@@ -6,6 +6,7 @@ public class Game {
     private final int numberOfPlayers;
     private MotherNature motherNature;
     private Bag bag;
+    private CharacterDeck characterDeck;
     private ArrayList<Player> playersList;
     private ArrayList<Professor> professorsList;
     private ArrayList<Cloud> cloudsList;
@@ -26,10 +27,10 @@ public class Game {
             playersList.add(new Player(playersNicknameList.get(i)));
             cloudsList.add(new Cloud(this,i+1));
         }
-        // Setting professors and character cards
+        // Creating elements of the game
         this.professorsList = new ArrayList<>();
         this.characterCardsList = new ArrayList<>();
-        // Creating instruments
+        this.characterDeck = new CharacterDeck();
         this.motherNature = new MotherNature();
         this.bag = new Bag();
         // Creating islands
@@ -59,11 +60,13 @@ public class Game {
     } */
 
     // Getter
-    public int getNumberOfPlayers () { return numberOfPlayers; }
+    public int getNumberOfPlayers() { return numberOfPlayers; }
     public MotherNature getMotherNature() { return motherNature; }
-    public Bag getBag () { return bag; }
-    public ArrayList<Professor> getProfessorsList() { return professorsList; }
+    public Bag getBag() { return bag; }
+    public CharacterDeck getCharacterDeck() { return characterDeck; }
     public ArrayList<Player> getPlayersList() { return playersList; }
+    public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
-    public ArrayList<CharacterCard> getCharacterCardsList () { return characterCardsList; }
+    public ArrayList<Island> getIslandsList() { return islandsList; }
+    public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
 }
