@@ -64,12 +64,10 @@ public class Dashboard {
     /**
      * Given an Arraylist
      *
-     * @param students
+     * @param hall
      */
-    public void putStudentsInHall(ArrayList<Student> students) {
-        for (Student s : students) {
-            this.hall.add(s);
-        }
+    public void putStudentsInHall(ArrayList<Student> hall) {
+        this.hall = hall;
     }
 
     //setters

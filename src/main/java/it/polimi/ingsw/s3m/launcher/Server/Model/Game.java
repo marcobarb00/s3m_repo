@@ -1,5 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -41,8 +43,41 @@ public class Game {
         this.gameInitializer = new GameInitializer(this);
     }
 
+    // Bag
+
+    public Student extractStudent() throws EmptyBagException {
+        if (bag.getTotalNumberOfStudents() <= 0) {
+            throw new EmptyBagException();
+        }
+        PawnColor extractedColor = extractColor();
+        while (bag.getStudents().get(extractedColor) == 0) {
+            extractedColor = extractColor();
+        }
+        Student extractedStudent = new Student(extractedColor);
+        bag.decrementStudentsColor(extractedStudent);
+        return extractedStudent;
+    }
+
+    private PawnColor extractColor () {
+        float percent = (float) Math.random();
+        if (percent < 0.2) {
+            return PawnColor.BLUE;
+        } else if (percent >= 0.2 && percent < 0.4) {
+            return PawnColor.GREEN;
+        } else if (percent >= 0.4 && percent < 0.6) {
+            return PawnColor.PINK;
+        } else if (percent >= 0.6 && percent < 0.8) {
+            return PawnColor.RED;
+        } else {
+            return PawnColor.YELLOW;
+        }
+    }
+
+    // Cloud
+
     // Operation
     /* public void moveMotherNature (int jump) {
+
         MotherNature.setCurrentPosition(jump, size.); // metodo
         int numberOfComputeDominance = IslandsList.get(MotherNature.getPosition).computeDominance();
         if (numberOfComputeDominance == 1) {
@@ -68,4 +103,9 @@ public class Game {
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
+
+    // Setter
+    public void setCharacterCardsList(ArrayList<CharacterCard> characterCardsList) {
+        this.characterCardsList = characterCardsList;
+    }
 }

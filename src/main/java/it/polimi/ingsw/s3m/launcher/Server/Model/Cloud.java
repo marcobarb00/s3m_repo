@@ -12,10 +12,10 @@ public class Cloud {
     public Cloud (Game game, int id) {
         this.game = game;
         this.id = id;
-        this.studentList = new ArrayList<Student>();
+        this.studentList = new ArrayList<>();
     }
 
-    public void refillThreeStudents () {
+    /* public void refillThreeStudents () {
         if (studentList.size() != 0) return;
         for (int i = 0; i < 3; i++) {
             try {
@@ -24,7 +24,7 @@ public class Cloud {
                 e.printStackTrace();
             }
         }
-    }
+    } */
 
     public ArrayList<Student> returnThreeStudents() { return studentList; }
 
