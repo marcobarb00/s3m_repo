@@ -1,12 +1,13 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
 import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 public abstract class View{
 	String nickname;
 
-	public abstract LoginMessage login();
+	public abstract Message login(LoginMessage loginMessage);
 
 	public abstract LoginMessage enterRoom();
 

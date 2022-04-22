@@ -32,8 +32,13 @@ public class RoomsController{
         }while(!loginMessageResult.isSuccessful());
 
         player.setNickname(loginMessageResult.getNickname());
+        player.setRoomID(loginMessageResult.getRoomID());
         Room room = rooms.get(loginMessageResult.getRoomID());
         room.addPlayer(player);
+
+        if(room.isFull()){
+            room.start();
+        }
     }
 
     /**

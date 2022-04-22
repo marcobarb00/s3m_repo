@@ -41,7 +41,13 @@ public class Room {
         playersList.add(player);
     }
 
-    public void sendNotificationToAll(NotificationMessage notification){
+    public void start(){
+        sendNotificationToAll("the room is starting");
+    }
+
+    public void sendNotificationToAll(String message){
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage(message);
         for(PlayerController player : playersList){
             player.sendMessage(notification);
         }

@@ -7,8 +7,9 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 public class ClientController{
-	Client client;
-	View view;
+	private Client client;
+	private View view;
+	private Message message;
 
 	public ClientController(View view){
 		this.view = view;
