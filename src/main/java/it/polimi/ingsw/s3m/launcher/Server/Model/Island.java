@@ -26,20 +26,8 @@ public class Island{
         }
     }
 
-    /**
-     * Method used to put the first student on the island at the beginning of the game
-     */
-    public void initializeFirstStudent () {
-        try {
-            Student student = game.getBag().pickStudent();
-            students.put(student.getColor(), 1);
-        } catch (EmptyBagException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setStudent(Student s){
-        students.replace(s.getColor(), students.get(s.getColor()) + 1);
+    public void addStudent(Student student){
+        students.replace(student.getColor(), students.get(student.getColor()) + 1);
     }
 
     /**
@@ -161,7 +149,7 @@ public class Island{
      * @return
      */
     public int getStudents(PawnColor pawnColor) {
-        return this.students.get(pawnColor);
+        return students.get(pawnColor);
     }
 
     public int getTowers() {

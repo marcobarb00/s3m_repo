@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-
 import java.util.HashMap;
 
 public class Bag {
@@ -9,11 +8,9 @@ public class Bag {
 
     public Bag () {
         students = new HashMap<PawnColor, Integer>();
-        students.put(PawnColor.BLUE, 26);
-        students.put(PawnColor.GREEN, 26);
-        students.put(PawnColor.PINK, 26);
-        students.put(PawnColor.RED, 26);
-        students.put(PawnColor.YELLOW, 26);
+        for (PawnColor color : PawnColor.values()) {
+            students.put(color, 24);
+        }
     }
 
     public HashMap<PawnColor, Integer> getStudents () { return students; }
@@ -51,7 +48,7 @@ public class Bag {
         while (students.get(color) == 0) {
             color = extractColor();
         }
-        students.put(color, students.get(color)-1);
+        students.replace(color, students.get(color)-1);
         return new Student(color);
     }
 

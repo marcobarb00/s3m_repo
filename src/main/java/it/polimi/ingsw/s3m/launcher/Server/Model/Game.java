@@ -39,7 +39,6 @@ public class Game {
             islandsList.add(new Island(this, i+1));
         }
         this.gameInitializer = new GameInitializer(this);
-        gameInitializer.setup();
     }
 
     // Operation
