@@ -21,6 +21,7 @@ public class GameInitializer {
         characterCardsSetup();
         // Inserting students in the hall of the Dashboard of each Player
         studentsInHallSetup();
+        // Inserting students on clouds
     }
 
     public void islandsSetup() {

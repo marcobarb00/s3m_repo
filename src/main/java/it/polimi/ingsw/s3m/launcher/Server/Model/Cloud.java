@@ -5,14 +5,12 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import java.util.ArrayList;
 
 public class Cloud {
-    private Game game;
     private final int id;
-    private ArrayList<Student> studentList;
+    private ArrayList<Student> students;
 
-    public Cloud (Game game, int id) {
-        this.game = game;
+    public Cloud (int id) {
         this.id = id;
-        this.studentList = new ArrayList<>();
+        this.students = new ArrayList<>();
     }
 
     /* public void refillThreeStudents () {
@@ -26,7 +24,11 @@ public class Cloud {
         }
     } */
 
-    public ArrayList<Student> returnThreeStudents() { return studentList; }
-
     public int getId() { return id; }
+
+    public ArrayList<Student> returnThreeStudents() { return students; }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
 }

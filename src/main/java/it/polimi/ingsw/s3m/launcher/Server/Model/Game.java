@@ -27,7 +27,7 @@ public class Game {
         this.cloudsList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             playersList.add(new Player(playersNicknameList.get(i)));
-            cloudsList.add(new Cloud(this,i+1));
+            cloudsList.add(new Cloud(i+1));
         }
         // Creating elements of the game
         this.professorsList = new ArrayList<>();
