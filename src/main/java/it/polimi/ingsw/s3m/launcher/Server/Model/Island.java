@@ -26,15 +26,11 @@ public class Island{
         }
     }
 
-    public void addStudent(Student student){
-        students.replace(student.getColor(), students.get(student.getColor()) + 1);
-    }
-
     /**
      * Could be called inside Game
      * @param players
      */
-    public int computeDominance(ArrayList<Player> players){
+    /*public int computeDominance(ArrayList<Player> players){
         Player possibleDominator = null;
         int maxInfluenceIndex = 0;
 
@@ -48,15 +44,17 @@ public class Island{
 
         setDominator(possibleDominator);
         return this.mergeIslands();         //exit code of mergeIslands
-    }
+    }*/
 
     /**
      * Computes influenceIndex for that player
      * @param player
      * @return
      */
-    private int computeInfluenceIndex(Player player){
+    /*private int computeInfluenceIndex(Player player){
         int influenceIndex = 0;
+
+        //TODO game not more passed to island
         ArrayList<Professor> professorsList = game.getProfessorsList();
         ArrayList<PawnColor> controlledColors = new ArrayList<>();
 
@@ -77,14 +75,15 @@ public class Island{
         }
 
         return influenceIndex;
-    }
+    }*/
 
 
     /**
-     * Method to merge islands, TODO how to remove merged island from implementation (in game class)?
+     * Method to merge islands,
      * Works for 3 islands too.
+     * TODO how to remove merged island from implementation (in game class)?
      */
-    private int mergeIslands(){
+    /*private int mergeIslands(){
         int exitCode = 0;   //do nothing case
         if(this.dominator == this.previousIsland.getDominator()){
             this.towers = this.towers + this.previousIsland.getTowers();
@@ -104,7 +103,7 @@ public class Island{
         }
 
         return exitCode;
-    }
+    }*/
 
     /**
      * For each color of student the method sums them to merge islands
@@ -122,6 +121,10 @@ public class Island{
         }
     }
 
+    public void addStudent(Student student){
+        students.replace(student.getColor(), students.get(student.getColor()) + 1);
+    }
+
     /**
      * Dominator must be set after computeDominance call
      * @param dominator
@@ -137,10 +140,6 @@ public class Island{
      */
     private void setTower(Tower tower){
         this.towers += 1;
-    }
-
-    public int getId() {
-        return id;
     }
 
     /**
@@ -168,10 +167,6 @@ public class Island{
         return nextIsland;
     }
 
-    public HashMap<PawnColor, Integer> getStudents() {
-        return students;
-    }
-
     public void setPreviousIsland(Island previousIsland) {
         this.previousIsland = previousIsland;
     }
@@ -179,4 +174,6 @@ public class Island{
     public void setNextIsland(Island nextIsland) {
         this.nextIsland = nextIsland;
     }
+
+    public int getId() { return id; }
 }
