@@ -13,22 +13,18 @@ public class Cloud {
         this.students = new ArrayList<>();
     }
 
-    /* public void refillThreeStudents () {
-        if (studentList.size() != 0) return;
-        for (int i = 0; i < 3; i++) {
-            try {
-                studentList.add(game.getBag().pickStudent());
-            } catch (EmptyBagException e) {
-                e.printStackTrace();
-            }
+    public ArrayList<Student> returnThreeStudents() {
+        if (students.size() != 3) return null;
+        ArrayList<Student> returningStudents = students;
+        for (int i = 0; i < returningStudents.size(); i++) {
+            students.remove(i);
         }
-    } */
-
-    public int getId() { return id; }
-
-    public ArrayList<Student> returnThreeStudents() { return students; }
+        return returningStudents;
+    }
 
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
+
+    public int getId() { return id; }
 }

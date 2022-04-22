@@ -24,7 +24,7 @@ class GameInitializerTest {
         for (Island island : game.getIslandsList()) {
             int sum = 0;
             for (PawnColor color : PawnColor.values()) {
-                sum += island.getStudents(color);
+                sum += island.getStudentsPerColor(color);
             }
             if (island.getId() == 1 || island.getId() == 7) {
                 assertEquals(0, sum);

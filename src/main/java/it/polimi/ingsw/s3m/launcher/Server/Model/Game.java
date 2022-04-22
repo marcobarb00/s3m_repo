@@ -38,7 +38,7 @@ public class Game {
         // Creating islands
         this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            islandsList.add(new Island(this, i+1));
+            islandsList.add(new Island(i+1));
         }
         this.gameInitializer = new GameInitializer(this);
     }
