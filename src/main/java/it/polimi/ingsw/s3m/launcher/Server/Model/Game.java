@@ -43,6 +43,19 @@ public class Game {
         this.gameInitializer = new GameInitializer(this);
     }
 
+    // Mother Nature
+
+    public void updateMotherNaturePosition (int jump) {
+        while (jump != 0) {
+            if (motherNature.getCurrentPosition() == islandsList.size()-1) {
+                motherNature.setCurrentPosition(0);
+            } else {
+                motherNature.incrementCurrentPosition();
+            }
+            jump--;
+        }
+    }
+
     // Bag
 
     public Student extractStudent() throws EmptyBagException {
@@ -89,7 +102,6 @@ public class Game {
 
     // Operation
     /* public void moveMotherNature (int jump) {
-
         MotherNature.setCurrentPosition(jump, size.); // metodo
         int numberOfComputeDominance = IslandsList.get(MotherNature.getPosition).computeDominance();
         if (numberOfComputeDominance == 1) {
@@ -102,7 +114,6 @@ public class Game {
         } else {
             //errore
         }
-
     } */
 
     // Getter
