@@ -22,6 +22,7 @@ public class GameInitializer {
         // Inserting students in the hall of the Dashboard of each Player
         studentsInHallSetup();
         // Inserting students on clouds
+        cloudsSetup();
     }
 
     public void islandsSetup() {
@@ -70,7 +71,11 @@ public class GameInitializer {
         }
     }
 
-    public ArrayList<Student> getFirstStudentsOnIslands() { return firstStudentsOnIslands; }
+    public void cloudsSetup() {
+        for (Cloud cloud : game.getCloudsList()) {
+            game.refillCloudStudents(cloud);
+        }
+    }
 
-    private ArrayList<Island> getGameIslandsList () { return game.getIslandsList(); }
+    public ArrayList<Student> getFirstStudentsOnIslands() { return firstStudentsOnIslands; }
 }

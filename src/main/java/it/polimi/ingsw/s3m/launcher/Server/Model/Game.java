@@ -75,6 +75,18 @@ public class Game {
 
     // Cloud
 
+    public void refillCloudStudents(Cloud cloud) {
+        ArrayList<Student> refillingStudents = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            try {
+                refillingStudents.add(extractStudent());
+            } catch (EmptyBagException e) {
+                e.printStackTrace();
+            }
+        }
+        cloud.setStudents(refillingStudents);
+    }
+
     // Operation
     /* public void moveMotherNature (int jump) {
 

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-
 import java.util.ArrayList;
 
 public class Cloud {
@@ -15,16 +13,17 @@ public class Cloud {
 
     public ArrayList<Student> returnThreeStudents() {
         if (students.size() != 3) return null;
-        ArrayList<Student> returningStudents = students;
-        for (int i = 0; i < returningStudents.size(); i++) {
-            students.remove(i);
-        }
+        ArrayList<Student> returningStudents = new ArrayList<>(students);
+        students.clear();
         return returningStudents;
     }
 
+    // GETTER
+    public int getId() { return id; }
+    public ArrayList<Student> getStudents() { return students; }
+
+    // SETTER
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
-
-    public int getId() { return id; }
 }

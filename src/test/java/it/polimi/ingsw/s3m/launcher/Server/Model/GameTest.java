@@ -31,12 +31,4 @@ class GameTest {
                 .collect(Collectors.toSet());
         assertEquals(PawnColor.values().length, colorList.size());
     }
-
-    @Test
-    void fullBagInitialization() {
-        ArrayList<String> playersNames = new ArrayList<>();
-        Game game = new Game(playersNames);
-        assertEquals(130, game.getBag().getNumberOfStudents());
-        assertNotNull(game.getBag());
-    }
 }
