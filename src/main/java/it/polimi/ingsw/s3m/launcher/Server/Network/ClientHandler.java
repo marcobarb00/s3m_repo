@@ -5,6 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientHandler implements Runnable{
     private final Socket socket;
@@ -28,8 +29,8 @@ public class ClientHandler implements Runnable{
             while(true){
                 readMessage();
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IOException | ClassNotFoundException e){
+            playerController.disconnect();
         }finally{
             close();
         }
@@ -55,13 +56,8 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public Message readMessage(){
-        try{
-            return (Message) objectInputStream.readObject();
-        }catch(ClassNotFoundException | IOException e){
-            e.printStackTrace();
-        }
-        return null;
+    public Message readMessage() throws IOException, ClassNotFoundException{
+        return (Message) objectInputStream.readObject();
     }
 
     public void activateCharacterCard(){}
@@ -81,7 +77,7 @@ public class ClientHandler implements Runnable{
             inputStream.close();
             outputStream.close();
             socket.close();
-            System.out.println("client" + socket.getInetAddress() + "socket closed");
+            System.out.println("client socket closed");
         } catch (IOException e) {
             e.printStackTrace();
         }

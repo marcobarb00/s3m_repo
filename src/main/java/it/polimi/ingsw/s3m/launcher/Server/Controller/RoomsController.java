@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,12 +20,22 @@ public class RoomsController{
             return instance;
     }
 
+    public Room getRoom(Integer roomID){
+        return rooms.get(roomID);
+    }
+
     public synchronized void login(PlayerController player){
         LoginMessage loginMessage = new LoginMessage();
         int numberOfRooms = rooms.size();
         loginMessage.setNumberOfRooms(numberOfRooms);
         player.sendMessage(loginMessage);
-        LoginMessage loginResponse = (LoginMessage) player.readMessage();
+        LoginMessage loginResponse;
+        try{
+            loginResponse = (LoginMessage) player.readMessage();
+        }catch(IOException | ClassNotFoundException e){
+            e.printStackTrace();
+            return;
+        }
 
         if (loginResponse.isNewRoom()){
             newRoom(player);
@@ -35,17 +46,24 @@ public class RoomsController{
 
     public synchronized void newRoom(PlayerController player){
         player.sendMessage(new NewRoomMessage());
-        NewRoomMessage newRoomMessageInfo = (NewRoomMessage) player.readMessage();
+        NewRoomMessage newRoomMessageInfo;
+        try{
+            newRoomMessageInfo = (NewRoomMessage) player.readMessage();
+        }catch(IOException | ClassNotFoundException e){
+            e.printStackTrace();
+            return;
+        }
+
         Integer roomID;
         do{
             roomID = ThreadLocalRandom.current().nextInt(0, 100000);
         }while(rooms.containsKey(roomID));
 
-        Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers());
-        rooms.put(roomID, newRoom);
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
-        //TODO insert the player in the room
+        Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers());
+        newRoom.addPlayer(player);
+        rooms.put(roomID, newRoom);
 
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage("room created successfully, room ID is: " + roomID);
@@ -59,7 +77,13 @@ public class RoomsController{
             enterRoomMessageInfo.setAvailableRoomsID(new ArrayList<>(rooms.keySet()));
             player.sendMessage(enterRoomMessageInfo);
 
-            EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.readMessage();
+            EnterRoomMessage enterRoomMessageResult;
+            try{
+                enterRoomMessageResult = (EnterRoomMessage) player.readMessage();
+            }catch(IOException | ClassNotFoundException e){
+                e.printStackTrace();
+                return;
+            }
             Integer roomID = enterRoomMessageResult.getRoomID();
 
             NotificationMessage notification = new NotificationMessage();
@@ -73,12 +97,20 @@ public class RoomsController{
                 notification.setMessage("there is another player with that nickname in the room");
             }
             else{
+                player.setNickname(enterRoomMessageInfo.getNickname());
+                player.setRoomID(roomID);
+                rooms.get(roomID).addPlayer(player);
+
                 notification.setMessage("entered in the room successfully");
                 player.sendMessage(notification);
                 successful = true;
-                //TODO insert the player in the room
             }
         }while(!successful);
+    }
+
+    public void deleteRoom(Integer roomID, PlayerController player){
+        rooms.get(roomID).deleteRoom(player);
+        rooms.remove(roomID);
     }
 
     public void startRoom(int roomID){

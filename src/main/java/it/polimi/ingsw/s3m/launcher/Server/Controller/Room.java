@@ -45,6 +45,21 @@ public class Room {
         sendNotificationToAll("the room is starting");
     }
 
+    public void deleteRoom(PlayerController player){
+        sendNotificationToAllButOne(player, "someone left, the room is being deleted");
+    }
+
+    public void sendNotificationToAllButOne(PlayerController one, String message){
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage(message);
+
+        ArrayList<PlayerController> allButOne = playersList;
+        allButOne.remove(one);
+        for(PlayerController player : allButOne){
+            player.sendMessage(notification);
+        }
+    }
+
     public void sendNotificationToAll(String message){
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage(message);
