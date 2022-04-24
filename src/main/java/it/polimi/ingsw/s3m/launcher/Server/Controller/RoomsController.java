@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.RoomFullException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +63,14 @@ public class RoomsController{
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
         Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers());
-        newRoom.addPlayer(player);
+        try{
+            newRoom.addPlayer(player);
+        }catch(RoomFullException e){
+            NotificationMessage notification = new NotificationMessage();
+            notification.setMessage("unable to create the new room, try again");
+            player.sendMessage(notification);
+            return;
+        }
         rooms.put(roomID, newRoom);
 
         NotificationMessage notification = new NotificationMessage();
@@ -89,20 +97,26 @@ public class RoomsController{
             NotificationMessage notification = new NotificationMessage();
             if(!rooms.containsKey(roomID)){
                 notification.setMessage("there is no room with ID: " + roomID);
+                player.sendMessage(notification);
             }
             else if(rooms.get(roomID).isFull()){
                 notification.setMessage("the room is already full");
+                player.sendMessage(notification);
             }
             else if(!rooms.get(roomID).isAllowedName(enterRoomMessageResult.getNickname())){
                 notification.setMessage("there is another player with that nickname in the room");
+                player.sendMessage(notification);
             }
             else{
                 player.setNickname(enterRoomMessageInfo.getNickname());
                 player.setRoomID(roomID);
-                rooms.get(roomID).addPlayer(player);
-
-                notification.setMessage("entered in the room successfully");
-                player.sendMessage(notification);
+                try{
+                    rooms.get(roomID).addPlayer(player);
+                }catch(RoomFullException e){
+                    notification.setMessage("the room is full, try with another room");
+                    player.sendMessage(notification);
+                    continue;
+                }
                 successful = true;
             }
         }while(!successful);

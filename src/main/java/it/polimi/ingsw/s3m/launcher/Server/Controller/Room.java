@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.RoomFullException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Room {
     private ArrayList<PlayerController> playersList;
     private Game gameState;
 
-    public Room(int playersNumber, int roomID) {
+    public Room(int roomID, int playersNumber) {
         this.roomID = roomID;
         this.playersNumber = playersNumber;
         this.playersList = new ArrayList<>();
@@ -37,8 +38,17 @@ public class Room {
                 .noneMatch(name -> name.equals(nickname));
     }
 
-    public void addPlayer(PlayerController player){
+    public void addPlayer(PlayerController player) throws RoomFullException{
+        if(this.isFull()){
+            throw new RoomFullException();
+        }
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage("entered in the room successfully");
+        player.sendMessage(notification);
         playersList.add(player);
+        if(this.isFull()){
+            start();
+        }
     }
 
     public void start(){
@@ -53,7 +63,7 @@ public class Room {
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage(message);
 
-        ArrayList<PlayerController> allButOne = playersList;
+        ArrayList<PlayerController> allButOne = new ArrayList<>(playersList);
         allButOne.remove(one);
         for(PlayerController player : allButOne){
             player.sendMessage(notification);
