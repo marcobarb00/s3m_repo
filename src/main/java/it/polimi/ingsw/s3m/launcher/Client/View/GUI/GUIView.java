@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Client.View;
+package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.EnterRoomMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
