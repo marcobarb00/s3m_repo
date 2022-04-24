@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -33,9 +32,8 @@ public class Server {
         ExecutorService executor = Executors.newCachedThreadPool();
         try {
             while(true){
-                System.out.println("server is waiting for a new client");
                 Socket clientSocket = serverSocket.accept();
-                executor.submit(new ClientSocket(clientSocket));
+                executor.submit(new ClientHandler(clientSocket));
             }
         } catch (IOException e) {
             e.printStackTrace();

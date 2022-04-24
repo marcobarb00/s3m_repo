@@ -1,7 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Client.Controller.ClientController;
-import it.polimi.ingsw.s3m.launcher.Communication.Notification;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.RoomFullException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
@@ -9,42 +9,72 @@ import java.util.ArrayList;
 public class Room {
     private int roomID;
     private int playersNumber;
-    private ArrayList<ClientHandler> clientList;
+    private ArrayList<PlayerController> playersList;
     private Game gameState;
 
-    public Room(int playersNumber, int roomID) {
+    public Room(int roomID, int playersNumber) {
         this.roomID = roomID;
         this.playersNumber = playersNumber;
-        this.clientList = new ArrayList<>();
+        this.playersList = new ArrayList<>();
     }
 
     public int getRoomID(){
         return roomID;
     }
 
-    public ArrayList<ClientHandler> getClientList(){
-        return clientList;
+    public ArrayList<PlayerController> getPlayersList(){
+        return playersList;
     }
 
     public boolean isFull(){
-        return clientList.size() >= playersNumber;
+        return playersList.size() >= playersNumber;
     }
 
     public boolean isAllowedName(String nickname){
-        if(clientList.isEmpty())
+        if(playersList.isEmpty())
             return true;
-        return clientList.stream()
-                .map(ClientHandler::getNickname)
+        return playersList.stream()
+                .map(PlayerController::getNickname)
                 .noneMatch(name -> name.equals(nickname));
     }
 
-    public void addClient(ClientHandler client){
-        clientList.add(client);
+    public void addPlayer(PlayerController player) throws RoomFullException{
+        if(this.isFull()){
+            throw new RoomFullException();
+        }
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage("entered in the room successfully");
+        player.sendMessage(notification);
+        playersList.add(player);
+        if(this.isFull()){
+            start();
+        }
     }
 
-    public void sendNotificationToAll(Notification notification){
-        for(ClientHandler client : clientList){
-            client.sendMessage(notification);
+    public void start(){
+        sendNotificationToAll("the room is starting");
+    }
+
+    public void deleteRoom(PlayerController player){
+        sendNotificationToAllButOne(player, "someone left, the room is being deleted");
+    }
+
+    public void sendNotificationToAllButOne(PlayerController one, String message){
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage(message);
+
+        ArrayList<PlayerController> allButOne = new ArrayList<>(playersList);
+        allButOne.remove(one);
+        for(PlayerController player : allButOne){
+            player.sendMessage(notification);
+        }
+    }
+
+    public void sendNotificationToAll(String message){
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage(message);
+        for(PlayerController player : playersList){
+            player.sendMessage(notification);
         }
     }
 }

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Communication;
 
-public class Notification implements Message{
+import it.polimi.ingsw.s3m.launcher.Client.View.View;
+
+public class NotificationMessage implements Message{
 	private String message;
 
 	public String getMessage(){
@@ -11,7 +13,8 @@ public class Notification implements Message{
 		this.message = message;
 	}
 
-	public void read(ControllerInterface controller){
-		controller.readNotification(this);
+	@Override
+	public void apply(View view){
+		view.notification(this);
 	}
 }
