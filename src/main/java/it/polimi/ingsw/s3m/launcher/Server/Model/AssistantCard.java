@@ -31,4 +31,8 @@ public enum AssistantCard {
     public int getMovements() {
         return movements;
     }
+
+    public String getType(){
+        return type;
+    }
 }

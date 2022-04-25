@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class LoginMessage implements Message{
 	private int numberOfRooms;
-	boolean isNewRoom;
+	private boolean isNewRoom;
 	private String message;
 
 	public int getNumberOfRooms(){

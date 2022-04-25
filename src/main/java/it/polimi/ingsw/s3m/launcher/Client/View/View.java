@@ -12,5 +12,7 @@ public abstract class View{
 
 	public abstract void notification(NotificationMessage notification);
 
-	public abstract void operationChoice(OperationChoiceMessage operationChoice);
+	public abstract void operationChoice(OperationChoiceMessage operationChoiceMessage);
+
+	public abstract void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage);
 }

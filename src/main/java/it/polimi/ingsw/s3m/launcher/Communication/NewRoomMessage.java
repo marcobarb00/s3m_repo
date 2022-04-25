@@ -3,7 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Communication;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 
 public class NewRoomMessage extends RoomMessage{
-	int numberOfPlayers;
+	private int numberOfPlayers;
 
 	public void setNumberOfPlayers(int numberOfPlayers){
 		this.numberOfPlayers = numberOfPlayers;

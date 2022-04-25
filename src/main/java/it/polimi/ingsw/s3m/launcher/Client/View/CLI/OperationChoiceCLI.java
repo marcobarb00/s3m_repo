@@ -6,8 +6,8 @@ import it.polimi.ingsw.s3m.launcher.Communication.OperationChoiceMessage;
 public class OperationChoiceCLI implements MessageCLI{
 	private String phase;
 
-	public OperationChoiceCLI(OperationChoiceMessage operationChoice){
-		this.phase = operationChoice.getPhase();
+	public OperationChoiceCLI(OperationChoiceMessage operationChoiceMessage){
+		this.phase = operationChoiceMessage.getPhase();
 	}
 
 	@Override
@@ -18,17 +18,17 @@ public class OperationChoiceCLI implements MessageCLI{
 				System.out.println("choose the assistant card you want to play");
 				break;
 			case "MoveStudentsPhase":
-				System.out.println("student allocation phase\n" +
-						"choose tour operation:\n" +
-						"1) activate a character card\n" +
-						"2) move a student from the hall to the tables\n" +
-						"3) move a student from the hall to an island\n");
+				System.out.println("student allocation phase" +
+						"\nchoose your operation:" +
+						"\n1) activate a character card" +
+						"\n2) move a student from the hall to the tables" +
+						"\n3) move a student from the hall to an island");
 				break;
 			case "MotherNaturePhase":
-				System.out.println("movement phase\n" +
-						"choose tour operation:\n" +
-						"1) activate a character card\n" +
-						"2) move mother nature\n");
+				System.out.println("movement phase" +
+						"\nchoose your operation:" +
+						"\n1) activate a character card" +
+						"\n2) move mother nature");
 				break;
 			case "ChooseCloudPhase":
 				System.out.println("choose the cloud to get the students from\n");

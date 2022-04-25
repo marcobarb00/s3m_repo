@@ -21,17 +21,22 @@ public class CLIView extends View{
 	}
 
 	@Override
+	public void enterRoom(EnterRoomMessage enterRoomMessage){
+		client.setMessage(new EnterRoomCLI(enterRoomMessage));
+	}
+
+	@Override
 	public void notification(NotificationMessage notification){
 		client.setMessage(new NotificationCLI(notification));
 	}
 
 	@Override
-	public void operationChoice(OperationChoiceMessage operationChoice){
-		client.setMessage(new OperationChoiceCLI(operationChoice));
+	public void operationChoice(OperationChoiceMessage operationChoiceMessage){
+		client.setMessage(new OperationChoiceCLI(operationChoiceMessage));
 	}
 
 	@Override
-	public void enterRoom(EnterRoomMessage enterRoomMessage){
-		client.setMessage(new EnterRoomCLI(enterRoomMessage));
+	public void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage){
+		client.setMessage(new PlayAssistantCardCLI(playAssistantCardMessage));
 	}
 }
