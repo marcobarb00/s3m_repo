@@ -3,8 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 
-import java.util.Scanner;
-
 public class CLIView extends View{
 	ClientCLI client;
 
@@ -28,5 +26,12 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void enterRoom(EnterRoomMessage enterRoomMessage){client.setMessage(new EnterRoomCLI(enterRoomMessage));}
+	public void operationChoice(OperationChoiceMessage operationChoice){
+		client.setMessage(new OperationChoiceCLI(operationChoice));
+	}
+
+	@Override
+	public void enterRoom(EnterRoomMessage enterRoomMessage){
+		client.setMessage(new EnterRoomCLI(enterRoomMessage));
+	}
 }

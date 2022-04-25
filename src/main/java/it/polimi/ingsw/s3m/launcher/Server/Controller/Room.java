@@ -10,6 +10,7 @@ public class Room {
     private int roomID;
     private int playersNumber;
     private ArrayList<PlayerController> playersList;
+    private boolean isStarted;
     private Game gameState;
 
     public Room(int roomID, int playersNumber) {
@@ -38,17 +39,14 @@ public class Room {
                 .noneMatch(name -> name.equals(nickname));
     }
 
-    public void addPlayer(PlayerController player) throws RoomFullException{
-        if(this.isFull()){
-            throw new RoomFullException();
-        }
-        NotificationMessage notification = new NotificationMessage();
-        notification.setMessage("entered in the room successfully");
-        player.sendMessage(notification);
+    public synchronized void addPlayer(PlayerController player){
         playersList.add(player);
-        if(this.isFull()){
-            start();
+        if(!isFull() || isStarted){
+            return;
         }
+
+        isStarted = true;
+        start();
     }
 
     public void start(){
