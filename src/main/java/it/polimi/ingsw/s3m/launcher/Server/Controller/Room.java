@@ -9,9 +9,10 @@ public class Room {
     private int roomID;
     private int playersNumber;
     private ArrayList<PlayerController> playersList;
+    private boolean isStarted;
     private Game gameState;
 
-    public Room(int playersNumber, int roomID) {
+    public Room(int roomID, int playersNumber) {
         this.roomID = roomID;
         this.playersNumber = playersNumber;
         this.playersList = new ArrayList<>();
@@ -37,8 +38,14 @@ public class Room {
                 .noneMatch(name -> name.equals(nickname));
     }
 
-    public void addPlayer(PlayerController player){
+    public synchronized void addPlayer(PlayerController player){
         playersList.add(player);
+        if(!isFull() || isStarted){
+            return;
+        }
+
+        isStarted = true;
+        start();
     }
 
     public void start(){

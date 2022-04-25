@@ -25,9 +25,9 @@ public class LoginCLI implements MessageCLI{
 			return loginInfo;
 		}
 
-		System.out.println("do you want to create a new room or join an existing one?");
-		System.out.println("1. create a new room");
-		System.out.println("2. join an existing room");
+		System.out.println("do you want to create a new room or join an existing one?\n" +
+				"1) create a new room\n" +
+				"2) join an existing room");
 
 		//let player insert their choice
 		Scanner scanner = new Scanner(System.in);

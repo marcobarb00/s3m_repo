@@ -59,15 +59,15 @@ public class RoomsController{
             roomID = ThreadLocalRandom.current().nextInt(0, 100000);
         }while(rooms.containsKey(roomID));
 
+        NotificationMessage notification = new NotificationMessage();
+        notification.setMessage("room created successfully, room ID is: " + roomID);
+        player.sendMessage(notification);
+
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
         Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers());
         newRoom.addPlayer(player);
         rooms.put(roomID, newRoom);
-
-        NotificationMessage notification = new NotificationMessage();
-        notification.setMessage("room created successfully, room ID is: " + roomID);
-        player.sendMessage(notification);
     }
 
     public synchronized void enterRoom(PlayerController player){
@@ -97,13 +97,13 @@ public class RoomsController{
                 notification.setMessage("there is another player with that nickname in the room");
             }
             else{
-                player.setNickname(enterRoomMessageInfo.getNickname());
-                player.setRoomID(roomID);
-                rooms.get(roomID).addPlayer(player);
-
                 notification.setMessage("entered in the room successfully");
                 player.sendMessage(notification);
                 successful = true;
+
+                player.setNickname(enterRoomMessageInfo.getNickname());
+                player.setRoomID(roomID);
+                rooms.get(roomID).addPlayer(player);
             }
         }while(!successful);
     }
@@ -111,8 +111,5 @@ public class RoomsController{
     public void deleteRoom(Integer roomID, PlayerController player){
         rooms.get(roomID).deleteRoom(player);
         rooms.remove(roomID);
-    }
-
-    public void startRoom(int roomID){
     }
 }
