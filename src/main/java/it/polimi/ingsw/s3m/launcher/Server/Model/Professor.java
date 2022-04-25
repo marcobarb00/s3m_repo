@@ -13,10 +13,6 @@ public class Professor {
 
     public PawnColor getColor () { return color; }
 
-    /**
-     * Method that change the player having the Professor
-     * @param player
-     */
     public void changePlayer (Player player) {
         this.player = player;
     }

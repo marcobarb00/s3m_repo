@@ -9,14 +9,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class CloudTest {
 
     @Test
-    void refillThreeStudents() {
-        ArrayList<String> playersName = new ArrayList<>();
-        Game game = new Game(playersName);
-        Cloud cloud = new Cloud(game, 1);
-        assertEquals(0, cloud.returnThreeStudents().size());
-        cloud.refillThreeStudents();
-        assertEquals(3, cloud.returnThreeStudents().size());
-        cloud.refillThreeStudents();
-        assertEquals(3, cloud.returnThreeStudents().size());
+    void returnThreeStudents() {
+        Cloud cloud = new Cloud(1);
+        ArrayList<Student> setStudents = new ArrayList<>();
+        ArrayList<Student> returnedStudents;
+        returnedStudents = cloud.returnThreeStudents();
+        assertNull(returnedStudents);
+        setStudents.add(new Student(PawnColor.BLUE));
+        setStudents.add(new Student(PawnColor.GREEN));
+        cloud.setStudents(setStudents);
+        assertEquals(2, cloud.getStudents().size());
+        returnedStudents = cloud.returnThreeStudents();
+        assertNull(returnedStudents);
+        setStudents.add(new Student(PawnColor.PINK));
+        assertEquals(3, cloud.getStudents().size());
+        returnedStudents = cloud.returnThreeStudents();
+        assertEquals(3, returnedStudents.size());
+        assertEquals(0, cloud.getStudents().size());
     }
 }

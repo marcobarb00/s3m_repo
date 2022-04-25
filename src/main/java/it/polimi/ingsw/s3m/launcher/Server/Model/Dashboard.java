@@ -7,10 +7,21 @@ public class Dashboard {
     private ArrayList<Student> hall;
     private ArrayList<Tower> towerList;
     private HashMap<PawnColor, Integer> tables;
-    private ArrayList<PawnColor> controlledColors;
+    private int coins;
+
+    public Dashboard() {
+        this.hall = new ArrayList<>();
+        this.towerList = new ArrayList<>();
+        this.tables = new HashMap<>();
+        for (PawnColor color : PawnColor.values()) {
+            tables.put(color, 0);
+        }
+        this.coins = 1;
+    }
 
     /**
      * Every time a tower is moved towerList shrinks
+     *
      * @return
      */
     public Tower moveTower() {
@@ -20,15 +31,52 @@ public class Dashboard {
     }
 
     /**
-     * Needed for computeInfluenceIndex in Island class.
-     * This doesn't screw up the reference of controlledColors
-     * @return
+     * Students can have from 0 to 3 students. Method removes students from hall and puts them
+     *         in tables
+     * @param students
+     * @throws Exception
      */
-    public ArrayList<PawnColor> getControlledColors(){
-        ArrayList<PawnColor> colors = new ArrayList<>();
-        for (PawnColor color : controlledColors){
-            colors.add(color);
+    public void moveStudentsFromHallToTables(ArrayList<Student> students) throws Exception {
+        if(hall.isEmpty() || students.isEmpty()) {
+            throw new Exception("Empty hall or students");
         }
-        return colors;
+
+        for (Student s : students) {
+            tables.replace(s.getColor(), tables.get(s.getColor()) + 1);
+            boolean studentFound = false;
+            for(Student studentInHall : hall){
+                if(studentInHall.getColor() == s.getColor()){
+                    hall.remove(studentInHall);
+                    studentFound = true;
+                    break;
+                }
+            }
+            if(!studentFound){
+                throw new Exception("No such student in hall");
+            }
+            if (tables.get(s.getColor()) % 3 == 0) {
+                coins++;
+            }
+        }
     }
+
+
+    /**
+     * Given an Arraylist
+     *
+     * @param hall
+     */
+    public void putStudentsInHall(ArrayList<Student> hall) {
+        this.hall = hall;
+    }
+
+    //setters
+    public void setCoins(int coins) { this.coins = coins; }
+
+
+    //getters
+    public ArrayList<Student> getHall() { return hall; }
+    public int getCoins() { return coins; }
+    public int getTables(PawnColor color) { return tables.get(color); }
 }
+
