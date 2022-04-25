@@ -7,17 +7,21 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
  */
 
 public enum AssistantCard {
-    EAGLE(7,4), DOG(3,2), ELEPHANT(2,1),
-    CAT(8,4), CHEETAH(10,5), LIZARD(5,3),
-    OCTOPUS(4,2), OSTRICH(9,5), TURTLE(1,1),
-    FOX(6,3);
+    
+    EAGLE(7,4, "eagle"), DOG(3,2, "dog"),
+    ELEPHANT(2,1, "elephant"), CAT(8,4, "cat"),
+    CHEETAH(10,5, "cheetah"), LIZARD(5,3, "lizard"),
+    OCTOPUS(4,2, "octopus"), OSTRICH(9,5, "ostrich"),
+    TURTLE(1,1, "turtle"), FOX(6,3, "fox");
 
     private final int value;
     private final int movements;
+    private final String type;
 
-    AssistantCard(int value, int movements) {
+    AssistantCard(int value, int movements, String type) {
         this.value = value;
         this.movements = movements;
+        this.type = type;
     }
 
     public int getValue() {
