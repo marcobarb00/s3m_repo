@@ -17,4 +17,9 @@ public class GUIView extends View{
 	public void notification(NotificationMessage notification){
 
 	}
+
+	@Override
+	public void operationChoice(OperationChoiceMessage operationChoice){
+
+	}
 }
