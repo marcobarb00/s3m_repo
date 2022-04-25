@@ -51,6 +51,7 @@ public class Dashboard {
                     break;
                 }
             }
+            //If there isn't a student of that color throws exception
             if(!studentFound){
                 throw new Exception("No such student in hall");
             }
@@ -62,7 +63,7 @@ public class Dashboard {
 
 
     /**
-     * Given an Arraylist
+     * Given an Arraylist, works with 7 or 3 but there are no controls here.
      *
      * @param hall
      */

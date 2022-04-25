@@ -30,11 +30,32 @@ public class Island{
     public Island getPreviousIsland() { return previousIsland; }
     public Island getNextIsland() { return nextIsland; }
     public HashMap<PawnColor, Integer> getStudents() { return students; }
+    public int getTowers() {
+        return towers;
+    }
     public int getStudentsPerColor(PawnColor pawnColor) { return students.get(pawnColor); }
+    public Player getDominator() {
+        return dominator;
+    }
 
     // SETTER
     public void setPreviousIsland(Island previousIsland) { this.previousIsland = previousIsland; }
     public void setNextIsland(Island nextIsland) { this.nextIsland = nextIsland; }
+    private void setTower(Tower tower){
+        this.towers += 1;
+    }
+
+    public void addStudent(Student student){
+        PawnColor color = student.getColor();
+        Integer oldValue = students.get(student.getColor());
+        students.replace(color, oldValue + 1);
+    }
+
+    public void setDominator(Player dominator) {
+        this.dominator = dominator;
+        this.setTower(dominator.getDashboard().moveTower());
+    }
+
 
     // Thing to change
 
@@ -113,26 +134,5 @@ public class Island{
             this.students.replace(color,this.getStudentsPerColor(color) + this.previousIsland.getStudentsPerColor(color));
 
         }
-    }
-
-    public void addStudent(Student student){
-        students.replace(student.getColor(), students.get(student.getColor()) + 1);
-    }
-
-    public void setDominator(Player dominator) {
-        this.dominator = dominator;
-        this.setTower(dominator.getDashboard().moveTower());
-    }
-
-    private void setTower(Tower tower){
-        this.towers += 1;
-    }
-
-    public int getTowers() {
-        return towers;
-    }
-
-    public Player getDominator() {
-        return dominator;
     }
 }
