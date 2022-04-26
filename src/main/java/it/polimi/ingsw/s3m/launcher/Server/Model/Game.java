@@ -11,7 +11,7 @@ public class Game {
     private Bag bag;
     private CharacterDeck characterDeck;
     private HashMap<String, Player> playerHashMap;
-    private HashMap<Integer, Cloud> cloudHashMap;
+    private ArrayList<Cloud> cloudsList;
     private ArrayList<Professor> professorsList;
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
@@ -36,9 +36,9 @@ public class Game {
                     new Player(playersNicknameList.get(2), TowerColor.GREY));
         }
         // Creating clouds
-        this.cloudHashMap = new HashMap<>();
+        this.cloudsList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            cloudHashMap.put(i+1, new Cloud(i+1));
+            cloudsList.add(new Cloud());
         }
         // Creating islands
         this.islandsList = new ArrayList<>();
@@ -129,11 +129,10 @@ public class Game {
 
     public void chooseCloud(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        Cloud chosenCloud = cloudHashMap.get(position);
+        Cloud chosenCloud = cloudsList.get(position);
         chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnThreeStudents());
     }
 
-    // TODO return?
     public void playAssistantCard(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastCardPlayed(chosenPlayer.getHand().get(position));
@@ -151,7 +150,7 @@ public class Game {
     public Bag getBag() { return bag; }
     public CharacterDeck getCharacterDeck() { return characterDeck; }
     public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
-    public HashMap<Integer, Cloud> getCloudHashMap() { return cloudHashMap; }
+    public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
