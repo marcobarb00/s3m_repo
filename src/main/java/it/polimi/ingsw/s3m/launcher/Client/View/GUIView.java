@@ -22,4 +22,9 @@ public class GUIView extends View{
 	public void operationChoice(OperationChoiceMessage operationChoice){
 
 	}
+
+	@Override
+	public void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage){
+
+	}
 }
