@@ -1,76 +1,34 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player {
     private String nickname;
-    private AssistantCard lastCardPlayed;
+    private TowerColor color;
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
+    private AssistantCard lastCardPlayed;
 
-    public Player (String nickname) {
+    public Player (String nickname, TowerColor color) {
         this.nickname = nickname;
+        this.color = color;
         this.dashboard = new Dashboard();
         this.hand = new ArrayList<>();
-        for (AssistantCard card : AssistantCard.values()) {
-            hand.add(card);
-        }
+        hand.addAll(Arrays.asList(AssistantCard.values()));
     }
 
-    public String getNickname() {
-        return nickname;
+    public void removeAssistantCardFromHand(int position) {
+        hand.remove(position);
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+    // GETTER
+    public String getNickname() { return nickname; }
+    public TowerColor getColor() { return color; }
+    public Dashboard getDashboard() { return dashboard; }
+    public ArrayList<AssistantCard> getHand() { return hand; }
+    public AssistantCard getLastCardPlayed() { return lastCardPlayed; }
 
-
-    public AssistantCard getLastCardPlayed() {
-        return lastCardPlayed;
-    }
-
-    public void setLastCardPlayed(AssistantCard lastCardPlayed) {
-        this.lastCardPlayed = lastCardPlayed;
-    }
-
-    public Dashboard getDashboard() {
-        return dashboard;
-    }
-
-    public void setDashboard(Dashboard dashboard) {
-        this.dashboard = dashboard;
-    }
-
-    public ArrayList<AssistantCard> getHand() {
-        return hand;
-    }
-
-    public void setHand(ArrayList<AssistantCard> hand) {
-        this.hand = hand;
-    }
-
-    /**
-     * Method that return the AssistantCard played
-     * by the player
-     * @return hand.get(position)
-     */
-    public AssistantCard playAssistantCard (int position) {
-        return hand.get(position);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public void getStudentsFromCloud (Cloud cloud) {
-    }
-
-
-    /**
-     * Method that chooses a CharacterCard and active
-     * its effect
-     */
-    public void activeCharacterCardEffect () {
-    }
+    // SETTER
+    public void setLastCardPlayed(AssistantCard lastCardPlayed) { this.lastCardPlayed = lastCardPlayed; }
 }

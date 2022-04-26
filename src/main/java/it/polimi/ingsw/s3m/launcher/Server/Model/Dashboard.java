@@ -19,6 +19,15 @@ public class Dashboard {
         this.coins = 1;
     }
 
+    public void addStudentsInHall(ArrayList<Student> hall) {
+        this.hall.addAll(hall);
+    }
+
+    // SETTER
+    public void putStudentsInHall (ArrayList<Student> hall) { this.hall = hall; }
+
+
+
     /**
      * Every time a tower is moved towerList shrinks
      *
@@ -62,14 +71,6 @@ public class Dashboard {
     }
 
 
-    /**
-     * Given an Arraylist, works with 7 or 3 but there are no controls here.
-     *
-     * @param hall
-     */
-    public void putStudentsInHall(ArrayList<Student> hall) {
-        this.hall = hall;
-    }
 
     //setters
     public void setCoins(int coins) { this.coins = coins; }

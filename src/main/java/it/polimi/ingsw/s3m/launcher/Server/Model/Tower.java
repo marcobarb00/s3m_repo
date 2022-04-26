@@ -1,7 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 public class Tower {
-    private TowerColor color;
+    /* private TowerColor color;
 
     public Tower (TowerColor color) {
         this.color = color;
@@ -9,5 +9,5 @@ public class Tower {
 
     public TowerColor getColor() {
         return color;
-    }
+    } */
 }

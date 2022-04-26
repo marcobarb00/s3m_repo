@@ -3,6 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameInitializer {
     private Game game;
@@ -67,13 +68,13 @@ public class GameInitializer {
                     e.printStackTrace();
                 }
             }
-            game.getPlayersList().get(i).getDashboard().putStudentsInHall(enteringHallStudents);
+            game.getPlayerHashMap().get(i).getDashboard().putStudentsInHall(enteringHallStudents);
         }
     }
 
     public void cloudsSetup() {
-        for (Cloud cloud : game.getCloudsList()) {
-            game.refillCloudStudents(cloud);
+        for (int i = 0; i < game.getNumberOfPlayers(); i++) {
+            game.refillCloudStudents(game.getCloudHashMap().get(i));
         }
     }
 

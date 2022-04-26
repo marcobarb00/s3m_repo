@@ -3,44 +3,71 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
     private final int numberOfPlayers;
     private MotherNature motherNature;
     private Bag bag;
     private CharacterDeck characterDeck;
-    private ArrayList<Player> playersList;
+    private HashMap<String, Player> playerHashMap;
+    private HashMap<Integer, Cloud> cloudHashMap;
     private ArrayList<Professor> professorsList;
-    private ArrayList<Cloud> cloudsList;
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
     private GameInitializer gameInitializer;
 
-    /**
-     * Constructor that creates all the necessaries elements for the game
-     * @param playersNicknameList list of the nicknames of the players
-     */
     public Game (ArrayList<String> playersNicknameList) {
-        // Setting players and clouds
+        // Setting number of players
         this.numberOfPlayers = playersNicknameList.size();
-        this.playersList = new ArrayList<>();
-        this.cloudsList = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            playersList.add(new Player(playersNicknameList.get(i)));
-            cloudsList.add(new Cloud(i+1));
+        // Creating players
+        this.playerHashMap = new HashMap<>();
+        if (numberOfPlayers == 2) {
+            playerHashMap.put(playersNicknameList.get(0),
+                    new Player(playersNicknameList.get(0), TowerColor.WHITE));
+            playerHashMap.put(playersNicknameList.get(1),
+                    new Player(playersNicknameList.get(1), TowerColor.BLACK));
+        } else if (numberOfPlayers == 3) {
+            playerHashMap.put(playersNicknameList.get(0),
+                    new Player(playersNicknameList.get(0), TowerColor.WHITE));
+            playerHashMap.put(playersNicknameList.get(1),
+                    new Player(playersNicknameList.get(1), TowerColor.BLACK));
+            playerHashMap.put(playersNicknameList.get(2),
+                    new Player(playersNicknameList.get(2), TowerColor.GREY));
         }
-        // Creating elements of the game
-        this.professorsList = new ArrayList<>();
-        this.characterCardsList = new ArrayList<>();
-        this.characterDeck = new CharacterDeck();
-        this.motherNature = new MotherNature();
-        this.bag = new Bag();
+        // Creating clouds
+        this.cloudHashMap = new HashMap<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            cloudHashMap.put(i+1, new Cloud(i+1));
+        }
         // Creating islands
         this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             islandsList.add(new Island(i+1));
         }
+        // Creating other elements of the game
+        this.professorsList = new ArrayList<>();
+        this.characterCardsList = new ArrayList<>();
+        this.characterDeck = new CharacterDeck();
+        this.motherNature = new MotherNature();
+        this.bag = new Bag();
         this.gameInitializer = new GameInitializer(this);
+    }
+
+    // Initializing methods
+
+    public void initializeJesterStudents () {
+        HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
+        for (int i = 0; i < 6; i++) {
+            try {
+                Student student = extractStudent();
+                PawnColor color = student.getColor();
+                initialingStudents.replace(color, initialingStudents.get(color)+1);
+            } catch (EmptyBagException e) {
+                e.printStackTrace();
+            }
+        }
+        // putStudents
     }
 
     // Mother Nature
@@ -49,9 +76,7 @@ public class Game {
         while (jump != 0) {
             if (motherNature.getCurrentPosition() == islandsList.size()-1) {
                 motherNature.setCurrentPosition(0);
-            } else {
-                motherNature.incrementCurrentPosition();
-            }
+            } else { motherNature.incrementCurrentPosition(); }
             jump--;
         }
     }
@@ -100,34 +125,38 @@ public class Game {
         cloud.setStudents(refillingStudents);
     }
 
-    // Operation
-    /* public void moveMotherNature (int jump) {
-        MotherNature.setCurrentPosition(jump, size.); // metodo
-        int numberOfComputeDominance = IslandsList.get(MotherNature.getPosition).computeDominance();
-        if (numberOfComputeDominance == 1) {
-            IslandsList.get(MotherNature.getPosition-1).remove();
-        } else if (numberOfComputeDominance == 2) {
-            IslandsList.get(MotherNature.getPosition+1).remove();
-        } else if () {
-            IslandsList.get(MotherNature.getPosition+1).remove();
-            IslandsList.get(MotherNature.getPosition-1).remove();
-        } else {
-            //errore
-        }
-    } */
+    // Operations
 
-    // Getter
+    public void chooseCloud(String playerNickname, int position) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        Cloud chosenCloud = cloudHashMap.get(position);
+        chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnThreeStudents());
+    }
+
+    // TODO return?
+    public void playAssistantCard(String playerNickname, int position) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        chosenPlayer.setLastCardPlayed(chosenPlayer.getHand().get(position));
+        chosenPlayer.removeAssistantCardFromHand(position);
+    }
+
+    // putStudentsOnTables
+    // putStudentsOnIslands
+    // moveMotherNature
+    // methodsForCharacterCards
+
+    // GETTER
     public int getNumberOfPlayers() { return numberOfPlayers; }
     public MotherNature getMotherNature() { return motherNature; }
     public Bag getBag() { return bag; }
     public CharacterDeck getCharacterDeck() { return characterDeck; }
-    public ArrayList<Player> getPlayersList() { return playersList; }
+    public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
+    public HashMap<Integer, Cloud> getCloudHashMap() { return cloudHashMap; }
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
-    public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
 
-    // Setter
+    // SETTER
     public void setCharacterCardsList(ArrayList<CharacterCard> characterCardsList) {
         this.characterCardsList = characterCardsList;
     }
