@@ -9,6 +9,7 @@ public class Player {
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
     private AssistantCard lastCardPlayed;
+    private int coin;
 
     public Player (String nickname, TowerColor color) {
         this.nickname = nickname;
@@ -16,6 +17,7 @@ public class Player {
         this.dashboard = new Dashboard();
         this.hand = new ArrayList<>();
         hand.addAll(Arrays.asList(AssistantCard.values()));
+        this.coin = 1;
     }
 
     public void removeAssistantCardFromHand(int position) {
@@ -28,6 +30,7 @@ public class Player {
     public Dashboard getDashboard() { return dashboard; }
     public ArrayList<AssistantCard> getHand() { return hand; }
     public AssistantCard getLastCardPlayed() { return lastCardPlayed; }
+    public int getCoin() { return coin; }
 
     // SETTER
     public void setLastCardPlayed(AssistantCard lastCardPlayed) { this.lastCardPlayed = lastCardPlayed; }

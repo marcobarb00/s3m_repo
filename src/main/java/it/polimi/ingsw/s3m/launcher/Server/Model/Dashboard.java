@@ -5,39 +5,36 @@ import java.util.HashMap;
 
 public class Dashboard {
     private ArrayList<Student> hall;
-    private ArrayList<Tower> towerList;
     private HashMap<PawnColor, Integer> tables;
-    private int coins;
+    private int numberOfTowers;
 
     public Dashboard() {
         this.hall = new ArrayList<>();
-        this.towerList = new ArrayList<>();
         this.tables = new HashMap<>();
         for (PawnColor color : PawnColor.values()) {
             tables.put(color, 0);
         }
-        this.coins = 1;
     }
 
-    public void addStudentsInHall(ArrayList<Student> hall) {
+    public void addStudentsInHall (ArrayList<Student> hall) {
         this.hall.addAll(hall);
     }
 
+    public void deleteStudentsFromTables (ArrayList<Student> deletingStudents) {
+        for (Student student : deletingStudents) {
+            hall.remove(student);
+        }
+    }
+
+    // GETTER
+    public ArrayList<Student> getHall() { return hall; }
+    public HashMap<PawnColor, Integer> getTables() { return tables; }
+    public int getNumberOfTowers() { return numberOfTowers; }
+
     // SETTER
     public void putStudentsInHall (ArrayList<Student> hall) { this.hall = hall; }
+    public void setNumberOfTowers (int numberOfTowers) { this.numberOfTowers = numberOfTowers; }
 
-
-
-    /**
-     * Every time a tower is moved towerList shrinks
-     *
-     * @return
-     */
-    public Tower moveTower() {
-        Tower t = towerList.get(0);
-        towerList.remove(0);
-        return t;
-    }
 
     /**
      * Students can have from 0 to 3 students. Method removes students from hall and puts them
@@ -65,20 +62,8 @@ public class Dashboard {
                 throw new Exception("No such student in hall");
             }
             if (tables.get(s.getColor()) % 3 == 0) {
-                coins++;
             }
         }
     }
-
-
-
-    //setters
-    public void setCoins(int coins) { this.coins = coins; }
-
-
-    //getters
-    public ArrayList<Student> getHall() { return hall; }
-    public int getCoins() { return coins; }
-    public int getTables(PawnColor color) { return tables.get(color); }
 }
 

@@ -146,7 +146,17 @@ public class Game {
     // Operations
 
     public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
+        CharacterCard jester = new Jester();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Jester) {
+                jester = characterCard;
+            }
+        }
         Player chosenPlayer = playerHashMap.get(playerNickname);
+        chosenPlayer.getDashboard().deleteStudentsFromTables(givenStudents);
+        ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
+        chosenPlayer.getDashboard().addStudentsInHall(exchangingStudents);
+        jester.incrementCost();
     }
 
     public void chooseCloud(String playerNickname, int position) {
