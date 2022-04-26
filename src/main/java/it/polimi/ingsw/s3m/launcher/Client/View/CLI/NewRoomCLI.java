@@ -6,10 +6,10 @@ import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
 import java.util.Scanner;
 
 public class NewRoomCLI implements MessageCLI{
-	String nickname;
-	Integer roomID;
-	int numberOfPlayers;
-	String message;
+	private String nickname;
+	private Integer roomID;
+	private int numberOfPlayers;
+	private String message;
 
 	public NewRoomCLI(NewRoomMessage newRoomMessage){
 		this.nickname = newRoomMessage.getNickname();
@@ -37,12 +37,22 @@ public class NewRoomCLI implements MessageCLI{
 			}
 		}
 
+		System.out.println("do you want to play expert mode? Y/N");
+		String expertModeChoice = scanner.nextLine();
+		while(!expertModeChoice.equalsIgnoreCase("Y") && !expertModeChoice.equalsIgnoreCase("N")){
+			System.out.println("you inserted an invalid input");
+			expertModeChoice = scanner.nextLine();
+		}
+
+		boolean expertChoice = expertModeChoice.equalsIgnoreCase("Y");
+
 		System.out.println("please insert your nickname");
 		String nickname = scanner.nextLine();
 
 		NewRoomMessage newRoomInfo = new NewRoomMessage();
 		newRoomInfo.setNickname(nickname);
 		newRoomInfo.setNumberOfPlayers(numbersOfPlayers);
+		newRoomInfo.setExpertMode(expertChoice);
 		return newRoomInfo;
 	}
 }

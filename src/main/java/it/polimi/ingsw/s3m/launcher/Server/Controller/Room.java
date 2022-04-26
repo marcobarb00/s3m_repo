@@ -1,21 +1,23 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.RoomFullException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Room {
-    private int roomID;
-    private int playersNumber;
-    private ArrayList<PlayerController> playersList;
+    private final int roomID;
+    private final int playersNumber;
+    private final boolean expertMode;
+    private final ArrayList<PlayerController> playersList;
     private boolean isStarted;
     private Game gameState;
 
-    public Room(int roomID, int playersNumber) {
+    public Room(int roomID, int playersNumber, boolean expertMode) {
         this.roomID = roomID;
         this.playersNumber = playersNumber;
+        this.expertMode = expertMode;
         this.playersList = new ArrayList<>();
     }
 
@@ -46,11 +48,16 @@ public class Room {
         }
 
         isStarted = true;
-        start();
+        new Thread(this::start).start();
     }
 
     public void start(){
-        sendNotificationToAll("the room is starting");
+        sendNotificationToAll("the game is starting");
+
+        ArrayList<String> playersNicknameList = playersList.stream()
+                .map(PlayerController::getNickname)
+                .collect(Collectors.toCollection(ArrayList::new));
+        this.gameState = new Game(playersNicknameList);
     }
 
     public void deleteRoom(PlayerController player){

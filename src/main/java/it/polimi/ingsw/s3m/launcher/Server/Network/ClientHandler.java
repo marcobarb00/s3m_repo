@@ -5,7 +5,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class ClientHandler implements Runnable{
     private final Socket socket;
@@ -13,7 +12,6 @@ public class ClientHandler implements Runnable{
     private ObjectOutputStream objectOutputStream;
     private InputStream inputStream;
     private ObjectInputStream objectInputStream;
-
     PlayerController playerController;
 
     public ClientHandler(Socket socket) {
@@ -59,18 +57,6 @@ public class ClientHandler implements Runnable{
     public Message readMessage() throws IOException, ClassNotFoundException{
         return (Message) objectInputStream.readObject();
     }
-
-    public void activateCharacterCard(){}
-
-    public void playAssistantCard(){}
-
-    public void putStudentsOnIsland(){}
-
-    public void putStudentOnTable(){}
-
-    public void moveMotherNature(){}
-
-    public void chooseCloud(){}
 
     public void close(){
         try {

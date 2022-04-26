@@ -55,7 +55,7 @@ public class RoomsController{
             return;
         }
 
-        Integer roomID;
+        int roomID;
         do{
             roomID = ThreadLocalRandom.current().nextInt(0, 100000);
         }while(rooms.containsKey(roomID));
@@ -66,7 +66,7 @@ public class RoomsController{
 
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
-        Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers());
+        Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers(), newRoomMessageInfo.isExpertMode());
         newRoom.addPlayer(player);
         rooms.put(roomID, newRoom);
     }
