@@ -60,25 +60,6 @@ public class Game {
         this.gameInitializer = new GameInitializer(this);
     }
 
-    // Initializing methods
-
-    public void initializeJesterStudents (Jester jester) {
-        HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
-        for (PawnColor color : PawnColor.values()) {
-            initialingStudents.put(color, 0);
-        }
-        for (int i = 0; i < 6; i++) {
-            try {
-                Student student = extractStudent();
-                PawnColor color = student.getColor();
-                initialingStudents.replace(color, initialingStudents.get(color)+1);
-            } catch (EmptyBagException e) {
-                e.printStackTrace();
-            }
-        }
-        jester.setStudentsOnCard(initialingStudents);
-    }
-
     // Bag
 
     public Student extractStudent() throws EmptyBagException {
@@ -132,6 +113,25 @@ public class Game {
         cloud.setStudents(refillingStudents);
     }
 
+    // Jester
+
+    public void initializeJesterStudents (Jester jester) {
+        HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
+        for (PawnColor color : PawnColor.values()) {
+            initialingStudents.put(color, 0);
+        }
+        for (int i = 0; i < 6; i++) {
+            try {
+                Student student = extractStudent();
+                PawnColor color = student.getColor();
+                initialingStudents.replace(color, initialingStudents.get(color)+1);
+            } catch (EmptyBagException e) {
+                e.printStackTrace();
+            }
+        }
+        jester.setStudentsOnCard(initialingStudents);
+    }
+
     // Mother Nature
 
     public void updateMotherNaturePosition (int jump) {
@@ -144,6 +144,10 @@ public class Game {
     }
 
     // Operations
+
+    public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+    }
 
     public void chooseCloud(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
