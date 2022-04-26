@@ -3,8 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 
-import java.io.IOException;
-
 public class PlayerController{
 	private ClientHandler client;
 	private String nickname;
@@ -30,12 +28,8 @@ public class PlayerController{
 		this.roomID = roomID;
 	}
 
-	public void sendMessage(Message message){
-		client.sendMessage(message);
-	}
-
-	public Message readMessage() throws IOException, ClassNotFoundException{
-		return client.readMessage();
+	public Message communicateWithClient(Message message){
+		return client.communicateWithClient(message);
 	}
 
 	public void login(){

@@ -71,7 +71,7 @@ public class Room {
         ArrayList<PlayerController> allButOne = new ArrayList<>(playersList);
         allButOne.remove(one);
         for(PlayerController player : allButOne){
-            player.sendMessage(notification);
+            player.communicateWithClient(notification);
         }
     }
 
@@ -79,7 +79,7 @@ public class Room {
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage(message);
         for(PlayerController player : playersList){
-            player.sendMessage(notification);
+            player.communicateWithClient(notification);
         }
     }
 }

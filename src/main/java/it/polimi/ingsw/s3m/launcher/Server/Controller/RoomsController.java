@@ -1,9 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.RoomFullException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -25,35 +23,23 @@ public class RoomsController{
         return rooms.get(roomID);
     }
 
-    public synchronized void login(PlayerController player){
-        LoginMessage loginMessage = new LoginMessage();
-        int numberOfRooms = rooms.size();
-        loginMessage.setNumberOfRooms(numberOfRooms);
-        player.sendMessage(loginMessage);
-        LoginMessage loginResponse;
-        try{
-            loginResponse = (LoginMessage) player.readMessage();
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
-            return;
-        }
+    public void login(PlayerController player){
+        Runnable login = () -> {
+            LoginMessage loginMessage = new LoginMessage();
+            loginMessage.setNumberOfRooms(rooms.size());
+            LoginMessage loginResponse = (LoginMessage) player.communicateWithClient(loginMessage);
 
-        if (loginResponse.isNewRoom()){
-            newRoom(player);
-        }else{
-            enterRoom(player);
-        }
+            if(loginResponse.isNewRoom()){
+                newRoom(player);
+            }else{
+                enterRoom(player);
+            }
+        };
+        new Thread(login).start();
     }
 
-    public synchronized void newRoom(PlayerController player){
-        player.sendMessage(new NewRoomMessage());
-        NewRoomMessage newRoomMessageInfo;
-        try{
-            newRoomMessageInfo = (NewRoomMessage) player.readMessage();
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
-            return;
-        }
+    public void newRoom(PlayerController player){
+        NewRoomMessage newRoomMessageInfo = (NewRoomMessage) player.communicateWithClient(new NewRoomMessage());
 
         int roomID;
         do{
@@ -62,7 +48,7 @@ public class RoomsController{
 
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage("room created successfully, room ID is: " + roomID);
-        player.sendMessage(notification);
+        player.communicateWithClient(notification);
 
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
@@ -71,38 +57,31 @@ public class RoomsController{
         rooms.put(roomID, newRoom);
     }
 
-    public synchronized void enterRoom(PlayerController player){
+    public void enterRoom(PlayerController player){
         boolean successful = false;
         do{
             EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
             enterRoomMessageInfo.setAvailableRoomsID(new ArrayList<>(rooms.keySet()));
-            player.sendMessage(enterRoomMessageInfo);
+            EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.communicateWithClient(enterRoomMessageInfo);
 
-            EnterRoomMessage enterRoomMessageResult;
-            try{
-                enterRoomMessageResult = (EnterRoomMessage) player.readMessage();
-            }catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
-                return;
-            }
             Integer roomID = enterRoomMessageResult.getRoomID();
 
             NotificationMessage notification = new NotificationMessage();
             if(!rooms.containsKey(roomID)){
                 notification.setMessage("there is no room with ID: " + roomID);
-                player.sendMessage(notification);
+                player.communicateWithClient(notification);
             }
             else if(rooms.get(roomID).isFull()){
                 notification.setMessage("the room is already full");
-                player.sendMessage(notification);
+                player.communicateWithClient(notification);
             }
             else if(!rooms.get(roomID).isAllowedName(enterRoomMessageResult.getNickname())){
                 notification.setMessage("there is another player with that nickname in the room");
-                player.sendMessage(notification);
+                player.communicateWithClient(notification);
             }
             else{
                 notification.setMessage("entered in the room successfully");
-                player.sendMessage(notification);
+                player.communicateWithClient(notification);
                 successful = true;
 
                 player.setNickname(enterRoomMessageInfo.getNickname());
