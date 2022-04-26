@@ -31,4 +31,20 @@ class GameTest {
                 .collect(Collectors.toSet());
         assertEquals(PawnColor.values().length, colorList.size());
     }
+
+    @Test
+    void drawThreeCharacterCards() {
+        ArrayList<String> playersNicknames = new ArrayList<>();
+        Game game = new Game(playersNicknames);
+        assertEquals(6, game.getCharacterCardsList().size());
+        for (CharacterCard characterCard : game.getCharacterCardsList()) {
+            System.out.println(characterCard.getName());
+        }
+        System.out.println("");
+        game.drawThreeCharacterCards();
+        assertEquals(3, game.getCharacterCardsList().size());
+        for (CharacterCard characterCard : game.getCharacterCardsList()) {
+            System.out.println(characterCard.getName());
+        }
+    }
 }

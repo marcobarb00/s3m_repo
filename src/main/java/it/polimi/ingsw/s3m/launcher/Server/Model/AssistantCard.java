@@ -27,11 +27,9 @@ public enum AssistantCard {
     public int getValue() {
         return value;
     }
-
     public int getMovements() {
         return movements;
     }
-
     public String getType(){
         return type;
     }

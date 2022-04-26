@@ -1,13 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import java.util.ArrayList;
-
 public class MotherNature {
-    private int currentPosition;
-
-    public MotherNature () {
-        this.currentPosition = 0;
-    }
+    private int currentPosition = 0;
 
     public void incrementCurrentPosition () {
         currentPosition++;

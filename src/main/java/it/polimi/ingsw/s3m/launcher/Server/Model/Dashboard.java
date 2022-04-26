@@ -19,6 +19,15 @@ public class Dashboard {
         this.coins = 1;
     }
 
+    public void addStudentsInHall(ArrayList<Student> hall) {
+        this.hall.addAll(hall);
+    }
+
+    // SETTER
+    public void putStudentsInHall (ArrayList<Student> hall) { this.hall = hall; }
+
+
+
     /**
      * Every time a tower is moved towerList shrinks
      *
@@ -51,6 +60,7 @@ public class Dashboard {
                     break;
                 }
             }
+            //If there isn't a student of that color throws exception
             if(!studentFound){
                 throw new Exception("No such student in hall");
             }
@@ -61,14 +71,6 @@ public class Dashboard {
     }
 
 
-    /**
-     * Given an Arraylist
-     *
-     * @param hall
-     */
-    public void putStudentsInHall(ArrayList<Student> hall) {
-        this.hall = hall;
-    }
 
     //setters
     public void setCoins(int coins) { this.coins = coins; }

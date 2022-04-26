@@ -10,7 +10,7 @@ class CloudTest {
 
     @Test
     void returnThreeStudents() {
-        Cloud cloud = new Cloud(1);
+        Cloud cloud = new Cloud();
         ArrayList<Student> setStudents = new ArrayList<>();
         ArrayList<Student> returnedStudents;
         returnedStudents = cloud.returnThreeStudents();
