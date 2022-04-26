@@ -1,31 +1,62 @@
 package it.polimi.ingsw.s3m.launcher.Client.Network;
 
+import it.polimi.ingsw.s3m.launcher.Client.View.CLI.ClientCLI;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class Client{
-	private final String SERVERIP = "localhost";
-	private final int PORT = Server.PORT;
+	private final String serverip = Server.SERVERIP;
+	private final int port = Server.PORT;
 	private Socket socket;
 	private ObjectInputStream inputStream;
-	private ObjectOutputStream outPutStream;
+	private ObjectOutputStream outputStream;
 
 	public static void main(String[] args){
-		//TODO CLIclient/GUIclient
-		Client client = new Client();
+		if(args[0].equals("CLI")) {
+			ClientCLI client = new ClientCLI();
+			client.start();
+		}else{
+		}
 	}
 
-	public void startClient(){
+	/**
+	 * creates socket and Input/OutputObjectStream
+	 */
+	public void start(){
 		try{
-			socket = new Socket(SERVERIP, PORT);
+			socket = new Socket(serverip, port);
+			outputStream = new ObjectOutputStream(socket.getOutputStream());
 			inputStream = new ObjectInputStream(socket.getInputStream());
-			outPutStream = new ObjectOutputStream(socket.getOutputStream());
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * sends a message to the server
+	 * @param message message to be sent
+	 */
+	public void sendMessage(Message message){
+		try{
+			outputStream.writeObject(message);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * receive a message from the server
+	 * @return message received
+	 */
+	public Message receiveMessage(){
+		try{
+			return (Message) inputStream.readObject();
+		}catch(IOException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

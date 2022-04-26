@@ -57,9 +57,14 @@ public class Island{
     }
 
 
+/*
+    /**
+     * Could be called inside Game
+     * @param players
+
     // Thing to change
 
-    /*public int computeDominance(ArrayList<Player> players){
+    public int computeDominance(ArrayList<Player> players){
         Player possibleDominator = null;
         int maxInfluenceIndex = 0;
 
