@@ -166,11 +166,20 @@ public class Game {
     // moveMotherNature
     // methodsForCharacterCards
 
-    // GETTER
+    // GETTER - Player
     public int getNumberOfPlayers() { return numberOfPlayers; }
+    public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
+    public ArrayList<String> getPlayersNicknames() {
+        ArrayList<String> listOfNicknames = new ArrayList<>();
+        for (Player player : playerHashMap.values()) {
+            listOfNicknames.add(player.getNickname());
+        }
+        return listOfNicknames;
+    }
+
+    // GETTER
     public MotherNature getMotherNature() { return motherNature; }
     public Bag getBag() { return bag; }
-    public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
