@@ -9,27 +9,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameInitializerTest {
 
     @Test
-    void islandsSetup() {
+    void characterCardsSetup() {
         ArrayList<String> playersNickname = new ArrayList<>();
+        playersNickname.add("User1");
+        playersNickname.add("User2");
+        playersNickname.add("User3");
         Game game = new Game(playersNickname);
-        GameInitializer gameInitializer = new GameInitializer(game);
-        assertEquals(10, gameInitializer.getFirstStudentsOnIslands().size());
-        for (Island island : game.getIslandsList()) {
-            for (PawnColor color : PawnColor.values()) {
-                assertEquals(0, island.getStudents().get(color));
-            }
-        }
-        gameInitializer.islandsSetup();
-        assertEquals(0, gameInitializer.getFirstStudentsOnIslands().size());
-        for (Island island : game.getIslandsList()) {
-            int sum = 0;
-            for (PawnColor color : PawnColor.values()) {
-                sum += island.getStudentsPerColor(color);
-            }
-            if (island.getId() == 1 || island.getId() == 7) {
-                assertEquals(0, sum);
-            } else {
-                assertEquals(1, sum);
+        for (CharacterCard characterCard : game.getCharacterCardsList()) {
+            if (characterCard instanceof Jester) {
+                int sumOfStudents = 0;
+                for (PawnColor color : PawnColor.values()) {
+                    sumOfStudents += ((Jester) characterCard).getStudentsOnCard().get(color);
+                }
+                assertEquals(6, sumOfStudents);
+                for (PawnColor color : PawnColor.values()) {
+                    System.out.println(((Jester) characterCard).getStudentsOnCard().get(color));
+                }
             }
         }
     }

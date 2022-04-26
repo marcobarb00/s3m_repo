@@ -54,11 +54,16 @@ public class GameInitializer {
     }
 
     public void characterCardsSetup() {
-        game.setCharacterCardsList(game.getCharacterDeck().drawThreeCharacterCards());
+        game.drawThreeCharacterCards();
+        for (CharacterCard characterCard : game.getCharacterCardsList()) {
+            if (characterCard instanceof Jester) {
+                game.initializeJesterStudents((Jester) characterCard);
+            }
+        }
     }
 
     public void studentsInHallSetup() {
-        for (int i = 0; i < game.getNumberOfPlayers(); i++) {
+        for (Player player : game.getPlayerHashMap().values()) {
             ArrayList<Student> enteringHallStudents = new ArrayList<>();
             for (int j = 0; j < 7; j++) {
                 try {
@@ -68,13 +73,13 @@ public class GameInitializer {
                     e.printStackTrace();
                 }
             }
-            game.getPlayerHashMap().get(i).getDashboard().putStudentsInHall(enteringHallStudents);
+            player.getDashboard().putStudentsInHall(enteringHallStudents);
         }
     }
 
     public void cloudsSetup() {
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
-            game.refillCloudStudents(game.getCloudHashMap().get(i));
+            game.refillCloudStudents(game.getCloudsList().get(i));
         }
     }
 

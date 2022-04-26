@@ -10,6 +10,9 @@ public class Jester extends CharacterCard {
         setName("Jester");
         setCost(1);
         studentsOnCard = new HashMap<>();
+        for (PawnColor color : PawnColor.values()) {
+            studentsOnCard.put(color, 0);
+        }
     }
 
     //TODO rewatch this method
