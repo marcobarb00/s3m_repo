@@ -4,11 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Player {
-    private String nickname;
-    private TowerColor color;
+    private final String nickname;
+    private final TowerColor color;
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
     private AssistantCard lastCardPlayed;
+
+    public Player (Player player) {
+        this.nickname = player.getNickname();
+        this.color = player.getColor();
+        this.dashboard = player.getDashboard();
+        this.hand = player.getHand();
+        this.lastCardPlayed = player.getLastCardPlayed();
+    }
 
     public Player (String nickname, TowerColor color) {
         this.nickname = nickname;
