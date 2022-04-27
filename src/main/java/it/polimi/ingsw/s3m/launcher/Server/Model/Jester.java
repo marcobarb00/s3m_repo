@@ -15,7 +15,6 @@ public class Jester extends CharacterCard {
         }
     }
 
-    //TODO rewatch this method
     public ArrayList<Student> exchangeStudents (ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
         ArrayList<Student> students = new ArrayList<>(requiredStudents);
         for (Student student : requiredStudents) {

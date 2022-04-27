@@ -14,6 +14,7 @@ public class Game {
     private ArrayList<Professor> professorsList;
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
+    private ComputeDominanceStrategy computeDominanceStrategy;
     private GameInitializer gameInitializer;
     private ExpertModeInitializer expertModeInitializer;
 
@@ -36,10 +37,12 @@ public class Game {
         // Islands
         this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            islandsList.add(new Island(i+1));
+            islandsList.add(new Island());
         }
         // Character cards
         this.characterCardsList = new ArrayList<>();
+        // Strategy: computeDominance
+        this.computeDominanceStrategy = new StandardComputeDominance();
 
         if (numberOfPlayers == 2) {
             gameInitializer = new TwoPlayersGameInitializer(this, playersNicknameList);
@@ -154,6 +157,11 @@ public class Game {
         chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnStudents());
     }
 
+    public void moveMotherNature(String playerNickname, int jump) {
+        updateMotherNaturePosition(jump);
+        computeDominanceStrategy.computerDominance();
+    }
+
     public void playAssistantCard(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastCardPlayed(chosenPlayer.getHand().get(position));
@@ -175,6 +183,18 @@ public class Game {
         }
         return listOfNicknames;
     }
+    public ArrayList<AssistantCard> getPlayerHand(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return chosenPlayer.getHand();
+    }
+    public AssistantCard getPlayerLastPlayedAssistantCard(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return chosenPlayer.getLastCardPlayed();
+    }
+    public int getPlayerCoins(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return ((ExpertPlayer) chosenPlayer).getCoins();
+    }
 
     // GETTER
     public boolean isExpertMode() { return expertMode; }
@@ -184,9 +204,4 @@ public class Game {
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
-
-    // SETTER
-    public void setCharacterCardsList(ArrayList<CharacterCard> characterCardsList) {
-        this.characterCardsList = characterCardsList;
-    }
 }
