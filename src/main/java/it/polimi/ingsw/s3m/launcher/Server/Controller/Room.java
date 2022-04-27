@@ -31,11 +31,11 @@ public class Room {
         return playersList;
     }
 
-    public boolean isFull(){
+    public synchronized boolean isFull(){
         return playersList.size() >= playersNumber;
     }
 
-    public boolean isAllowedName(String nickname){
+    public synchronized boolean isAllowedName(String nickname){
         if(playersList.isEmpty())
             return true;
         return playersList.stream()
