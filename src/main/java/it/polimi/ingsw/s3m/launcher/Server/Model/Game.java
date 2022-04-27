@@ -14,6 +14,7 @@ public class Game {
     private ArrayList<Professor> professorsList;
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
+    private ComputeDominanceStrategy computeDominanceStrategy;
     private GameInitializer gameInitializer;
     private ExpertModeInitializer expertModeInitializer;
 
@@ -40,6 +41,8 @@ public class Game {
         }
         // Character cards
         this.characterCardsList = new ArrayList<>();
+        // Strategy: computeDominance
+        this.computeDominanceStrategy = new StandardComputeDominance();
 
         if (numberOfPlayers == 2) {
             gameInitializer = new TwoPlayersGameInitializer(this, playersNicknameList);
@@ -152,6 +155,11 @@ public class Game {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         Cloud chosenCloud = cloudsList.get(position);
         chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnStudents());
+    }
+
+    public void moveMotherNature(String playerNickname, int jump) {
+        updateMotherNaturePosition(jump);
+        computeDominanceStrategy.computerDominance();
     }
 
     public void playAssistantCard(String playerNickname, int position) {
