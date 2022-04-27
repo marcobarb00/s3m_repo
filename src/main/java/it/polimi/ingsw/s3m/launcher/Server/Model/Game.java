@@ -36,7 +36,7 @@ public class Game {
         // Islands
         this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            islandsList.add(new Island(i+1));
+            islandsList.add(new Island());
         }
         // Character cards
         this.characterCardsList = new ArrayList<>();
@@ -175,6 +175,18 @@ public class Game {
         }
         return listOfNicknames;
     }
+    public ArrayList<AssistantCard> getPlayerHand(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return chosenPlayer.getHand();
+    }
+    public AssistantCard getPlayerLastPlayedAssistantCard(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return chosenPlayer.getLastCardPlayed();
+    }
+    public int getPlayerCoins(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return ((ExpertPlayer) chosenPlayer).getCoins();
+    }
 
     // GETTER
     public boolean isExpertMode() { return expertMode; }
@@ -184,9 +196,4 @@ public class Game {
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
-
-    // SETTER
-    public void setCharacterCardsList(ArrayList<CharacterCard> characterCardsList) {
-        this.characterCardsList = characterCardsList;
-    }
 }
