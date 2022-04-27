@@ -58,7 +58,7 @@ public class Room {
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
         //TODO Controls for game instance
-        this.gameState = new Game(playersNicknameList);
+        this.gameState = new Game(playersNicknameList, expertMode);
     }
 
     public void deleteRoom(PlayerController player){
