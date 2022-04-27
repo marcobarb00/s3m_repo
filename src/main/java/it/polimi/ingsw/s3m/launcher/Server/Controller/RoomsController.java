@@ -38,7 +38,7 @@ public class RoomsController{
         new Thread(login).start();
     }
 
-    public void newRoom(PlayerController player){
+    public synchronized void newRoom(PlayerController player){
         NewRoomMessage newRoomMessageInfo = (NewRoomMessage) player.communicateWithClient(new NewRoomMessage());
 
         int roomID;
@@ -57,7 +57,7 @@ public class RoomsController{
         rooms.put(roomID, newRoom);
     }
 
-    public void enterRoom(PlayerController player){
+    public synchronized void enterRoom(PlayerController player){
         boolean successful = false;
         do{
             EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
@@ -91,7 +91,7 @@ public class RoomsController{
         }while(!successful);
     }
 
-    public void deleteRoom(Integer roomID, PlayerController player){
+    public synchronized void deleteRoom(Integer roomID, PlayerController player){
         rooms.get(roomID).deleteRoom(player);
         rooms.remove(roomID);
     }

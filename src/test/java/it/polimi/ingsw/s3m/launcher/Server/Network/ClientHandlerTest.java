@@ -3,7 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Server.Network;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.net.Socket;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,11 +16,6 @@ class ClientHandlerTest{
 
 	@Test
 	void writeOutputStreamNullInput(){
-		assertThrows(IOException.class, () -> clientHandler.writeOutputStream(null));
-	}
-
-	@Test
-	void communicateWithClientNullInput(){
-		assertThrows(IOException.class, () -> clientHandler.communicateWithClient(null));
+		assertThrows(NullPointerException.class, () -> clientHandler.writeOutputStream(null));
 	}
 }

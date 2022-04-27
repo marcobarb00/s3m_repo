@@ -49,7 +49,11 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void writeOutputStream(Message message){
+    public void writeOutputStream(Message message) throws NullPointerException{
+        if(message == null){
+            System.out.println("ERROR: trying to send a null message");
+            throw new NullPointerException();
+        }
         try{
             objectOutputStream.writeObject(message);
             objectOutputStream.flush();
