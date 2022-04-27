@@ -1,9 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -48,17 +50,39 @@ public class Room {
         }
 
         isStarted = true;
-        new Thread(this::start).start();
+        new Thread(() -> {
+            try {
+                start();
+            } catch (DoubleNicknameException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
-    public void start(){
+    public void start() throws DoubleNicknameException {
         sendNotificationToAll("the game is starting");
 
         ArrayList<String> playersNicknameList = playersList.stream()
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
+
         //TODO Controls for game instance
-        this.gameState = new Game(playersNicknameList, expertMode);
+        boolean checkNicknames = checkGameInstanceConditions(playersNicknameList);
+        if(checkNicknames) {
+            this.gameState = new Game(playersNicknameList, expertMode);
+        }else{
+            throw new DoubleNicknameException();
+        }
+    }
+
+    private boolean checkGameInstanceConditions(ArrayList<String> players) {
+        for(String p : players){
+            int occurrences = Collections.frequency(players, p);
+            if(occurrences > 1){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void deleteRoom(PlayerController player){
@@ -83,4 +107,6 @@ public class Room {
             player.communicateWithClient(notification);
         }
     }
+
+
 }

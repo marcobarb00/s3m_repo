@@ -1,24 +1,13 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
-
-//TODO Decide where to instantiate
 public class Island{
-    private int id;
-    private Island previousIsland;
-    private Island nextIsland;
     private HashMap<PawnColor,Integer> students;
-
     private Player dominator = null;
-    private int towers = 0;
+    private int numberOfTowers = 0;
 
-    //TODO Setting next and prev islands for each one (setters)
-    public Island(int id) {
-        this.id = id;
+    public Island() {
         students = new HashMap<>();
         for (PawnColor color : PawnColor.values()) {
             students.put(color, 0);
@@ -26,21 +15,12 @@ public class Island{
     }
 
     // GETTER
-    public int getId() { return id; }
-    public Island getPreviousIsland() { return previousIsland; }
-    public Island getNextIsland() { return nextIsland; }
     public HashMap<PawnColor, Integer> getStudents() { return students; }
-    public int getTowers() {
-        return towers;
-    }
-    public int getStudentsPerColor(PawnColor pawnColor) { return students.get(pawnColor); }
-    public Player getDominator() {
-        return dominator;
-    }
+    public Player getDominator() { return dominator; }
+    public int getNumberOfTowers() { return numberOfTowers; }
 
     // SETTER
-    public void setPreviousIsland(Island previousIsland) { this.previousIsland = previousIsland; }
-    public void setNextIsland(Island nextIsland) { this.nextIsland = nextIsland; }
+    public void setDominator(Player dominator) { this.dominator = dominator; }
 
     public void addStudent(Student student){
         PawnColor color = student.getColor();
@@ -48,18 +28,8 @@ public class Island{
         students.replace(color, oldValue + 1);
     }
 
-    public void setDominator(Player dominator) {
-        this.dominator = dominator;
-    }
-
 
 /*
-    /**
-     * Could be called inside Game
-     * @param players
-
-    // Thing to change
-
     public int computeDominance(ArrayList<Player> players){
         Player possibleDominator = null;
         int maxInfluenceIndex = 0;
@@ -123,17 +93,4 @@ public class Island{
 
         return exitCode;
     }*/
-
-    private void sumStudentsNextIsland(){
-        for (PawnColor color : this.students.keySet()){
-            this.students.replace(color,this.getStudentsPerColor(color) + this.nextIsland.getStudentsPerColor(color));
-        }
-    }
-
-    private void sumStudentsPreviousIsland(){
-        for (PawnColor color : this.students.keySet()){
-            this.students.replace(color,this.getStudentsPerColor(color) + this.previousIsland.getStudentsPerColor(color));
-
-        }
-    }
 }

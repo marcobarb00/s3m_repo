@@ -1,9 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class Game {
@@ -16,50 +14,42 @@ public class Game {
     private ArrayList<Professor> professorsList;
     private ArrayList<Island> islandsList;
     private ArrayList<CharacterCard> characterCardsList;
+    private ComputeDominanceStrategy computeDominanceStrategy;
     private GameInitializer gameInitializer;
+    private ExpertModeInitializer expertModeInitializer;
 
     public Game (ArrayList<String> playersNicknameList, boolean expertMode) {
-        // Setting number of players
         this.numberOfPlayers = playersNicknameList.size();
         this.expertMode = expertMode;
-        // Creating players
+        // MotherNature
+        this.motherNature = new MotherNature();
+        // Bag
+        this.bag = new Bag();
+        // Players
         this.playerHashMap = new HashMap<>();
-        if (numberOfPlayers == 2) {
-            playerHashMap.put(playersNicknameList.get(0),
-                    new Player(playersNicknameList.get(0), TowerColor.WHITE));
-            playerHashMap.put(playersNicknameList.get(1),
-                    new Player(playersNicknameList.get(1), TowerColor.BLACK));
-        } else if (numberOfPlayers == 3) {
-            playerHashMap.put(playersNicknameList.get(0),
-                    new Player(playersNicknameList.get(0), TowerColor.WHITE));
-            playerHashMap.put(playersNicknameList.get(1),
-                    new Player(playersNicknameList.get(1), TowerColor.BLACK));
-            playerHashMap.put(playersNicknameList.get(2),
-                    new Player(playersNicknameList.get(2), TowerColor.GREY));
-        }
-        // Creating clouds
+        // Clouds
         this.cloudsList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             cloudsList.add(new Cloud());
         }
-        // Creating islands
+        // Professors
+        this.professorsList = new ArrayList<>();
+        // Islands
         this.islandsList = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            islandsList.add(new Island(i+1));
+            islandsList.add(new Island());
         }
-        // Creating the full deck of the character cards
+        // Character cards
         this.characterCardsList = new ArrayList<>();
-        characterCardsList.add(new Centaur());
-        characterCardsList.add(new Jester());
-        characterCardsList.add(new Knight());
-        characterCardsList.add(new MagicPostman());
-        characterCardsList.add(new Minstrel());
-        characterCardsList.add(new Mushroomer());
-        // Creating other elements of the game
-        this.professorsList = new ArrayList<>();
-        this.motherNature = new MotherNature();
-        this.bag = new Bag();
-        this.gameInitializer = new GameInitializer(this);
+        // Strategy: computeDominance
+        this.computeDominanceStrategy = new StandardComputeDominance();
+
+        if (numberOfPlayers == 2) {
+            gameInitializer = new TwoPlayersGameInitializer(this, playersNicknameList);
+        } else if (numberOfPlayers == 3) {
+            gameInitializer = new ThreePlayersGameInitializer(this, playersNicknameList);
+        }
+        if (expertMode) expertModeInitializer = new ExpertModeInitializer(this);
     }
 
     // Bag
@@ -103,9 +93,9 @@ public class Game {
 
     // Cloud
 
-    public void refillCloudStudents(Cloud cloud) {
+    public void refillCloudStudents(Cloud cloud, int numberOfStudents) {
         ArrayList<Student> refillingStudents = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfStudents; i++) {
             try {
                 refillingStudents.add(extractStudent());
             } catch (EmptyBagException e) {
@@ -164,7 +154,12 @@ public class Game {
     public void chooseCloud(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         Cloud chosenCloud = cloudsList.get(position);
-        chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnThreeStudents());
+        chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnStudents());
+    }
+
+    public void moveMotherNature(String playerNickname, int jump) {
+        updateMotherNaturePosition(jump);
+        computeDominanceStrategy.computerDominance();
     }
 
     public void playAssistantCard(String playerNickname, int position) {
@@ -188,6 +183,18 @@ public class Game {
         }
         return listOfNicknames;
     }
+    public ArrayList<AssistantCard> getPlayerHand(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return chosenPlayer.getHand();
+    }
+    public AssistantCard getPlayerLastPlayedAssistantCard(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return chosenPlayer.getLastCardPlayed();
+    }
+    public int getPlayerCoins(String playerNickname) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        return ((ExpertPlayer) chosenPlayer).getCoins();
+    }
 
     // GETTER
     public boolean isExpertMode() { return expertMode; }
@@ -197,9 +204,4 @@ public class Game {
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
-
-    // SETTER
-    public void setCharacterCardsList(ArrayList<CharacterCard> characterCardsList) {
-        this.characterCardsList = characterCardsList;
-    }
 }

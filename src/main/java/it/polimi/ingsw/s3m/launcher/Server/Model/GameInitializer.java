@@ -1,42 +1,28 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-
 import java.util.ArrayList;
 
-public class GameInitializer {
-    private Game game;
-    private ArrayList<Student> firstStudentsOnIslands;
+public abstract class GameInitializer {
+    Game game;
 
-    public GameInitializer (Game game) {
+    public GameInitializer(Game game) {
         this.game = game;
-        // Initializing first students on islands
-        firstStudentsOnIslands = new ArrayList<>();
+    }
+
+    // Abstract methods
+    public abstract void playersSetup(ArrayList<String> nicknames);
+    public abstract void dashboardsSetup();
+    public abstract void studentsInHallSetup();
+    public abstract void cloudsSetup();
+
+    // Common method islandsSetup
+    public void islandsSetup() {
+        ArrayList<Student> firstStudentsOnIslands = new ArrayList<>();
         for (PawnColor color : PawnColor.values()) {
             firstStudentsOnIslands.add(new Student(color));
             firstStudentsOnIslands.add(new Student(color));
         }
-        islandsSetup();
-        // Pick character cards
-        characterCardsSetup();
-        // Inserting students in the hall of the Dashboard of each Player
-        studentsInHallSetup();
-        // Inserting students on clouds
-        cloudsSetup();
-    }
-
-    public void islandsSetup() {
         for (int i = 0; i < game.getIslandsList().size(); i++) {
-            if (i == 0) {
-                game.getIslandsList().get(i).setNextIsland(game.getIslandsList().get(i+1));
-                game.getIslandsList().get(i).setPreviousIsland(game.getIslandsList().get(11));
-            } else if (i == 11) {
-                game.getIslandsList().get(i).setNextIsland(game.getIslandsList().get(0));
-                game.getIslandsList().get(i).setPreviousIsland(game.getIslandsList().get(i-1));
-            } else {
-                game.getIslandsList().get(i).setNextIsland(game.getIslandsList().get(i+1));
-                game.getIslandsList().get(i).setPreviousIsland(game.getIslandsList().get(i-1));
-            }
             if (i != 0 && i != 6) {
                 Student student = extractStudent(firstStudentsOnIslands);
                 game.getIslandsList().get(i).addStudent(student);
@@ -50,35 +36,5 @@ public class GameInitializer {
         returnedStudent = students.get(extractedNumber);
         students.remove(extractedNumber);
         return returnedStudent;
-    }
-
-    public void characterCardsSetup() {
-        game.drawThreeCharacterCards();
-        for (CharacterCard characterCard : game.getCharacterCardsList()) {
-            if (characterCard instanceof Jester) {
-                game.initializeJesterStudents((Jester) characterCard);
-            }
-        }
-    }
-
-    public void studentsInHallSetup() {
-        for (Player player : game.getPlayerHashMap().values()) {
-            ArrayList<Student> enteringHallStudents = new ArrayList<>();
-            for (int j = 0; j < 7; j++) {
-                try {
-                    Student student = game.extractStudent();
-                    enteringHallStudents.add(student);
-                } catch (EmptyBagException e) {
-                    e.printStackTrace();
-                }
-            }
-            player.getDashboard().putStudentsInHall(enteringHallStudents);
-        }
-    }
-
-    public void cloudsSetup() {
-        for (int i = 0; i < game.getNumberOfPlayers(); i++) {
-            game.refillCloudStudents(game.getCloudsList().get(i));
-        }
     }
 }
