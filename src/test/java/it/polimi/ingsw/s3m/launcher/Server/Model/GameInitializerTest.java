@@ -14,7 +14,7 @@ class GameInitializerTest {
         playersNickname.add("User1");
         playersNickname.add("User2");
         playersNickname.add("User3");
-        Game game = new Game(playersNickname);
+        Game game = new Game(playersNickname, true);
         for (CharacterCard characterCard : game.getCharacterCardsList()) {
             if (characterCard instanceof Jester) {
                 int sumOfStudents = 0;

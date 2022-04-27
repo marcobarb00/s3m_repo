@@ -8,13 +8,7 @@ import java.util.Collection;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DashboardTest {
-
-    @Test
-    void moveTower() {
-
-    }
-
-    @Test
+    /* @Test
     void moveStudentFromHallToTables() throws Exception {
         ArrayList<Student> students = new ArrayList<>();
         students.add(new Student(PawnColor.BLUE));
@@ -86,5 +80,5 @@ class DashboardTest {
         assertEquals(2, dashboard.getHall().stream().filter( a -> a.getColor() == PawnColor.RED).count());
         assertEquals(1, dashboard.getHall().stream().filter( a -> a.getColor() == PawnColor.YELLOW).count());
         assertEquals(0, dashboard.getHall().stream().filter( a -> a.getColor() == PawnColor.PINK).count());
-    }
+    } */
 }

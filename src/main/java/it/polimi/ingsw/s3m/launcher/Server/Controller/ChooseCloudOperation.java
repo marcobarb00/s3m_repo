@@ -5,22 +5,23 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import java.util.ArrayList;
 
 public class ChooseCloudOperation extends Operation{
-    Player nickPlayer;
-    int cloudPosition;
+    private PlayerController playerController;
+    private int cloudPosition;
 
-    public ChooseCloudOperation(Game game, Player nickPlayer, int cloudPosition){
+    //Position is meant as arraylist index (0 to cloudList.size)
+    public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){
         super(game);
-        this.nickPlayer =  nickPlayer;
+        this.playerController =  playerController;
         this.cloudPosition = cloudPosition;
     }
 
     @Override
     public void executeOperation() throws PlayerNotInListException, CloudNotInListException {
-        ArrayList<Player> playersList = super.game.getPlayersList();
+        ArrayList<String> playersList = super.game.getPlayersNicknames();
         ArrayList<Cloud> cloudsList = super.game.getCloudsList();
 
-        boolean nickPlayerInList = playersList.contains(nickPlayer);
-        if(!nickPlayerInList){
+        boolean playerControllerInList = playersList.contains(playerController.getNickname());
+        if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
 
@@ -29,9 +30,6 @@ public class ChooseCloudOperation extends Operation{
             throw new CloudNotInListException();
         }
 
-        if(nickPlayerInList && cloudInList){
-            //TODO complete after model merge into master
-            //super.game.chooseCloud(nickPlayer, cloudPosition);
-        }
+        super.game.chooseCloud(playerController.getNickname(), cloudPosition);
     }
 }

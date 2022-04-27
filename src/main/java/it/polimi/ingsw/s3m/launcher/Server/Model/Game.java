@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class Game {
     private final int numberOfPlayers;
+    private final boolean expertMode;
     private MotherNature motherNature;
     private Bag bag;
     private HashMap<String, Player> playerHashMap;
@@ -17,9 +18,10 @@ public class Game {
     private ArrayList<CharacterCard> characterCardsList;
     private GameInitializer gameInitializer;
 
-    public Game (ArrayList<String> playersNicknameList) {
+    public Game (ArrayList<String> playersNicknameList, boolean expertMode) {
         // Setting number of players
         this.numberOfPlayers = playersNicknameList.size();
+        this.expertMode = expertMode;
         // Creating players
         this.playerHashMap = new HashMap<>();
         if (numberOfPlayers == 2) {
@@ -146,7 +148,17 @@ public class Game {
     // Operations
 
     public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
+        CharacterCard jester = new Jester();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Jester) {
+                jester = characterCard;
+            }
+        }
         Player chosenPlayer = playerHashMap.get(playerNickname);
+        chosenPlayer.getDashboard().deleteStudentsFromTables(givenStudents);
+        ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
+        chosenPlayer.getDashboard().addStudentsInHall(exchangingStudents);
+        jester.incrementCost();
     }
 
     public void chooseCloud(String playerNickname, int position) {
@@ -166,11 +178,21 @@ public class Game {
     // moveMotherNature
     // methodsForCharacterCards
 
-    // GETTER
+    // GETTER - Player
     public int getNumberOfPlayers() { return numberOfPlayers; }
+    public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
+    public ArrayList<String> getPlayersNicknames() {
+        ArrayList<String> listOfNicknames = new ArrayList<>();
+        for (Player player : playerHashMap.values()) {
+            listOfNicknames.add(player.getNickname());
+        }
+        return listOfNicknames;
+    }
+
+    // GETTER
+    public boolean isExpertMode() { return expertMode; }
     public MotherNature getMotherNature() { return motherNature; }
     public Bag getBag() { return bag; }
-    public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }

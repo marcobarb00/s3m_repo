@@ -3,7 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class GameInitializer {
     private Game game;
@@ -82,6 +81,4 @@ public class GameInitializer {
             game.refillCloudStudents(game.getCloudsList().get(i));
         }
     }
-
-    public ArrayList<Student> getFirstStudentsOnIslands() { return firstStudentsOnIslands; }
 }
