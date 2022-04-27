@@ -59,7 +59,6 @@ public class Game {
         this.professorsList = new ArrayList<>();
         this.motherNature = new MotherNature();
         this.bag = new Bag();
-        this.gameInitializer = new GameInitializer(this);
     }
 
     // Bag
@@ -103,9 +102,9 @@ public class Game {
 
     // Cloud
 
-    public void refillCloudStudents(Cloud cloud) {
+    public void refillCloudStudents(Cloud cloud, int numberOfStudents) {
         ArrayList<Student> refillingStudents = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfStudents; i++) {
             try {
                 refillingStudents.add(extractStudent());
             } catch (EmptyBagException e) {
