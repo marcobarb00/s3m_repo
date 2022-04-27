@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Cloud {
     private ArrayList<Student> students = new ArrayList<>();
 
-    public ArrayList<Student> returnThreeStudents() {
+    public ArrayList<Student> returnStudents() {
         ArrayList<Student> returningStudents = new ArrayList<>(students);
         students.clear();
         return returningStudents;
