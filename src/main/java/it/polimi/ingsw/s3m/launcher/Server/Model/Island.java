@@ -41,9 +41,6 @@ public class Island{
     // SETTER
     public void setPreviousIsland(Island previousIsland) { this.previousIsland = previousIsland; }
     public void setNextIsland(Island nextIsland) { this.nextIsland = nextIsland; }
-    private void setTower(Tower tower){
-        this.towers += 1;
-    }
 
     public void addStudent(Student student){
         PawnColor color = student.getColor();
@@ -53,7 +50,6 @@ public class Island{
 
     public void setDominator(Player dominator) {
         this.dominator = dominator;
-        this.setTower(dominator.getDashboard().moveTower());
     }
 
 
