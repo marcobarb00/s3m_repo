@@ -81,6 +81,4 @@ public class GameInitializer {
             game.refillCloudStudents(game.getCloudsList().get(i));
         }
     }
-
-    public ArrayList<Student> getFirstStudentsOnIslands() { return firstStudentsOnIslands; }
 }

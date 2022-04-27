@@ -57,7 +57,7 @@ public class Room {
         ArrayList<String> playersNicknameList = playersList.stream()
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
-        this.gameState = new Game(playersNicknameList);
+        this.gameState = new Game(playersNicknameList, expertMode);
     }
 
     public void deleteRoom(PlayerController player){
