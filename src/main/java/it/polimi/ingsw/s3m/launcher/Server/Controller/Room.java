@@ -57,6 +57,7 @@ public class Room {
         ArrayList<String> playersNicknameList = playersList.stream()
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
+        //TODO Controls for game instance
         this.gameState = new Game(playersNicknameList);
     }
 

@@ -5,9 +5,10 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import java.util.ArrayList;
 
 public class ChooseCloudOperation extends Operation{
-    PlayerController playerController;
-    int cloudPosition;
+    private PlayerController playerController;
+    private int cloudPosition;
 
+    //Position is meant as arraylist index (0 to cloudList.size)
     public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){
         super(game);
         this.playerController =  playerController;
