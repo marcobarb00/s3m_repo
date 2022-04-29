@@ -1,24 +1,22 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 public enum AssistantCard {
-
-    CHEETAH     (1, 1, "cheetah"),
-    OSTRICH     (2, 1, "ostrich"),
-    CAT         (3, 2, "cat"),
-    EAGLE       (4, 2, "eagle"),
-    FOX         (5, 3, "fox"),
-    LIZARD      (6, 3, "lizard"),
-    OCTOPUS     (7, 4, "octopus"),
-    DOG         (8, 4, "dog"),
-    ELEPHANT    (9, 5, "elephant"),
-    TURTLE      (10, 5, "turtle");
-
+    TURTLE ("Turtle", 1, 1),
+    ELEPHANT ("Elephant", 2, 1),
+    DOG ("Dog", 3, 2),
+    OCTOPUS ("Octopus", 4, 2),
+    LIZARD ("Lizard", 5, 3),
+    FOX ("Fox", 6, 3),
+    EAGLE ("Eagle", 7, 4),
+    CAT ("Cat", 8, 4),
+    OSTRICH ("Ostrich", 9, 5),
+    CHEETAH ("Cheetah", 10, 5);
 
     private final String type;
     private final int value;
     private int movements;
 
-    AssistantCard(int value, int movements, String type) {
+    AssistantCard(String type, int value, int movements) {
         this.type = type;
         this.value = value;
         this.movements = movements;
