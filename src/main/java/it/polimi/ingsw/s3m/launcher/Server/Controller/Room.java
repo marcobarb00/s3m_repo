@@ -59,6 +59,10 @@ public class Room {
         }).start();
     }
 
+    /**
+     * Instantiates game if controls are passed, if not an exception is thrown
+     * @throws DoubleNicknameException
+     */
     public void start() throws DoubleNicknameException {
         sendNotificationToAll("the game is starting");
 
@@ -66,7 +70,6 @@ public class Room {
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        //TODO Controls for game instance
         boolean checkNicknames = checkGameInstanceConditions(playersNicknameList);
         if(checkNicknames) {
             this.gameState = new Game(playersNicknameList, expertMode);
@@ -75,6 +78,11 @@ public class Room {
         }
     }
 
+    /**
+     * Controls if two or more players have the same nickname
+     * @param players
+     * @return
+     */
     private boolean checkGameInstanceConditions(ArrayList<String> players) {
         for(String p : players){
             int occurrences = Collections.frequency(players, p);

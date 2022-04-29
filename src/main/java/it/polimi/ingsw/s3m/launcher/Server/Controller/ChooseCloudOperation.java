@@ -15,6 +15,11 @@ public class ChooseCloudOperation extends Operation{
         this.cloudPosition = cloudPosition;
     }
 
+    /**
+     * Controls if
+     * @throws PlayerNotInListException
+     * @throws CloudNotInListException
+     */
     @Override
     public void executeOperation() throws PlayerNotInListException, CloudNotInListException {
         ArrayList<String> playersList = super.game.getPlayersNicknames();
