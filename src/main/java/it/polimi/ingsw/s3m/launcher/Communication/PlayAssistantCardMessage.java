@@ -1,19 +1,20 @@
 package it.polimi.ingsw.s3m.launcher.Communication;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 
 import java.util.ArrayList;
 
 public class PlayAssistantCardMessage implements Message{
-	private ArrayList<AssistantCardMessage> assistantCardMessageList;
+	private ArrayList<AssistantCardDTO> assistantCardDTOList;
 	private int cardChosen;
 
-	public void setAssistantCardMessageList(ArrayList<AssistantCardMessage> assistantCardMessageList){
-		this.assistantCardMessageList = assistantCardMessageList;
+	public void setAssistantCardMessageList(ArrayList<AssistantCardDTO> assistantCardDTOList){
+		this.assistantCardDTOList = assistantCardDTOList;
 	}
 
-	public ArrayList<AssistantCardMessage> getAssistantCardMessageList(){
-		return assistantCardMessageList;
+	public ArrayList<AssistantCardDTO> getAssistantCardMessageList(){
+		return assistantCardDTOList;
 	}
 
 	public void setCardChosen(int cardChosen){

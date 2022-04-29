@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.AssistantCardMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.PlayAssistantCardMessage;
 
@@ -8,20 +8,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayAssistantCardCLI implements MessageCLI{
-	private ArrayList<AssistantCardMessage> assistantCardMessageList;
+	private ArrayList<AssistantCardDTO> assistantCardDTOList;
 
 	public PlayAssistantCardCLI(PlayAssistantCardMessage playAssistantCardMessage){
-		this.assistantCardMessageList = playAssistantCardMessage.getAssistantCardMessageList();
+		this.assistantCardDTOList = playAssistantCardMessage.getAssistantCardMessageList();
 	}
 
 	@Override
 	public Message execute(){
 		System.out.println("your hand:");
-		for(int i = 0; i < assistantCardMessageList.size(); i++){
-			AssistantCardMessage assistantCardMessage = assistantCardMessageList.get(i);
-			System.out.println(i + ") " + assistantCardMessage.getType() +
-					"\n value: " + assistantCardMessage.getValue() +
-					"\n movement: " + assistantCardMessage.getMovements());
+		for(int i = 0; i < assistantCardDTOList.size(); i++){
+			AssistantCardDTO assistantCardDTO = assistantCardDTOList.get(i);
+			System.out.println(i + ") " + assistantCardDTO.getType() +
+					"\n value: " + assistantCardDTO.getValue() +
+					"\n movement: " + assistantCardDTO.getMovements());
 		}
 
 		Scanner scanner = new Scanner(System.in);
@@ -31,8 +31,8 @@ public class PlayAssistantCardCLI implements MessageCLI{
 		}catch(Exception e){
 			choice = -1;
 		}
-		while(choice < 0 || choice >= assistantCardMessageList.size()){
-			System.out.println("invalid input, to choose a card insert a number between 0 and " + assistantCardMessageList.size());
+		while(choice < 0 || choice >= assistantCardDTOList.size()){
+			System.out.println("invalid input, to choose a card insert a number between 0 and " + assistantCardDTOList.size());
 		}
 
 		PlayAssistantCardMessage playAssistantCardMessage = new PlayAssistantCardMessage();
