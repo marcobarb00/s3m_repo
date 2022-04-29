@@ -64,4 +64,17 @@ public class Mapper{
 
 		return islandDTOList;
 	}
+
+	public CharacterCardDTO characterCardToDTO(CharacterCard characterCard){
+		return new CharacterCardDTO(characterCard.getName(), characterCard.getCost());
+	}
+
+	public ArrayList<CharacterCardDTO> characterCardListToDTO(ArrayList<CharacterCard> characterCardList){
+		ArrayList<CharacterCardDTO> characterCardDTOList = new ArrayList<>();
+		for(CharacterCard island : characterCardList){
+			characterCardDTOList.add(characterCardToDTO(island));
+		}
+
+		return characterCardDTOList;
+	}
 }
