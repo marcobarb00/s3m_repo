@@ -36,14 +36,14 @@ public class Dashboard {
     }
 
     public int moveStudentsFromHallToTables (ArrayList<Student> movingStudents) {
-        int addingCoins = 0;
+        int earnCoins = 0;
         for (Student student : movingStudents) {
             PawnColor color = student.getColor();
             tables.replace(color, tables.get(color)+1);
-            if (tables.get(color) % 3 == 0) addingCoins++;
+            if (tables.get(color) % 3 == 0) earnCoins++;
             hall.remove(student);
         }
-        return addingCoins;
+        return earnCoins;
     }
 
     // GETTER
