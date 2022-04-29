@@ -1,11 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-/**
- * Enum class that manages Assistant types.
- * "Maybe" no need for AssistantCard class.
- *
- */
-
 public enum AssistantCard {
 
     CHEETAH     (1, 1, "cheetah"),
@@ -19,25 +13,21 @@ public enum AssistantCard {
     ELEPHANT    (9, 5, "elephant"),
     TURTLE      (10, 5, "turtle");
 
-    private final int value;
-    private final int movements;
+
     private final String type;
+    private final int value;
+    private int movements;
 
     AssistantCard(int value, int movements, String type) {
+        this.type = type;
         this.value = value;
         this.movements = movements;
-        this.type = type;
     }
 
-    public int getValue() {
-        return value;
-    }
+    public void incrementMovementsByTwo() { movements += 2; }
 
-    public int getMovements() {
-        return movements;
-    }
-
-    public String getType() {
-        return type;
-    }
+    // GETTER
+    public String getType() { return type; }
+    public int getValue() { return value; }
+    public int getMovements() { return movements; }
 }

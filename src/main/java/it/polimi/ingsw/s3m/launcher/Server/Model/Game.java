@@ -178,7 +178,7 @@ public class Game {
             if (characterCard instanceof MagicPostman) magicPostman = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        //TODO magicPostman action - increment by 2 the possible move value of MotherNature
+        chosenPlayer.getLastCardPlayed().incrementMovementsByTwo();
         chosenPlayer.removeCoins(magicPostman.getCost());
         magicPostman.incrementCost();
     }
@@ -216,8 +216,8 @@ public class Game {
     }
 
     //TODO this method
-    public void moveMotherNature(String playerNickname, int jump) {
-        updateMotherNaturePosition(jump);
+    public void moveMotherNature(String playerNickname, int movement) {
+        updateMotherNaturePosition(movement);
         computeDominanceStrategy.executeStrategy();
     }
 
@@ -227,8 +227,17 @@ public class Game {
         chosenPlayer.removeAssistantCardFromHand(position);
     }
 
-    // putStudentsOnTables
-    // putStudentsOnIslands
+    public void putStudentsOnTables(String playerNickname, ArrayList<Student> selectedStudents) {
+        int additionalCoins;
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromHallToTables(selectedStudents);
+        chosenPlayer.addCoins(additionalCoins);
+    }
+
+    public void putStudentsOnIslands(String playerNickname, int position) {
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        Island chosenIsland = islandsList.get(position);
+    }
 
     // GETTER - Player
     public int getNumberOfPlayers() { return numberOfPlayers; }
