@@ -31,8 +31,23 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void operationChoice(OperationChoiceMessage operationChoiceMessage){
-		client.setMessage(new OperationChoiceCLI(operationChoiceMessage));
+	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
+		client.setMessage(new PlanningPhaseCLI(planningPhaseMessage));
+	}
+
+	@Override
+	public void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
+		client.setMessage(new MoveStudentsPhaseCLI(moveStudentsPhaseMessage));
+	}
+
+	@Override
+	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
+		client.setMessage(new MotherNaturePhaseCLI(motherNaturePhaseMessage));
+	}
+
+	@Override
+	public void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage){
+		client.setMessage(new ChooseCloudPhaseCLI(chooseCloudPhaseMessage));
 	}
 
 	@Override

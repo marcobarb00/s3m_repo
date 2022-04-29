@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-public class StandardComputeDominance implements ComputeDominanceStrategy {
+public class KnightComputeDominance implements ComputeDominanceStrategy {
     @Override
     public void executeStrategy() {
 

@@ -19,12 +19,27 @@ public class GUIView extends View{
 	}
 
 	@Override
-	public void operationChoice(OperationChoiceMessage operationChoice){
+	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
 
 	}
 
 	@Override
-	public void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage) {
+	public void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
+
+	}
+
+	@Override
+	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
+
+	}
+
+	@Override
+	public void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage){
+
+	}
+
+	@Override
+	public void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage){
 
 	}
 }

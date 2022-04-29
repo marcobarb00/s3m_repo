@@ -12,7 +12,13 @@ public abstract class View{
 
 	public abstract void notification(NotificationMessage notification);
 
-	public abstract void operationChoice(OperationChoiceMessage operationChoiceMessage);
+	public abstract void planningPhase(PlanningPhaseMessage planningPhaseMessage);
+
+	public abstract void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage);
+
+	public abstract void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage);
+
+	public abstract void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage);
 
 	public abstract void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage);
 }
