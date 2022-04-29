@@ -20,7 +20,7 @@ public class ExpertModeInitializer {
 
     public void playersUpdate() {
         for (Player player : game.getPlayerHashMap().values()) {
-            player = new ExpertPlayer(player);
+            player.addCoins(1);
         }
     }
 
