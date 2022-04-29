@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,9 +13,9 @@ public class Mapper{
 		return new AssistantCardDTO(assistantCard.getType(), assistantCard.getValue(), assistantCard.getMovements());
 	}
 
-	public ArrayList<AssistantCardDTO> handToDTO(ArrayList<AssistantCard> assistantCardsardList){
+	public ArrayList<AssistantCardDTO> handToDTO(ArrayList<AssistantCard> hand){
 		ArrayList<AssistantCardDTO> assistantCardDTOList = new ArrayList<>();
-		for(AssistantCard assistantCard : assistantCardsardList){
+		for(AssistantCard assistantCard : hand){
 			assistantCardDTOList.add(assistantCardToDTO(assistantCard));
 		}
 
@@ -28,14 +29,39 @@ public class Mapper{
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		HashMap<String, Integer> tables = new HashMap<>();
-		for(PawnColor color : PawnColor.values()){
-			tables.put(color.name(), dashboard.getTables().get(color));
-		}
+		dashboard.getTables().forEach((k, v) -> tables.put(k.name(), v));
 
 		return new DashboardDTO(hall, tables, dashboard.getNumberOfTowers());
 	}
 
 	public PlayerDTO playerToDTO(Player player){
 		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()), handToDTO(player.getHand()), assistantCardToDTO(player.getLastCardPlayed()));
+	}
+
+	public ArrayList<PlayerDTO> playerListToDTO(ArrayList<Player> playerList){
+		ArrayList<PlayerDTO> playerDTOList = new ArrayList<>();
+		for(Player player : playerList){
+			playerDTOList.add(playerToDTO(player));
+		}
+
+		return playerDTOList;
+	}
+
+	public IslandDTO islandToDTO(Island island){
+		HashMap<String, Integer> students = new HashMap<>();
+		for(PawnColor color : PawnColor.values()){
+			students.put(color.name(), island.getStudents().get(color));
+		}
+
+		return new IslandDTO(students, island.getDominator().getColor().name(), island.getNumberOfTowers());
+	}
+
+	public ArrayList<IslandDTO> islandListToDTO(ArrayList<Island> islandsList){
+		ArrayList<IslandDTO> islandDTOList = new ArrayList<>();
+		for(Island island : islandsList){
+			islandDTOList.add(islandToDTO(island));
+		}
+
+		return islandDTOList;
 	}
 }
