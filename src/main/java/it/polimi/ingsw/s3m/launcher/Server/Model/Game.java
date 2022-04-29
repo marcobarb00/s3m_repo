@@ -140,9 +140,7 @@ public class Game {
     public void activateCentaurEffect (String playerNickname) {
         CharacterCard centaur = new Centaur();
         for (CharacterCard characterCard : characterCardsList) {
-            if (characterCard instanceof Centaur) {
-                centaur = characterCard;
-            }
+            if (characterCard instanceof Centaur) centaur = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
         computeDominanceStrategy = new CentaurComputeDominance();
@@ -153,16 +151,61 @@ public class Game {
     public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
         CharacterCard jester = new Jester();
         for (CharacterCard characterCard : characterCardsList) {
-            if (characterCard instanceof Jester) {
-                jester = characterCard;
-            }
+            if (characterCard instanceof Jester) jester = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        chosenPlayer.getDashboard().deleteStudentsFromTables(givenStudents);
+        chosenPlayer.getDashboard().deleteStudentsFromHall(givenStudents);
         ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
         chosenPlayer.getDashboard().addStudentsInHall(exchangingStudents);
         chosenPlayer.removeCoins(jester.getCost());
         jester.incrementCost();
+    }
+
+    public void activateKnightEffect (String playerNickname) {
+        CharacterCard knight = new Knight();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Knight) knight = characterCard;
+        }
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        computeDominanceStrategy = new KnightComputeDominance();
+        chosenPlayer.removeCoins(knight.getCost());
+        knight.incrementCost();
+    }
+
+    public void activateMagicPostmanEffect (String playerNickname) {
+        CharacterCard magicPostman = new MagicPostman();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof MagicPostman) magicPostman = characterCard;
+        }
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        //TODO magicPostman action - increment by 2 the possible move value of MotherNature
+        chosenPlayer.removeCoins(magicPostman.getCost());
+        magicPostman.incrementCost();
+    }
+
+    public void activateMinstrelEffect (String playerNickname, ArrayList<Student> enteringHallStudents, ArrayList<Student> enteringTablesStudents) {
+        int additionalCoins;
+        CharacterCard minstrel = new Minstrel();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Minstrel) minstrel = characterCard;
+        }
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        chosenPlayer.getDashboard().addStudentsInHall(enteringHallStudents);
+        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromHallToTables(enteringTablesStudents);
+        chosenPlayer.addCoins(additionalCoins);
+        chosenPlayer.removeCoins(minstrel.getCost());
+        minstrel.incrementCost();
+    }
+
+    public void activateMushroomerEffect (String playerNickname) {
+        CharacterCard mushroomer = new Mushroomer();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Mushroomer) mushroomer = characterCard;
+        }
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        computeDominanceStrategy = new MushroomerComputeDominance();
+        chosenPlayer.removeCoins(mushroomer.getCost());
+        mushroomer.incrementCost();
     }
 
     public void chooseCloud(String playerNickname, int position) {
@@ -174,7 +217,7 @@ public class Game {
     //TODO this method
     public void moveMotherNature(String playerNickname, int jump) {
         updateMotherNaturePosition(jump);
-        computeDominanceStrategy.computerDominance();
+        computeDominanceStrategy.executeStrategy();
     }
 
     public void playAssistantCard(String playerNickname, int position) {
@@ -185,7 +228,6 @@ public class Game {
 
     // putStudentsOnTables
     // putStudentsOnIslands
-    // methodsForCharacterCards
 
     // GETTER - Player
     public int getNumberOfPlayers() { return numberOfPlayers; }

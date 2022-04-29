@@ -16,14 +16,27 @@ public class Dashboard {
         }
     }
 
+    // Hall
     public void addStudentsInHall (ArrayList<Student> hall) {
         this.hall.addAll(hall);
     }
 
-    public void deleteStudentsFromTables (ArrayList<Student> deletingStudents) {
+    public void deleteStudentsFromHall (ArrayList<Student> deletingStudents) {
         for (Student student : deletingStudents) {
             hall.remove(student);
         }
+    }
+
+    // Tables
+    public int moveStudentsFromHallToTables (ArrayList<Student> movingStudents) {
+        int addingCoins = 0;
+        for (Student student : movingStudents) {
+            PawnColor color = student.getColor();
+            tables.replace(color, tables.get(color)+1);
+            if (tables.get(color) % 3 == 0) addingCoins++;
+            hall.remove(student);
+        }
+        return addingCoins;
     }
 
     // GETTER
@@ -34,36 +47,5 @@ public class Dashboard {
     // SETTER
     public void putStudentsInHall (ArrayList<Student> hall) { this.hall = hall; }
     public void setNumberOfTowers (int numberOfTowers) { this.numberOfTowers = numberOfTowers; }
-
-
-    /**
-     * Students can have from 0 to 3 students. Method removes students from hall and puts them
-     *         in tables
-     * @param students
-     * @throws Exception
-     */
-    public void moveStudentsFromHallToTables(ArrayList<Student> students) throws Exception {
-        if(hall.isEmpty() || students.isEmpty()) {
-            throw new Exception("Empty hall or students");
-        }
-
-        for (Student s : students) {
-            tables.replace(s.getColor(), tables.get(s.getColor()) + 1);
-            boolean studentFound = false;
-            for(Student studentInHall : hall){
-                if(studentInHall.getColor() == s.getColor()){
-                    hall.remove(studentInHall);
-                    studentFound = true;
-                    break;
-                }
-            }
-            //If there isn't a student of that color throws exception
-            if(!studentFound){
-                throw new Exception("No such student in hall");
-            }
-            if (tables.get(s.getColor()) % 3 == 0) {
-            }
-        }
-    }
 }
 
