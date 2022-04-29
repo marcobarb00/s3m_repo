@@ -178,7 +178,7 @@ public class Game {
             if (characterCard instanceof MagicPostman) magicPostman = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        //TODO magicPostman action - increment by 2 the possible move value of MotherNature
+        chosenPlayer.getLastCardPlayed().incrementMovementsByTwo();
         chosenPlayer.removeCoins(magicPostman.getCost());
         magicPostman.incrementCost();
     }
