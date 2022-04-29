@@ -15,5 +15,6 @@ public abstract class Operation {
         this.game = game;
     }
 
-    public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException;
+    public abstract void executeOperation() throws PlayerNotInListException,
+            CloudNotInListException, IllegalArgumentException;
 }

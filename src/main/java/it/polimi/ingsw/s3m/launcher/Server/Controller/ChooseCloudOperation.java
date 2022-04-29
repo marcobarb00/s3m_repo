@@ -35,6 +35,8 @@ public class ChooseCloudOperation extends Operation{
             throw new CloudNotInListException();
         }
 
-        super.game.chooseCloud(playerController.getNickname(), cloudPosition);
+        if(playerControllerInList && cloudInList){
+            super.game.chooseCloud(playerController.getNickname(), cloudPosition);
+        }
     }
 }

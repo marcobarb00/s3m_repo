@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.CloudNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Cloud;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 
@@ -13,7 +14,9 @@ public class ActivateJesterEffectOperation extends Operation{
     private ArrayList<Student> givenStudents;
 
     /**
-     * Checks if activateJesterEffect method has safe parameters
+     * Checks if activateJesterEffect method has safe parameters.
+     * Required students are those the player wants from the card,
+     * given students are those from the player hall.
      * @param game
      * @param playerController
      * @param requiredStudents
@@ -28,9 +31,23 @@ public class ActivateJesterEffectOperation extends Operation{
         this.givenStudents = givenStudents;
     }
 
-    //TODO Do controls on parameters of activateJesterEffect (game line 140)
     @Override
-    public void executeOperation() throws PlayerNotInListException, CloudNotInListException {
+    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException{
+        ArrayList<String> playersList = super.game.getPlayersNicknames();
 
+        boolean playerControllerInList = playersList.contains(playerController.getNickname());
+        if(!playerControllerInList){
+            throw new PlayerNotInListException();
+        }
+
+        boolean checkRequired = requiredStudents.size() == 3;
+        boolean checkGiven = givenStudents.size() == 3;
+
+        if(checkGiven && checkRequired){
+            super.game.activateJesterEffect(playerController.getNickname(),
+                    requiredStudents, givenStudents);
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 }
