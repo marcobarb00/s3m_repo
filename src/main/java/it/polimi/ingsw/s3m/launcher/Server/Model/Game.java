@@ -234,9 +234,11 @@ public class Game {
         chosenPlayer.addCoins(additionalCoins);
     }
 
-    public void putStudentsOnIslands(String playerNickname, int position) {
+    public void putStudentsOnIslands(String playerNickname, int position, ArrayList<Student> selectedStudents) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         Island chosenIsland = islandsList.get(position);
+        chosenPlayer.getDashboard().deleteStudentsFromHall(selectedStudents);
+        chosenIsland.addStudentsOnIsland(selectedStudents);
     }
 
     // GETTER - Player

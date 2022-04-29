@@ -22,9 +22,7 @@ public class Dashboard {
     }
 
     public void deleteStudentsFromHall (ArrayList<Student> deletingStudents) {
-        for (Student student : deletingStudents) {
-            hall.remove(student);
-        }
+        for (Student student : deletingStudents) hall.remove(student);
     }
 
     // Tables
