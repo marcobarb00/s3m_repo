@@ -12,6 +12,13 @@ public class ActivateJesterEffectOperation extends Operation{
     private ArrayList<Student> requiredStudents;
     private ArrayList<Student> givenStudents;
 
+    /**
+     * Checks if activateJesterEffect method has safe parameters
+     * @param game
+     * @param playerController
+     * @param requiredStudents
+     * @param givenStudents
+     */
     public ActivateJesterEffectOperation(Game game, PlayerController playerController,
                                          ArrayList<Student> requiredStudents,
                                          ArrayList<Student> givenStudents) {
@@ -19,10 +26,6 @@ public class ActivateJesterEffectOperation extends Operation{
         this.playerController = playerController;
         this.requiredStudents = requiredStudents;
         this.givenStudents = givenStudents;
-    }
-
-    public ActivateJesterEffectOperation(Game game) {
-        super(game);
     }
 
     //TODO Do controls on parameters of activateJesterEffect (game line 140)

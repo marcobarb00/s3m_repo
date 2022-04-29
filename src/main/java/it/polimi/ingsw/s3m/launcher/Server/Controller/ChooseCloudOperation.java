@@ -16,7 +16,7 @@ public class ChooseCloudOperation extends Operation{
     }
 
     /**
-     * Controls if
+     * Controls if chooseCloud method has safe parameters
      * @throws PlayerNotInListException
      * @throws CloudNotInListException
      */
