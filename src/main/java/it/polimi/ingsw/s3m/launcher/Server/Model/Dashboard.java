@@ -28,6 +28,13 @@ public class Dashboard {
     }
 
     // Tables
+    public void deleteStudentsFromTables (ArrayList<Student> deletingStudents) {
+        for (Student student : deletingStudents) {
+            PawnColor color = student.getColor();
+            tables.replace(color, tables.get(color)-1);
+        }
+    }
+
     public int moveStudentsFromHallToTables (ArrayList<Student> movingStudents) {
         int addingCoins = 0;
         for (Student student : movingStudents) {

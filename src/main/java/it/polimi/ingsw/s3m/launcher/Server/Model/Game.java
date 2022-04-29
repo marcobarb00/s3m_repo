@@ -191,6 +191,7 @@ public class Game {
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.getDashboard().addStudentsInHall(enteringHallStudents);
+        chosenPlayer.getDashboard().deleteStudentsFromTables(enteringHallStudents);
         additionalCoins = chosenPlayer.getDashboard().moveStudentsFromHallToTables(enteringTablesStudents);
         chosenPlayer.addCoins(additionalCoins);
         chosenPlayer.removeCoins(minstrel.getCost());
