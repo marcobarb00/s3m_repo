@@ -137,6 +137,19 @@ public class Game {
 
     // Operations
 
+    public void activateCentaurEffect (String playerNickname) {
+        CharacterCard centaur = new Centaur();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Centaur) {
+                centaur = characterCard;
+            }
+        }
+        Player chosenPlayer = playerHashMap.get(playerNickname);
+        computeDominanceStrategy = new CentaurComputeDominance();
+        chosenPlayer.removeCoins(centaur.getCost());
+        centaur.incrementCost();
+    }
+
     public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
         CharacterCard jester = new Jester();
         for (CharacterCard characterCard : characterCardsList) {
@@ -148,6 +161,7 @@ public class Game {
         chosenPlayer.getDashboard().deleteStudentsFromTables(givenStudents);
         ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
         chosenPlayer.getDashboard().addStudentsInHall(exchangingStudents);
+        chosenPlayer.removeCoins(jester.getCost());
         jester.incrementCost();
     }
 
@@ -157,6 +171,7 @@ public class Game {
         chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnStudents());
     }
 
+    //TODO this method
     public void moveMotherNature(String playerNickname, int jump) {
         updateMotherNaturePosition(jump);
         computeDominanceStrategy.computerDominance();
@@ -170,7 +185,6 @@ public class Game {
 
     // putStudentsOnTables
     // putStudentsOnIslands
-    // moveMotherNature
     // methodsForCharacterCards
 
     // GETTER - Player
@@ -193,7 +207,7 @@ public class Game {
     }
     public int getPlayerCoins(String playerNickname) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        return ((ExpertPlayer) chosenPlayer).getCoins();
+        return chosenPlayer.getCoins();
     }
 
     // GETTER

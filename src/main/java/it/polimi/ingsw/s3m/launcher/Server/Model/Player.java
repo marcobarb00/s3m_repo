@@ -8,15 +8,8 @@ public class Player {
     private final TowerColor color;
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
-    private AssistantCard lastCardPlayed;
-
-    public Player (Player player) {
-        this.nickname = player.getNickname();
-        this.color = player.getColor();
-        this.dashboard = player.getDashboard();
-        this.hand = player.getHand();
-        this.lastCardPlayed = player.getLastCardPlayed();
-    }
+    private AssistantCard lastCardPlayed = null;
+    private int coins = 0;
 
     public Player (String nickname, TowerColor color) {
         this.nickname = nickname;
@@ -30,12 +23,21 @@ public class Player {
         hand.remove(position);
     }
 
+    // Coins
+    public void addCoins (int earnCoins) {
+        coins += earnCoins;
+    }
+    public void removeCoins (int usedCoins) {
+        coins -= usedCoins;
+    }
+
     // GETTER
     public String getNickname() { return nickname; }
     public TowerColor getColor() { return color; }
     public Dashboard getDashboard() { return dashboard; }
     public ArrayList<AssistantCard> getHand() { return hand; }
     public AssistantCard getLastCardPlayed() { return lastCardPlayed; }
+    public int getCoins() { return coins; }
 
     // SETTER
     public void setLastCardPlayed(AssistantCard lastCardPlayed) { this.lastCardPlayed = lastCardPlayed; }
