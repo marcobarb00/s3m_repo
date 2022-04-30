@@ -264,6 +264,15 @@ public class Game {
         return chosenPlayer.getCoins();
     }
 
+    // GETTER - Character Cards
+    public HashMap<PawnColor, Integer> getJesterStudentsOnCard() {
+        CharacterCard jester = new Jester();
+        for (CharacterCard characterCard : characterCardsList) {
+            if (characterCard instanceof Jester) jester = characterCard;
+        }
+        return ((Jester) jester).getStudentsOnCard();
+    }
+
     // GETTER
     public boolean isExpertMode() { return expertMode; }
     public MotherNature getMotherNature() { return motherNature; }
