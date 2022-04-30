@@ -54,36 +54,67 @@ public class ActivateJesterEffectOperation extends Operation{
                 requiredStudents, givenStudents);
     }
 
+    /**
+     * Checks if on Jester card the students are enough
+     */
     private void searchStudentsOnCard(){
         HashMap<PawnColor, Integer> studentsOnJester = game.getJesterStudentsOnCard();
+
+        HashMap<PawnColor, Integer> requiredStudentsHashMap = new HashMap<>();
+        for(PawnColor p : PawnColor.values()){
+            requiredStudentsHashMap.put(p,0);
+        }
+
         for(Student requiredStudent : requiredStudents){
             PawnColor requiredStudentColor = requiredStudent.getColor();
-            boolean checkOnCard = studentsOnJester.get(requiredStudentColor) > 0;
-            if(checkOnCard){
-                int oldValue = studentsOnJester.get(requiredStudent.getColor());
-                studentsOnJester.replace(requiredStudentColor, oldValue - 1);
-            }else{
-                throw new IllegalArgumentException("Student not on Jester");
+            int oldValue = requiredStudentsHashMap.get(requiredStudentColor);
+            requiredStudentsHashMap.replace(requiredStudentColor, oldValue  + 1);
+        }
+
+        for(PawnColor color : PawnColor.values()){
+            boolean notEnoughStudentsOnCard =
+                    requiredStudentsHashMap.get(color) > studentsOnJester.get(color);
+            if(notEnoughStudentsOnCard){
+                throw new IllegalArgumentException("Not enough students on jester card");
             }
         }
     }
 
     private void searchStudentsInHall(){
-        String playerNickname = playerController.getNickname();
-        Player player = game.getPlayerHashMap().get(playerNickname);
+        HashMap<PawnColor, Integer> givenStudentsHashMap = new HashMap<>();
+
+        for(PawnColor p : PawnColor.values()){
+            givenStudentsHashMap.put(p,0);
+        }
+
+        for(Student givenStudent : givenStudents){
+            PawnColor givenStudentColor = givenStudent.getColor();
+            int oldValue = givenStudentsHashMap.get(givenStudentColor);
+            givenStudentsHashMap.replace(givenStudentColor, oldValue  + 1);
+        }
+
+        Player player = game.getPlayerHashMap().get(playerController.getNickname());
         ArrayList<Student> hall = player.getDashboard().getHall();
 
-        for(Student givenStudent: givenStudents){
-            boolean checkStudentInHall = false;
-            for(Student studentInHall : hall){
-                checkStudentInHall = studentInHall.getColor() == givenStudent.getColor();
-                if(checkStudentInHall){
-                    hall.remove(studentInHall);
-                    break;
-                }
-            }
-            if(!checkStudentInHall)
-                throw new IllegalArgumentException("Student not in hall");
+        HashMap<PawnColor, Integer> hallHashMap = new HashMap<>();
+
+        for(PawnColor p : PawnColor.values()){
+            hallHashMap.put(p,0);
         }
+
+        for(Student hallStudent : hall){
+            PawnColor hallStudentColor = hallStudent.getColor();
+            int oldValue = hallHashMap.get(hallStudentColor);
+            hallHashMap.replace(hallStudentColor, oldValue  + 1);
+        }
+
+        for(PawnColor color : PawnColor.values()){
+            boolean notEnoughStudentsInHall =
+                    givenStudentsHashMap.get(color) > hallHashMap.get(color);
+            if(notEnoughStudentsInHall){
+                throw new IllegalArgumentException("Not enough students in hall");
+            }
+        }
+
     }
 }
