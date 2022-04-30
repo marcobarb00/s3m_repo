@@ -4,6 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import java.util.ArrayList;
 
+//DONE
 public class ChooseCloudOperation extends Operation{
     private PlayerController playerController;
     private int cloudPosition;

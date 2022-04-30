@@ -2,9 +2,9 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-
 import java.util.ArrayList;
 
+//DONE
 public class ActivateCentaurEffectOperation extends Operation{
     private PlayerController playerController;
 

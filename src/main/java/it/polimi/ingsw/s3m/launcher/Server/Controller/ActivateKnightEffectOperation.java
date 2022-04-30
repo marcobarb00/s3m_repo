@@ -5,6 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
 
+//DONE
 public class ActivateKnightEffectOperation extends Operation{
     private PlayerController playerController;
 
