@@ -3,7 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Island{
+public class Island {
     private Player dominator = null;
     private HashMap<PawnColor, Integer> students;
     private int numberOfTowers;

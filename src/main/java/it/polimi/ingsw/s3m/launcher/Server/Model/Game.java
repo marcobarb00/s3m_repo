@@ -8,14 +8,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game {
     private final int numberOfPlayers;
     private final boolean expertMode;
-    private MotherNature motherNature;
-    private Bag bag;
-    private HashMap<String, Player> playerHashMap;
-    private ArrayList<Cloud> cloudsList;
-    private ArrayList<Professor> professorsList;
-    private ArrayList<Island> islandsList;
-    private ArrayList<CharacterCard> characterCardsList;
-    private ComputeDominanceStrategy computeDominanceStrategy;
+    private MotherNature motherNature = new MotherNature();
+    private Bag bag = new Bag();
+    private HashMap<String, Player> playerHashMap = new HashMap<>();
+    private HashMap<PawnColor, Player> professorsHashMap = new HashMap<>();
+    private ArrayList<Cloud> cloudsList = new ArrayList<>();
+    private ArrayList<Island> islandsList = new ArrayList<>();
+    private ArrayList<CharacterCard> characterCardsList = new ArrayList<>();
+    private ComputeDominanceStrategy computeDominanceStrategy = new StandardComputeDominance();
     private GameInitializer gameInitializer;
     private ExpertModeInitializer expertModeInitializer;
     private Turn turn;
@@ -23,34 +23,17 @@ public class Game {
     public Game (ArrayList<String> playersNicknameList, boolean expertMode) {
         this.numberOfPlayers = playersNicknameList.size();
         this.expertMode = expertMode;
-        // MotherNature
-        this.motherNature = new MotherNature();
-        // Bag
-        this.bag = new Bag();
-        // Players
-        this.playerHashMap = new HashMap<>();
-        // Clouds
-        this.cloudsList = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            cloudsList.add(new Cloud());
-        }
         // Professors
-        this.professorsList = new ArrayList<>();
+        for (PawnColor color : PawnColor.values()) professorsHashMap.put(color, null);
+        // Clouds
+        for (int i = 0; i < numberOfPlayers; i++) cloudsList.add(new Cloud());
         // Islands
-        this.islandsList = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            islandsList.add(new Island());
-        }
-        // Character cards
-        this.characterCardsList = new ArrayList<>();
-        // Strategy: computeDominance
-        this.computeDominanceStrategy = new StandardComputeDominance();
+        for (int i = 0; i < 12; i++) islandsList.add(new Island());
 
-        if (numberOfPlayers == 2) {
+        if (numberOfPlayers == 2)
             gameInitializer = new TwoPlayersGameInitializer(this, playersNicknameList);
-        } else if (numberOfPlayers == 3) {
+        else if (numberOfPlayers == 3)
             gameInitializer = new ThreePlayersGameInitializer(this, playersNicknameList);
-        }
         if (expertMode) expertModeInitializer = new ExpertModeInitializer(this);
 
         // Turn
@@ -180,9 +163,9 @@ public class Game {
             if (characterCard instanceof Jester) jester = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        chosenPlayer.getDashboard().deleteStudentsFromHall(givenStudents);
+        chosenPlayer.getDashboard().deleteStudentsFromEntrance(givenStudents);
         ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
-        chosenPlayer.getDashboard().addStudentsInHall(exchangingStudents);
+        chosenPlayer.getDashboard().addStudentsInEntrance(exchangingStudents);
         chosenPlayer.removeCoins(jester.getCost());
         jester.incrementCost();
     }
@@ -209,16 +192,16 @@ public class Game {
         magicPostman.incrementCost();
     }
 
-    public void activateMinstrelEffect (String playerNickname, ArrayList<Student> enteringHallStudents, ArrayList<Student> enteringTablesStudents) {
+    public void activateMinstrelEffect (String playerNickname, ArrayList<Student> enteringStudents, ArrayList<Student> enteringTablesStudents) {
         int additionalCoins;
         CharacterCard minstrel = new Minstrel();
         for (CharacterCard characterCard : characterCardsList) {
             if (characterCard instanceof Minstrel) minstrel = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        chosenPlayer.getDashboard().addStudentsInHall(enteringHallStudents);
-        chosenPlayer.getDashboard().deleteStudentsFromTables(enteringHallStudents);
-        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromHallToTables(enteringTablesStudents);
+        chosenPlayer.getDashboard().addStudentsInEntrance(enteringStudents);
+        chosenPlayer.getDashboard().deleteStudentsFromTables(enteringStudents);
+        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(enteringTablesStudents);
         chosenPlayer.addCoins(additionalCoins);
         chosenPlayer.removeCoins(minstrel.getCost());
         minstrel.incrementCost();
@@ -239,7 +222,7 @@ public class Game {
     public void chooseCloud(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         Cloud chosenCloud = cloudsList.get(position);
-        chosenPlayer.getDashboard().addStudentsInHall(chosenCloud.returnStudents());
+        chosenPlayer.getDashboard().addStudentsInEntrance(chosenCloud.returnStudents());
     }
 
     //TODO this method
@@ -257,14 +240,14 @@ public class Game {
     public void putStudentsOnTables(String playerNickname, ArrayList<Student> selectedStudents) {
         int additionalCoins;
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromHallToTables(selectedStudents);
+        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(selectedStudents);
         chosenPlayer.addCoins(additionalCoins);
     }
 
     public void putStudentsOnIslands(String playerNickname, int position, ArrayList<Student> selectedStudents) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         Island chosenIsland = islandsList.get(position);
-        chosenPlayer.getDashboard().deleteStudentsFromHall(selectedStudents);
+        chosenPlayer.getDashboard().deleteStudentsFromEntrance(selectedStudents);
         chosenIsland.addStudentsOnIsland(selectedStudents);
     }
 
@@ -304,8 +287,8 @@ public class Game {
     public boolean isExpertMode() { return expertMode; }
     public MotherNature getMotherNature() { return motherNature; }
     public Bag getBag() { return bag; }
+    public HashMap<PawnColor, Player> getProfessorsHashMap() { return professorsHashMap; }
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
-    public ArrayList<Professor> getProfessorsList() { return professorsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
 }

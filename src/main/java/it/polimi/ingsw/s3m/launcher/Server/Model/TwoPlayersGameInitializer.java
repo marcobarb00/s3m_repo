@@ -42,7 +42,7 @@ public class TwoPlayersGameInitializer extends GameInitializer {
                     e.printStackTrace();
                 }
             }
-            player.getDashboard().putStudentsInHall(enteringHallStudents);
+            player.getDashboard().addStudentsInEntrance(enteringHallStudents);
         }
     }
 
