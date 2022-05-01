@@ -283,6 +283,11 @@ public class Game {
         return ((Jester) jester).getStudentsOnCard();
     }
 
+    // GETTER - Turn
+    public Turn getTurn() { return turn; }
+    public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
+    public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
+
     // GETTER
     public boolean isExpertMode() { return expertMode; }
     public MotherNature getMotherNature() { return motherNature; }
