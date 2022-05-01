@@ -1,32 +1,42 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Island{
-    private HashMap<PawnColor,Integer> students;
     private Player dominator = null;
-    private int numberOfTowers = 0;
+    private HashMap<PawnColor, Integer> students;
+    private int numberOfTowers;
 
     public Island() {
         students = new HashMap<>();
         for (PawnColor color : PawnColor.values()) {
             students.put(color, 0);
         }
+        this.numberOfTowers = 0;
+    }
+
+    // Adding students
+    public void addStudent(Student student){
+        PawnColor color = student.getColor();
+        students.replace(color, students.get(color)+1);
+    }
+
+    public void addStudentsOnIsland(ArrayList<Student> islandStudents) {
+        for (Student student : islandStudents) {
+            PawnColor color = student.getColor();
+            students.replace(color, students.get(color)+1);
+        }
     }
 
     // GETTER
-    public HashMap<PawnColor, Integer> getStudents() { return students; }
     public Player getDominator() { return dominator; }
+    public HashMap<PawnColor, Integer> getStudents() { return students; }
     public int getNumberOfTowers() { return numberOfTowers; }
 
     // SETTER
     public void setDominator(Player dominator) { this.dominator = dominator; }
-
-    public void addStudent(Student student){
-        PawnColor color = student.getColor();
-        Integer oldValue = students.get(student.getColor());
-        students.replace(color, oldValue + 1);
-    }
+    public void addTower() { numberOfTowers++; }
 
 
 /*
@@ -49,7 +59,6 @@ public class Island{
     /*private int computeInfluenceIndex(Player player){
         int influenceIndex = 0;
 
-        //TODO game not more passed to island
         ArrayList<Professor> professorsList = game.getProfessorsList();
         ArrayList<PawnColor> controlledColors = new ArrayList<>();
 

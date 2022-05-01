@@ -4,23 +4,26 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import java.util.ArrayList;
 
+//DONE
 public class ChooseCloudOperation extends Operation{
-    private PlayerController playerController;
     private int cloudPosition;
 
     //Position is meant as arraylist index (0 to cloudList.size)
     public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){
-        super(game);
-        this.playerController =  playerController;
+        super(game, playerController);
         this.cloudPosition = cloudPosition;
     }
 
+    /**
+     * Controls if chooseCloud method has safe parameters
+     * @throws PlayerNotInListException
+     * @throws CloudNotInListException
+     */
     @Override
     public void executeOperation() throws PlayerNotInListException, CloudNotInListException {
-        ArrayList<String> playersList = super.game.getPlayersNicknames();
         ArrayList<Cloud> cloudsList = super.game.getCloudsList();
 
-        boolean playerControllerInList = playersList.contains(playerController.getNickname());
+        boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
@@ -30,6 +33,8 @@ public class ChooseCloudOperation extends Operation{
             throw new CloudNotInListException();
         }
 
-        super.game.chooseCloud(playerController.getNickname(), cloudPosition);
+        if(playerControllerInList && cloudInList){
+            super.game.chooseCloud(playerController.getNickname(), cloudPosition);
+        }
     }
 }
