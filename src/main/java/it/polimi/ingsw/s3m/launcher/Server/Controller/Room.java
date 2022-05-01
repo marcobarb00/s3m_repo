@@ -2,12 +2,12 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Turn;
+import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -72,53 +72,32 @@ public class Room {
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-<<<<<<< HEAD
-        //TODO Controls for game instance
         checkGameInstanceConditions(playersNicknameList);
         this.gameState = new Game(playersNicknameList, expertMode);
 
-        Iterator<Turn> turnIterator = new Iterator<Turn>(){
-            ArrayList<Turn> turnList = new ArrayList<>();
-
-            @Override
-            public boolean hasNext(){
-                return false;
-            }
-
-            @Override
-            public Turn next(){
-                return null;
-            }
-        };
-
         while(true){
-
+            gameState.refiilClouds();
+            for(int i = 0; i < playersNumber; i++){
+                planningPhase(playersList.get(i));
+            }
+            for(int i = 0; i < playersNumber; i++){
+                actionPhase(playersList.get(i));
+            }
+            turn.setPLayer(turn.getNextPlayer());
         }
     }
 
     private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
-=======
-        boolean checkNicknames = checkGameInstanceConditions(playersNicknameList);
-        if(checkNicknames) {
-            this.gameState = new Game(playersNicknameList, expertMode);
-        }else{
-            throw new DoubleNicknameException();
-        }
-    }
-
-    /**
-     * Controls if two or more players have the same nickname
-     * @param players
-     * @return
-     */
-    private boolean checkGameInstanceConditions(ArrayList<String> players) {
->>>>>>> master
         for(String p : players){
             int occurrences = Collections.frequency(players, p);
             if(occurrences > 1){
                 throw new DoubleNicknameException();
             }
         }
+    }
+
+    void planningPhase(PlayerController player){
+
     }
 
     public void deleteRoom(PlayerController player){

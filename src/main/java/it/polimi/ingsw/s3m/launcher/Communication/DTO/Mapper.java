@@ -29,7 +29,7 @@ public class Mapper{
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		HashMap<String, Integer> tables = new HashMap<>();
-		dashboard.getTables().forEach((k, v) -> tables.put(k.name(), v));
+		dashboard.getTables().forEach((color, value) -> tables.put(color.name(), value));
 
 		return new DashboardDTO(hall, tables, dashboard.getNumberOfTowers());
 	}
@@ -45,6 +45,13 @@ public class Mapper{
 		}
 
 		return playerDTOList;
+	}
+
+	public HashMap<String, PlayerDTO> playerHashMapToDTO(HashMap<String, Player> playerHashMap){
+		HashMap<String, PlayerDTO> players = new HashMap<>();
+		playerHashMap.forEach((nickname, player) -> players.put(nickname, playerToDTO(player)));
+
+		return players;
 	}
 
 	public IslandDTO islandToDTO(Island island){
@@ -76,5 +83,33 @@ public class Mapper{
 		}
 
 		return characterCardDTOList;
+	}
+
+	public CloudDTO cloudToDTO(Cloud cloud){
+		ArrayList<String> students = cloud.getStudents().stream()
+				.map(Student::getColor)
+				.map(Enum::name)
+				.collect(Collectors.toCollection(ArrayList::new));
+
+		return new CloudDTO(students);
+	}
+
+	public ArrayList<CloudDTO> cloudListToDTO(ArrayList<Cloud> cloudList){
+		ArrayList<CloudDTO> cloudDTOList = new ArrayList<>();
+		for(Cloud cloud : cloudList){
+			cloudDTOList.add(cloudToDTO(cloud));
+		}
+
+		return cloudDTOList;
+	}
+
+	public GameDTO gameToDTO(Game game){
+		HashMap<String, PlayerDTO> playerList = playerHashMapToDTO(game.getPlayerHashMap());
+
+		HashMap<String, PlayerDTO> professors = new HashMap<>();
+
+		//professors
+
+		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()));
 	}
 }
