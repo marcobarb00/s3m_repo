@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.CloudNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
@@ -19,11 +20,12 @@ public abstract class Operation {
     }
 
     public abstract void executeOperation() throws PlayerNotInListException,
-            CloudNotInListException, IllegalArgumentException;
+            CloudNotInListException, IllegalArgumentException, NotExpertModeException;
 
     public boolean checkNickname(){
         ArrayList<String> playersList = game.getPlayersNicknames();
         boolean playerControllerInList = playersList.contains(playerController.getNickname());
         return playerControllerInList;
     }
+
 }
