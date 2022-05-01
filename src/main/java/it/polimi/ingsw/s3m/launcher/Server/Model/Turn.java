@@ -9,5 +9,6 @@ public class Turn {
     }
 
     // GETTER
+    public String getCurrentPlayerNickname() { return currentPlayerNickname; }
     public Phase getCurrentPhase() { return currentPhase; }
 }

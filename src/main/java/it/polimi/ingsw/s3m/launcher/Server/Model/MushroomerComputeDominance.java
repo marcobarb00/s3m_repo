@@ -4,8 +4,8 @@ public class MushroomerComputeDominance implements ComputeDominanceStrategy {
     private PawnColor color;
 
     @Override
-    public void executeStrategy(Island island) {
-
+    public Player computeDominance(Island island) {
+        return null;
     }
 
     public void setColor(PawnColor color) { this.color = color; }
