@@ -1,12 +1,15 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.CloudNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
+// DONE
 public class ActivateJesterEffectOperation extends Operation{
     private ArrayList<Student> requiredStudents;
     private ArrayList<Student> givenStudents;
@@ -28,26 +31,31 @@ public class ActivateJesterEffectOperation extends Operation{
         this.givenStudents = givenStudents;
     }
 
-    //TODO
+    //TODO Asking for a HashMap implementation of hall
     @Override
-    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException{
+    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException {
         //Check for double nicknames
         boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
+        boolean checkExpertMode = game.isExpertMode();
+
+        if(!checkExpertMode){
+            throw new NotExpertModeException();
+        }
 
         boolean checkRequired = requiredStudents.size() == 3;
         boolean checkGiven = givenStudents.size() == 3;
         if(!(checkGiven && checkRequired)){
-            //throw new IllegalArgumentException("Must exchange only 3 students");
+            new IllegalArgumentException("Must exchange only 3 students");
         }
 
         //Search students on card
         searchStudentsOnCard();
 
         //Search students in dashboard hall
-        //Smells soooo bad
+        //Method looks like crap but should work
         searchStudentsInHall();
 
         super.game.activateJesterEffect(playerController.getNickname(),
@@ -60,20 +68,12 @@ public class ActivateJesterEffectOperation extends Operation{
     private void searchStudentsOnCard(){
         HashMap<PawnColor, Integer> studentsOnJester = game.getJesterStudentsOnCard();
 
-        HashMap<PawnColor, Integer> requiredStudentsHashMap = new HashMap<>();
-        for(PawnColor p : PawnColor.values()){
-            requiredStudentsHashMap.put(p,0);
-        }
-
-        for(Student requiredStudent : requiredStudents){
-            PawnColor requiredStudentColor = requiredStudent.getColor();
-            int oldValue = requiredStudentsHashMap.get(requiredStudentColor);
-            requiredStudentsHashMap.replace(requiredStudentColor, oldValue  + 1);
-        }
-
+        //checking on Jester card
         for(PawnColor color : PawnColor.values()){
+            int numberOfRequiredStudents = (int) requiredStudents.stream().filter(
+                    student -> student.getColor() == color ).count();
             boolean notEnoughStudentsOnCard =
-                    requiredStudentsHashMap.get(color) > studentsOnJester.get(color);
+                    numberOfRequiredStudents > studentsOnJester.get(color);
             if(notEnoughStudentsOnCard){
                 throw new IllegalArgumentException("Not enough students on jester card");
             }
@@ -81,36 +81,18 @@ public class ActivateJesterEffectOperation extends Operation{
     }
 
     private void searchStudentsInHall(){
-        HashMap<PawnColor, Integer> givenStudentsHashMap = new HashMap<>();
-
-        for(PawnColor p : PawnColor.values()){
-            givenStudentsHashMap.put(p,0);
-        }
-
-        for(Student givenStudent : givenStudents){
-            PawnColor givenStudentColor = givenStudent.getColor();
-            int oldValue = givenStudentsHashMap.get(givenStudentColor);
-            givenStudentsHashMap.replace(givenStudentColor, oldValue  + 1);
-        }
-
         Player player = game.getPlayerHashMap().get(playerController.getNickname());
         ArrayList<Student> hall = player.getDashboard().getHall();
 
-        HashMap<PawnColor, Integer> hallHashMap = new HashMap<>();
-
-        for(PawnColor p : PawnColor.values()){
-            hallHashMap.put(p,0);
-        }
-
-        for(Student hallStudent : hall){
-            PawnColor hallStudentColor = hallStudent.getColor();
-            int oldValue = hallHashMap.get(hallStudentColor);
-            hallHashMap.replace(hallStudentColor, oldValue  + 1);
-        }
-
+        //For each color looks how many students of that color and compares
+        // with hall of that color
         for(PawnColor color : PawnColor.values()){
+            int numberOfGivenStudents = (int) givenStudents.stream().filter(
+                    student -> student.getColor() == color ).count();
+            int numberOfHallStudents = (int) hall.stream().filter(
+                    student -> student.getColor() == color ).count();
             boolean notEnoughStudentsInHall =
-                    givenStudentsHashMap.get(color) > hallHashMap.get(color);
+                    numberOfGivenStudents > numberOfHallStudents;
             if(notEnoughStudentsInHall){
                 throw new IllegalArgumentException("Not enough students in hall");
             }
