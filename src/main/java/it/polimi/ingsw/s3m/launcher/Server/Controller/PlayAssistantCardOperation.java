@@ -23,10 +23,6 @@ public class PlayAssistantCardOperation extends Operation{
         if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
-        boolean checkExpertMode = game.isExpertMode();
-        if(!checkExpertMode){
-            throw new NotExpertModeException();
-        }
 
         ArrayList<AssistantCard> hand = game.getPlayerHand(playerController.getNickname());
         boolean checkAssistantCard = 0 <= assistantCardPosition && assistantCardPosition < hand.size();
@@ -35,7 +31,6 @@ public class PlayAssistantCardOperation extends Operation{
             throw new IllegalArgumentException("Card not in list");
         }
 
-        super.game.playAssistantCard(playerController.getNickname(),assistantCardPosition);
-
+        super.game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
     }
 }
