@@ -31,7 +31,6 @@ public class ActivateJesterEffectOperation extends Operation{
         this.givenStudents = givenStudents;
     }
 
-    //TODO Asking for a HashMap implementation of hall
     @Override
     public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException {
         //Check for double nicknames
@@ -39,8 +38,8 @@ public class ActivateJesterEffectOperation extends Operation{
         if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
-        boolean checkExpertMode = game.isExpertMode();
 
+        boolean checkExpertMode = game.isExpertMode();
         if(!checkExpertMode){
             throw new NotExpertModeException();
         }
@@ -56,7 +55,7 @@ public class ActivateJesterEffectOperation extends Operation{
 
         //Search students in dashboard hall
         //Method looks like crap but should work
-        searchStudentsInHall();
+        searchStudentsInEntrance();
 
         super.game.activateJesterEffect(playerController.getNickname(),
                 requiredStudents, givenStudents);
@@ -80,21 +79,19 @@ public class ActivateJesterEffectOperation extends Operation{
         }
     }
 
-    private void searchStudentsInHall(){
+    private void searchStudentsInEntrance(){
         Player player = game.getPlayerHashMap().get(playerController.getNickname());
-        ArrayList<Student> hall = player.getDashboard().getHall();
+        HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
 
         //For each color looks how many students of that color and compares
-        // with hall of that color
+        // with entrance of that color
         for(PawnColor color : PawnColor.values()){
             int numberOfGivenStudents = (int) givenStudents.stream().filter(
                     student -> student.getColor() == color ).count();
-            int numberOfHallStudents = (int) hall.stream().filter(
-                    student -> student.getColor() == color ).count();
-            boolean notEnoughStudentsInHall =
-                    numberOfGivenStudents > numberOfHallStudents;
-            if(notEnoughStudentsInHall){
-                throw new IllegalArgumentException("Not enough students in hall");
+            boolean notEnoughStudentsInEntrance =
+                    numberOfGivenStudents > entrance.get(color);
+            if(notEnoughStudentsInEntrance){
+                throw new IllegalArgumentException("Not enough students in entrance");
             }
         }
 
