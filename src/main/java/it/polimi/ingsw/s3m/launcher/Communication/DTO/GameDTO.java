@@ -11,8 +11,9 @@ public class GameDTO{
 	private HashMap<String, PlayerDTO> professors;
 	private ArrayList<IslandDTO> islands;
 	private ArrayList<CharacterCardDTO> characterCards;
+	private String currentPlayerTurn;
 
-	public GameDTO(boolean expertMode, int motherNaturePosition, HashMap<String, PlayerDTO> players, ArrayList<CloudDTO> clouds, HashMap<String, PlayerDTO> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards){
+	public GameDTO(boolean expertMode, int motherNaturePosition, HashMap<String, PlayerDTO> players, ArrayList<CloudDTO> clouds, HashMap<String, PlayerDTO> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards, String currentPlayerTurn){
 		this.expertMode = expertMode;
 		this.motherNaturePosition = motherNaturePosition;
 		this.players = players;
@@ -20,6 +21,7 @@ public class GameDTO{
 		this.professors = professors;
 		this.islands = islands;
 		this.characterCards = characterCards;
+		this.currentPlayerTurn = currentPlayerTurn;
 	}
 
 	public boolean isExpertMode(){

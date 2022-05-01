@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 public class ClientCLI {
@@ -17,7 +18,7 @@ public class ClientCLI {
             try {
                 Message receivedMessage = client.receiveMessage();
                 receivedMessage.apply(view);
-                if(receivedMessage instanceof NotificationMessage){
+                if(receivedMessage instanceof Notification){
                     message.execute();
                 }else{
                     Message toSendMessage = message.execute();

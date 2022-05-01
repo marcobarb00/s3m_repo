@@ -108,8 +108,8 @@ public class Mapper{
 
 		HashMap<String, PlayerDTO> professors = new HashMap<>();
 
-		//professors
+		//TODO professors and currentPlayerTurn
 
-		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()));
+		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()) , "");
 	}
 }

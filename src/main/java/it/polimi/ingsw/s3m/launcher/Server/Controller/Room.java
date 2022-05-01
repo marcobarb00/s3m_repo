@@ -75,6 +75,8 @@ public class Room {
         checkGameInstanceConditions(playersNicknameList);
         this.gameState = new Game(playersNicknameList, expertMode);
 
+        //TODO fix errors
+        /*
         while(true){
             gameState.refiilClouds();
             for(int i = 0; i < playersNumber; i++){
@@ -85,6 +87,7 @@ public class Room {
             }
             turn.setPLayer(turn.getNextPlayer());
         }
+        */
     }
 
     private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
