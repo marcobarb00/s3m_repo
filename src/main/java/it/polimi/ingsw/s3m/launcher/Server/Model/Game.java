@@ -3,6 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
     private final int numberOfPlayers;
@@ -17,6 +18,7 @@ public class Game {
     private ComputeDominanceStrategy computeDominanceStrategy;
     private GameInitializer gameInitializer;
     private ExpertModeInitializer expertModeInitializer;
+    private Turn turn;
 
     public Game (ArrayList<String> playersNicknameList, boolean expertMode) {
         this.numberOfPlayers = playersNicknameList.size();
@@ -50,9 +52,12 @@ public class Game {
             gameInitializer = new ThreePlayersGameInitializer(this, playersNicknameList);
         }
         if (expertMode) expertModeInitializer = new ExpertModeInitializer(this);
+
+        // Turn
+        turn = new Turn(playersNicknameList.get(ThreadLocalRandom.current().nextInt(0, numberOfPlayers-1)));
     }
 
-    // Bag
+    // BAG
 
     public Student extractStudent() throws EmptyBagException {
         if (bag.getTotalNumberOfStudents() <= 0) {
@@ -82,16 +87,25 @@ public class Game {
         }
     }
 
-    // CharacterCards deck
+    // CHARACTER CARDS
 
     public void drawThreeCharacterCards() {
         while (characterCardsList.size() != 3) {
-            int extractedNumber = (int) (Math.random()*(characterCardsList.size()));
+            int extractedNumber = ThreadLocalRandom.current().nextInt(0, characterCardsList.size()-1);
             characterCardsList.remove(extractedNumber);
         }
     }
 
-    // Cloud
+    // CLOUD
+
+    public void refillClouds() {
+        int numberOfStudents;
+        if (expertMode) numberOfStudents = 4;
+        else numberOfStudents = 3;
+        for (int i = 0; i < numberOfPlayers; i++) {
+            refillCloudStudents(cloudsList.get(i), numberOfStudents);
+        }
+    }
 
     public void refillCloudStudents(Cloud cloud, int numberOfStudents) {
         ArrayList<Student> refillingStudents = new ArrayList<>();
@@ -105,7 +119,17 @@ public class Game {
         cloud.setStudents(refillingStudents);
     }
 
-    // Jester
+    // ISLAND
+
+    public void mergePreviousIsland() {
+
+    }
+
+    public void mergeNextIsland() {
+
+    }
+
+    // JESTER
 
     public void initializeJesterStudents (Jester jester) {
         HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
@@ -124,7 +148,7 @@ public class Game {
         jester.setStudentsOnCard(initialingStudents);
     }
 
-    // Mother Nature
+    // MOTHER NATURE
 
     public void updateMotherNaturePosition (int jump) {
         while (jump != 0) {
@@ -134,6 +158,8 @@ public class Game {
             jump--;
         }
     }
+
+    // TURN
 
     // Operations
 
@@ -198,13 +224,14 @@ public class Game {
         minstrel.incrementCost();
     }
 
-    public void activateMushroomerEffect (String playerNickname) {
+    public void activateMushroomerEffect (String playerNickname, PawnColor chosenColor) {
         CharacterCard mushroomer = new Mushroomer();
         for (CharacterCard characterCard : characterCardsList) {
             if (characterCard instanceof Mushroomer) mushroomer = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
         computeDominanceStrategy = new MushroomerComputeDominance();
+        ((MushroomerComputeDominance) computeDominanceStrategy).setColor(chosenColor);
         chosenPlayer.removeCoins(mushroomer.getCost());
         mushroomer.incrementCost();
     }
@@ -218,7 +245,7 @@ public class Game {
     //TODO this method
     public void moveMotherNature(String playerNickname, int movement) {
         updateMotherNaturePosition(movement);
-        computeDominanceStrategy.executeStrategy();
+        //computeDominanceStrategy.executeStrategy();
     }
 
     public void playAssistantCard(String playerNickname, int position) {
