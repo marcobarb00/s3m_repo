@@ -3,9 +3,11 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Turn;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -67,22 +69,35 @@ public class Room {
                 .collect(Collectors.toCollection(ArrayList::new));
 
         //TODO Controls for game instance
-        boolean checkNicknames = checkGameInstanceConditions(playersNicknameList);
-        if(checkNicknames) {
-            this.gameState = new Game(playersNicknameList, expertMode);
-        }else{
-            throw new DoubleNicknameException();
+        checkGameInstanceConditions(playersNicknameList);
+        this.gameState = new Game(playersNicknameList, expertMode);
+
+        Iterator<Turn> turnIterator = new Iterator<Turn>(){
+            ArrayList<Turn> turnList = new ArrayList<>();
+
+            @Override
+            public boolean hasNext(){
+                return false;
+            }
+
+            @Override
+            public Turn next(){
+                return null;
+            }
+        };
+
+        while(true){
+
         }
     }
 
-    private boolean checkGameInstanceConditions(ArrayList<String> players) {
+    private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
         for(String p : players){
             int occurrences = Collections.frequency(players, p);
             if(occurrences > 1){
-                return false;
+                throw new DoubleNicknameException();
             }
         }
-        return true;
     }
 
     public void deleteRoom(PlayerController player){
