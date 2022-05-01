@@ -6,11 +6,9 @@ import java.util.ArrayList;
 
 //DONE
 public class ActivateCentaurEffectOperation extends Operation{
-    private PlayerController playerController;
 
     public ActivateCentaurEffectOperation(Game game, PlayerController playerController) {
-        super(game);
-        this.playerController = playerController;
+        super(game, playerController);
     }
 
     @Override
