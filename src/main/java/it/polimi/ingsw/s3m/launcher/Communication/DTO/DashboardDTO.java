@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DashboardDTO{
-	private ArrayList<String> hall;
+	private HashMap<String, Integer> entrance;
 	private HashMap<String, Integer> tables;
 	private int numberOfTowers;
 
-	public DashboardDTO(ArrayList<String> hall, HashMap<String, Integer> tables, int numberOfTowers){
-		this.hall = hall;
+	public DashboardDTO(HashMap<String, Integer> entrance, HashMap<String, Integer> tables, int numberOfTowers){
+		this.entrance = entrance;
 		this.tables = tables;
 		this.numberOfTowers = numberOfTowers;
 	}
 
-	public ArrayList<String> getHall(){
-		return hall;
+	public HashMap<String, Integer> getEntrance(){
+		return entrance;
 	}
 
 	public HashMap<String, Integer> getTables(){

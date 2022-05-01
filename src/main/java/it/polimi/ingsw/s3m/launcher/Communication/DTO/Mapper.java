@@ -23,15 +23,13 @@ public class Mapper{
 	}
 
 	public DashboardDTO dashboardToDTO(Dashboard dashboard){
-		ArrayList<String> hall = dashboard.getHall().stream()
-				.map(Student::getColor)
-				.map(Enum::name)
-				.collect(Collectors.toCollection(ArrayList::new));
+		HashMap<String, Integer> entrance = new HashMap<>();
+		dashboard.getTables().forEach((color, value) -> entrance.put(color.name(), value));
 
 		HashMap<String, Integer> tables = new HashMap<>();
 		dashboard.getTables().forEach((color, value) -> tables.put(color.name(), value));
 
-		return new DashboardDTO(hall, tables, dashboard.getNumberOfTowers());
+		return new DashboardDTO(entrance, tables, dashboard.getNumberOfTowers());
 	}
 
 	public PlayerDTO playerToDTO(Player player){

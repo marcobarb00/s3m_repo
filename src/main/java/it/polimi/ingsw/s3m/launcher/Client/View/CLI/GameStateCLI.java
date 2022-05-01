@@ -46,10 +46,7 @@ public class GameStateCLI implements MessageCLI{
 
 	private void printDashboard(DashboardDTO dashboard){
 		System.out.println("entrance");
-		ArrayList<String> hall = dashboard.getHall();
-		for(int i = 0; i < hall.size(); i++){
-			System.out.println(i + ": " + hall.get(i));
-		}
+		dashboard.getEntrance().forEach((k, v) -> System.out.println(k + ": " + v));
 
 		System.out.println("hall");
 		dashboard.getTables().forEach((k, v) -> System.out.println(k + ": " + v));

@@ -75,19 +75,16 @@ public class Room {
         checkGameInstanceConditions(playersNicknameList);
         this.gameState = new Game(playersNicknameList, expertMode);
 
-        //TODO fix errors
-        /*
         while(true){
-            gameState.refiilClouds();
+            gameState.refillClouds();
             for(int i = 0; i < playersNumber; i++){
                 planningPhase(playersList.get(i));
             }
             for(int i = 0; i < playersNumber; i++){
                 actionPhase(playersList.get(i));
             }
-            turn.setPLayer(turn.getNextPlayer());
+            //turn.setPLayer(turn.getNextPlayer());
         }
-        */
     }
 
     private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
@@ -100,6 +97,10 @@ public class Room {
     }
 
     void planningPhase(PlayerController player){
+
+    }
+
+    void actionPhase(PlayerController player){
 
     }
 
