@@ -31,6 +31,11 @@ public class CLIView extends View{
 	}
 
 	@Override
+	public void updateGameState(GameStateMessage gameState){
+		client.setMessage(new GameStateCLI(gameState));
+	}
+
+	@Override
 	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
 		client.setMessage(new PlanningPhaseCLI(planningPhaseMessage));
 	}

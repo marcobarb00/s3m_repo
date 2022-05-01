@@ -2,10 +2,12 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -70,27 +72,35 @@ public class Room {
                 .map(PlayerController::getNickname)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        boolean checkNicknames = checkGameInstanceConditions(playersNicknameList);
-        if(checkNicknames) {
-            this.gameState = new Game(playersNicknameList, expertMode);
-        }else{
-            throw new DoubleNicknameException();
+        checkGameInstanceConditions(playersNicknameList);
+        this.gameState = new Game(playersNicknameList, expertMode);
+
+        //TODO fix errors
+        /*
+        while(true){
+            gameState.refiilClouds();
+            for(int i = 0; i < playersNumber; i++){
+                planningPhase(playersList.get(i));
+            }
+            for(int i = 0; i < playersNumber; i++){
+                actionPhase(playersList.get(i));
+            }
+            turn.setPLayer(turn.getNextPlayer());
         }
+        */
     }
 
-    /**
-     * Controls if two or more players have the same nickname
-     * @param players
-     * @return
-     */
-    private boolean checkGameInstanceConditions(ArrayList<String> players) {
+    private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
         for(String p : players){
             int occurrences = Collections.frequency(players, p);
             if(occurrences > 1){
-                return false;
+                throw new DoubleNicknameException();
             }
         }
-        return true;
+    }
+
+    void planningPhase(PlayerController player){
+
     }
 
     public void deleteRoom(PlayerController player){
