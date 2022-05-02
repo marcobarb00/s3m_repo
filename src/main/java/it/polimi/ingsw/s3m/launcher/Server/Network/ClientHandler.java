@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
@@ -74,7 +75,7 @@ public class ClientHandler implements Runnable{
                 e.printStackTrace();
             }
         }
-        if(messageToSend instanceof NotificationMessage){
+        if(messageToSend instanceof Notification){
             writeOutputStream(messageToSend);
             messageReceived = null;
         }else{
@@ -95,7 +96,7 @@ public class ClientHandler implements Runnable{
         }
         messageToSend = message;
         notifyAll();
-        if(message instanceof NotificationMessage){
+        if(message instanceof Notification){
             return null;
         }else{
             while(messageReceived == null){

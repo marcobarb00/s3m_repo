@@ -6,6 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.PlanningPhaseMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.PlayAssistantCardMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
@@ -109,7 +110,9 @@ public class Room {
         planningPhaseMessage.setPlayedAssistantCards(playedCards);
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
         planningPhaseMessage.setHand(handDTO);
-        player.communicateWithClient(planningPhaseMessage);
+        PlayAssistantCardMessage playAssistantCardMessage = (PlayAssistantCardMessage) player.communicateWithClient(planningPhaseMessage);
+
+
     }
 
     void actionPhase(PlayerController player){
