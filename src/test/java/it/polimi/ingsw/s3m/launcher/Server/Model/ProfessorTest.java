@@ -5,15 +5,4 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProfessorTest {
-
-    @Test
-    void changePlayer() {
-        Professor professor = new Professor(PawnColor.BLUE);
-        assertNull(professor.getPlayer());
-        Player pippo = new Player(new Dashboard(), "Pippo");
-        professor.changePlayer(pippo);
-        assertEquals(pippo, professor.getPlayer());
-        assertNotNull(professor.getPlayer());
-    }
-
 }

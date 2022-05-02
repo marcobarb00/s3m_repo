@@ -18,8 +18,7 @@ public class Client{
 		if(args[0].equals("CLI")) {
 			ClientCLI client = new ClientCLI();
 			client.start();
-		}else {
-
+		}else{
 		}
 	}
 

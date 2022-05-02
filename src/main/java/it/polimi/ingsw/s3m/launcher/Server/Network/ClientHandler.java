@@ -1,11 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class ClientHandler implements Runnable{
     private final Socket socket;
@@ -14,7 +14,9 @@ public class ClientHandler implements Runnable{
     private InputStream inputStream;
     private ObjectInputStream objectInputStream;
 
-    PlayerController playerController;
+    private PlayerController playerController;
+    private Message messageToSend;
+    private Message messageReceived;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -24,10 +26,10 @@ public class ClientHandler implements Runnable{
     public void run(){
         setupStream();
         this.playerController = new PlayerController(this);
+        playerController.login();
         try{
-            playerController.login();
             while(true){
-                readMessage();
+                sendMessage();
             }
         }catch(IOException | ClassNotFoundException e){
             playerController.disconnect();
@@ -47,7 +49,11 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void sendMessage(Message message){
+    public void writeOutputStream(Message message) throws NullPointerException{
+        if(message == null){
+            System.out.println("ERROR: trying to send a null message");
+            throw new NullPointerException();
+        }
         try{
             objectOutputStream.writeObject(message);
             objectOutputStream.flush();
@@ -56,21 +62,54 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public Message readMessage() throws IOException, ClassNotFoundException{
+    public Message readInputStream() throws IOException, ClassNotFoundException{
         return (Message) objectInputStream.readObject();
     }
 
-    public void activateCharacterCard(){}
+    public synchronized void sendMessage() throws IOException, ClassNotFoundException{
+        while(messageToSend == null){
+            try{
+                wait();
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+        if(messageToSend instanceof NotificationMessage){
+            writeOutputStream(messageToSend);
+            messageReceived = null;
+        }else{
+            writeOutputStream(messageToSend);
+            messageReceived = readInputStream();
+        }
+        messageToSend = null;
+        notifyAll();
+    }
 
-    public void playAssistantCard(){}
-
-    public void putStudentsOnIsland(){}
-
-    public void putStudentOnTable(){}
-
-    public void moveMotherNature(){}
-
-    public void chooseCloud(){}
+    public synchronized Message communicateWithClient(Message message){
+        while (messageToSend != null) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        messageToSend = message;
+        notifyAll();
+        if(message instanceof NotificationMessage){
+            return null;
+        }else{
+            while(messageReceived == null){
+                try{
+                    wait();
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+            Message temp = messageReceived;
+            messageReceived = null;
+            return temp;
+        }
+    }
 
     public void close(){
         try {

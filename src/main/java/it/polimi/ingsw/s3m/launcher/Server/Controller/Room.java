@@ -1,20 +1,31 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
+import it.polimi.ingsw.s3m.launcher.Communication.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.RoomFullException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Communication.PlanningPhaseMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
+import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class Room {
-    private int roomID;
-    private int playersNumber;
-    private ArrayList<PlayerController> playersList;
+    private final int roomID;
+    private final int playersNumber;
+    private final boolean expertMode;
+    private final ArrayList<PlayerController> playersList;
+    private boolean isStarted;
     private Game gameState;
+    private Mapper mapper = new Mapper();
 
-    public Room(int roomID, int playersNumber) {
+    public Room(int roomID, int playersNumber, boolean expertMode) {
         this.roomID = roomID;
         this.playersNumber = playersNumber;
+        this.expertMode = expertMode;
         this.playersList = new ArrayList<>();
     }
 
@@ -26,11 +37,11 @@ public class Room {
         return playersList;
     }
 
-    public boolean isFull(){
+    public synchronized boolean isFull(){
         return playersList.size() >= playersNumber;
     }
 
-    public boolean isAllowedName(String nickname){
+    public synchronized boolean isAllowedName(String nickname){
         if(playersList.isEmpty())
             return true;
         return playersList.stream()
@@ -38,21 +49,71 @@ public class Room {
                 .noneMatch(name -> name.equals(nickname));
     }
 
-    public void addPlayer(PlayerController player) throws RoomFullException{
-        if(this.isFull()){
-            throw new RoomFullException();
-        }
-        NotificationMessage notification = new NotificationMessage();
-        notification.setMessage("entered in the room successfully");
-        player.sendMessage(notification);
+    public synchronized void addPlayer(PlayerController player){
         playersList.add(player);
-        if(this.isFull()){
-            start();
+        if(!isFull() || isStarted){
+            return;
+        }
+
+        isStarted = true;
+        new Thread(() -> {
+            try {
+                start();
+            } catch (DoubleNicknameException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * Instantiates game if controls are passed, if not an exception is thrown
+     * @throws DoubleNicknameException
+     */
+    public void start() throws DoubleNicknameException {
+        sendNotificationToAll("the game is starting");
+
+        ArrayList<String> playersNicknameList = playersList.stream()
+                .map(PlayerController::getNickname)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        checkGameInstanceConditions(playersNicknameList);
+        this.gameState = new Game(playersNicknameList, expertMode);
+
+        while(true){
+            gameState.refillClouds();
+            for(int i = 0; i < playersNumber; i++){
+                planningPhase(playersList.get(i));
+            }
+            for(int i = 0; i < playersNumber; i++){
+                actionPhase(playersList.get(i));
+            }
+            //turn.setPLayer(turn.getNextPlayer());
         }
     }
 
-    public void start(){
-        sendNotificationToAll("the room is starting");
+    private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
+        for(String p : players){
+            int occurrences = Collections.frequency(players, p);
+            if(occurrences > 1){
+                throw new DoubleNicknameException();
+            }
+        }
+    }
+
+    void planningPhase(PlayerController player){
+        GameDTO gameDTO = mapper.gameToDTO(gameState);
+        player.communicateWithClient(new GameStateMessage(gameDTO));
+
+        PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage();
+        ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
+        planningPhaseMessage.setPlayedAssistantCards(playedCards);
+        ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
+        planningPhaseMessage.setHand(handDTO);
+        player.communicateWithClient(planningPhaseMessage);
+    }
+
+    void actionPhase(PlayerController player){
+
     }
 
     public void deleteRoom(PlayerController player){
@@ -66,7 +127,7 @@ public class Room {
         ArrayList<PlayerController> allButOne = new ArrayList<>(playersList);
         allButOne.remove(one);
         for(PlayerController player : allButOne){
-            player.sendMessage(notification);
+            player.communicateWithClient(notification);
         }
     }
 
@@ -74,7 +135,9 @@ public class Room {
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage(message);
         for(PlayerController player : playersList){
-            player.sendMessage(notification);
+            player.communicateWithClient(notification);
         }
     }
+
+
 }

@@ -15,13 +15,13 @@ public class EnterRoomCLI implements MessageCLI{
 
     @Override
     public Message execute() {
-        System.out.println("ID's of rooms that are open");
+        System.out.println("\nID's of rooms that are open");
 
         for(Integer roomID : availableRoomsID){
             System.out.println(roomID);
         }
 
-        System.out.println("please insert the room ID to join that room");
+        System.out.println("\nplease insert the room ID to join that room");
         Scanner scanner = new Scanner(System.in);
         int roomID;
         try{
@@ -30,7 +30,7 @@ public class EnterRoomCLI implements MessageCLI{
             roomID = -1;
         }
         while(roomID < 0 || !availableRoomsID.contains(roomID)){
-            System.out.println("invalid room ID");
+            System.out.println("\ninvalid room ID");
             try{
                 roomID = Integer.parseInt(scanner.nextLine());
             }catch (Exception e){
@@ -38,7 +38,7 @@ public class EnterRoomCLI implements MessageCLI{
             }
         }
 
-        System.out.println("please insert your nickname");
+        System.out.println("\nplease insert your nickname");
         String nickname = scanner.nextLine();
 
         EnterRoomMessage enterRoomMessage = new EnterRoomMessage();

@@ -3,8 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 
-import java.util.Scanner;
-
 public class CLIView extends View{
 	ClientCLI client;
 
@@ -23,10 +21,42 @@ public class CLIView extends View{
 	}
 
 	@Override
+	public void enterRoom(EnterRoomMessage enterRoomMessage){
+		client.setMessage(new EnterRoomCLI(enterRoomMessage));
+	}
+
+	@Override
 	public void notification(NotificationMessage notification){
 		client.setMessage(new NotificationCLI(notification));
 	}
 
 	@Override
-	public void enterRoom(EnterRoomMessage enterRoomMessage){client.setMessage(new EnterRoomCLI(enterRoomMessage));}
+	public void updateGameState(GameStateMessage gameState){
+		client.setMessage(new GameStateCLI(gameState));
+	}
+
+	@Override
+	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
+		client.setMessage(new PlanningPhaseCLI(planningPhaseMessage));
+	}
+
+	@Override
+	public void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
+		client.setMessage(new MoveStudentsPhaseCLI(moveStudentsPhaseMessage));
+	}
+
+	@Override
+	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
+		client.setMessage(new MotherNaturePhaseCLI(motherNaturePhaseMessage));
+	}
+
+	@Override
+	public void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage){
+		client.setMessage(new ChooseCloudPhaseCLI(chooseCloudPhaseMessage));
+	}
+
+	@Override
+	public void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage){
+		client.setMessage(new PlayAssistantCardCLI(playAssistantCardMessage));
+	}
 }

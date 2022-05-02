@@ -1,27 +1,17 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import java.util.ArrayList;
-
 public class MotherNature {
-    private int currentPosition;
+    private int currentPosition = 0;
 
-    public MotherNature () {
-        this.currentPosition = 0;
+    public void incrementCurrentPosition () {
+        currentPosition++;
     }
 
+    // GETTER
     public int getCurrentPosition() { return currentPosition; }
 
-    public int setCurrentPosition(int jump, ArrayList<Island> islands) {
-        //TODO jump non negative exception (?)
-        //if (jump <= 0) throw NonPositiveJumpParemeterException e;
-        while (jump != 0) {
-            if (currentPosition == islands.size()-1) {
-                currentPosition = 0;
-            } else {
-                currentPosition++;
-            }
-            jump--;
-        }
-        return currentPosition;
+    // SETTER
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
     }
 }

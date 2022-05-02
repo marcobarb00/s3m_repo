@@ -1,9 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Communication;
 
 public abstract class RoomMessage implements Message{
-    String nickname;
-    Integer roomID;
-    String message;
+    private String nickname;
+    private Integer roomID;
+    private String message;
 
     public String getNickname() {
         return nickname;

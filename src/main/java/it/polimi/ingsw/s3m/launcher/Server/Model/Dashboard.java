@@ -4,31 +4,59 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dashboard {
-    private ArrayList<Student> hall;
-    private ArrayList<Tower> towerList;
+    private HashMap<PawnColor, Integer> entrance;
     private HashMap<PawnColor, Integer> tables;
-    private ArrayList<PawnColor> controlledColors;
+    private int numberOfTowers;
 
-    /**
-     * Every time a tower is moved towerList shrinks
-     * @return
-     */
-    public Tower moveTower() {
-        Tower t = towerList.get(0);
-        towerList.remove(0);
-        return t;
-    }
-
-    /**
-     * Needed for computeInfluenceIndex in Island class.
-     * This doesn't screw up the reference of controlledColors
-     * @return
-     */
-    public ArrayList<PawnColor> getControlledColors(){
-        ArrayList<PawnColor> colors = new ArrayList<>();
-        for (PawnColor color : controlledColors){
-            colors.add(color);
+    public Dashboard() {
+        this.entrance = new HashMap<>();
+        this.tables = new HashMap<>();
+        for (PawnColor color : PawnColor.values()) {
+            entrance.put(color, 0);
+            tables.put(color, 0);
         }
-        return colors;
     }
+
+    // Entrance
+    public void addStudentsInEntrance (ArrayList<Student> enteringStudents) {
+        for (Student student : enteringStudents) {
+            PawnColor color = student.getColor();
+            entrance.replace(color, entrance.get(color)+1);
+        }
+    }
+
+    public void deleteStudentsFromEntrance (ArrayList<Student> deletingStudents) {
+        for (Student student : deletingStudents) {
+            PawnColor color = student.getColor();
+            entrance.replace(color, entrance.get(color)-1);
+        }
+    }
+
+    // Tables
+    public void deleteStudentsFromTables (ArrayList<Student> deletingStudents) {
+        for (Student student : deletingStudents) {
+            PawnColor color = student.getColor();
+            tables.replace(color, tables.get(color)-1);
+        }
+    }
+
+    public int moveStudentsFromEntranceToTables (ArrayList<Student> movingStudents) {
+        int earnCoins = 0;
+        for (Student student : movingStudents) {
+            PawnColor color = student.getColor();
+            entrance.replace(color, entrance.get(color)-1);
+            tables.replace(color, tables.get(color)+1);
+            if (tables.get(color) % 3 == 0) earnCoins++;
+        }
+        return earnCoins;
+    }
+
+    // GETTER
+    public HashMap<PawnColor, Integer> getEntrance() { return entrance; }
+    public HashMap<PawnColor, Integer> getTables() { return tables; }
+    public int getNumberOfTowers() { return numberOfTowers; }
+
+    // SETTER
+    public void setNumberOfTowers (int numberOfTowers) { this.numberOfTowers = numberOfTowers; }
 }
+
