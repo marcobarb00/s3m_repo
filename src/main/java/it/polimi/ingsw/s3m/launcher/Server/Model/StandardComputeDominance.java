@@ -8,7 +8,10 @@ public class StandardComputeDominance implements ComputeDominanceStrategy {
     public Player computeDominance(Island island, HashMap<PawnColor, Player> professors) {
         int maxInfluence = 0;
         Player dominatingPlayer = null;
-        for (Player player : professors.values()) playersInfluence.putIfAbsent(player, 0);
+        for (Player player : professors.values()) {
+            if (player != null)
+                playersInfluence.putIfAbsent(player, 0);
+        }
         for (PawnColor color : PawnColor.values()) {
             Player currentPlayer = professors.get(color);
             if (currentPlayer != null) {
@@ -18,12 +21,15 @@ public class StandardComputeDominance implements ComputeDominanceStrategy {
         }
         Player islandDominator = island.getDominator();
         int islandNumberOfTower = island.getNumberOfTowers();
-        playersInfluence.replace(islandDominator, playersInfluence.get(islandDominator) + islandNumberOfTower);
-        for (Player player : playersInfluence.keySet()) {
-            int singlePlayerInfluence = playersInfluence.get(player);
-            if (singlePlayerInfluence > maxInfluence) {
-                dominatingPlayer = player;
-                maxInfluence = singlePlayerInfluence;
+        if (islandDominator != null)
+            playersInfluence.replace(islandDominator, playersInfluence.get(islandDominator) + islandNumberOfTower);
+        if (!playersInfluence.keySet().isEmpty()) {
+            for (Player player : playersInfluence.keySet()) {
+                int singlePlayerInfluence = playersInfluence.get(player);
+                if (singlePlayerInfluence > maxInfluence) {
+                    dominatingPlayer = player;
+                    maxInfluence = singlePlayerInfluence;
+                }
             }
         }
         return dominatingPlayer;

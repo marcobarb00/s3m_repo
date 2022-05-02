@@ -14,6 +14,7 @@ public class Game {
     private HashMap<PawnColor, Player> professorsHashMap = new HashMap<>();
     private ArrayList<Cloud> cloudsList = new ArrayList<>();
     private ArrayList<Island> islandsList = new ArrayList<>();
+    private ArrayList<AssistantCard> playedAssistantCardsList = new ArrayList<>();
     private ArrayList<CharacterCard> characterCardsList = new ArrayList<>();
     private ComputeDominanceStrategy computeDominanceStrategy = new StandardComputeDominance();
     private GameInitializer gameInitializer;
@@ -235,6 +236,7 @@ public class Game {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastCardPlayed(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
+        playedAssistantCardsList.add(chosenPlayer.getLastCardPlayed());
     }
 
     public void putStudentsOnTables(String playerNickname, ArrayList<Student> selectedStudents) {
@@ -295,5 +297,6 @@ public class Game {
     public HashMap<PawnColor, Player> getProfessorsHashMap() { return professorsHashMap; }
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
+    public ArrayList<AssistantCard> getPlayedAssistantCardsList() { return playedAssistantCardsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
 }
