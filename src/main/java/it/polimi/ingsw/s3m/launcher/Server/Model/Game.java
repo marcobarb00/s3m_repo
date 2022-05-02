@@ -178,6 +178,7 @@ public class Game {
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
         computeDominanceStrategy = new KnightComputeDominance();
+        ((KnightComputeDominance) computeDominanceStrategy).setActingPlayer(chosenPlayer);
         chosenPlayer.removeCoins(knight.getCost());
         knight.incrementCost();
     }
@@ -215,7 +216,7 @@ public class Game {
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
         computeDominanceStrategy = new MushroomerComputeDominance();
-        ((MushroomerComputeDominance) computeDominanceStrategy).setColor(chosenColor);
+        ((MushroomerComputeDominance) computeDominanceStrategy).setChosenColor(chosenColor);
         chosenPlayer.removeCoins(mushroomer.getCost());
         mushroomer.incrementCost();
     }
