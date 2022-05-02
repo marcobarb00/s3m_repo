@@ -25,7 +25,7 @@ public class TwoPlayersGameInitializer extends GameInitializer {
 
     @Override
     public void dashboardsSetup() {
-        for (Player player : game. getPlayerHashMap().values()) {
+        for (Player player : game.getPlayerHashMap().values()) {
             player.getDashboard().setNumberOfTowers(8);
         }
     }

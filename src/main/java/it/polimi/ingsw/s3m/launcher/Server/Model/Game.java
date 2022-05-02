@@ -258,9 +258,7 @@ public class Game {
     public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
     public ArrayList<String> getPlayersNicknames() {
         ArrayList<String> listOfNicknames = new ArrayList<>();
-        for (Player player : playerHashMap.values()) {
-            listOfNicknames.add(player.getNickname());
-        }
+        for (Player player : playerHashMap.values()) listOfNicknames.add(player.getNickname());
         return listOfNicknames;
     }
     public ArrayList<AssistantCard> getPlayerHand(String playerNickname) {
@@ -279,9 +277,8 @@ public class Game {
     // GETTER - Character Cards
     public HashMap<PawnColor, Integer> getJesterStudentsOnCard() {
         CharacterCard jester = new Jester();
-        for (CharacterCard characterCard : characterCardsList) {
+        for (CharacterCard characterCard : characterCardsList)
             if (characterCard instanceof Jester) jester = characterCard;
-        }
         return ((Jester) jester).getStudentsOnCard();
     }
 

@@ -25,7 +25,7 @@ public class Mapper{
 
 	public DashboardDTO dashboardToDTO(Dashboard dashboard){
 		HashMap<String, Integer> entrance = new HashMap<>();
-		dashboard.getTables().forEach((color, value) -> entrance.put(color.name(), value));
+		dashboard.getEntrance().forEach((color, value) -> entrance.put(color.name(), value));
 
 		HashMap<String, Integer> tables = new HashMap<>();
 		dashboard.getTables().forEach((color, value) -> tables.put(color.name(), value));
