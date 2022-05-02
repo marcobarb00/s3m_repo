@@ -8,6 +8,8 @@ import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.PlayAssistantCardMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
 import java.util.ArrayList;
@@ -85,6 +87,9 @@ public class Room {
             for(int i = 0; i < playersNumber; i++){
                 planningPhase(playersList.get(i));
             }
+
+            //TODO call method to calculate player's turn
+
             for(int i = 0; i < playersNumber; i++){
                 actionPhase(playersList.get(i));
             }
@@ -112,7 +117,12 @@ public class Room {
         planningPhaseMessage.setHand(handDTO);
         PlayAssistantCardMessage playAssistantCardMessage = (PlayAssistantCardMessage) player.communicateWithClient(planningPhaseMessage);
 
-
+        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardMessage.getCardChosen());
+        try{
+            playAssistantCardOperation.executeOperation();
+        }catch(PlayerNotInListException e){
+            e.printStackTrace();
+        }
     }
 
     void actionPhase(PlayerController player){

@@ -19,9 +19,11 @@ public class PlanningPhaseCLI implements MessageCLI{
 
 	@Override
 	public Message execute(){
-		System.out.println("\ncards played by the other players");
-		for(AssistantCardDTO assistantCard : playedAssistantCards){
-			printAssistantCard(assistantCard);
+		if(playedAssistantCards.size() != 0){
+			System.out.println("\ncards played by the other players:");
+			for(AssistantCardDTO assistantCard : playedAssistantCards){
+				printAssistantCard(assistantCard);
+			}
 		}
 
 		System.out.println("\nyour hand:");
