@@ -31,12 +31,13 @@ public class GameStateCLI implements MessageCLI{
 		});
 
 		System.out.println("your hand");
-		//TODO get current player hand
-		ArrayList<AssistantCardDTO> hand = new ArrayList<>();
+		ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(gameState.getCurrentPlayerTurn()).getHand();
 		for(int i = 0; i < hand.size(); i++){
 			System.out.println("index: " + i);
 			printAssistantCard(hand.get(i));
 		}
+
+		//TODO print last played assistant card
 
 		return null;
 	}

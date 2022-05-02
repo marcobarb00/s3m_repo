@@ -51,4 +51,8 @@ public class GameDTO{
 	public ArrayList<CharacterCardDTO> getCharacterCards(){
 		return characterCards;
 	}
+
+	public String getCurrentPlayerTurn(){
+		return currentPlayerTurn;
+	}
 }

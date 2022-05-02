@@ -2,18 +2,19 @@ package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class Mapper{
 	public AssistantCardDTO assistantCardToDTO(AssistantCard assistantCard){
+		if(assistantCard == null){
+			return new AssistantCardDTO(null, 0, 0);
+		}
 		return new AssistantCardDTO(assistantCard.getType(), assistantCard.getValue(), assistantCard.getMovements());
 	}
 
-	public ArrayList<AssistantCardDTO> handToDTO(ArrayList<AssistantCard> hand){
+	public ArrayList<AssistantCardDTO> assistantCardListToDTO(ArrayList<AssistantCard> hand){
 		ArrayList<AssistantCardDTO> assistantCardDTOList = new ArrayList<>();
 		for(AssistantCard assistantCard : hand){
 			assistantCardDTOList.add(assistantCardToDTO(assistantCard));
@@ -33,7 +34,7 @@ public class Mapper{
 	}
 
 	public PlayerDTO playerToDTO(Player player){
-		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()), handToDTO(player.getHand()), assistantCardToDTO(player.getLastCardPlayed()));
+		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()), assistantCardListToDTO(player.getHand()), assistantCardToDTO(player.getLastCardPlayed()));
 	}
 
 	public ArrayList<PlayerDTO> playerListToDTO(ArrayList<Player> playerList){
@@ -105,9 +106,8 @@ public class Mapper{
 		HashMap<String, PlayerDTO> playerList = playerHashMapToDTO(game.getPlayerHashMap());
 
 		HashMap<String, PlayerDTO> professors = new HashMap<>();
+		game.getProfessorsHashMap().forEach((color, player) -> professors.put(color.name(), playerToDTO(player)));
 
-		//TODO professors and currentPlayerTurn
-
-		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()) , "");
+		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()) , game.getCurrentPlayerNickname());
 	}
 }

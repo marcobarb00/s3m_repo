@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 public class GameStateMessage implements Notification{
 	GameDTO gameState;
 
-	public void setGameState(GameDTO gameState){
+	public GameStateMessage(GameDTO gameState){
 		this.gameState = gameState;
 	}
 

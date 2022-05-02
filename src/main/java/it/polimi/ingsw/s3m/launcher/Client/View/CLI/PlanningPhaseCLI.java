@@ -10,9 +10,11 @@ import java.util.Scanner;
 
 public class PlanningPhaseCLI implements MessageCLI{
 	ArrayList<AssistantCardDTO> playedAssistantCards;
-	int handSize;
+	ArrayList<AssistantCardDTO> hand;
 
 	public PlanningPhaseCLI(PlanningPhaseMessage planningPhaseMessage){
+		this.playedAssistantCards = planningPhaseMessage.getPlayedAssistantCards();
+		this.hand = planningPhaseMessage.getHand();
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class PlanningPhaseCLI implements MessageCLI{
 		}catch (Exception e){
 			cardChoice = -1;
 		}
-		while(cardChoice < 0 || cardChoice > handSize){
+		while(cardChoice < 0 || cardChoice > hand.size()){
 			System.out.println("invalid choice, please select a valid index of the card");
 			try{
 				cardChoice = Integer.parseInt(scanner.nextLine());

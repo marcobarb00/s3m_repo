@@ -1,13 +1,16 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
+import it.polimi.ingsw.s3m.launcher.Communication.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -17,6 +20,7 @@ public class Room {
     private final ArrayList<PlayerController> playersList;
     private boolean isStarted;
     private Game gameState;
+    private Mapper mapper = new Mapper();
 
     public Room(int roomID, int playersNumber, boolean expertMode) {
         this.roomID = roomID;
@@ -97,7 +101,15 @@ public class Room {
     }
 
     void planningPhase(PlayerController player){
+        GameDTO gameDTO = mapper.gameToDTO(gameState);
+        player.communicateWithClient(new GameStateMessage(gameDTO));
 
+        PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage();
+        ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
+        planningPhaseMessage.setPlayedAssistantCards(playedCards);
+        ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
+        planningPhaseMessage.setHand(handDTO);
+        player.communicateWithClient(planningPhaseMessage);
     }
 
     void actionPhase(PlayerController player){
