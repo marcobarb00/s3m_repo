@@ -47,7 +47,7 @@ public class ActivateJesterEffectOperation extends Operation{
         boolean checkRequired = requiredStudents.size() == 3;
         boolean checkGiven = givenStudents.size() == 3;
         if(!(checkGiven && checkRequired)){
-            new IllegalArgumentException("Must exchange only 3 students");
+            new IllegalArgumentException("Incorrect exchange students value");
         }
 
         //Search students on card

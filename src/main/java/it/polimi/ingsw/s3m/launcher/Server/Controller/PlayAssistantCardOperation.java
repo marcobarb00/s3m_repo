@@ -7,6 +7,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;
 
+//Done
 public class PlayAssistantCardOperation extends Operation{
     private int assistantCardPosition;
 
@@ -17,9 +18,7 @@ public class PlayAssistantCardOperation extends Operation{
 
     @Override
     public void executeOperation() throws PlayerNotInListException, NotExpertModeException {
-        ArrayList<String> playersList = super.game.getPlayersNicknames();
-
-        boolean playerControllerInList = playersList.contains(playerController.getNickname());
+        boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
@@ -28,7 +27,7 @@ public class PlayAssistantCardOperation extends Operation{
         boolean checkAssistantCard = 0 <= assistantCardPosition && assistantCardPosition < hand.size();
 
         if(!checkAssistantCard){
-            throw new IllegalArgumentException("Card not in list");
+            throw new IllegalArgumentException("Incorrect card position value");
         }
 
         super.game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
