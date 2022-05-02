@@ -3,12 +3,13 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import java.util.HashMap;
 
 public class StandardComputeDominance implements ComputeDominanceStrategy {
-    HashMap<Player, Integer> playersInfluence = new HashMap<>();
 
     @Override
     public Player computeDominance(Island island, HashMap<PawnColor, Player> professors) {
-        int maxInfluence = 0;
+        HashMap<Player, Integer> playersInfluence = new HashMap<>();
         Player dominatingPlayer = null;
+        int maxInfluence = 0;
+
         for (Player player : professors.values()) {
             if (player != null)
                 playersInfluence.putIfAbsent(player, 0);

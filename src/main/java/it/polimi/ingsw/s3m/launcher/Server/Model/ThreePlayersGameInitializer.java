@@ -10,7 +10,7 @@ public class ThreePlayersGameInitializer extends GameInitializer {
         super(game);
         playersSetup(playersNicknames);
         dashboardsSetup();
-        studentsInHallSetup();
+        studentsInEntranceSetup();
         cloudsSetup();
         islandsSetup();
     }
@@ -33,7 +33,7 @@ public class ThreePlayersGameInitializer extends GameInitializer {
     }
 
     @Override
-    public void studentsInHallSetup() {
+    public void studentsInEntranceSetup() {
         for (Player player : game.getPlayerHashMap().values()) {
             ArrayList<Student> enteringHallStudents = new ArrayList<>();
             for (int j = 0; j < 9; j++) {
