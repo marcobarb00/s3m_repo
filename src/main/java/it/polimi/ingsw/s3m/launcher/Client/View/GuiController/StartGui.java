@@ -3,11 +3,10 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
-public class StartGui extends Application {
+class StartGui extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ControllerGui instance = ControllerGui.getInstance();
+        ControllerGui instance = (ControllerGui) ControllerGui.getInstance();
         instance.startGame(primaryStage);
     }
 
