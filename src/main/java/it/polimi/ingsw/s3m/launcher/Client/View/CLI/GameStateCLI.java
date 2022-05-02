@@ -35,7 +35,10 @@ public class GameStateCLI implements MessageCLI{
 			printAssistantCard(hand.get(i));
 		}
 
-		//TODO print last played assistant card
+		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getPlayedAssistantCardsList();
+		for(int i = 0; i < playedAssistantCards.size(); i++){
+			printAssistantCard(playedAssistantCards.get(i));
+		}
 
 		return null;
 	}
