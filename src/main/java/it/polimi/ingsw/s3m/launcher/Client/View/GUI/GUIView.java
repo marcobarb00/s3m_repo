@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
+import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 
 public class GUIView extends View{
