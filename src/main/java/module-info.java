@@ -1,4 +1,4 @@
-module it.polimi.ingsw.s3m.launcher {
+module it.polimi.ingsw.s3m.launcher{
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;

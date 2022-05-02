@@ -17,7 +17,7 @@ public class PlayAssistantCardOperation extends Operation{
     }
 
     @Override
-    public void executeOperation() throws PlayerNotInListException, NotExpertModeException {
+    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException {
         boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
             throw new PlayerNotInListException();

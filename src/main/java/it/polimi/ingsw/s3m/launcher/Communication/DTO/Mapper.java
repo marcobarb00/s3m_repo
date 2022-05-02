@@ -25,7 +25,7 @@ public class Mapper{
 
 	public DashboardDTO dashboardToDTO(Dashboard dashboard){
 		HashMap<String, Integer> entrance = new HashMap<>();
-		dashboard.getTables().forEach((color, value) -> entrance.put(color.name(), value));
+		dashboard.getEntrance().forEach((color, value) -> entrance.put(color.name(), value));
 
 		HashMap<String, Integer> tables = new HashMap<>();
 		dashboard.getTables().forEach((color, value) -> tables.put(color.name(), value));
@@ -114,6 +114,6 @@ public class Mapper{
 		HashMap<String, PlayerDTO> professors = new HashMap<>();
 		game.getProfessorsHashMap().forEach((color, player) -> professors.put(color.name(), playerToDTO(player)));
 
-		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()) , game.getCurrentPlayerNickname());
+		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()) , assistantCardListToDTO(game.getPlayedAssistantCardsList()), game.getCurrentPlayerNickname());
 	}
 }

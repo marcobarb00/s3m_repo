@@ -19,12 +19,20 @@ public class PlanningPhaseCLI implements MessageCLI{
 
 	@Override
 	public Message execute(){
-		System.out.println("cards played by the other players");
-		for(AssistantCardDTO assistantCard : playedAssistantCards){
-			printAssistantCard(assistantCard);
+		if(playedAssistantCards.size() != 0){
+			System.out.println("\ncards played by the other players:");
+			for(AssistantCardDTO assistantCard : playedAssistantCards){
+				printAssistantCard(assistantCard);
+			}
 		}
 
-		System.out.println("select the index of the assistant card you want to play");
+		System.out.println("\nyour hand:");
+		for(int i = 0; i < hand.size(); i++){
+			System.out.println("index: " + i);
+			printAssistantCard(hand.get(i));
+		}
+
+		System.out.println("\nselect the index of the assistant card you want to play");
 		Scanner scanner = new Scanner(System.in);
 		int cardChoice;
 		try{
@@ -33,7 +41,7 @@ public class PlanningPhaseCLI implements MessageCLI{
 			cardChoice = -1;
 		}
 		while(cardChoice < 0 || cardChoice > hand.size()){
-			System.out.println("invalid choice, please select a valid index of the card");
+			System.out.println("\ninvalid choice, please select a valid index of the card");
 			try{
 				cardChoice = Integer.parseInt(scanner.nextLine());
 			}catch (Exception e){
@@ -47,8 +55,6 @@ public class PlanningPhaseCLI implements MessageCLI{
 	}
 
 	private void printAssistantCard(AssistantCardDTO assistantCard){
-		System.out.println("name: " + assistantCard.getType());
-		System.out.println("value: " + assistantCard.getValue());
-		System.out.println("movements: " + assistantCard.getMovements());
+		System.out.println("name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
 	}
 }

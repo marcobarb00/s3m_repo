@@ -23,19 +23,11 @@ public class GameStateCLI implements MessageCLI{
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
 
 		System.out.println("\ndashboards:");
-		gameState.getPlayers().forEach((k, v) -> {
-			System.out.println(k + "'s dashboard:");
-			printDashboard(v.getDashboard());
+		gameState.getPlayers().forEach((nickname, player) -> {
+			System.out.println("\n" + nickname + "'s dashboard:");
+			printDashboard(player.getDashboard());
 		});
 
-		System.out.println("\nyour hand:");
-		ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(gameState.getCurrentPlayerTurn()).getHand();
-		for(int i = 0; i < hand.size(); i++){
-			System.out.println("index: " + i);
-			printAssistantCard(hand.get(i));
-		}
-
-		//TODO print last played assistant card
 
 		return null;
 	}
@@ -63,9 +55,5 @@ public class GameStateCLI implements MessageCLI{
 		System.out.println(students);
 
 		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left");
-	}
-
-	private void printAssistantCard(AssistantCardDTO assistantCard){
-		System.out.println("name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
 	}
 }
