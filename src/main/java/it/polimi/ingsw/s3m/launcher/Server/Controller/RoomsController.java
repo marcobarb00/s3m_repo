@@ -84,7 +84,7 @@ public class RoomsController{
                 player.communicateWithClient(notification);
                 successful = true;
 
-                player.setNickname(enterRoomMessageInfo.getNickname());
+                player.setNickname(enterRoomMessageResult.getNickname());
                 player.setRoomID(roomID);
                 rooms.get(roomID).addPlayer(player);
             }

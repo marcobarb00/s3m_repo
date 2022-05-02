@@ -1,8 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class IslandDTO{
+public class IslandDTO implements Serializable{
 	private HashMap<String,Integer> students;
 	private String dominatorColor;
 	private int numberOfTowers;

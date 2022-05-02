@@ -1,9 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameDTO{
+public class GameDTO implements Serializable{
 	private boolean expertMode;
 	private int motherNaturePosition;
 	private HashMap<String, PlayerDTO> players;

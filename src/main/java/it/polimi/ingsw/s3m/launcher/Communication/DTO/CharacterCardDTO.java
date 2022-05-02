@@ -1,6 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
-public class CharacterCardDTO{
+import java.io.Serializable;
+
+public class CharacterCardDTO implements Serializable{
 	private String name;
 	private int cost;
 

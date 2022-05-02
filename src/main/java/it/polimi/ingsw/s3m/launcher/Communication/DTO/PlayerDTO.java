@@ -1,8 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayerDTO{
+public class PlayerDTO implements Serializable{
 	private String nickname;
 	private String color;
 	private DashboardDTO dashboard;

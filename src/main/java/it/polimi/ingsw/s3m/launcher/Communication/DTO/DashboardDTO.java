@@ -1,9 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DashboardDTO{
+public class DashboardDTO implements Serializable{
 	private HashMap<String, Integer> entrance;
 	private HashMap<String, Integer> tables;
 	private int numberOfTowers;

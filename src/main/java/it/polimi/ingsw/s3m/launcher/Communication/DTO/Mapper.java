@@ -34,6 +34,9 @@ public class Mapper{
 	}
 
 	public PlayerDTO playerToDTO(Player player){
+		if(player == null){
+			return new PlayerDTO("", "", null, null, null);
+		}
 		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()), assistantCardListToDTO(player.getHand()), assistantCardToDTO(player.getLastCardPlayed()));
 	}
 
@@ -59,6 +62,9 @@ public class Mapper{
 			students.put(color.name(), island.getStudents().get(color));
 		}
 
+		if(island.getDominator() == null){
+			return new IslandDTO(students, "", 0);
+		}
 		return new IslandDTO(students, island.getDominator().getColor().name(), island.getNumberOfTowers());
 	}
 
