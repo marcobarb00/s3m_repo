@@ -1,13 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
 import it.polimi.ingsw.s3m.launcher.Communication.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameStateCLI implements MessageCLI{
 	GameDTO gameState;
@@ -18,19 +16,19 @@ public class GameStateCLI implements MessageCLI{
 
 	@Override
 	public Message execute(){
-		System.out.println("islands:");
+		System.out.println("\nislands:");
 		System.out.println("WIP");
 
-		System.out.println("professors:");
-		gameState.getProfessors().forEach((k, v) -> System.out.println(k + ": " + v));
+		System.out.println("\nprofessors:");
+		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
 
-		System.out.println("dashboards");
+		System.out.println("\ndashboards:");
 		gameState.getPlayers().forEach((k, v) -> {
 			System.out.println(k + "'s dashboard:");
 			printDashboard(v.getDashboard());
 		});
 
-		System.out.println("your hand");
+		System.out.println("\nyour hand:");
 		ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(gameState.getCurrentPlayerTurn()).getHand();
 		for(int i = 0; i < hand.size(); i++){
 			System.out.println("index: " + i);
@@ -46,18 +44,28 @@ public class GameStateCLI implements MessageCLI{
 	}
 
 	private void printDashboard(DashboardDTO dashboard){
-		System.out.println("entrance");
-		dashboard.getEntrance().forEach((k, v) -> System.out.println(k + ": " + v));
+		StringBuilder students;
 
-		System.out.println("hall");
-		dashboard.getTables().forEach((k, v) -> System.out.println(k + ": " + v));
+		System.out.println("\nentrance:");
+		HashMap<String, Integer> entrance = dashboard.getEntrance();
+		students = new StringBuilder();
+		for(String color : entrance.keySet()){
+			students.append(color).append(": ").append(entrance.get(color)).append(" ");
+		}
+		System.out.println(students);
 
-		System.out.println("you have " + dashboard.getNumberOfTowers() + " towers left");
+		System.out.println("\nhall:");
+		HashMap<String, Integer> hall = dashboard.getTables();
+		students = new StringBuilder();
+		for(String color : hall.keySet()){
+			students.append(color).append(": ").append(hall.get(color)).append(" ");
+		}
+		System.out.println(students);
+
+		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left");
 	}
 
 	private void printAssistantCard(AssistantCardDTO assistantCard){
-		System.out.println("name: " + assistantCard.getType());
-		System.out.println("value: " + assistantCard.getValue());
-		System.out.println("movements: " + assistantCard.getMovements());
+		System.out.println("name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
 	}
 }

@@ -25,20 +25,23 @@ public class RoomsController{
 
     public void login(PlayerController player){
         Runnable login = () -> {
-            LoginMessage loginMessage = new LoginMessage();
-            loginMessage.setNumberOfRooms(rooms.size());
-            LoginMessage loginResponse = (LoginMessage) player.communicateWithClient(loginMessage);
+            boolean successful = false;
+            do{
+                LoginMessage loginMessage = new LoginMessage();
+                loginMessage.setNumberOfRooms(rooms.size());
+                LoginMessage loginResponse = (LoginMessage) player.communicateWithClient(loginMessage);
 
-            if(loginResponse.isNewRoom()){
-                newRoom(player);
-            }else{
-                enterRoom(player);
-            }
+                if(loginResponse.isNewRoom()){
+                    successful = newRoom(player);
+                }else{
+                    successful = enterRoom(player);
+                }
+            }while(!successful);
         };
         new Thread(login).start();
     }
 
-    public synchronized void newRoom(PlayerController player){
+    public synchronized boolean newRoom(PlayerController player){
         NewRoomMessage newRoomMessageInfo = (NewRoomMessage) player.communicateWithClient(new NewRoomMessage());
 
         int roomID;
@@ -55,40 +58,47 @@ public class RoomsController{
         Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers(), newRoomMessageInfo.isExpertMode());
         newRoom.addPlayer(player);
         rooms.put(roomID, newRoom);
+        return true;
     }
 
-    public synchronized void enterRoom(PlayerController player){
-        boolean successful = false;
-        do{
-            EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
-            enterRoomMessageInfo.setAvailableRoomsID(new ArrayList<>(rooms.keySet()));
-            EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.communicateWithClient(enterRoomMessageInfo);
+    public synchronized boolean enterRoom(PlayerController player){
+        NotificationMessage notification = new NotificationMessage();
+        if(rooms.isEmpty()){
+            notification.setMessage("there are no rooms to join in");
+            player.communicateWithClient(notification);
+            return false;
+        }
 
-            Integer roomID = enterRoomMessageResult.getRoomID();
+        EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
+        enterRoomMessageInfo.setAvailableRoomsID(new ArrayList<>(rooms.keySet()));
+        EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.communicateWithClient(enterRoomMessageInfo);
 
-            NotificationMessage notification = new NotificationMessage();
-            if(!rooms.containsKey(roomID)){
-                notification.setMessage("there is no room with ID: " + roomID);
-                player.communicateWithClient(notification);
-            }
-            else if(rooms.get(roomID).isFull()){
-                notification.setMessage("the room is already full");
-                player.communicateWithClient(notification);
-            }
-            else if(!rooms.get(roomID).isAllowedName(enterRoomMessageResult.getNickname())){
-                notification.setMessage("there is another player with that nickname in the room");
-                player.communicateWithClient(notification);
-            }
-            else{
-                notification.setMessage("entered in the room successfully");
-                player.communicateWithClient(notification);
-                successful = true;
+        Integer roomID = enterRoomMessageResult.getRoomID();
 
-                player.setNickname(enterRoomMessageResult.getNickname());
-                player.setRoomID(roomID);
-                rooms.get(roomID).addPlayer(player);
-            }
-        }while(!successful);
+        if(!rooms.containsKey(roomID)){
+            notification.setMessage("there is no room with ID: " + roomID);
+            player.communicateWithClient(notification);
+            return false;
+        }
+        else if(rooms.get(roomID).isFull()){
+            notification.setMessage("the room is already full");
+            player.communicateWithClient(notification);
+            return false;
+        }
+        else if(!rooms.get(roomID).isAllowedName(enterRoomMessageResult.getNickname())){
+            notification.setMessage("there is another player with that nickname in the room");
+            player.communicateWithClient(notification);
+            return false;
+        }
+        else{
+            notification.setMessage("entered in the room successfully");
+            player.communicateWithClient(notification);
+
+            player.setNickname(enterRoomMessageResult.getNickname());
+            player.setRoomID(roomID);
+            rooms.get(roomID).addPlayer(player);
+            return true;
+        }
     }
 
     public synchronized void deleteRoom(Integer roomID, PlayerController player){

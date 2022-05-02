@@ -20,7 +20,7 @@ public class NewRoomCLI implements MessageCLI{
 
 	@Override
 	public Message execute(){
-		System.out.println("please insert the number of players in your room (2 or 3)");
+		System.out.println("\nplease insert the number of players in your room (2 or 3)");
 		Scanner scanner = new Scanner(System.in);
 		int numbersOfPlayers;
 		try{
@@ -29,7 +29,7 @@ public class NewRoomCLI implements MessageCLI{
 			numbersOfPlayers = 0;
 		}
 		while(numbersOfPlayers != 2 && numbersOfPlayers != 3){
-			System.out.println("you inserted an invalid input");
+			System.out.println("\nyou inserted an invalid input");
 			try{
 				numbersOfPlayers = Integer.parseInt(scanner.nextLine());
 			}catch(Exception e){
@@ -37,16 +37,16 @@ public class NewRoomCLI implements MessageCLI{
 			}
 		}
 
-		System.out.println("do you want to play expert mode? Y/N");
+		System.out.println("\ndo you want to play expert mode? Y/N");
 		String expertModeChoice = scanner.nextLine();
 		while(!expertModeChoice.equalsIgnoreCase("Y") && !expertModeChoice.equalsIgnoreCase("N")){
-			System.out.println("you inserted an invalid input");
+			System.out.println("\nyou inserted an invalid input");
 			expertModeChoice = scanner.nextLine();
 		}
 
 		boolean expertChoice = expertModeChoice.equalsIgnoreCase("Y");
 
-		System.out.println("please insert your nickname");
+		System.out.println("\nplease insert your nickname");
 		String nickname = scanner.nextLine();
 
 		NewRoomMessage newRoomInfo = new NewRoomMessage();

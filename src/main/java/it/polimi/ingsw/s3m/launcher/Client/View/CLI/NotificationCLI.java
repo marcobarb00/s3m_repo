@@ -12,7 +12,7 @@ public class NotificationCLI implements MessageCLI{
 
 	@Override
 	public Message execute(){
-		System.out.println(message);
+		System.out.println("\n" + message);
 		return null;
 	}
 }

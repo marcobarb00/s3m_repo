@@ -19,13 +19,8 @@ public class LoginCLI implements MessageCLI{
 	@Override
 	public Message execute(){
 		LoginMessage loginInfo = new LoginMessage();
-		if(numberOfAvailableRooms == 0){
-			System.out.println("there are no rooms available, create a new room!");
-			loginInfo.setNewRoom(true);
-			return loginInfo;
-		}
 
-		System.out.println("do you want to create a new room or join an existing one?" +
+		System.out.println("\ndo you want to create a new room or join an existing one?" +
 				"\n1) create a new room" +
 				"\n2) join an existing room");
 
@@ -38,7 +33,7 @@ public class LoginCLI implements MessageCLI{
 			choiceRoom = 0;
 		}
 		while(choiceRoom != 1 && choiceRoom != 2){
-			System.out.println("invalid choice, please press press 1 or 2 to choose");
+			System.out.println("\ninvalid choice, please press press 1 or 2 to choose");
 			try{
 				choiceRoom = Integer.parseInt(scanner.nextLine());
 			}catch (Exception e){
@@ -46,12 +41,7 @@ public class LoginCLI implements MessageCLI{
 			}
 		}
 
-		if(choiceRoom == 1){
-			loginInfo.setNewRoom(true);
-			return loginInfo;
-		}else{
-			loginInfo.setNewRoom(false);
-			return loginInfo;
-		}
+		loginInfo.setNewRoom(choiceRoom == 1);
+		return loginInfo;
 	}
 }
