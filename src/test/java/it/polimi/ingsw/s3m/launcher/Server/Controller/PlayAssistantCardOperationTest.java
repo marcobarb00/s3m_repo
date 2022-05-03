@@ -20,7 +20,6 @@ class PlayAssistantCardOperationTest {
     void executeOperation() {
         ArrayList<String> playerList = new ArrayList<>(Arrays.asList("paolo","nino"));
         Game game = new Game(playerList,false);
-        ArrayList<AssistantCard> hand = game.getPlayerHand("paolo");
         PlayerController playerController = new PlayerController(new ClientHandler(new Socket()));
 
         //PlayerNotInListException
@@ -38,7 +37,6 @@ class PlayAssistantCardOperationTest {
         Operation operation3 = new PlayAssistantCardOperation(game, playerController, 11);
         e = assertThrows(Exception.class,() -> operation3.executeOperation());
         assertEquals("Incorrect card position value", e.getMessage());
-
     }
 
 }
