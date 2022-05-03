@@ -105,11 +105,11 @@ public class Game {
 
     // ISLAND
 
-    public void mergePreviousIsland() {
+    public void mergePreviousIsland(Island mergingInIsland, Island mergingOutIsland) {
 
     }
 
-    public void mergeNextIsland() {
+    public void mergeNextIsland(Island mergingInIsland, Island mergingOutIsland) {
 
     }
 
@@ -230,7 +230,32 @@ public class Game {
     //TODO this method
     public void moveMotherNature(String playerNickname, int movement) {
         updateMotherNaturePosition(movement);
-        //computeDominanceStrategy.executeStrategy();
+        Island currentIsland = islandsList.get(motherNature.getCurrentPosition());
+
+        int currentIslandIndex = islandsList.indexOf(currentIsland);
+        Island previousIsland;
+        Island nextIsland;
+        if (currentIslandIndex == 0)
+            previousIsland = islandsList.get(islandsList.size()-1);
+        else
+            previousIsland = islandsList.get(currentIslandIndex-1);
+        if (currentIslandIndex == islandsList.size()-1)
+            nextIsland = islandsList.get(0);
+        else
+            nextIsland = islandsList.get(currentIslandIndex+1);
+
+        Player possibleDominator;
+        possibleDominator = computeDominanceStrategy.computeDominance(currentIsland, professorsHashMap);
+
+        if (!possibleDominator.equals(currentIsland.getDominator())) {
+                currentIsland.setDominator(possibleDominator);
+                if (possibleDominator.equals(nextIsland.getDominator()))
+                    mergeNextIsland(currentIsland, nextIsland);
+                if (possibleDominator.equals(previousIsland.getDominator()))
+                    mergePreviousIsland(currentIsland, previousIsland);
+        }
+
+        //TODO win condition if number of islands equals 3
     }
 
     public void playAssistantCard(String playerNickname, int position) {
