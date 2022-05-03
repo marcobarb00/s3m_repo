@@ -106,10 +106,18 @@ public class Game {
     // ISLAND
 
     public void mergePreviousIsland(Island mergingInIsland, Island mergingOutIsland) {
-
+        for (PawnColor color : PawnColor.values()) {
+            int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
+            mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
+        }
+        //TODO method to add towers in island and elimination of the mergingOutIsland
     }
 
     public void mergeNextIsland(Island mergingInIsland, Island mergingOutIsland) {
+        for (PawnColor color : PawnColor.values()) {
+            int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
+            mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
+        }
 
     }
 
@@ -227,7 +235,6 @@ public class Game {
         chosenPlayer.getDashboard().addStudentsInEntrance(chosenCloud.returnStudents());
     }
 
-    //TODO this method
     public void moveMotherNature(String playerNickname, int movement) {
         updateMotherNaturePosition(movement);
         Island currentIsland = islandsList.get(motherNature.getCurrentPosition());
