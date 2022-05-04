@@ -10,21 +10,24 @@ import java.util.Scanner;
 
 public class MoveStudentsPhaseCLI implements MessageCLI{
 	private ArrayList<CharacterCardDTO> characterCardDTOList;
-	private int expertMode;
+	private boolean expertMode;
+	private boolean characterCardActivated;
 
-	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
-
-	}
+	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){}
 
 	@Override
 	public Message execute(){
 		int studentsMoved = 0;
 
+		System.out.println("student allocation phase");
+
 		while(studentsMoved < 3){
-			System.out.println("student allocation phase" +
-					"\nchoose your operation:" +
-					"\n1) activate a character card" +
-					"\n2) move a student from the hall to the tables" +
+			System.out.println("choose your operation:");
+
+			if(expertMode)
+				System.out.println("1) activate a character card");
+
+			System.out.println("2) move a student from the hall to the tables" +
 					"\n3) move a student from the hall to an island");
 
 			Scanner scanner = new Scanner(System.in);
@@ -45,6 +48,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 			switch(operationChoice){
 				case 1:
+					chooseCharacterCard();
 					break;
 				case 2:
 					studentsMoved++;
@@ -57,5 +61,9 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 		}
 
 		return null;
+	}
+
+	public void chooseCharacterCard(){
+		characterCardActivated = true;
 	}
 }

@@ -18,6 +18,7 @@ public class GameStateCLI implements MessageCLI{
 	public Message execute(){
 		System.out.println("\nislands:");
 		System.out.println("WIP");
+		//TODO print islands
 
 		System.out.println("\nprofessors:");
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
@@ -27,7 +28,6 @@ public class GameStateCLI implements MessageCLI{
 			System.out.println("\n" + nickname + "'s dashboard:");
 			printDashboard(player.getDashboard());
 		});
-
 
 		return null;
 	}
