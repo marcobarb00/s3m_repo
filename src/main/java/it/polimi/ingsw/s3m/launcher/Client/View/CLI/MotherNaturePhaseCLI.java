@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MotherNaturePhaseMessage;
 
 public class MotherNaturePhaseCLI implements MessageCLI{
@@ -9,7 +10,7 @@ public class MotherNaturePhaseCLI implements MessageCLI{
 	}
 
 	@Override
-	public Message execute(){
+	public Response execute(){
 		System.out.println("movement phase" +
 				"\nchoose your operation:" +
 				"\n1) activate a character card" +

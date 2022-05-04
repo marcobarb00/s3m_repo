@@ -1,6 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.LoginResponse;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.NewRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NewRoomMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 
 import java.util.ArrayList;
@@ -24,8 +29,7 @@ public class RoomsController{
             boolean successful;
             do{
                 LoginMessage loginMessage = new LoginMessage();
-                loginMessage.setNumberOfRooms(rooms.size());
-                LoginMessage loginResponse = (LoginMessage) player.communicateWithClient(loginMessage);
+                LoginResponse loginResponse = (LoginResponse) player.communicateWithClient(loginMessage);
 
                 if(loginResponse.isNewRoom()){
                     successful = newRoom(player);
@@ -38,7 +42,7 @@ public class RoomsController{
     }
 
     private synchronized boolean newRoom(PlayerController player){
-        NewRoomMessage newRoomMessageInfo = (NewRoomMessage) player.communicateWithClient(new NewRoomMessage());
+        NewRoomResponse newRoomMessageInfo = (NewRoomResponse) player.communicateWithClient(new NewRoomMessage());
 
         int roomID;
         do{
@@ -69,7 +73,7 @@ public class RoomsController{
 
         EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
         enterRoomMessageInfo.setAvailableRoomsID(availableRoomIDs);
-        EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.communicateWithClient(enterRoomMessageInfo);
+        EnterRoomResponse enterRoomMessageResult = (EnterRoomResponse) player.communicateWithClient(enterRoomMessageInfo);
 
         Integer roomID = enterRoomMessageResult.getRoomID();
 

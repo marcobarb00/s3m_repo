@@ -1,7 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.EnterRoomMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class EnterRoomCLI implements MessageCLI{
     }
 
     @Override
-    public Message execute() {
+    public Response execute() {
         System.out.println("\nID's of rooms that are open");
 
         for(Integer roomID : availableRoomsID){
@@ -41,9 +42,6 @@ public class EnterRoomCLI implements MessageCLI{
         System.out.println("\nplease insert your nickname");
         String nickname = scanner.nextLine();
 
-        EnterRoomMessage enterRoomMessage = new EnterRoomMessage();
-        enterRoomMessage.setNickname(nickname);
-        enterRoomMessage.setRoomID(roomID);
-        return enterRoomMessage;
+        return new EnterRoomResponse(nickname, roomID);
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 
 public class PlayerController{
@@ -28,7 +29,7 @@ public class PlayerController{
 		this.roomID = roomID;
 	}
 
-	public Message communicateWithClient(Message message){
+	public Response communicateWithClient(Message message){
 		return client.communicateWithClient(message);
 	}
 

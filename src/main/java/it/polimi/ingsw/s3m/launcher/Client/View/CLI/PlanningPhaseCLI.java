@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
 
@@ -18,7 +19,7 @@ public class PlanningPhaseCLI implements MessageCLI{
 	}
 
 	@Override
-	public Message execute(){
+	public Response execute(){
 		if(playedAssistantCards.size() != 0){
 			System.out.println("\ncards played by the other players:");
 			for(AssistantCardDTO assistantCard : playedAssistantCards){

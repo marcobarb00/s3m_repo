@@ -1,10 +1,11 @@
-package it.polimi.ingsw.s3m.launcher.Communication;
+package it.polimi.ingsw.s3m.launcher.Server.Message;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 import java.util.ArrayList;
 
-public class EnterRoomMessage extends RoomMessage{
+public class EnterRoomMessage implements Message{
 	private ArrayList<Integer> availableRoomsID;
 
 	public ArrayList<Integer> getAvailableRoomsID() {
