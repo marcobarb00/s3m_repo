@@ -51,6 +51,10 @@ public class Dashboard {
         return earnCoins;
     }
 
+    // Towers
+    public void incrementTowers() { numberOfTowers++; }
+    public void decrementTowers() { numberOfTowers--; }
+
     // GETTER
     public HashMap<PawnColor, Integer> getEntrance() { return entrance; }
     public HashMap<PawnColor, Integer> getTables() { return tables; }

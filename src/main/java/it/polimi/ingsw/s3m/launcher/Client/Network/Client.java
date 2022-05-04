@@ -3,6 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Client.Network;
 import it.polimi.ingsw.s3m.launcher.Client.View.CLI.ClientCLI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.StartGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
 import javafx.application.Platform;
 
@@ -40,12 +41,12 @@ public class Client{
 	}
 
 	/**
-	 * sends a message to the server
-	 * @param message message to be sent
+	 * sends a response to the server
+	 * @param response response to be sent
 	 */
-	public void sendMessage(Message message){
+	public void sendResponse(Response response){
 		try{
-			outputStream.writeObject(message);
+			outputStream.writeObject(response);
 		}catch(IOException e){
 			e.printStackTrace();
 		}

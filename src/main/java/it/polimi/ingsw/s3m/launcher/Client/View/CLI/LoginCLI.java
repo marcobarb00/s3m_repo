@@ -1,24 +1,17 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.EnterRoomMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.LoginResponse;
+import it.polimi.ingsw.s3m.launcher.Server.Message.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Set;
 
 public class LoginCLI implements MessageCLI{
-	private int numberOfAvailableRooms;
-
-	LoginCLI(LoginMessage loginMessage){
-		this.numberOfAvailableRooms = loginMessage.getNumberOfRooms();
-	}
+	LoginCLI(LoginMessage loginMessage){}
 
 	@Override
-	public Message execute(){
-		LoginMessage loginInfo = new LoginMessage();
+	public Response execute(){
+		LoginResponse loginInfo = new LoginResponse();
 
 		System.out.println("\ndo you want to create a new room or join an existing one?" +
 				"\n1) create a new room" +

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
-import it.polimi.ingsw.s3m.launcher.Communication.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 
 public abstract class View{

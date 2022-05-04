@@ -1,6 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughIslandsException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.ZeroTowersRemainedException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -44,13 +47,11 @@ public class Game {
     // BAG
 
     public Student extractStudent() throws EmptyBagException {
-        if (bag.getTotalNumberOfStudents() <= 0) {
-            throw new EmptyBagException();
-        }
+        if (bag.getTotalNumberOfStudents() <= 0) throw new EmptyBagException();
+
         PawnColor extractedColor = extractColor();
-        while (bag.getStudents().get(extractedColor) == 0) {
+        while (bag.getStudents().get(extractedColor) == 0)
             extractedColor = extractColor();
-        }
         Student extractedStudent = new Student(extractedColor);
         bag.decrementStudentsColor(extractedStudent);
         return extractedStudent;
@@ -105,12 +106,34 @@ public class Game {
 
     // ISLAND
 
-    public void mergePreviousIsland(Island mergingInIsland, Island mergingOutIsland) {
-        for (PawnColor color : PawnColor.values()) {
-            int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
-            mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
-        }
-        //TODO method to add towers in island and elimination of the mergingOutIsland
+    public void samePlayerCheckInNextIsland (Island currentIsland) {
+        Player currentIslandDominator = currentIsland.getDominator();
+        int islandIndex = islandsList.indexOf(currentIsland);
+
+        Island nextIsland;
+        if (islandIndex == islandsList.size()-1)
+            nextIsland = islandsList.get(0);
+        else
+            nextIsland = islandsList.get(islandIndex+1);
+        Player nextIslandDominator = nextIsland.getDominator();
+
+        if (currentIslandDominator.equals(nextIslandDominator))
+            mergeNextIsland(currentIsland, nextIsland);
+    }
+
+    public void samePlayerCheckInPreviousIsland (Island currentIsland) {
+        Player currentIslandDominator = currentIsland.getDominator();
+        int islandIndex = islandsList.indexOf(currentIsland);
+
+        Island previousIsland;
+        if (islandIndex == 0)
+            previousIsland = islandsList.get(islandsList.size()-1);
+        else
+            previousIsland = islandsList.get(islandIndex-1);
+        Player previousIslandDominator = previousIsland.getDominator();
+
+        if (currentIslandDominator.equals(previousIslandDominator))
+            mergePreviousIsland(currentIsland, previousIsland);
     }
 
     public void mergeNextIsland(Island mergingInIsland, Island mergingOutIsland) {
@@ -118,7 +141,19 @@ public class Game {
             int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
             mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
         }
+        mergingInIsland.sumTower(mergingOutIsland.getNumberOfTowers());
 
+        islandsList.remove(mergingOutIsland);
+    }
+
+    public void mergePreviousIsland(Island mergingInIsland, Island mergingOutIsland) {
+        for (PawnColor color : PawnColor.values()) {
+            int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
+            mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
+        }
+        mergingInIsland.sumTower(mergingOutIsland.getNumberOfTowers());
+
+        islandsList.remove(mergingOutIsland);
     }
 
     // JESTER
@@ -235,34 +270,37 @@ public class Game {
         chosenPlayer.getDashboard().addStudentsInEntrance(chosenCloud.returnStudents());
     }
 
-    public void moveMotherNature(String playerNickname, int movement) {
+    public void moveMotherNature(int movement) throws NotEnoughIslandsException, ZeroTowersRemainedException {
         updateMotherNaturePosition(movement);
+
         Island currentIsland = islandsList.get(motherNature.getCurrentPosition());
+        Player currentPlayer = currentIsland.getDominator();
 
-        int currentIslandIndex = islandsList.indexOf(currentIsland);
-        Island previousIsland;
-        Island nextIsland;
-        if (currentIslandIndex == 0)
-            previousIsland = islandsList.get(islandsList.size()-1);
-        else
-            previousIsland = islandsList.get(currentIslandIndex-1);
-        if (currentIslandIndex == islandsList.size()-1)
-            nextIsland = islandsList.get(0);
-        else
-            nextIsland = islandsList.get(currentIslandIndex+1);
+        Player newDominatingPlayer = computeDominanceStrategy.computeDominance(currentIsland, professorsHashMap);
 
-        Player possibleDominator;
-        possibleDominator = computeDominanceStrategy.computeDominance(currentIsland, professorsHashMap);
+        if (newDominatingPlayer != null) {
+            if (currentPlayer == null) {
+                currentIsland.setDominator(newDominatingPlayer);
+                currentIsland.addTower();
+                newDominatingPlayer.getDashboard().decrementTowers();
+                if (newDominatingPlayer.getDashboard().getNumberOfTowers() == 0)
+                    throw new ZeroTowersRemainedException();
+            } else if (!newDominatingPlayer.equals(currentPlayer)) {
+                int islandTowers = currentIsland.getNumberOfTowers();
+                for (int i = 0; i < islandTowers; i++) {
+                    currentPlayer.getDashboard().incrementTowers();
+                    newDominatingPlayer.getDashboard().decrementTowers();
+                    if (newDominatingPlayer.getDashboard().getNumberOfTowers() == 0)
+                        throw new ZeroTowersRemainedException();
+                }
+                currentIsland.setDominator(newDominatingPlayer);
 
-        if (!possibleDominator.equals(currentIsland.getDominator())) {
-                currentIsland.setDominator(possibleDominator);
-                if (possibleDominator.equals(nextIsland.getDominator()))
-                    mergeNextIsland(currentIsland, nextIsland);
-                if (possibleDominator.equals(previousIsland.getDominator()))
-                    mergePreviousIsland(currentIsland, previousIsland);
+                samePlayerCheckInNextIsland(currentIsland);
+                samePlayerCheckInPreviousIsland(currentIsland);
+            }
         }
 
-        //TODO win condition if number of islands equals 3
+        if (islandsList.size() <= 3) throw new NotEnoughIslandsException();
     }
 
     public void playAssistantCard(String playerNickname, int position) {
