@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Notification;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;
@@ -16,7 +17,7 @@ public class ClientHandler implements Runnable{
 
     private PlayerController playerController;
     private Message messageToSend;
-    private Message messageReceived;
+    private Response response;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -62,10 +63,6 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public Message readInputStream() throws IOException, ClassNotFoundException{
-        return (Message) objectInputStream.readObject();
-    }
-
     public synchronized void sendMessage() throws IOException, ClassNotFoundException{
         while(messageToSend == null){
             try{
@@ -76,16 +73,16 @@ public class ClientHandler implements Runnable{
         }
         if(messageToSend instanceof Notification){
             writeOutputStream(messageToSend);
-            messageReceived = null;
+            response = null;
         }else{
             writeOutputStream(messageToSend);
-            messageReceived = readInputStream();
+            response = (Response) objectInputStream.readObject();
         }
         messageToSend = null;
         notifyAll();
     }
 
-    public synchronized Message communicateWithClient(Message message){
+    public synchronized Response communicateWithClient(Message message){
         while (messageToSend != null) {
             try {
                 wait();
@@ -98,15 +95,15 @@ public class ClientHandler implements Runnable{
         if(message instanceof Notification){
             return null;
         }else{
-            while(messageReceived == null){
+            while(response == null){
                 try{
                     wait();
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }
             }
-            Message temp = messageReceived;
-            messageReceived = null;
+            Response temp = response;
+            response = null;
             return temp;
         }
     }

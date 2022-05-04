@@ -1,9 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
@@ -17,7 +18,6 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Room {
-    private final int roomID;
     private final int playersNumber;
     private final boolean expertMode;
     private final ArrayList<PlayerController> playersList;
@@ -25,19 +25,10 @@ public class Room {
     private Game gameState;
     private final Mapper mapper = new Mapper();
 
-    public Room(int roomID, int playersNumber, boolean expertMode) {
-        this.roomID = roomID;
+    public Room(int playersNumber, boolean expertMode) {
         this.playersNumber = playersNumber;
         this.expertMode = expertMode;
         this.playersList = new ArrayList<>();
-    }
-
-    public int getRoomID(){
-        return roomID;
-    }
-
-    public ArrayList<PlayerController> getPlayersList(){
-        return playersList;
     }
 
     public synchronized boolean isFull(){
@@ -88,7 +79,11 @@ public class Room {
             //TODO call the method to calculate who's starting
 
             for(int i = 0; i < playersNumber; i++){
-                planningPhase(playersList.get(i));
+                PlayerController currentPlayer = playersList.get(i);
+                sendNotificationToPlayer(currentPlayer, "it's your turn");
+                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn");
+                sendGameState(currentPlayer);
+                planningPhase(currentPlayer);
             }
 
             //TODO call method to calculate player's turn
@@ -110,16 +105,16 @@ public class Room {
     }
 
     private void planningPhase(PlayerController player){
-        sendGameState(player);
-
-        PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage();
         ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
-        planningPhaseMessage.setPlayedAssistantCards(playedCards);
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
-        planningPhaseMessage.setHand(handDTO);
-        PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) player.communicateWithClient(planningPhaseMessage);
-        //TODO check if it really is a playAssistantCardMessage???
+        PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(playedCards, handDTO);
+        Response response = player.communicateWithClient(planningPhaseMessage);
+        while(!(response instanceof PlayAssistantCardResponse)){
+            sendNotificationToPlayer(player, "the operation received is not the correct type");
+            response = player.communicateWithClient(planningPhaseMessage);
+        }
 
+        PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) response;
         PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
         try{
             playAssistantCardOperation.executeOperation();
@@ -143,9 +138,12 @@ public class Room {
         sendNotificationToAllButOne(player, "someone left, the room is being deleted");
     }
 
+    public void sendNotificationToPlayer(PlayerController player, String message){
+        player.communicateWithClient(new NotificationMessage(message));
+    }
+
     private void sendNotificationToAllButOne(PlayerController one, String message){
-        NotificationMessage notification = new NotificationMessage();
-        notification.setMessage(message);
+        NotificationMessage notification = new NotificationMessage(message);
 
         ArrayList<PlayerController> allButOne = new ArrayList<>(playersList);
         allButOne.remove(one);
@@ -155,8 +153,7 @@ public class Room {
     }
 
     private void sendNotificationToAll(String message){
-        NotificationMessage notification = new NotificationMessage();
-        notification.setMessage(message);
+        NotificationMessage notification = new NotificationMessage(message);
         for(PlayerController player : playersList){
             player.communicateWithClient(notification);
         }

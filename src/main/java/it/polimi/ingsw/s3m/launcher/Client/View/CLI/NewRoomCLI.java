@@ -1,25 +1,17 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.NewRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NewRoomMessage;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
 import java.util.Scanner;
 
 public class NewRoomCLI implements MessageCLI{
-	private String nickname;
-	private Integer roomID;
-	private int numberOfPlayers;
-	private String message;
 
-	public NewRoomCLI(NewRoomMessage newRoomMessage){
-		this.nickname = newRoomMessage.getNickname();
-		this.roomID = newRoomMessage.getRoomID();
-		this.numberOfPlayers = newRoomMessage.getNumberOfPlayers();
-		this.message = newRoomMessage.getMessage();
-	}
+	public NewRoomCLI(NewRoomMessage newRoomMessage){}
 
 	@Override
-	public Message execute(){
+	public Response execute(){
 		System.out.println("\nplease insert the number of players in your room (2 or 3)");
 		Scanner scanner = new Scanner(System.in);
 		int numbersOfPlayers;
@@ -49,10 +41,6 @@ public class NewRoomCLI implements MessageCLI{
 		System.out.println("\nplease insert your nickname");
 		String nickname = scanner.nextLine();
 
-		NewRoomMessage newRoomInfo = new NewRoomMessage();
-		newRoomInfo.setNickname(nickname);
-		newRoomInfo.setNumberOfPlayers(numbersOfPlayers);
-		newRoomInfo.setExpertMode(expertChoice);
-		return newRoomInfo;
+		return new NewRoomResponse(nickname, numbersOfPlayers, expertChoice);
 	}
 }

@@ -10,6 +10,11 @@ public class PlanningPhaseMessage implements Message{
 	ArrayList<AssistantCardDTO> playedAssistantCards;
 	ArrayList<AssistantCardDTO> hand;
 
+	public PlanningPhaseMessage(ArrayList<AssistantCardDTO> playedAssistantCards, ArrayList<AssistantCardDTO> hand){
+		this.playedAssistantCards = playedAssistantCards;
+		this.hand = hand;
+	}
+
 	public void setPlayedAssistantCards(ArrayList<AssistantCardDTO> playedAssistantCards){
 		this.playedAssistantCards = playedAssistantCards;
 	}

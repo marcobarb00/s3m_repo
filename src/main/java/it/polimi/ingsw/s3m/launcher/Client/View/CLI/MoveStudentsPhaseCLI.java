@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
 
@@ -23,7 +24,9 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	}
 
 	@Override
-	public Message execute(){
+
+	public Response execute(){
+		int studentsMoved = 0;
 
 		System.out.println("student allocation phase");
 

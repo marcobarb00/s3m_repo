@@ -1,7 +1,7 @@
-package it.polimi.ingsw.s3m.launcher.Client.View.Response;
+package it.polimi.ingsw.s3m.launcher.Client.Response;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.Operation;
 
 public class PlayAssistantCardResponse implements Response{
 	private int cardChosen;
@@ -12,10 +12,5 @@ public class PlayAssistantCardResponse implements Response{
 
 	public int getCardChosen(){
 		return cardChosen;
-	}
-
-	@Override
-	public void apply(View view){
-
 	}
 }

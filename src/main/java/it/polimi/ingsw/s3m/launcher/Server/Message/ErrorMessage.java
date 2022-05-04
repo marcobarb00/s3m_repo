@@ -1,12 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Server.Message;
-
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
-import it.polimi.ingsw.s3m.launcher.Communication.Notification;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
-public class NotificationMessage implements Notification{
+public class ErrorMessage implements Message{
 	private String message;
 
-	public NotificationMessage(String message){
+	public ErrorMessage(String message){
 		this.message = message;
 	}
 
@@ -16,6 +15,6 @@ public class NotificationMessage implements Notification{
 
 	@Override
 	public void apply(View view){
-		view.notification(this);
+
 	}
 }
