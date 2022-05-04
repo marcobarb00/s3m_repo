@@ -65,7 +65,7 @@ class ActivateJesterEffectOperationTest {
         assertEquals("Not in expert mode", e.getMessage());
     }
 
-    private  void playerNotInListException(ArrayList<String> playerList, PlayerController playerController,
+    private void playerNotInListException(ArrayList<String> playerList, PlayerController playerController,
                                            ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
         Game game = new Game(playerList,true);
         playerController.setNickname("giovanni");
@@ -83,7 +83,8 @@ class ActivateJesterEffectOperationTest {
         Game game = new Game(playerList,true);
         Operation operation = new ActivateJesterEffectOperation(game, playerController,
                 requiredStudents, givenStudents);
-        Exception e = assertThrows(IllegalArgumentException.class,() -> operation.executeOperation());
+        Exception e = assertThrows(IllegalArgumentException.class,
+                () -> operation.executeOperation());
         assertEquals("Incorrect exchange students value", e.getMessage());
     }
     private void notStudentsOnJester(ArrayList<String> playerList, PlayerController playerController,
@@ -93,7 +94,8 @@ class ActivateJesterEffectOperationTest {
         Game game = new Game(playerList,true);
         Operation operation = new ActivateJesterEffectOperation(game, playerController,
                 requiredStudents, givenStudents);
-        Exception e = assertThrows(IllegalArgumentException.class,() -> operation.executeOperation());
+        Exception e = assertThrows(IllegalArgumentException.class,
+                () -> operation.executeOperation());
         assertEquals("Not enough students on jester card", e.getMessage());
     }
 }

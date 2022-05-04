@@ -118,7 +118,7 @@ public class Game {
         Player nextIslandDominator = nextIsland.getDominator();
 
         if (currentIslandDominator.equals(nextIslandDominator))
-            mergeNextIsland(currentIsland, nextIsland);
+            mergeIsland(currentIsland, nextIsland);
     }
 
     public void samePlayerCheckInPreviousIsland (Island currentIsland) {
@@ -133,20 +133,10 @@ public class Game {
         Player previousIslandDominator = previousIsland.getDominator();
 
         if (currentIslandDominator.equals(previousIslandDominator))
-            mergePreviousIsland(currentIsland, previousIsland);
+            mergeIsland(currentIsland, previousIsland);
     }
 
-    public void mergeNextIsland(Island mergingInIsland, Island mergingOutIsland) {
-        for (PawnColor color : PawnColor.values()) {
-            int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
-            mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
-        }
-        mergingInIsland.sumTower(mergingOutIsland.getNumberOfTowers());
-
-        islandsList.remove(mergingOutIsland);
-    }
-
-    public void mergePreviousIsland(Island mergingInIsland, Island mergingOutIsland) {
+    public void mergeIsland(Island mergingInIsland, Island mergingOutIsland) {
         for (PawnColor color : PawnColor.values()) {
             int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
             mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
@@ -179,14 +169,25 @@ public class Game {
 
     public void updateMotherNaturePosition (int jump) {
         while (jump != 0) {
-            if (motherNature.getCurrentPosition() == islandsList.size()-1) {
+            if (motherNature.getCurrentPosition() == islandsList.size()-1)
                 motherNature.setCurrentPosition(0);
-            } else { motherNature.incrementCurrentPosition(); }
+            else motherNature.incrementCurrentPosition();
             jump--;
         }
     }
 
     // TURN
+
+    //TODO this method
+    public void setTurnFirstPlayer() {
+        int minValue = 11;
+        for (AssistantCard assistantCard : ((PlanningPhase) turn.getCurrentPhase()).getPlayedCards()) {
+            int cardValue = assistantCard.getValue();
+            if (cardValue < minValue) {
+                minValue = cardValue;
+            }
+        }
+    }
 
     // Operations
 
@@ -285,7 +286,7 @@ public class Game {
                 newDominatingPlayer.getDashboard().decrementTowers();
                 if (newDominatingPlayer.getDashboard().getNumberOfTowers() == 0)
                     throw new ZeroTowersRemainedException();
-            } else if (!newDominatingPlayer.equals(currentPlayer)) {
+            } else if (!newDominatingPlayer.getNickname().equals(currentPlayer.getNickname())) {
                 int islandTowers = currentIsland.getNumberOfTowers();
                 for (int i = 0; i < islandTowers; i++) {
                     currentPlayer.getDashboard().incrementTowers();
@@ -307,6 +308,7 @@ public class Game {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastCardPlayed(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
+        ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getLastCardPlayed());
         playedAssistantCardsList.add(chosenPlayer.getLastCardPlayed());
     }
 
@@ -355,8 +357,10 @@ public class Game {
 
     // GETTER - Turn
     public Turn getTurn() { return turn; }
+    public String getFirstPlayerNickname() { return turn.getFirstPlayerNickname(); }
     public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
     public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
+    public boolean isCharacterCardActivated() { return turn.isActivatedCharacterCard(); }
 
     // GETTER
     public boolean isExpertMode() { return expertMode; }

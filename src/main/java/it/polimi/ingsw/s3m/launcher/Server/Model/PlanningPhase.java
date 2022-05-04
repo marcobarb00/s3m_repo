@@ -3,19 +3,12 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import java.util.ArrayList;
 
 public class PlanningPhase extends Phase{
-    private Player player;
-    private ArrayList<AssistantCard> playedCards;
+    private ArrayList<AssistantCard> playedCards = new ArrayList<>();
 
-    public PlanningPhase(Player player) {
-        this.player = player;
+    public void addPlayedCard(AssistantCard assistantCard) {
+        playedCards.add(assistantCard);
     }
 
-    @Override
-    public void startPhase() {
-
-    }
-
-    private void playAssistantCard(){
-
-    }
+    // GETTER
+    public ArrayList<AssistantCard> getPlayedCards() { return playedCards; }
 }
