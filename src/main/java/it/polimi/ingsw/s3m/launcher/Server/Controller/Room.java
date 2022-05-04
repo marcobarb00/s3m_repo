@@ -1,12 +1,16 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.PlayAssistantCardOperation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,10 +117,10 @@ public class Room {
         planningPhaseMessage.setPlayedAssistantCards(playedCards);
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
         planningPhaseMessage.setHand(handDTO);
-        PlayAssistantCardMessage playAssistantCardMessage = (PlayAssistantCardMessage) player.communicateWithClient(planningPhaseMessage);
+        PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) player.communicateWithClient(planningPhaseMessage);
         //TODO check if it really is a playAssistantCardMessage???
 
-        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardMessage.getCardChosen());
+        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
         try{
             playAssistantCardOperation.executeOperation();
         }catch(PlayerNotInListException e){

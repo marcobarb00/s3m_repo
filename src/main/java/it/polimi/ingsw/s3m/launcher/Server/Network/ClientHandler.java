@@ -2,7 +2,6 @@ package it.polimi.ingsw.s3m.launcher.Server.Network;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Notification;
-import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 
 import java.io.*;

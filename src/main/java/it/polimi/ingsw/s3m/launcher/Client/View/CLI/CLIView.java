@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 
 public class CLIView extends View{
 	ClientCLI client;
@@ -53,10 +54,5 @@ public class CLIView extends View{
 	@Override
 	public void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage){
 		client.setMessage(new ChooseCloudPhaseCLI(chooseCloudPhaseMessage));
-	}
-
-	@Override
-	public void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage){
-		client.setMessage(new PlayAssistantCardCLI(playAssistantCardMessage));
 	}
 }

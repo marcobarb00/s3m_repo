@@ -2,9 +2,10 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.ActivateCentaurEffectOperation;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.Operation;
 import org.junit.jupiter.api.Test;
 
 import java.net.Socket;
