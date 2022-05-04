@@ -10,6 +10,6 @@ module it.polimi.ingsw.s3m.launcher{
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens it.polimi.ingsw.s3m.launcher.Client.View.GuiController to javafx.fxml;
-    exports it.polimi.ingsw.s3m.launcher.Client.View.GuiController;
+    opens it.polimi.ingsw.s3m.launcher.Client.View.GUIController to javafx.fxml;
+    exports it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 }

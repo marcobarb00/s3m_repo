@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
@@ -89,7 +91,11 @@ public class Room {
             //TODO call method to calculate player's turn
 
             for(int i = 0; i < playersNumber; i++){
-                actionPhase(playersList.get(i));
+                PlayerController currentPlayer = playersList.get(i);
+                sendNotificationToPlayer(currentPlayer, "it's your turn");
+                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn");
+                sendGameState(currentPlayer);
+                actionPhase(currentPlayer);
             }
             //turn.setPLayer(turn.getNextPlayer());
         }
@@ -109,6 +115,7 @@ public class Room {
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(playedCards, handDTO);
         Response response = player.communicateWithClient(planningPhaseMessage);
+
         while(!(response instanceof PlayAssistantCardResponse)){
             sendNotificationToPlayer(player, "the operation received is not the correct type");
             response = player.communicateWithClient(planningPhaseMessage);
@@ -124,14 +131,19 @@ public class Room {
     }
 
     private void actionPhase(PlayerController player){
-        sendGameState(player);
-
         //move students phase
-
+        moveStudentPhase(player);
     }
 
     private void moveStudentPhase(PlayerController player){
+        //TODO set attributes of moveStudentsPhaseMessage
+        MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage();
+        Response response = player.communicateWithClient(moveStudentsPhaseMessage);
 
+        while(!(response instanceof MoveStudentsResponse)){
+            sendNotificationToPlayer(player, "the operation received is not the correct type");
+            response = player.communicateWithClient(moveStudentsPhaseMessage);
+        }
     }
 
     public void deleteRoom(PlayerController player){

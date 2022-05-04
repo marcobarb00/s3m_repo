@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Client.Response.ErrorResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Message.ErrorMessage;
 import javafx.fxml.FXML;

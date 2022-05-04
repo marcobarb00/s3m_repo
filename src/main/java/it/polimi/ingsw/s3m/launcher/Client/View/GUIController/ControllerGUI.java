@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Client.View.GuiController;
+package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ClientGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ErrorGUI;
