@@ -1,6 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
@@ -43,11 +42,6 @@ public class GUIView extends View{
 
 	@Override
 	public void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage){
-
-	}
-
-	@Override
-	public void playAssistantCard(PlayAssistantCardResponse playAssistantCardResponse){
 
 	}
 }
