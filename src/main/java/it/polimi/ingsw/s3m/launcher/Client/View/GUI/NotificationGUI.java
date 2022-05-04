@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
