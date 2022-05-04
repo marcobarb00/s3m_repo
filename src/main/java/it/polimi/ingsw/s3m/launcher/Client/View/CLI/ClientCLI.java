@@ -3,7 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Notification;
-import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
 
 public class ClientCLI {
     private Client client;

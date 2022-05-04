@@ -1,33 +1,27 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class RoomsController{
     private static RoomsController instance = null;
-    private static HashMap<Integer, Room> rooms = new HashMap<>();
+    private final static HashMap<Integer, Room> rooms = new HashMap<>();
 
     private RoomsController() {}
 
     public static RoomsController instance(){
-        if(instance == null)
-            return new RoomsController();
-        else
-            return instance;
-    }
-
-    public Room getRoom(Integer roomID){
-        return rooms.get(roomID);
+        return Objects.requireNonNullElseGet(instance, RoomsController::new);
     }
 
     public void login(PlayerController player){
         Runnable login = () -> {
-            boolean successful = false;
+            boolean successful;
             do{
                 LoginMessage loginMessage = new LoginMessage();
                 loginMessage.setNumberOfRooms(rooms.size());

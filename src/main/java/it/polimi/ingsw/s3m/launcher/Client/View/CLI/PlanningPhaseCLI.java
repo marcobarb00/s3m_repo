@@ -2,8 +2,8 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.PlanningPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.PlayAssistantCardMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,7 +49,7 @@ public class PlanningPhaseCLI implements MessageCLI{
 			}
 		}
 
-		PlayAssistantCardMessage cardChosen = new PlayAssistantCardMessage();
+		PlayAssistantCardResponse cardChosen = new PlayAssistantCardResponse();
 		cardChosen.setCardChosen(cardChoice);
 		return cardChosen;
 	}

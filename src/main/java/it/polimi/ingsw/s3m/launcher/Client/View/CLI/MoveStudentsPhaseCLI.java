@@ -1,9 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.ActivateCharacterCardMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.MoveStudentsPhaseMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 
 import java.util.ArrayList;
 import java.util.Scanner;

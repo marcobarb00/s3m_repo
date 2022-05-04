@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 
 public abstract class View{
 
@@ -21,6 +22,4 @@ public abstract class View{
 	public abstract void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage);
 
 	public abstract void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage);
-
-	public abstract void playAssistantCard(PlayAssistantCardMessage playAssistantCardMessage);
 }
