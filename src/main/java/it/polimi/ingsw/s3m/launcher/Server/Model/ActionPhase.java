@@ -11,38 +11,4 @@ public class ActionPhase extends Phase{
     public void startPhase() {
 
     }
-
-
-    /*private Student getStudentsFromCloud(){
-        return null;
-    private Student getStudentsFromCloud(){
-
-    }
-
-    private void activateCharacterCard(){
-
-    }
-
-    private void move3Students(){
-
-    }
-
-    private void professorDominance(){
-
-    }
-
-    private void moveMotherNature(){
-
-    }
-
-    private Player islandDominance(){
-        return null;
-    }
-
-    private boolean checkWinCondition(){
-        return false;
-    }
-
-    }*/
-
 }

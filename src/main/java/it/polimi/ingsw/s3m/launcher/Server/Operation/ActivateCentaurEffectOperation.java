@@ -1,5 +1,7 @@
-package it.polimi.ingsw.s3m.launcher.Server.Controller;
+package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
+import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import java.util.ArrayList;
@@ -12,8 +14,13 @@ public class ActivateCentaurEffectOperation extends Operation{
     }
 
     @Override
-    public void executeOperation() throws PlayerNotInListException {
+    public void executeOperation() throws PlayerNotInListException, NotExpertModeException {
         ArrayList<String> playersList = super.game.getPlayersNicknames();
+
+        boolean checkExpertMode = game.isExpertMode();
+        if(!checkExpertMode){
+            throw new NotExpertModeException();
+        }
 
         boolean playerControllerInList = playersList.contains(playerController.getNickname());
         if(!playerControllerInList){
@@ -21,6 +28,5 @@ public class ActivateCentaurEffectOperation extends Operation{
         }else{
             super.game.activateCentaurEffect(playerController.getNickname());
         }
-
     }
 }

@@ -1,10 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
-import it.polimi.ingsw.s3m.launcher.Communication.GameStateMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameStateCLI implements MessageCLI{
@@ -18,6 +17,7 @@ public class GameStateCLI implements MessageCLI{
 	public Message execute(){
 		System.out.println("\nislands:");
 		System.out.println("WIP");
+		//TODO print islands
 
 		System.out.println("\nprofessors:");
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
@@ -27,7 +27,6 @@ public class GameStateCLI implements MessageCLI{
 			System.out.println("\n" + nickname + "'s dashboard:");
 			printDashboard(player.getDashboard());
 		});
-
 
 		return null;
 	}

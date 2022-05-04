@@ -1,16 +1,16 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
-import it.polimi.ingsw.s3m.launcher.Communication.GameStateMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.NotificationMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.PlanningPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.PlayAssistantCardMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.PlayAssistantCardOperation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +23,7 @@ public class Room {
     private final ArrayList<PlayerController> playersList;
     private boolean isStarted;
     private Game gameState;
-    private Mapper mapper = new Mapper();
+    private final Mapper mapper = new Mapper();
 
     public Room(int roomID, int playersNumber, boolean expertMode) {
         this.roomID = roomID;
@@ -72,7 +72,7 @@ public class Room {
      * Instantiates game if controls are passed, if not an exception is thrown
      * @throws DoubleNicknameException
      */
-    public void start() throws DoubleNicknameException {
+    private void start() throws DoubleNicknameException {
         sendNotificationToAll("the game is starting");
 
         ArrayList<String> playersNicknameList = playersList.stream()
@@ -84,6 +84,9 @@ public class Room {
 
         while(true){
             gameState.refillClouds();
+
+            //TODO call the method to calculate who's starting
+
             for(int i = 0; i < playersNumber; i++){
                 planningPhase(playersList.get(i));
             }
@@ -106,18 +109,18 @@ public class Room {
         }
     }
 
-    void planningPhase(PlayerController player){
-        GameDTO gameDTO = mapper.gameToDTO(gameState);
-        player.communicateWithClient(new GameStateMessage(gameDTO));
+    private void planningPhase(PlayerController player){
+        sendGameState(player);
 
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage();
         ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
         planningPhaseMessage.setPlayedAssistantCards(playedCards);
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
         planningPhaseMessage.setHand(handDTO);
-        PlayAssistantCardMessage playAssistantCardMessage = (PlayAssistantCardMessage) player.communicateWithClient(planningPhaseMessage);
+        PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) player.communicateWithClient(planningPhaseMessage);
+        //TODO check if it really is a playAssistantCardMessage???
 
-        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardMessage.getCardChosen());
+        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
         try{
             playAssistantCardOperation.executeOperation();
         }catch(PlayerNotInListException e){
@@ -125,7 +128,14 @@ public class Room {
         }
     }
 
-    void actionPhase(PlayerController player){
+    private void actionPhase(PlayerController player){
+        sendGameState(player);
+
+        //move students phase
+
+    }
+
+    private void moveStudentPhase(PlayerController player){
 
     }
 
@@ -133,7 +143,7 @@ public class Room {
         sendNotificationToAllButOne(player, "someone left, the room is being deleted");
     }
 
-    public void sendNotificationToAllButOne(PlayerController one, String message){
+    private void sendNotificationToAllButOne(PlayerController one, String message){
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage(message);
 
@@ -144,7 +154,7 @@ public class Room {
         }
     }
 
-    public void sendNotificationToAll(String message){
+    private void sendNotificationToAll(String message){
         NotificationMessage notification = new NotificationMessage();
         notification.setMessage(message);
         for(PlayerController player : playersList){
@@ -152,5 +162,8 @@ public class Room {
         }
     }
 
-
+    private void sendGameState(PlayerController player){
+        GameDTO gameDTO = mapper.gameToDTO(gameState);
+        player.communicateWithClient(new GameStateMessage(gameDTO));
+    }
 }

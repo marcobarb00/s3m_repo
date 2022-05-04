@@ -1,31 +1,27 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Communication.*;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class RoomsController{
     private static RoomsController instance = null;
-    private static HashMap<Integer, Room> rooms = new HashMap<>();
+    private final static HashMap<Integer, Room> rooms = new HashMap<>();
 
     private RoomsController() {}
 
     public static RoomsController instance(){
-        if(instance == null)
-            return new RoomsController();
-        else
-            return instance;
-    }
-
-    public Room getRoom(Integer roomID){
-        return rooms.get(roomID);
+        return Objects.requireNonNullElseGet(instance, RoomsController::new);
     }
 
     public void login(PlayerController player){
         Runnable login = () -> {
-            boolean successful = false;
+            boolean successful;
             do{
                 LoginMessage loginMessage = new LoginMessage();
                 loginMessage.setNumberOfRooms(rooms.size());
@@ -41,7 +37,7 @@ public class RoomsController{
         new Thread(login).start();
     }
 
-    public synchronized boolean newRoom(PlayerController player){
+    private synchronized boolean newRoom(PlayerController player){
         NewRoomMessage newRoomMessageInfo = (NewRoomMessage) player.communicateWithClient(new NewRoomMessage());
 
         int roomID;
@@ -61,16 +57,18 @@ public class RoomsController{
         return true;
     }
 
-    public synchronized boolean enterRoom(PlayerController player){
+    private synchronized boolean enterRoom(PlayerController player){
         NotificationMessage notification = new NotificationMessage();
-        if(rooms.isEmpty()){
+
+        ArrayList<Integer> availableRoomIDs = rooms.keySet().stream().filter(roomID -> !rooms.get(roomID).isFull()).collect(Collectors.toCollection(ArrayList::new));
+        if(availableRoomIDs.isEmpty()){
             notification.setMessage("there are no rooms to join in");
             player.communicateWithClient(notification);
             return false;
         }
 
         EnterRoomMessage enterRoomMessageInfo = new EnterRoomMessage();
-        enterRoomMessageInfo.setAvailableRoomsID(new ArrayList<>(rooms.keySet()));
+        enterRoomMessageInfo.setAvailableRoomsID(availableRoomIDs);
         EnterRoomMessage enterRoomMessageResult = (EnterRoomMessage) player.communicateWithClient(enterRoomMessageInfo);
 
         Integer roomID = enterRoomMessageResult.getRoomID();
