@@ -1,4 +1,44 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-public class ClientGUI {
+import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
+import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Notification;
+import javafx.application.Platform;
+
+public class ClientGUI extends Thread{
+	private Client client;
+	private ControllerGUI controllerGUI;
+	private GUIView view;
+	private MessageGUI message;
+	
+	public ClientGUI(ControllerGUI controllerGUI){
+		this.view = new GUIView(this);
+		this.client = new Client();
+		this.controllerGUI = controllerGUI;
+	}
+
+	@Override
+	public void run(){
+		while(true){
+			try{
+				Message msg;
+				msg = client.receiveMessage();
+				msg.apply(view);
+			}catch(Exception e){
+				try{
+					Thread.sleep(3000);
+					client.close();
+					Platform.exit();
+					System.exit(1);
+				}catch(InterruptedException e1){
+					//e1.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void setMessage(MessageGUI message) {
+		this.message = message;
+	}
 }

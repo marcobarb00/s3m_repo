@@ -6,10 +6,11 @@ import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 
 public class ClientCLI {
     private Client client;
-    private CLIView view = new CLIView(this);
+    private CLIView view;
     private MessageCLI message;
 
     public void start(){
+        this.view = new CLIView(this);
         this.client = new Client();
         client.start();
 

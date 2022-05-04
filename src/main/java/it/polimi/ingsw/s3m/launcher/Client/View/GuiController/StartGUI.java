@@ -5,16 +5,13 @@ import javafx.stage.Stage;
 
 public class StartGUI extends Application {
 
-
     @Override
-    public void start(Stage primaryStage) {
-    }
-    /*@Override
     public void start(Stage primaryStage) throws Exception {
         ControllerGUI instance = ControllerGUI.getInstance();
         instance.startGame(primaryStage);
-    }*/
-    public static void main(String[] args) {
-        launch(args);
+    }
+
+    public void startGUI(){
+        launch();
     }
 }
