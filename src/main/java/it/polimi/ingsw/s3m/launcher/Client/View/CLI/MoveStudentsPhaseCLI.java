@@ -20,7 +20,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
-		//todo
+		//TODO Constructor
 	}
 
 	@Override
@@ -42,28 +42,14 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			//Options menu
 			System.out.println("choose your operation:");
 			System.out.println(	"1) move a student from the hall to the tables" +
-								"2) move a student from the hall to an island\"");
+								"\n2) move a student from the hall to an island");
 			if(expertMode) {
 				System.out.println("3) activate a character card" );
 				maxOperationNumber = 3;
 			}
 
-			Scanner scanner = new Scanner(System.in);
-			int operationChoice;
-			try{
-				operationChoice = Integer.parseInt(scanner.nextLine());
-			}catch (Exception e){
-				operationChoice = 0;
-			}
-
-			while(operationChoice < 1 || operationChoice > maxOperationNumber){
-				System.out.println("\ninvalid choice, please select a valid operation");
-				try{
-					operationChoice = Integer.parseInt(scanner.nextLine());
-				}catch (Exception e){
-					operationChoice = 0;
-				}
-			}
+			int operationChoice = getOperation();
+			checkOperation(operationChoice, maxOperationNumber);
 
 			HashMap<Integer, Runnable> operations = setOperations();
 			operations.get(operationChoice).run();
@@ -76,9 +62,36 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 		int cardsNumber = characterCardDTOList.size();
 		for (int i = 0; i < cardsNumber; i++) {
 			CharacterCardDTO card = characterCardDTOList.get(i);
-			System.out.println((i+1) + ") "  + card.getName() + " cost: " + card.getCost());
+			System.out.println((i+1) + ") " + card.getName() + " cost: " + card.getCost());
 		}
+
+		int selectedCard =getOperation();
+		checkOperation(selectedCard, characterCardDTOList.size());
+
 		characterCardActivated = true;
+	}
+
+	private int getOperation(){
+		Scanner scanner = new Scanner(System.in);
+		int operationChoice;
+		try{
+			operationChoice = Integer.parseInt(scanner.nextLine());
+		}catch (Exception e){
+			operationChoice = 0;
+		}
+		return operationChoice;
+	}
+
+	private void checkOperation(int operationChoice, int maxOperationNumber){
+		Scanner scanner = new Scanner(System.in);
+		while(operationChoice < 1 || operationChoice > maxOperationNumber){
+			System.out.println("\ninvalid choice, please select a valid operation");
+			try{
+				operationChoice = Integer.parseInt(scanner.nextLine());
+			}catch (Exception e){
+				operationChoice = 0;
+			}
+		}
 	}
 
 	public void setThreePlayerMode(boolean threePlayerMode){
