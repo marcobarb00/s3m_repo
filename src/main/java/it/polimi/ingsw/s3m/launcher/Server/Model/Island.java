@@ -29,6 +29,9 @@ public class Island {
         }
     }
 
+    // Towers
+    public void sumTower(int addend) { numberOfTowers += addend; }
+
     // GETTER
     public Player getDominator() { return dominator; }
     public HashMap<PawnColor, Integer> getStudents() { return students; }
