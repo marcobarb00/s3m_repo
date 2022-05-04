@@ -24,9 +24,9 @@ public class PutStudentsOnTablesOperation extends Operation{
             throw new PlayerNotInListException();
         }
 
+        //checking 3 players mode
         boolean checkSelectedStudentsNumber;
         int numberOfPlayers = game.getNumberOfPlayers();
-        //checking 3 players mode
         if(numberOfPlayers == 3){
             checkSelectedStudentsNumber = selectedStudents.size() <= 4;
         }else{
