@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class EnterRoomMessage implements Message{
 	private ArrayList<Integer> availableRoomsID;
 
-	public ArrayList<Integer> getAvailableRoomsID() {
-		return availableRoomsID;
+	public EnterRoomMessage(ArrayList<Integer> availableRoomsID){
+		this.availableRoomsID = availableRoomsID;
 	}
 
-	public void setAvailableRoomsID(ArrayList<Integer> availableRoomsID) {
-		this.availableRoomsID = availableRoomsID;
+	public ArrayList<Integer> getAvailableRoomsID() {
+		return availableRoomsID;
 	}
 
 	@Override

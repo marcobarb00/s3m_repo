@@ -11,10 +11,6 @@ public class MotherNaturePhaseCLI implements MessageCLI{
 
 	@Override
 	public Response execute(){
-		System.out.println("movement phase" +
-				"\nchoose your operation:" +
-				"\n1) activate a character card" +
-				"\n2) move mother nature");
 		return null;
 	}
 }

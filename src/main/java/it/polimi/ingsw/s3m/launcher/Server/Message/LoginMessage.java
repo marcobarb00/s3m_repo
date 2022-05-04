@@ -7,16 +7,6 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class LoginMessage implements Message{
-	private String message;
-
-	public String getMessage(){
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
 	@Override
 	public void apply(View view){
 		view.login(this);

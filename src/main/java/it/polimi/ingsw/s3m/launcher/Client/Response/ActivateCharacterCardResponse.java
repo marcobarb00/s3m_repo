@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Client.View.Response;
+package it.polimi.ingsw.s3m.launcher.Client.Response;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 

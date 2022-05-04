@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.LoginResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.LoginResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Message.LoginMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
@@ -12,8 +12,8 @@ public class LoginCLI implements MessageCLI{
 	@Override
 	public Response execute(){
 		System.out.println("\ndo you want to create a new room or join an existing one?" +
-				"\n1) create a new room" +
-				"\n2) join an existing room");
+						   "\n1) create a new room" +
+						   "\n2) join an existing room");
 
 		//let player insert their choice
 		Scanner scanner = new Scanner(System.in);
