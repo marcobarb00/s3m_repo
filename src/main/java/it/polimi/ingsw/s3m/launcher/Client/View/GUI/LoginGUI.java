@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.LoginMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;

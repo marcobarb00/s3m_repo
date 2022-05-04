@@ -6,6 +6,8 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.ActivateJesterEffectOperation;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.Operation;
 import org.junit.jupiter.api.Test;
 
 import java.net.Socket;

@@ -4,6 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
 import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Notification;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import javafx.application.Platform;
 
 public class ClientGUI extends Thread{
@@ -28,7 +29,7 @@ public class ClientGUI extends Thread{
 			}catch(Exception e){
 				try{
 					Thread.sleep(3000);
-					client.close();
+					close();
 					Platform.exit();
 					System.exit(1);
 				}catch(InterruptedException e1){
@@ -40,5 +41,13 @@ public class ClientGUI extends Thread{
 
 	public void setMessage(MessageGUI message) {
 		this.message = message;
+	}
+
+	public void communicate(Response response){
+		client.sendResponse(response);
+	}
+
+	public void close(){
+		client.close();
 	}
 }

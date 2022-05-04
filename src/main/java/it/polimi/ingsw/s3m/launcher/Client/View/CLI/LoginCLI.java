@@ -11,8 +11,6 @@ public class LoginCLI implements MessageCLI{
 
 	@Override
 	public Response execute(){
-		LoginResponse loginInfo = new LoginResponse();
-
 		System.out.println("\ndo you want to create a new room or join an existing one?" +
 				"\n1) create a new room" +
 				"\n2) join an existing room");
@@ -34,7 +32,6 @@ public class LoginCLI implements MessageCLI{
 			}
 		}
 
-		loginInfo.setNewRoom(choiceRoom == 1);
-		return loginInfo;
+		return new LoginResponse(choiceRoom == 1);
 	}
 }

@@ -3,8 +3,8 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GuiController;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ClientGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ErrorGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.LoadingScreenGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.ErrorMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.Server.Message.ErrorMessage;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +23,6 @@ public class ControllerGUI {
     private Stage secondaryStage;
     private LoadingScreenGUI loadingScreenGUI;
     private ErrorGUI errorGui;
-
 
     private ControllerGUI() {
         secondaryStage = new Stage();
@@ -74,10 +73,6 @@ public class ControllerGUI {
         });
     }
 
-    public void receive(Message message) {
-        message.accept(guiVisitor);
-    }
-
 
     private void setScene(Parent root)  {
         Scene gameScene = new Scene(root);
@@ -104,8 +99,8 @@ public class ControllerGUI {
         thread.close();
     }
 
-    public void sendObject(Message message) {
-        thread.communicate(message);
+    public void sendObject(Response response) {
+        thread.communicate(response);
 
     }
 
