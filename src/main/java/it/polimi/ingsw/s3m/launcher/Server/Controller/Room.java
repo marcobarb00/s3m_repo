@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Room {
+    private Integer roomID;
     private final int playersNumber;
     private final boolean expertMode;
     private final ArrayList<PlayerController> playersList;
@@ -27,7 +28,8 @@ public class Room {
     private Game gameState;
     private final Mapper mapper = new Mapper();
 
-    public Room(int playersNumber, boolean expertMode) {
+    public Room(Integer roomID, int playersNumber, boolean expertMode) {
+        this.roomID = roomID;
         this.playersNumber = playersNumber;
         this.expertMode = expertMode;
         this.playersList = new ArrayList<>();
@@ -114,19 +116,30 @@ public class Room {
         ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(playedCards, handDTO);
-        Response response = player.communicateWithClient(planningPhaseMessage);
 
-        while(!(response instanceof PlayAssistantCardResponse)){
-            sendNotificationToPlayer(player, "the operation received is not the correct type");
-            response = player.communicateWithClient(planningPhaseMessage);
-        }
+        boolean successful = false;
 
-        PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) response;
-        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
-        try{
-            playAssistantCardOperation.executeOperation();
-        }catch(PlayerNotInListException e){
-            e.printStackTrace();
+        while(!successful){
+            Response response = player.communicateWithClient(planningPhaseMessage);
+            if(!(response instanceof PlayAssistantCardResponse)){
+                sendNotificationToPlayer(player, "the operation received is not the correct type");
+                successful = false;
+                continue;
+            }
+
+            PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) response;
+            PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
+
+            try{
+                playAssistantCardOperation.executeOperation();
+            }catch(PlayerNotInListException e){
+                sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
+                RoomsController.instance().deleteRoom(roomID, player);
+            }catch(IllegalArgumentException e){
+
+            }
+
+            successful = true;
         }
     }
 
@@ -147,7 +160,7 @@ public class Room {
     }
 
     public void deleteRoom(PlayerController player){
-        sendNotificationToAllButOne(player, "someone left, the room is being deleted");
+        sendNotificationToAllButOne(player, "the room is being deleted");
     }
 
     public void sendNotificationToPlayer(PlayerController player, String message){

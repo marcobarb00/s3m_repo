@@ -52,7 +52,7 @@ public class RoomsController{
 
         player.setNickname(newRoomMessageInfo.getNickname());
         player.setRoomID(roomID);
-        Room newRoom = new Room(newRoomMessageInfo.getNumberOfPlayers(), newRoomMessageInfo.isExpertMode());
+        Room newRoom = new Room(roomID, newRoomMessageInfo.getNumberOfPlayers(), newRoomMessageInfo.isExpertMode());
         newRoom.addPlayer(player);
         rooms.put(roomID, newRoom);
         return true;
@@ -99,6 +99,7 @@ public class RoomsController{
 
     public synchronized void deleteRoom(Integer roomID, PlayerController player){
         rooms.get(roomID).deleteRoom(player);
-        rooms.remove(roomID);
+        Room room = rooms.remove(roomID);
+        room = null;
     }
 }
