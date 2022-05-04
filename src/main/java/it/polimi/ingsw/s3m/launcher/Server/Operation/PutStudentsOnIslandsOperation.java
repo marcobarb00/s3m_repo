@@ -14,7 +14,8 @@ public class PutStudentsOnIslandsOperation extends Operation{
     private int islandPosition;
     private ArrayList<Student> selectedStudents;
 
-    public PutStudentsOnIslandsOperation(Game game, PlayerController playerController, int islandPosition, ArrayList<Student> selectedStudents) {
+    public PutStudentsOnIslandsOperation(Game game, PlayerController playerController,
+                                         int islandPosition, ArrayList<Student> selectedStudents) {
         super(game, playerController);
         this.islandPosition = islandPosition;
         this.selectedStudents = selectedStudents;
