@@ -46,7 +46,7 @@ public class ActivateJesterEffectOperation extends Operation{
         boolean checkRequired = requiredStudents.size() == 3;
         boolean checkGiven = givenStudents.size() == 3;
         if(!(checkGiven && checkRequired)){
-            new IllegalArgumentException("Incorrect exchange students value");
+            throw new IllegalArgumentException("Incorrect exchange students value");
         }
 
         //Search students on card
@@ -63,7 +63,7 @@ public class ActivateJesterEffectOperation extends Operation{
     /**
      * Checks if on Jester card the students are enough
      */
-    private void searchStudentsOnCard(){
+    private void searchStudentsOnCard() throws IllegalArgumentException{
         HashMap<PawnColor, Integer> studentsOnJester = game.getJesterStudentsOnCard();
 
         //checking on Jester card
@@ -78,7 +78,7 @@ public class ActivateJesterEffectOperation extends Operation{
         }
     }
 
-    private void searchStudentsInEntrance(){
+    private void searchStudentsInEntrance() throws IllegalArgumentException{
         Player player = game.getPlayerHashMap().get(playerController.getNickname());
         HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
 
