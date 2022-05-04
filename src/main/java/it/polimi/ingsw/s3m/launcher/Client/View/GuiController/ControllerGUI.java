@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GuiController;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ClientGUI;
+import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -25,4 +26,14 @@ public class ControllerGUI {
             INSTANCE = new ControllerGUI();
         return INSTANCE;
     }
+
+
+    /*public void sendObject(Message message) {
+        thread.communicate(message);
+
+    }
+
+    public void startLoading() {
+        loadingScreenGui.start();
+    }*/
 }
