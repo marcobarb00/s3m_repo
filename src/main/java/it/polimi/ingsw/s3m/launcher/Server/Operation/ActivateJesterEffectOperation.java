@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
@@ -31,16 +32,23 @@ public class ActivateJesterEffectOperation extends Operation{
     }
 
     @Override
-    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException {
+    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException {
         //Check for double nicknames
         boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
             throw new PlayerNotInListException();
         }
 
+        //checking expert mode
         boolean checkExpertMode = game.isExpertMode();
         if(!checkExpertMode){
             throw new NotExpertModeException();
+        }
+
+        //checking if player has enough coins
+        boolean checkCost = checkCharacterCardCost("Jester");
+        if(!checkCost){
+            throw new NotEnoughCoinsException();
         }
 
         boolean checkRequired = requiredStudents.size() == 3;

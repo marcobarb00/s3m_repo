@@ -2,9 +2,12 @@ package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.CloudNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ public abstract class Operation {
     }
 
     public abstract void executeOperation() throws PlayerNotInListException,
-            CloudNotInListException, IllegalArgumentException, NotExpertModeException;
+            CloudNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException;
 
     public boolean checkNickname(){
         ArrayList<String> playersList = game.getPlayersNicknames();
@@ -29,4 +32,16 @@ public abstract class Operation {
         return playerControllerInList;
     }
 
+    public boolean checkCharacterCardCost(String cardName){
+        ArrayList<CharacterCard> cards = game.getCharacterCardsList();
+        CharacterCard card = null;
+        for(CharacterCard c : cards){
+            if(c.getName().equals(cardName))
+                card = c;
+        }
+        String nickname = playerController.getNickname();
+        int coins = game.getPlayerHashMap().get(nickname).getCoins();
+
+        return coins >= card.getCost();
+    }
 }

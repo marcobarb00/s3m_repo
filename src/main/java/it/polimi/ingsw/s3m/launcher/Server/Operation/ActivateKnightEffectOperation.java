@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
@@ -13,18 +14,24 @@ public class ActivateKnightEffectOperation extends Operation{
     }
 
     @Override
-    public void executeOperation() throws PlayerNotInListException, NotExpertModeException {
+    public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException {
 
         boolean playerControllerInList = checkNickname();
-        boolean checkExpertMode = game.isExpertMode();
+        if(!playerControllerInList){
+            throw new PlayerNotInListException();
+        }
 
+        boolean checkExpertMode = game.isExpertMode();
         if(!checkExpertMode){
             throw new NotExpertModeException();
         }
-        if(!playerControllerInList){
-            throw new PlayerNotInListException();
-        }else{
-            super.game.activateKnightEffect(playerController.getNickname());
+
+        //checking if player has enough coins
+        boolean checkCost = checkCharacterCardCost("Knight");
+        if(!checkCost){
+            throw new NotEnoughCoinsException();
         }
+
+        super.game.activateKnightEffect(playerController.getNickname());
     }
 }

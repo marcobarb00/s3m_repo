@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
@@ -25,7 +26,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
     }
 
     @Override
-    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException {
+    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException {
         //Check for double nicknames
         boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
@@ -35,6 +36,12 @@ public class ActivateMinstrelEffectOperation extends Operation{
         boolean checkExpertMode = game.isExpertMode();
         if(!checkExpertMode){
             throw new NotExpertModeException();
+        }
+
+        //checking if player has enough coins
+        boolean checkCost = checkCharacterCardCost("Minstrel");
+        if(!checkCost){
+            throw new NotEnoughCoinsException();
         }
 
         boolean checkStudentsNumber = enteringEntranceStudents.size() ==  2 && enteringTablesStudents.size() == 2;
