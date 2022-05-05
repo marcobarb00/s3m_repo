@@ -42,6 +42,9 @@ public class NewRoomGUI {
     @FXML
     GridPane gridPane;
 
+
+
+
     public void selectTwoPlayers(MouseEvent event) {
         NumberOfPlayersMessage number = new NumberOfPlayersMessage(2);
         ControllerGUI.getInstance().sendObject(number);
@@ -80,11 +83,6 @@ public class NewRoomGUI {
         ControllerGUI.getInstance().startLoading();
     }
 
-    public void setCreatedRoom(LoginMessage object, Stage secondaryStage) {
-        if (object.getPlayers() != null) {
-            for (String player : object.getPlayers())
-                connected.appendText(player + "\n");
-        }
-    }
+
 
 }
