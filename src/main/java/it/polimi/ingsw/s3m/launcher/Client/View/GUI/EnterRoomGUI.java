@@ -1,14 +1,14 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Server.Message.LoginMessage;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class EnterRoomGUI {
 
@@ -21,17 +21,19 @@ public class EnterRoomGUI {
     @FXML
     GridPane gridPane;
 
+    private EnterRoomResponse enterRoomResponse = new EnterRoomResponse();
 
     public void enterGame(ActionEvent event) {
         String nick = nickname.getText();
-        ControllerGUI.getInstance().sendObject(new LoginMessage(nick));
+        enterRoomResponse.setNickname(nick);
         ControllerGUI.getInstance().startLoading();
+        ControllerGUI.getInstance().sendResponse(enterRoomResponse);
     }
 
-    public void setCreatedRoom(LoginMessage object, Stage secondaryStage) {
-        if (object.getPlayers() != null) {
-            for (String player : object.getPlayers())
-                connected.appendText(player + "\n");
+    public void setCreatedRoom(EnterRoomMessage message) {
+        if (message.getAvailableRoomsID() != null) {
+            for (Integer roomID : message.getAvailableRoomsID())
+                otherIDRoom.appendText(roomID + "\n");
         }
     }
 }

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Client.View.GuiController;
+package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

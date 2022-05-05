@@ -1,11 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Client.Network;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.CLI.ClientCLI;
-import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.StartGUI;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.StartGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
-import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.Response.ErrorResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Message.ErrorMessage;
 import javafx.fxml.FXML;
@@ -16,6 +16,6 @@ public class ErrorGUI {
 
     public void insert(ErrorMessage message) {
         notification.setText(message.getMessage());
-        ControllerGUI.getInstance().sendObject(new ErrorResponse());
+        ControllerGUI.getInstance().sendResponse(new ErrorResponse());
     }
 }

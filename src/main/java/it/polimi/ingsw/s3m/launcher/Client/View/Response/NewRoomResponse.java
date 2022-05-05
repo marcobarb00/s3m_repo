@@ -13,6 +13,21 @@ public class NewRoomResponse implements Response{
 		this.expertMode = expertMode;
 	}
 
+	public NewRoomResponse(){
+	}
+
+	public void setNickname(String nickname){
+		this.nickname = nickname;
+	}
+
+	public void setNumberOfPlayers(int numberOfPlayers){
+		this.numberOfPlayers = numberOfPlayers;
+	}
+
+	public void setExpertMode(boolean expertMode){
+		this.expertMode = expertMode;
+	}
+
 	public String getNickname(){
 		return nickname;
 	}

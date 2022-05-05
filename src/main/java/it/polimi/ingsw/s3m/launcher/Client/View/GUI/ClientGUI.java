@@ -1,9 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
-import it.polimi.ingsw.s3m.launcher.Client.View.GuiController.ControllerGUI;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import javafx.application.Platform;
 
@@ -14,9 +13,10 @@ public class ClientGUI extends Thread{
 	private MessageGUI message;
 	
 	public ClientGUI(ControllerGUI controllerGUI){
-		this.view = new GUIView(this);
-		this.client = new Client();
+		this.view = new GUIView(this, controllerGUI);
 		this.controllerGUI = controllerGUI;
+		this.client = new Client();
+		this.client.start();
 	}
 
 	@Override
