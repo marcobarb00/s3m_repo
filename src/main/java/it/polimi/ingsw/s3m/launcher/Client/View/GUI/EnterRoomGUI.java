@@ -28,7 +28,7 @@ public class EnterRoomGUI {
         ControllerGUI.getInstance().startLoading();
     }
 
-    public void setConnectedUsers(LoginMessage object, Stage secondaryStage) {
+    public void setCreatedRoom(LoginMessage object, Stage secondaryStage) {
         if (object.getPlayers() != null) {
             for (String player : object.getPlayers())
                 connected.appendText(player + "\n");

@@ -38,8 +38,6 @@ public class NewRoomGUI {
     @FXML
     TextField nickname;
     @FXML
-    TextArea otherIDRoom;
-    @FXML
     GridPane gridPane;
 
 
