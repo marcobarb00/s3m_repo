@@ -1,10 +1,12 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 
 import java.lang.reflect.Executable;
 import java.util.ArrayList;
@@ -15,8 +17,10 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	private ArrayList<CharacterCardDTO> characterCardDTOList;
 	private boolean expertMode;
 	private boolean threePlayerMode;
+	private int selectedCharacterCard;			//To put in response constructor
 	private boolean characterCardActivated;
-	private int studentsMoved = 0;
+	private int studentsMoved;
+	private ArrayList<Student> studentsToBeMoved;
 
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
@@ -54,6 +58,10 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			HashMap<Integer, Runnable> operations = setOperations();
 			operations.get(operationChoice).run();
 			}
+
+		//TODO return students response
+		//TODO
+		//return new MoveStudentsResponse(characterCardActivated, selectedCharacterCard, studentsToBeMoved );
 		return null;
 	}
 
@@ -65,9 +73,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			System.out.println((i+1) + ") " + card.getName() + " cost: " + card.getCost());
 		}
 
-		int selectedCard =getOperation();
-		checkOperation(selectedCard, characterCardDTOList.size());
-
+		selectedCharacterCard = getOperation() - 1;
+		checkOperation(selectedCharacterCard, characterCardDTOList.size());
 		characterCardActivated = true;
 	}
 
@@ -85,7 +92,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	private void checkOperation(int operationChoice, int maxOperationNumber){
 		Scanner scanner = new Scanner(System.in);
 		while(operationChoice < 1 || operationChoice > maxOperationNumber){
-			System.out.println("\ninvalid choice, please select a valid operation");
+			System.out.println("\ninvalid choice, please select a valid input");
 			try{
 				operationChoice = Integer.parseInt(scanner.nextLine());
 			}catch (Exception e){
