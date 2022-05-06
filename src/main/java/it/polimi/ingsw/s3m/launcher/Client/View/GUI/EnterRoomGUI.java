@@ -5,6 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -15,7 +16,9 @@ public class EnterRoomGUI {
     @FXML
     TextField nickname;
     @FXML
-    TextArea otherIDRoom;
+    TextField roomID;
+    @FXML
+    Label otherIDRoom;
     @FXML
     ImageView backgroundImage;
     @FXML
@@ -33,7 +36,7 @@ public class EnterRoomGUI {
     public void setCreatedRoom(EnterRoomMessage message) {
         if (message.getAvailableRoomsID() != null) {
             for (Integer roomID : message.getAvailableRoomsID())
-                otherIDRoom.appendText(roomID + "\n");
+                otherIDRoom.setText(roomID + "\n");
         }
     }
 }
