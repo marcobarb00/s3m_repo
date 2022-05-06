@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class ActivateMushroomerEffectOperation extends Operation{
     private PawnColor notInfluencingColor;
 
-    //TODO Needs a PawnColor which computeDominance isn't called upon.
     public ActivateMushroomerEffectOperation(Game game, PlayerController playerController, PawnColor notInfluencingColor) {
         super(game, playerController);
         this.notInfluencingColor = notInfluencingColor;
@@ -37,6 +36,5 @@ public class ActivateMushroomerEffectOperation extends Operation{
         }
 
         super.game.activateMushroomerEffect(playerController.getNickname(), notInfluencingColor);
-
     }
 }

@@ -1,10 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.CloudNotInListException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
@@ -23,8 +20,10 @@ public abstract class Operation {
         this.game = game;
     }
 
-    public abstract void executeOperation() throws PlayerNotInListException,
-            CloudNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException;
+    public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
+            IllegalArgumentException, NotExpertModeException,
+            NotEnoughCoinsException, NotPlayersTurnException,
+            ZeroTowersRemainedException, NotEnoughIslandsException;
 
     public boolean checkNickname(){
         ArrayList<String> playersList = game.getPlayersNicknames();
@@ -43,5 +42,10 @@ public abstract class Operation {
         int coins = game.getPlayerHashMap().get(nickname).getCoins();
 
         return coins >= card.getCost();
+    }
+
+    public boolean checkCurrentPlayer(){
+        String currentPlayer = game.getTurn().getCurrentPlayerNickname();
+        return playerController.getNickname().equals(currentPlayer);
     }
 }

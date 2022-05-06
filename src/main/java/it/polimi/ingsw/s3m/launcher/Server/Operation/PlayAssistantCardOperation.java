@@ -4,6 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 
 import java.util.ArrayList;
 
@@ -25,11 +26,25 @@ public class PlayAssistantCardOperation extends Operation{
 
         ArrayList<AssistantCard> hand = game.getPlayerHand(playerController.getNickname());
         boolean checkAssistantCard = 0 <= assistantCardPosition && assistantCardPosition < hand.size();
-
         if(!checkAssistantCard){
             throw new IllegalArgumentException("Incorrect card position value");
         }
 
-        super.game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
+        //check if already played in turn
+        boolean checkCard = checkPlayableCard();
+        if(!checkCard){
+            throw new IllegalArgumentException("AssistantCard already played");
+        }
+
+        game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
+    }
+
+    private boolean checkPlayableCard(){
+        ArrayList<AssistantCard> cardsPlayedInTurn = game.getPlayedAssistantCardsList();
+        Player player = game.getPlayerHashMap().get(playerController.getNickname());
+        String handCardType = player.getHand().get(assistantCardPosition).getType();
+
+        return cardsPlayedInTurn.stream().map(AssistantCard::getType).
+                noneMatch(type -> type.equals(handCardType));
     }
 }
