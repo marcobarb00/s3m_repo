@@ -3,6 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
@@ -13,6 +14,8 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.ActivateCentaurEffectOperation;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.Operation;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.PlayAssistantCardOperation;
 
 import java.util.ArrayList;
@@ -123,7 +126,6 @@ public class Room {
             Response response = player.communicateWithClient(planningPhaseMessage);
             if(!(response instanceof PlayAssistantCardResponse)){
                 sendNotificationToPlayer(player, "the operation received is not the correct type");
-                successful = false;
                 continue;
             }
 
@@ -136,7 +138,7 @@ public class Room {
                 sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
                 RoomsController.instance().deleteRoom(roomID, player);
             }catch(IllegalArgumentException e){
-
+                //TODO handle exception
             }
 
             successful = true;
@@ -149,13 +151,27 @@ public class Room {
     }
 
     private void moveStudentPhase(PlayerController player){
-        //TODO set attributes of moveStudentsPhaseMessage
-        MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage();
+        ArrayList<CharacterCardDTO> characterCardList = mapper.characterCardListToDTO(gameState.getCharacterCardsList());
+        MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(characterCardList, expertMode, playersNumber==3);
         Response response = player.communicateWithClient(moveStudentsPhaseMessage);
 
         while(!(response instanceof MoveStudentsResponse)){
             sendNotificationToPlayer(player, "the operation received is not the correct type");
             response = player.communicateWithClient(moveStudentsPhaseMessage);
+        }
+
+        MoveStudentsResponse moveStudentsResponse = (MoveStudentsResponse) response;
+
+        if(moveStudentsResponse.isCharacterCardActivated()){
+            CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(moveStudentsResponse.getCharacterCardPosition());
+            Operation operation;
+            switch(playedCharacterCard.getName()){
+                case "Centaur":
+                    operation = new ActivateCentaurEffectOperation(gameState, player);
+                    break;
+                    //TODO complete switch
+                case "...":
+            }
         }
     }
 

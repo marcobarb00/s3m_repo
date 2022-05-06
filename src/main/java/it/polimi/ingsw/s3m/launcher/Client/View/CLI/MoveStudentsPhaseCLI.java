@@ -18,16 +18,14 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	private boolean characterCardActivated;
 	private int studentsMoved = 0;
 
-
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
-		//TODO Constructor
+		this.characterCardDTOList = moveStudentsPhaseMessage.getCharacterCardDTOList();
+		this.expertMode = moveStudentsPhaseMessage.isExpertMode();
+		this.threePlayerMode = moveStudentsPhaseMessage.isThreePlayerMode();
 	}
 
 	@Override
-
 	public Response execute(){
-		int studentsMoved = 0;
-
 		System.out.println("student allocation phase");
 
 		//Checking if 3 or 4 mode game
@@ -41,8 +39,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 			//Options menu
 			System.out.println("choose your operation:");
-			System.out.println(	"1) move a student from the hall to the tables" +
-								"\n2) move a student from the hall to an island");
+			System.out.println("1) move a student from the hall to the tables" +
+							   "\n2) move a student from the hall to an island");
 			if(expertMode) {
 				System.out.println("3) activate a character card" );
 				maxOperationNumber = 3;
