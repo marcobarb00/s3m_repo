@@ -198,7 +198,7 @@ public class ControllerGUI {
 
     /*public void IslandsAndDashboard(GameStateMessage gameStateMessage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("IslandsAndDashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(".fxml"));
             Parent showGame = (Parent) loader.load();
             islandsAndDashboardGUI = loader.getController();
             if (gameStateMessage instanceof GameStateMessage) {

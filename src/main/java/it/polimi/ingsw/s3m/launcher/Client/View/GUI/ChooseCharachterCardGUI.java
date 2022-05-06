@@ -9,19 +9,17 @@ import java.util.List;
 
 public class ChooseCharachterCardGUI {
 
-    private List<Integer> chosenNumbers;
-
     @FXML
     GridPane gridPane;
     @FXML
-    VBox vBoxCharachterCard;
+    VBox vBoxCharacterCard;
     @FXML
     ImageView backgroundImage;
     @FXML
-    ImageView charachterOne;
+    ImageView characterZero;
     @FXML
-    ImageView charachterTwo;
+    ImageView characterOne;
     @FXML
-    ImageView assistantTwo;
+    ImageView characterTwo;
 
 }

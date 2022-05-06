@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class PlanningPhaseGUI {
 
@@ -45,8 +45,7 @@ public class PlanningPhaseGUI {
     ImageView assistantNine;
 
 
-    public void AssistantChoiceGUI(){
-    }
+    //public void AssistantChoiceGUI(){}
 
     public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage, Stage secondaryStage) {
         ArrayList<AssistantCardDTO> hand = planningPhaseMessage.getHand();
@@ -74,55 +73,46 @@ public class PlanningPhaseGUI {
         assistantZero.setImage(view);
     }
 
-    public void insertAssistantOne(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantOne(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantOne.setImage(view);
     }
 
-    public void insertAssistantTwo(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantTwo(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantTwo.setImage(view);
     }
 
-    public void insertAssistantThree(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantThree(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantFour.setImage(view);
     }
-    public void insertAssistantFour(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantFour(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantFour.setImage(view);
     }
 
-    public void insertAssistantFive(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantFive(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantFive.setImage(view);
     }
 
-    public void insertAssistantSix(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantSix(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantSix.setImage(view);
     }
-    public void insertAssistantSeven(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantSeven(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantSeven.setImage(view);
     }
 
-    public void insertAssistantEight(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantEight(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantEight.setImage(view);
     }
 
-    public void insertAssistantNine(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantNine(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantNine.setImage(view);
     }
 
@@ -141,35 +131,35 @@ public class PlanningPhaseGUI {
             assistantOne.setVisible(false);
         }
         if (name.equals("assistantTwo")) {
-            chosenNumbers.add(2);
+            chosenNumber = 2;
             assistantTwo.setVisible(false);
         }
         if (name.equals("assistantThree")) {
-            chosenNumbers.add(3);
+            chosenNumber = 3;
             assistantThree.setVisible(false);
         }
         if (name.equals("assistantFour")) {
-            chosenNumbers.add(4);
+            chosenNumber = 4;
             assistantFour.setVisible(false);
         }
         if (name.equals("assistantFive")) {
-            chosenNumbers.add(5);
+            chosenNumber = 5;
             assistantFive.setVisible(false);
         }
         if (name.equals("assistantSix")) {
-            chosenNumbers.add(6);
+            chosenNumber = 6;
             assistantSix.setVisible(false);
         }
         if (name.equals("assistantSeven")) {
-            chosenNumbers.add(7);
+            chosenNumber = 7;
             assistantSeven.setVisible(false);
         }
         if (name.equals("assistantEight")) {
-            chosenNumbers.add(8);
+            chosenNumber = 8;
             assistantEight.setVisible(false);
         }
         if (name.equals("assistantNine")) {
-            chosenNumbers.add(9);
+            chosenNumber = 9;
             assistantNine.setVisible(false);
         }
 
