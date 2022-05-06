@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.NewRoomResponse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;

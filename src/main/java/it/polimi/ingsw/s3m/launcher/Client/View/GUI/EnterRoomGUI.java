@@ -1,12 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.EnterRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;

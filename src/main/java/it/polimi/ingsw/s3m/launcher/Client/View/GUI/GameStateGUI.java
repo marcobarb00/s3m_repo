@@ -1,10 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-
 public class GameStateGUI {
 
     /*public void update(GameStateMessage gameStateMessage, Stage secondaryStage) {

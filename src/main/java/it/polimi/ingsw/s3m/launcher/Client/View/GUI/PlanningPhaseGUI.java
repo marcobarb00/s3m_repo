@@ -1,8 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -48,8 +49,10 @@ public class PlanningPhaseGUI {
     //public void AssistantChoiceGUI(){}
 
     public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage, Stage secondaryStage) {
-        ArrayList<AssistantCardDTO> hand = planningPhaseMessage.getHand();
-        ArrayList<AssistantCardDTO> playedCards = planningPhaseMessage.getPlayedAssistantCards();
+        GameDTO gameState = planningPhaseMessage.getGameState();
+        String currentPlayer = gameState.getCurrentPlayerTurn();
+        ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
+        ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(currentPlayer).getHand();
 
         try{
             insertAssistantZero(hand.get(0));
