@@ -16,6 +16,6 @@ public class ErrorGUI {
 
     public void insert(ErrorMessage message) {
         notification.setText(message.getMessage());
-        ControllerGUI.getInstance().sendObject(new ErrorResponse());
+        ControllerGUI.getInstance().sendResponse(new ErrorResponse());
     }
 }

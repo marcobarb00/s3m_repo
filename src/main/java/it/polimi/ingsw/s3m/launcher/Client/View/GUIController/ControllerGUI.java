@@ -1,10 +1,13 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ClientGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.ErrorGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.LoadingScreenGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.ErrorMessage;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
+import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +26,11 @@ public class ControllerGUI {
     private Stage secondaryStage;
     private LoadingScreenGUI loadingScreenGUI;
     private ErrorGUI errorGui;
+    private NewRoomGUI newRoomGUI;
+    private EnterRoomGUI enterRoomGUI;
+    private NotificationGUI notificationGUI;
+    private NewRoomResponse newRoomResponse = new NewRoomResponse();
+    private GameStateGUI islandsAndDashboardGUI;
 
     private ControllerGUI() {
         secondaryStage = new Stage();
@@ -36,6 +44,10 @@ public class ControllerGUI {
         if (INSTANCE == null)
             INSTANCE = new ControllerGUI();
         return INSTANCE;
+    }
+
+    public NewRoomResponse getNewRoomResponse(){
+        return newRoomResponse;
     }
 
     public void startGame(Stage primaryStage) {
@@ -73,7 +85,6 @@ public class ControllerGUI {
         });
     }
 
-
     private void setScene(Parent root)  {
         Scene gameScene = new Scene(root);
         Platform.runLater(() -> {
@@ -85,21 +96,80 @@ public class ControllerGUI {
         });
     }
 
+    public void launchNotification(NotificationMessage message) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Notification.fxml"));
+            Parent notificationGui = (Parent) loader.load();
+            this.notificationGUI = loader.getController();
+            this.notificationGUI.insert(message);
+            setScene(notificationGui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void launchLogin(LoginMessage message){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
+            Parent loginGUI = (Parent) loader.load();
+            setScene(loginGUI);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void launchNewRoom(NewRoomMessage message) {
+        launchNumOfPlayerGui();
+    }
 
+    public void launchNumOfPlayerGui() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("NumOfPlayers.fxml"));
+            Parent showNumOfPlayers = (Parent) loader.load();
+            setScene(showNumOfPlayers);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void launchGameConfigMessage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GameConfig.fxml"));
+            Parent gameConfigGUI = (Parent) loader.load();
+            setScene(gameConfigGUI);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void launchSetNickname(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("SetNickname.fxml"));
+            Parent setNicknameGUI = (Parent) loader.load();
+            setScene(setNicknameGUI);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
-
-
+    public void launchEnterRoom(EnterRoomMessage enterRoomMessage){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("EnterRoom.fxml"));
+            Parent enterRoom = (Parent) loader.load();
+            enterRoomGUI = loader.getController();
+            enterRoomGUI.setCreatedRoom(enterRoomMessage);
+            setScene(enterRoom);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void closeSocket() {
         thread.close();
     }
 
-    public void sendObject(Response response) {
+
+    public void sendResponse(Response response) {
         thread.communicate(response);
 
     }
@@ -119,4 +189,20 @@ public class ControllerGUI {
             e.printStackTrace();
         }
     }
+
+    /*public void IslandsAndDashboard(GameStateMessage gameStateMessage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(".fxml"));
+            Parent showGame = (Parent) loader.load();
+            islandsAndDashboardGUI = loader.getController();
+            if (gameStateMessage instanceof GameStateMessage) {
+                islandsAndDashboardGUI.update((GameStateMessage) gameStateMessage, secondaryStage);
+                currentIslandsAndDashboardGUI = (GameStateMessage) gameStateMessage;
+            }
+            islandsAndDashboardGUI.inizializeForAction(currentIslandsAndDashboardGUI, secondaryStage);
+            setScene(showGame);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

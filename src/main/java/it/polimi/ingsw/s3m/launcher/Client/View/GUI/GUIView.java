@@ -1,28 +1,39 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.CLI.ClientCLI;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 
 public class GUIView extends View{
 	ClientGUI client;
+	private ControllerGUI controllerGUI;
 
-	public GUIView(ClientGUI client){
+	public GUIView(ClientGUI client, ControllerGUI controllerGUI){
 		this.client = client;
+		this.controllerGUI = controllerGUI;
 	}
 
 	@Override
-	public void login(LoginMessage loginMessage){}
+	public void login(LoginMessage loginMessage){
+		controllerGUI.threadSleep(3000);
+		controllerGUI.launchLogin(loginMessage);
+		controllerGUI.closePrimaryStage();
+	}
 
 	@Override
-	public void enterRoom(EnterRoomMessage enterRoomMessage){}
+	public void enterRoom(EnterRoomMessage enterRoomMessage){
+		controllerGUI.launchEnterRoom(enterRoomMessage);
+	}
 
 	@Override
-	public void newRoom(NewRoomMessage newRoomMessage){}
+	public void newRoom(NewRoomMessage newRoomMessage){
+		controllerGUI.launchNewRoom(newRoomMessage);
+	}
 
 	@Override
 	public void notification(NotificationMessage notification){
-
+		controllerGUI.launchNotification(notification);
 	}
 
 	@Override

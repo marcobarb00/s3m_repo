@@ -12,4 +12,7 @@ module it.polimi.ingsw.s3m.launcher{
 
     opens it.polimi.ingsw.s3m.launcher.Client.View.GUIController to javafx.fxml;
     exports it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
+
+    opens it.polimi.ingsw.s3m.launcher.Client.View.GUI to javafx.fxml;
+    exports it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 }

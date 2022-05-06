@@ -13,9 +13,10 @@ public class ClientGUI extends Thread{
 	private MessageGUI message;
 	
 	public ClientGUI(ControllerGUI controllerGUI){
-		this.view = new GUIView(this);
-		this.client = new Client();
+		this.view = new GUIView(this, controllerGUI);
 		this.controllerGUI = controllerGUI;
+		this.client = new Client();
+		this.client.start();
 	}
 
 	@Override

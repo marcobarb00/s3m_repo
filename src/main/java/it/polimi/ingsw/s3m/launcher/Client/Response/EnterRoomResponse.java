@@ -11,6 +11,17 @@ public class EnterRoomResponse implements Response{
 		this.roomID = roomID;
 	}
 
+	public EnterRoomResponse(){
+	}
+
+	public void setNickname(String nickname){
+		this.nickname = nickname;
+	}
+
+	public void setRoomID(Integer roomID){
+		this.roomID = roomID;
+	}
+
 	public String getNickname(){
 		return nickname;
 	}

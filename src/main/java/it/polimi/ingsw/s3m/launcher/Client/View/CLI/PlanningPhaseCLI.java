@@ -55,9 +55,7 @@ public class PlanningPhaseCLI implements MessageCLI{
 			}
 		}
 
-		PlayAssistantCardResponse cardChosen = new PlayAssistantCardResponse();
-		cardChosen.setCardChosen(cardChoice);
-		return cardChosen;
+		return new PlayAssistantCardResponse(cardChoice);
 	}
 
 	private void printAssistantCard(AssistantCardDTO assistantCard){
