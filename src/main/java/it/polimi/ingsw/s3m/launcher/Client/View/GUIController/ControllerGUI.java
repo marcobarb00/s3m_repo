@@ -2,11 +2,9 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
 import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Client.View.Response.NewRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
-import it.polimi.ingsw.s3m.launcher.Server.Message.ErrorMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Message.LoginMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Message.NewRoomMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,8 +24,9 @@ public class ControllerGUI {
     private LoadingScreenGUI loadingScreenGUI;
     private ErrorGUI errorGui;
     private NewRoomGUI newRoomGUI;
+    private EnterRoomGUI enterRoomGUI;
     private NotificationGUI notificationGUI;
-    private NewRoomGUI numOfPlayerGUI;
+    private NewRoomResponse newRoomResponse = new NewRoomResponse();
 
     private ControllerGUI() {
         secondaryStage = new Stage();
@@ -41,6 +40,10 @@ public class ControllerGUI {
         if (INSTANCE == null)
             INSTANCE = new ControllerGUI();
         return INSTANCE;
+    }
+
+    public NewRoomResponse getNewRoomResponse(){
+        return newRoomResponse;
     }
 
     public void startGame(Stage primaryStage) {
@@ -141,6 +144,18 @@ public class ControllerGUI {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("SetNickname.fxml"));
             Parent setNicknameGUI = (Parent) loader.load();
             setScene(setNicknameGUI);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launchEnterRoom(EnterRoomMessage enterRoomMessage){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("EnterRoom.fxml"));
+            Parent enterRoom = (Parent) loader.load();
+            enterRoomGUI = loader.getController();
+            enterRoomGUI.setCreatedRoom(enterRoomMessage);
+            setScene(enterRoom);
         } catch (IOException e) {
             e.printStackTrace();
         }

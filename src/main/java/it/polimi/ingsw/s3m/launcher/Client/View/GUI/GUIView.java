@@ -22,7 +22,9 @@ public class GUIView extends View{
 	}
 
 	@Override
-	public void enterRoom(EnterRoomMessage enterRoomMessage){}
+	public void enterRoom(EnterRoomMessage enterRoomMessage){
+		controllerGUI.launchEnterRoom(enterRoomMessage);
+	}
 
 	@Override
 	public void newRoom(NewRoomMessage newRoomMessage){
@@ -31,7 +33,7 @@ public class GUIView extends View{
 
 	@Override
 	public void notification(NotificationMessage notification){
-
+		controllerGUI.launchNotification(notification);
 	}
 
 	@Override

@@ -40,16 +40,14 @@ public class NewRoomGUI {
     GridPane gridPane;
 
 
-    private NewRoomResponse newRoomResponse = new NewRoomResponse();
-
     public void selectTwoPlayers(MouseEvent event) {
-        newRoomResponse.setNumberOfPlayers(2);
+        ControllerGUI.getInstance().getNewRoomResponse().setNumberOfPlayers(2);
         ControllerGUI.getInstance().startLoading();
         ControllerGUI.getInstance().launchGameConfigMessage();
     }
 
     public void selectThreePlayers(MouseEvent event) {
-        newRoomResponse.setNumberOfPlayers(3);
+        ControllerGUI.getInstance().getNewRoomResponse().setNumberOfPlayers(3);
         ControllerGUI.getInstance().startLoading();
         ControllerGUI.getInstance().launchGameConfigMessage();
     }
@@ -62,13 +60,13 @@ public class NewRoomGUI {
 
 
     public void selectNormal(MouseEvent mouseEvent) {
-        newRoomResponse.setExpertMode(false);
+        ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(false);
         ControllerGUI.getInstance().startLoading();
         ControllerGUI.getInstance().launchSetNickname();
     }
 
     public void selectExpert(MouseEvent mouseEvent) {
-        newRoomResponse.setExpertMode(true);
+        ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(true);
         ControllerGUI.getInstance().startLoading();
         ControllerGUI.getInstance().launchSetNickname();
     }
@@ -78,9 +76,9 @@ public class NewRoomGUI {
 
     public void enterGame(ActionEvent event) {
         String nick = nickname.getText();
-        newRoomResponse.setNickname(nick);
+        ControllerGUI.getInstance().getNewRoomResponse().setNickname(nick);
         ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().sendResponse(newRoomResponse);
+        ControllerGUI.getInstance().sendResponse(ControllerGUI.getInstance().getNewRoomResponse());
     }
 
 
