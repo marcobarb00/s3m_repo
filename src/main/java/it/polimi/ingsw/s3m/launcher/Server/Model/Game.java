@@ -371,9 +371,7 @@ public class Game {
     public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
     public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
     public boolean isCharacterCardActivated() { return ((ActionPhase) turn.getCurrentPhase()).isActivatedCharacterCard(); }
-    public ArrayList<AssistantCard> getTurnPlayedCards() {
-        return new ArrayList<>(((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().values());
-    }
+    public ArrayList<AssistantCard> getTurnPlayedCards() { return new ArrayList<>(((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().values()); }
 
     // SETTER - Turn
     public void setCurrentPlayerNickname(String nickname) {
@@ -381,6 +379,9 @@ public class Game {
     }
     public void setCurrentPhase(Phase phase) {
         turn.setCurrentPhase(phase);
+    }
+    public void setActivatedCharacterCard() {
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     // GETTER
