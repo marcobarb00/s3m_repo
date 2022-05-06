@@ -233,7 +233,7 @@ public class Game {
             if (characterCard instanceof MagicPostman) magicPostman = characterCard;
         }
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        chosenPlayer.getLastCardPlayed().incrementMovementsByTwo();
+        chosenPlayer.getLastPlayedCard().incrementMovementsByTwo();
         chosenPlayer.removeCoins(magicPostman.getCost());
         magicPostman.incrementCost();
     }
@@ -306,10 +306,10 @@ public class Game {
 
     public void playAssistantCard(String playerNickname, int position) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        chosenPlayer.setLastCardPlayed(chosenPlayer.getHand().get(position));
+        chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
-        ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getLastCardPlayed());
-        playedAssistantCardsList.add(chosenPlayer.getLastCardPlayed());
+        ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getLastPlayedCard());
+        playedAssistantCardsList.add(chosenPlayer.getLastPlayedCard());
     }
 
     public void putStudentsOnTables(String playerNickname, ArrayList<Student> selectedStudents) {
@@ -340,7 +340,7 @@ public class Game {
     }
     public AssistantCard getPlayerLastPlayedAssistantCard(String playerNickname) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        return chosenPlayer.getLastCardPlayed();
+        return chosenPlayer.getLastPlayedCard();
     }
     public int getPlayerCoins(String playerNickname) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
