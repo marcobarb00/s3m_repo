@@ -11,7 +11,6 @@ public class ThreePlayersGameInitializer extends GameInitializer {
         playersSetup(playersNicknames);
         dashboardsSetup();
         studentsInEntranceSetup();
-        cloudsSetup();
         islandsSetup();
     }
 
@@ -45,13 +44,6 @@ public class ThreePlayersGameInitializer extends GameInitializer {
                 }
             }
             player.getDashboard().addStudentsInEntrance(enteringHallStudents);
-        }
-    }
-
-    @Override
-    public void cloudsSetup() {
-        for (int i = 0; i < game.getNumberOfPlayers(); i++) {
-            game.refillCloudStudents(game.getCloudsList().get(i), 4);
         }
     }
 }

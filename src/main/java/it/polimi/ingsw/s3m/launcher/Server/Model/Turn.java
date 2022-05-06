@@ -4,17 +4,16 @@ public class Turn {
     private String firstPlayerNickname;
     private String currentPlayerNickname;
     private Phase currentPhase;
-    private boolean characterCardActivated;
 
     public Turn(String firstPlayerNickname) {
         this.currentPlayerNickname = firstPlayerNickname;
+        this.currentPhase = new PlanningPhase();
     }
 
     // GETTER
     public String getFirstPlayerNickname() { return firstPlayerNickname; }
     public String getCurrentPlayerNickname() { return currentPlayerNickname; }
     public Phase getCurrentPhase() { return currentPhase; }
-    public boolean isActivatedCharacterCard() { return characterCardActivated; }
 
     // SETTER
     public void setFirstPlayerNickname(String firstPlayerNickname) {
@@ -25,8 +24,5 @@ public class Turn {
     }
     public void setCurrentPhase(Phase currentPhase) {
         this.currentPhase = currentPhase;
-    }
-    public void setActivatedCharacterCard(boolean characterCardActivated) {
-        this.characterCardActivated = characterCardActivated;
     }
 }
