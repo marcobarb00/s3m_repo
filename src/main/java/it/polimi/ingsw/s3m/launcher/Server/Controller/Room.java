@@ -7,19 +7,18 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.DoubleNicknameException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
-import it.polimi.ingsw.s3m.launcher.Server.Operation.ActivateCentaurEffectOperation;
-import it.polimi.ingsw.s3m.launcher.Server.Operation.Operation;
-import it.polimi.ingsw.s3m.launcher.Server.Operation.PlayAssistantCardOperation;
+import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -83,26 +82,29 @@ public class Room {
         while(true){
             gameState.refillClouds();
 
-            //TODO call the method to calculate who's starting
+            ArrayList<String> nicknameList =  playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
 
-            for(int i = 0; i < playersNumber; i++){
+            int i = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+            while(i < playersNumber){
                 PlayerController currentPlayer = playersList.get(i);
-                sendNotificationToPlayer(currentPlayer, "it's your turn");
-                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn");
+                sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
+                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn to execute the planning phase");
                 sendGameState(currentPlayer);
                 planningPhase(currentPlayer);
+
+                i = (i+1) % playersNumber;
             }
 
-            //TODO call method to calculate player's turn
+            gameState.setTurnFirstPlayer();
 
-            for(int i = 0; i < playersNumber; i++){
+            i = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+            while(i < playersNumber){
                 PlayerController currentPlayer = playersList.get(i);
-                sendNotificationToPlayer(currentPlayer, "it's your turn");
-                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn");
-                sendGameState(currentPlayer);
+                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn to execute the action phase");
                 actionPhase(currentPlayer);
+
+                i = (i+1) % playersNumber;
             }
-            //turn.setPLayer(turn.getNextPlayer());
         }
     }
 
@@ -116,6 +118,7 @@ public class Room {
     }
 
     private void planningPhase(PlayerController player){
+        //TODO change gameState.getPlayedAssistantCardsList() into gameState.getTurn().getPlayedAssistantCardsList()
         ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
         ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(playedCards, handDTO);
@@ -138,7 +141,7 @@ public class Room {
                 sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
                 RoomsController.instance().deleteRoom(roomID, player);
             }catch(IllegalArgumentException e){
-                //TODO handle exception
+                sendNotificationToPlayer(player, e.getMessage());
             }
 
             successful = true;
@@ -146,11 +149,15 @@ public class Room {
     }
 
     private void actionPhase(PlayerController player){
-        //move students phase
         moveStudentPhase(player);
+        motherNaturePhase(player);
+        chooseCloudPhase(player);
     }
 
     private void moveStudentPhase(PlayerController player){
+        sendNotificationToPlayer(player, "it's your turn to move the students");
+        sendGameState(player);
+
         ArrayList<CharacterCardDTO> characterCardList = mapper.characterCardListToDTO(gameState.getCharacterCardsList());
         MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(characterCardList, expertMode, playersNumber==3);
         Response response = player.communicateWithClient(moveStudentsPhaseMessage);
@@ -164,15 +171,49 @@ public class Room {
 
         if(moveStudentsResponse.isCharacterCardActivated()){
             CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(moveStudentsResponse.getCharacterCardPosition());
-            Operation operation;
+            Operation characterCardOperation = null;
             switch(playedCharacterCard.getName()){
                 case "Centaur":
-                    operation = new ActivateCentaurEffectOperation(gameState, player);
+                    characterCardOperation = new ActivateCentaurEffectOperation(gameState, player);
                     break;
-                    //TODO complete switch
-                case "...":
+                case "Knight":
+                    characterCardOperation = new ActivateKnightEffectOperation(gameState, player);
+                    break;
+                case "Minstrel":
+                    //characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player);
+                    break;
+                case "Mushroomer":
+                    //characterCardOperation = new ActivateMushroomerEffectOperation(gameState, player);
+                    break;
+                case "Jester":
+                    //characterCardOperation = new ActivateJesterEffectOperation(gameState, player);
+                    break;
+                case "MagicPostman":
+                    characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
+                    break;
+                default:
+                    //TODO notificate the error
+            }
+
+            try{
+                characterCardOperation.executeOperation();
+            }catch(PlayerNotInListException e){
+                sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
+                RoomsController.instance().deleteRoom(roomID, player);
+            }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException e){
+                sendNotificationToAll(e.getMessage());
             }
         }
+    }
+
+    public void motherNaturePhase(PlayerController player){
+        sendNotificationToPlayer(player, "it's your turn to move the students");
+        sendGameState(player);
+    }
+
+    public void chooseCloudPhase(PlayerController player){
+        sendNotificationToPlayer(player, "it's your turn to choose the cloud");
+        sendGameState(player);
     }
 
     public void deleteRoom(PlayerController player){

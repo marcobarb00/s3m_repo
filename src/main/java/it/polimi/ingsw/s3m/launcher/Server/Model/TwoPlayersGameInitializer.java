@@ -11,7 +11,6 @@ public class TwoPlayersGameInitializer extends GameInitializer {
         playersSetup(playersNicknames);
         dashboardsSetup();
         studentsInEntranceSetup();
-        cloudsSetup();
         islandsSetup();
     }
 
@@ -43,13 +42,6 @@ public class TwoPlayersGameInitializer extends GameInitializer {
                 }
             }
             player.getDashboard().addStudentsInEntrance(enteringHallStudents);
-        }
-    }
-
-    @Override
-    public void cloudsSetup() {
-        for (int i = 0; i < game.getNumberOfPlayers(); i++) {
-            game.refillCloudStudents(game.getCloudsList().get(i), 3);
         }
     }
 }
