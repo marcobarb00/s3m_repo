@@ -2,6 +2,8 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.Response.PlayAssistantCardResponse;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanningPhaseGUI {
-
-    private List<Integer> chosenNumbers;
 
     @FXML
     GridPane gridPane;
@@ -46,25 +46,31 @@ public class PlanningPhaseGUI {
 
 
     public void AssistantChoiceGUI(){
-        this.chosenNumbers = new ArrayList<>();
     }
 
-    public void insertAssistant(List<Integer> cardNumbers, Stage secondaryStage) {
-        insertAssistantZero(cardNumbers.get(0));
-        insertAssistantOne(cardNumbers.get(1));
-        insertAssistantTwo(cardNumbers.get(2));
-        insertAssistantThree(cardNumbers.get(3));
-        insertAssistantFour(cardNumbers.get(4));
-        insertAssistantFive(cardNumbers.get(5));
-        insertAssistantSix(cardNumbers.get(6));
-        insertAssistantSeven(cardNumbers.get(7));
-        insertAssistantEight(cardNumbers.get(8));
-        insertAssistantNine(cardNumbers.get(9));
+    public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage, Stage secondaryStage) {
+        ArrayList<AssistantCardDTO> hand = planningPhaseMessage.getHand();
+        ArrayList<AssistantCardDTO> playedCards = planningPhaseMessage.getPlayedAssistantCards();
+
+        try{
+            insertAssistantZero(hand.get(0));
+            insertAssistantOne(hand.get(1));
+            insertAssistantTwo(hand.get(2));
+            insertAssistantThree(hand.get(3));
+            insertAssistantFour(hand.get(4));
+            insertAssistantFive(hand.get(5));
+            insertAssistantSix(hand.get(6));
+            insertAssistantSeven(hand.get(7));
+            insertAssistantEight(hand.get(8));
+            insertAssistantNine(hand.get(9));
+        }catch(ArrayIndexOutOfBoundsException e){
+            return;
+        }
+
     }
 
-    public void insertAssistantZero(Integer cardNumbers) {
-        int c = cardNumbers;
-        Image view = new Image(c + ".jpg");
+    public void insertAssistantZero(AssistantCardDTO assistantCardDTO) {
+        Image view = new Image(assistantCardDTO.getType() + ".jpg");
         assistantZero.setImage(view);
     }
 
@@ -124,12 +130,14 @@ public class PlanningPhaseGUI {
 
     public void chooseAssistantCard(MouseEvent event) {
         String name = event.getPickResult().getIntersectedNode().getId();
+        int chosenNumber = -1;
+
         if (name.equals("assistantZero")) {
-            chosenNumbers.add(0);
+            chosenNumber = 0;
             assistantZero.setVisible(false);
         }
         if (name.equals("assistantOne")) {
-            chosenNumbers.add(1);
+            chosenNumber = 1;
             assistantOne.setVisible(false);
         }
         if (name.equals("assistantTwo")) {
@@ -165,13 +173,9 @@ public class PlanningPhaseGUI {
             assistantNine.setVisible(false);
         }
 
-
-        if (chosenNumbers.size() > 1) {
-            ControllerGUI.getInstance().sendResponse(new PlayAssistantCardResponse());
-            hide();
-            ControllerGUI.getInstance().startLoading();
-        }
-
+        ControllerGUI.getInstance().sendResponse(new PlayAssistantCardResponse(chosenNumber));
+        hide();
+        ControllerGUI.getInstance().startLoading();
     }
 
     private void hide() {
