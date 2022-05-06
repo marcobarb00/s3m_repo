@@ -178,13 +178,13 @@ public class Game {
 
     // TURN
 
-    //TODO this method
     public void setTurnFirstPlayer() {
         int minValue = 11;
-        for (AssistantCard assistantCard : ((PlanningPhase) turn.getCurrentPhase()).getPlayedCards()) {
-            int cardValue = assistantCard.getValue();
+        for (String nickname : ((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().keySet()) {
+            int cardValue = ((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().get(nickname).getValue();
             if (cardValue < minValue) {
                 minValue = cardValue;
+                turn.setFirstPlayerNickname(nickname);
             }
         }
     }
@@ -308,7 +308,7 @@ public class Game {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
-        ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getLastPlayedCard());
+        ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
         playedAssistantCardsList.add(chosenPlayer.getLastPlayedCard());
     }
 
@@ -361,6 +361,9 @@ public class Game {
     public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
     public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
     public boolean isCharacterCardActivated() { return turn.isActivatedCharacterCard(); }
+    public ArrayList<AssistantCard> getPlayedCards() {
+        return new ArrayList<>(((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().values());
+    }
 
     // GETTER
     public boolean isExpertMode() { return expertMode; }
