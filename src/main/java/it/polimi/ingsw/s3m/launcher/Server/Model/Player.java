@@ -8,7 +8,7 @@ public class Player {
     private final TowerColor color;
     private Dashboard dashboard;
     private ArrayList<AssistantCard> hand;
-    private AssistantCard lastCardPlayed = null;
+    private AssistantCard lastPlayedCard = null;
     private int coins = 0;
 
     public Player (String nickname, TowerColor color) {
@@ -36,9 +36,9 @@ public class Player {
     public TowerColor getColor() { return color; }
     public Dashboard getDashboard() { return dashboard; }
     public ArrayList<AssistantCard> getHand() { return hand; }
-    public AssistantCard getLastCardPlayed() { return lastCardPlayed; }
+    public AssistantCard getLastPlayedCard() { return lastPlayedCard; }
     public int getCoins() { return coins; }
 
     // SETTER
-    public void setLastCardPlayed(AssistantCard lastCardPlayed) { this.lastCardPlayed = lastCardPlayed; }
+    public void setLastPlayedCard(AssistantCard lastPlayedCard) { this.lastPlayedCard = lastPlayedCard; }
 }
