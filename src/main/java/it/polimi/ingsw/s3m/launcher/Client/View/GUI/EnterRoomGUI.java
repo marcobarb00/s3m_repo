@@ -29,14 +29,23 @@ public class EnterRoomGUI {
     public void enterGame(ActionEvent event) {
         String nick = nickname.getText();
         enterRoomResponse.setNickname(nick);
+        Integer roomIDChoice;
+        try{
+             roomIDChoice = Integer.parseInt(roomID.getText());
+        }catch(NumberFormatException e){
+            roomIDChoice = 0;
+        }
+        enterRoomResponse.setRoomID(roomIDChoice);
         ControllerGUI.getInstance().startLoading();
         ControllerGUI.getInstance().sendResponse(enterRoomResponse);
     }
 
     public void setCreatedRoom(EnterRoomMessage message) {
+        StringBuilder availableRoomList = new StringBuilder();
         if (message.getAvailableRoomsID() != null) {
             for (Integer roomID : message.getAvailableRoomsID())
-                otherIDRoom.setText(roomID + "\n");
+                availableRoomList.append(roomID).append("\n");
         }
+        otherIDRoom.setText(availableRoomList.toString());
     }
 }
