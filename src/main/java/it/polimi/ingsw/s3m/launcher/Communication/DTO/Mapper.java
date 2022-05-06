@@ -108,12 +108,26 @@ public class Mapper{
 		return cloudDTOList;
 	}
 
+	public TurnDTO turnToDTO(Turn turn){
+		if(turn.getCurrentPhase() instanceof PlanningPhase){
+			PlanningPhase phase = (PlanningPhase) turn.getCurrentPhase();
+			ArrayList<AssistantCardDTO> playedCards = new ArrayList<>();
+			phase.getPlayedCards().forEach((nickname, card) -> playedCards.add(assistantCardToDTO(card)));
+
+			return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), "PlanningPhase", playedCards, false);
+		}else if(turn.getCurrentPhase() instanceof ActionPhase){
+			return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), "PlanningPhase", new ArrayList<>(), ((ActionPhase) turn.getCurrentPhase()).isActivatedCharacterCard());
+		}else{
+			return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), "NoPhase", new ArrayList<>(), false);
+		}
+	}
+
 	public GameDTO gameToDTO(Game game){
 		HashMap<String, PlayerDTO> playerList = playerHashMapToDTO(game.getPlayerHashMap());
 
 		HashMap<String, PlayerDTO> professors = new HashMap<>();
 		game.getProfessorsHashMap().forEach((color, player) -> professors.put(color.name(), playerToDTO(player)));
 
-		return new GameDTO(game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()) , assistantCardListToDTO(game.getPlayedAssistantCardsList()), game.getCurrentPlayerNickname());
+		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()), game.getCurrentPlayerNickname(), turnToDTO(game.getTurn()));
 	}
 }

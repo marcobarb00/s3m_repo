@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
@@ -14,18 +15,14 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class MoveStudentsPhaseCLI implements MessageCLI{
-	private ArrayList<CharacterCardDTO> characterCardDTOList;
-	private boolean expertMode;
-	private boolean threePlayerMode;
+	private GameDTO gameState;
 	private int selectedCharacterCard;			//To put in response constructor
 	private boolean characterCardActivated;
 	private int studentsMoved;
 	private ArrayList<Student> studentsToBeMoved;
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
-		this.characterCardDTOList = moveStudentsPhaseMessage.getCharacterCardDTOList();
-		this.expertMode = moveStudentsPhaseMessage.isExpertMode();
-		this.threePlayerMode = moveStudentsPhaseMessage.isThreePlayerMode();
+		this.gameState = moveStudentsPhaseMessage.getGameState();
 	}
 
 	@Override
@@ -34,7 +31,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 		//Checking if 3 or 4 mode game
 		int studentsToBeMoved = 3;
-		if(threePlayerMode){
+		if(gameState.getPlayersNumber() == 3){
 			studentsToBeMoved = 4;
 		}
 
@@ -45,7 +42,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			System.out.println("choose your operation:");
 			System.out.println("1) move a student from the hall to the tables" +
 							   "\n2) move a student from the hall to an island");
-			if(expertMode) {
+			if(gameState.isExpertMode()) {
 				System.out.println("3) activate a character card" );
 				maxOperationNumber = 3;
 			}
@@ -64,6 +61,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	}
 
 	public void chooseCharacterCard(){
+		ArrayList<CharacterCardDTO> characterCardDTOList = gameState.getCharacterCards();
+
 		System.out.println("choose character card:");
 		int cardsNumber = characterCardDTOList.size();
 		for (int i = 0; i < cardsNumber; i++) {
@@ -97,14 +96,6 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 				operationChoice = 0;
 			}
 		}
-	}
-
-	public void setThreePlayerMode(boolean threePlayerMode){
-		this.threePlayerMode = threePlayerMode;
-	}
-
-	public void setExpertMode(boolean expertMode) {
-		this.expertMode = expertMode;
 	}
 
 	private void incrementStudentsMoved(){

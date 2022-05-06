@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
@@ -9,16 +10,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlanningPhaseCLI implements MessageCLI{
-	ArrayList<AssistantCardDTO> playedAssistantCards;
-	ArrayList<AssistantCardDTO> hand;
+	GameDTO gameState;
 
 	public PlanningPhaseCLI(PlanningPhaseMessage planningPhaseMessage){
-		this.playedAssistantCards = planningPhaseMessage.getPlayedAssistantCards();
-		this.hand = planningPhaseMessage.getHand();
+		this.gameState = planningPhaseMessage.getGameState();
 	}
 
 	@Override
 	public Response execute(){
+		GameStateCLI gameStateCLI = new GameStateCLI(gameState);
+		gameStateCLI.printState();
+
+		String currentPlayer = gameState.getCurrentPlayerTurn();
+		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
+		ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(currentPlayer).getHand();
+
 		if(playedAssistantCards.size() != 0){
 			System.out.println("\ncards played by the other players:");
 			for(AssistantCardDTO assistantCard : playedAssistantCards){

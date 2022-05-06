@@ -12,8 +12,6 @@ public abstract class View{
 
 	public abstract void notification(NotificationMessage notification);
 
-	public abstract void updateGameState(GameStateMessage gameState);
-
 	public abstract void planningPhase(PlanningPhaseMessage planningPhaseMessage);
 
 	public abstract void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage);

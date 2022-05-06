@@ -2,33 +2,20 @@ package it.polimi.ingsw.s3m.launcher.Server.Message;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 import java.util.ArrayList;
 
 public class PlanningPhaseMessage implements Message{
-	ArrayList<AssistantCardDTO> playedAssistantCards;
-	ArrayList<AssistantCardDTO> hand;
+	GameDTO gameState;
 
-	public PlanningPhaseMessage(ArrayList<AssistantCardDTO> playedAssistantCards, ArrayList<AssistantCardDTO> hand){
-		this.playedAssistantCards = playedAssistantCards;
-		this.hand = hand;
+	public PlanningPhaseMessage(GameDTO gameState){
+		this.gameState = gameState;
 	}
 
-	public void setPlayedAssistantCards(ArrayList<AssistantCardDTO> playedAssistantCards){
-		this.playedAssistantCards = playedAssistantCards;
-	}
-
-	public void setHand(ArrayList<AssistantCardDTO> hand){
-		this.hand = hand;
-	}
-
-	public ArrayList<AssistantCardDTO> getPlayedAssistantCards(){
-		return playedAssistantCards;
-	}
-
-	public ArrayList<AssistantCardDTO> getHand(){
-		return hand;
+	public GameDTO getGameState(){
+		return gameState;
 	}
 
 	@Override

@@ -2,13 +2,10 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
-import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
@@ -17,8 +14,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -89,7 +84,6 @@ public class Room {
                 PlayerController currentPlayer = playersList.get(i);
                 sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
                 sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn to execute the planning phase");
-                sendGameState(currentPlayer);
                 planningPhase(currentPlayer);
 
                 i = (i+1) % playersNumber;
@@ -119,9 +113,7 @@ public class Room {
 
     private void planningPhase(PlayerController player){
         //TODO change gameState.getPlayedAssistantCardsList() into gameState.getTurn().getPlayedAssistantCardsList()
-        ArrayList<AssistantCardDTO> playedCards = mapper.assistantCardListToDTO(gameState.getPlayedAssistantCardsList());
-        ArrayList<AssistantCardDTO> handDTO = mapper.assistantCardListToDTO(gameState.getPlayerHand(player.getNickname()));
-        PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(playedCards, handDTO);
+        PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(mapper.gameToDTO(gameState));
 
         boolean successful = false;
 
@@ -156,10 +148,8 @@ public class Room {
 
     private void moveStudentPhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to move the students");
-        sendGameState(player);
 
-        ArrayList<CharacterCardDTO> characterCardList = mapper.characterCardListToDTO(gameState.getCharacterCardsList());
-        MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(characterCardList, expertMode, playersNumber==3);
+        MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
         Response response = player.communicateWithClient(moveStudentsPhaseMessage);
 
         while(!(response instanceof MoveStudentsResponse)){
@@ -200,7 +190,8 @@ public class Room {
             }catch(PlayerNotInListException e){
                 sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
                 RoomsController.instance().deleteRoom(roomID, player);
-            }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException e){
+            }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException | NotPlayersTurnException | ZeroTowersRemainedException | NotEnoughIslandsException e){
+                //TODO fix exceptions ZeroTowersRemainedException, NotEnoughIslandsException
                 sendNotificationToAll(e.getMessage());
             }
         }
@@ -208,12 +199,10 @@ public class Room {
 
     public void motherNaturePhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to move the students");
-        sendGameState(player);
     }
 
     public void chooseCloudPhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to choose the cloud");
-        sendGameState(player);
     }
 
     public void deleteRoom(PlayerController player){
@@ -239,10 +228,5 @@ public class Room {
         for(PlayerController player : playersList){
             player.communicateWithClient(notification);
         }
-    }
-
-    private void sendGameState(PlayerController player){
-        GameDTO gameDTO = mapper.gameToDTO(gameState);
-        player.communicateWithClient(new GameStateMessage(gameDTO));
     }
 }

@@ -26,11 +26,6 @@ public class GUIView extends View{
 	}
 
 	@Override
-	public void updateGameState(GameStateMessage gameState){
-
-	}
-
-	@Override
 	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
 
 	}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDTO implements Serializable{
+	private int playersNumber;
 	private boolean expertMode;
 	private int motherNaturePosition;
 	private HashMap<String, PlayerDTO> players;
@@ -12,10 +13,10 @@ public class GameDTO implements Serializable{
 	private HashMap<String, PlayerDTO> professors;
 	private ArrayList<IslandDTO> islands;
 	private ArrayList<CharacterCardDTO> characterCards;
-	private ArrayList<AssistantCardDTO> playedAssistantCardsList;
 	private String currentPlayerTurn;
+	private TurnDTO turn;
 
-	public GameDTO(boolean expertMode, int motherNaturePosition, HashMap<String, PlayerDTO> players, ArrayList<CloudDTO> clouds, HashMap<String, PlayerDTO> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards, ArrayList<AssistantCardDTO> playedAssistantCardsList, String currentPlayerTurn){
+	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, HashMap<String, PlayerDTO> players, ArrayList<CloudDTO> clouds, HashMap<String, PlayerDTO> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards, String currentPlayerTurn, TurnDTO turn){
 		this.expertMode = expertMode;
 		this.motherNaturePosition = motherNaturePosition;
 		this.players = players;
@@ -23,8 +24,13 @@ public class GameDTO implements Serializable{
 		this.professors = professors;
 		this.islands = islands;
 		this.characterCards = characterCards;
-		this.playedAssistantCardsList = playedAssistantCardsList;
 		this.currentPlayerTurn = currentPlayerTurn;
+		this.turn = turn;
+		this.playersNumber = playersNumber;
+	}
+
+	public int getPlayersNumber(){
+		return playersNumber;
 	}
 
 	public boolean isExpertMode(){
@@ -55,11 +61,11 @@ public class GameDTO implements Serializable{
 		return characterCards;
 	}
 
-	public ArrayList<AssistantCardDTO> getPlayedAssistantCardsList(){
-		return playedAssistantCardsList;
-	}
-
 	public String getCurrentPlayerTurn(){
 		return currentPlayerTurn;
+	}
+
+	public TurnDTO getTurn(){
+		return turn;
 	}
 }

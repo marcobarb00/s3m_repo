@@ -1,21 +1,19 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
-import it.polimi.ingsw.s3m.launcher.Server.Message.GameStateMessage;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 import java.util.HashMap;
 
-public class GameStateCLI implements MessageCLI{
+public class GameStateCLI{
 	GameDTO gameState;
 
-	public GameStateCLI(GameStateMessage gameStateMessage){
-		this.gameState = gameStateMessage.getGameState();
+	public GameStateCLI(GameDTO gameState){
+		this.gameState = gameState;
 	}
 
-	@Override
-	public Response execute(){
+	public void printState(){
+		//TODO print characterCard
+
 		System.out.println("\nislands:");
 		System.out.println("WIP");
 		//TODO print islands
@@ -28,8 +26,6 @@ public class GameStateCLI implements MessageCLI{
 			System.out.println("\n" + nickname + "'s dashboard:");
 			printDashboard(player.getDashboard());
 		});
-
-		return null;
 	}
 
 	private void printIsland(IslandDTO island){
