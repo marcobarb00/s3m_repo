@@ -13,7 +13,6 @@ public abstract class GameInitializer {
     public abstract void playersSetup(ArrayList<String> nicknames);
     public abstract void dashboardsSetup();
     public abstract void studentsInEntranceSetup();
-    public abstract void cloudsSetup();
 
     // Common method islandsSetup
     public void islandsSetup() {

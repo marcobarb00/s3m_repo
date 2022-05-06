@@ -257,6 +257,7 @@ public class Game {
         chosenPlayer.removeCoins(minstrel.getCost());
         minstrel.incrementCost();
         ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        //TODO update professors
     }
 
     public void activateMushroomerEffect (String playerNickname, PawnColor chosenColor) {
@@ -324,6 +325,7 @@ public class Game {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(selectedStudents);
         chosenPlayer.addCoins(additionalCoins);
+        //TODO update professors
     }
 
     public void putStudentsOnIslands(String playerNickname, int position, ArrayList<Student> selectedStudents) {
