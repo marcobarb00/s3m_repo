@@ -11,18 +11,18 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game {
     private final int numberOfPlayers;
     private final boolean expertMode;
-    private MotherNature motherNature = new MotherNature();
-    private Bag bag = new Bag();
-    private HashMap<String, Player> playerHashMap = new HashMap<>();
-    private HashMap<PawnColor, Player> professorsHashMap = new HashMap<>();
-    private ArrayList<Cloud> cloudsList = new ArrayList<>();
-    private ArrayList<Island> islandsList = new ArrayList<>();
-    private ArrayList<AssistantCard> playedAssistantCardsList = new ArrayList<>();
-    private ArrayList<CharacterCard> characterCardsList = new ArrayList<>();
+    private final MotherNature motherNature = new MotherNature();
+    private final Bag bag = new Bag();
+    private final HashMap<String, Player> playerHashMap = new HashMap<>();
+    private final HashMap<PawnColor, Player> professorsHashMap = new HashMap<>();
+    private final ArrayList<Cloud> cloudsList = new ArrayList<>();
+    private final ArrayList<Island> islandsList = new ArrayList<>();
+    private final ArrayList<AssistantCard> playedAssistantCardsList = new ArrayList<>();
+    private final ArrayList<CharacterCard> characterCardsList = new ArrayList<>();
     private ComputeDominanceStrategy computeDominanceStrategy = new StandardComputeDominance();
     private GameInitializer gameInitializer;
     private ExpertModeInitializer expertModeInitializer;
-    private Turn turn;
+    private final Turn turn;
 
     public Game (ArrayList<String> playersNicknameList, boolean expertMode) {
         this.numberOfPlayers = playersNicknameList.size();
@@ -189,6 +189,7 @@ public class Game {
         }
     }
 
+
     // Operations
 
     public void activateCentaurEffect (String playerNickname) {
@@ -200,6 +201,7 @@ public class Game {
         computeDominanceStrategy = new CentaurComputeDominance();
         chosenPlayer.removeCoins(centaur.getCost());
         centaur.incrementCost();
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
@@ -213,6 +215,7 @@ public class Game {
         chosenPlayer.getDashboard().addStudentsInEntrance(exchangingStudents);
         chosenPlayer.removeCoins(jester.getCost());
         jester.incrementCost();
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     public void activateKnightEffect (String playerNickname) {
@@ -225,6 +228,7 @@ public class Game {
         ((KnightComputeDominance) computeDominanceStrategy).setActingPlayer(chosenPlayer);
         chosenPlayer.removeCoins(knight.getCost());
         knight.incrementCost();
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     public void activateMagicPostmanEffect (String playerNickname) {
@@ -236,6 +240,7 @@ public class Game {
         chosenPlayer.getLastPlayedCard().incrementMovementsByTwo();
         chosenPlayer.removeCoins(magicPostman.getCost());
         magicPostman.incrementCost();
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     public void activateMinstrelEffect (String playerNickname, ArrayList<Student> enteringStudents, ArrayList<Student> enteringTablesStudents) {
@@ -251,6 +256,7 @@ public class Game {
         chosenPlayer.addCoins(additionalCoins);
         chosenPlayer.removeCoins(minstrel.getCost());
         minstrel.incrementCost();
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     public void activateMushroomerEffect (String playerNickname, PawnColor chosenColor) {
@@ -263,6 +269,7 @@ public class Game {
         ((MushroomerComputeDominance) computeDominanceStrategy).setChosenColor(chosenColor);
         chosenPlayer.removeCoins(mushroomer.getCost());
         mushroomer.incrementCost();
+        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
     }
 
     public void chooseCloud(String playerNickname, int position) {
@@ -326,6 +333,7 @@ public class Game {
         chosenIsland.addStudentsOnIsland(selectedStudents);
     }
 
+
     // GETTER - Player
     public int getNumberOfPlayers() { return numberOfPlayers; }
     public HashMap<String, Player> getPlayerHashMap() { return playerHashMap; }
@@ -360,9 +368,17 @@ public class Game {
     public String getFirstPlayerNickname() { return turn.getFirstPlayerNickname(); }
     public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
     public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
-    public boolean isCharacterCardActivated() { return turn.isActivatedCharacterCard(); }
-    public ArrayList<AssistantCard> getPlayedCards() {
+    public boolean isCharacterCardActivated() { return ((ActionPhase) turn.getCurrentPhase()).isActivatedCharacterCard(); }
+    public ArrayList<AssistantCard> getTurnPlayedCards() {
         return new ArrayList<>(((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().values());
+    }
+
+    // SETTER - Turn
+    public void setCurrentPlayerNickname(String nickname) {
+        turn.setCurrentPlayerNickname(nickname);
+    }
+    public void setCurrentPhase(Phase phase) {
+        turn.setCurrentPhase(phase);
     }
 
     // GETTER
