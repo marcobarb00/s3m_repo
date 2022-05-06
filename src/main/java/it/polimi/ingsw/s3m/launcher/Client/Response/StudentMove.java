@@ -11,6 +11,11 @@ public class StudentMove{
 		this.islandIndex = islandIndex;
 	}
 
+	public StudentMove(String color, boolean movedOnIsland){
+		this.color = color;
+		this.movedOnIsland = movedOnIsland;
+	}
+
 	public String getColor(){
 		return color;
 	}

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.StudentMove;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
@@ -19,7 +20,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	private int selectedCharacterCard;			//To put in response constructor
 	private boolean characterCardActivated;
 	private int studentsMoved;
-	private ArrayList<Student> studentsToBeMoved;
+	private int studentsToBeMoved;
+	private ArrayList<StudentMove> studentToMove;
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
 		this.gameState = moveStudentsPhaseMessage.getGameState();
@@ -55,7 +57,6 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			}
 
 		//TODO return students response
-		//TODO
 		//return new MoveStudentsResponse(characterCardActivated, selectedCharacterCard, studentsToBeMoved );
 		return null;
 	}
@@ -98,14 +99,28 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 		}
 	}
 
-	private void incrementStudentsMoved(){
+	//TODO needs gameState
+	private void chooseIsland(){
+		//System.out.println("choose an island from 1 to " + (islandList.size() - 1));
+
+		System.out.println("choose a color");
+		System.out.println("1) RED	2) GREEN");
+		System.out.println("3) BLUE	4) PINK");
+		System.out.println("5) YELLOW");
+
+		//studentsToMove.add(new StudentMove(studentColor, true, islandPosition));
+		this.studentsMoved++;
+	}
+
+	private void chooseColor(){
+		System.out.println("choose a color");
 		this.studentsMoved++;
 	}
 
 	private HashMap<Integer, Runnable> setOperations(){
 		HashMap<Integer, Runnable> operations = new HashMap<>();
-		operations.put(1, () -> incrementStudentsMoved() );
-		operations.put(2, () ->  incrementStudentsMoved());
+		operations.put(1, () -> chooseIsland() );
+		operations.put(2, () ->  chooseColor());
 		operations.put(3, () -> chooseCharacterCard() );
 		return operations;
 	}
