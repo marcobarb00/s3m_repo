@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
-import it.polimi.ingsw.s3m.launcher.Client.View.Response.EnterRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.Response.NewRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
@@ -27,6 +26,8 @@ public class ControllerGUI {
     private EnterRoomGUI enterRoomGUI;
     private NotificationGUI notificationGUI;
     private NewRoomResponse newRoomResponse = new NewRoomResponse();
+    private GameStateGUI islandsAndDashboardGUI;
+    private GameStateMessage currentIslandsAndDashboardGUI;
 
     private ControllerGUI() {
         secondaryStage = new Stage();
@@ -185,4 +186,33 @@ public class ControllerGUI {
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
+
+
+
+
+    /*public void IslandsAndDashboard(GameStateMessage gameStateMessage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("IslandsAndDashboard.fxml"));
+            Parent showGame = (Parent) loader.load();
+            islandsAndDashboardGUI = loader.getController();
+            if (gameStateMessage instanceof GameStateMessage) {
+                islandsAndDashboardGUI.update((GameStateMessage) gameStateMessage, secondaryStage);
+                currentIslandsAndDashboardGUI = (GameStateMessage) gameStateMessage;
+            }
+            islandsAndDashboardGUI.inizializeForAction(currentIslandsAndDashboardGUI, secondaryStage);
+            setScene(showGame);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
+
+
 }
