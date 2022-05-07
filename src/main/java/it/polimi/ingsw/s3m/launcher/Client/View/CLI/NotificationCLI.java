@@ -4,7 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 
-public class NotificationCLI implements MessageCLI{
+public class NotificationCLI extends MessageCLI{
 	String message;
 
 	public NotificationCLI(NotificationMessage notification){

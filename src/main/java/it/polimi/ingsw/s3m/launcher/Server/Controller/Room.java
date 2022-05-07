@@ -78,12 +78,17 @@ public class Room {
         while(true){
             //planning phase
             //TODO change the phase in game
-            gameState.refillClouds();
+            try{
+                gameState.refillClouds();
+            }catch(EmptyBagException e){
+                //TODO handle exception
+            }
 
             ArrayList<String> nicknameList =  playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
 
             int startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
             for(int i = 0; i < playersNumber; i++){
+                //TODO set current player to turn
                 PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                 sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
                 sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the planning phase");
@@ -96,6 +101,7 @@ public class Room {
 
             startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
             for(int i = 0; i < playersNumber; i++){
+                //TODO set current player to turn
                 PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                 sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the action phase");
                 actionPhase(currentPlayer);

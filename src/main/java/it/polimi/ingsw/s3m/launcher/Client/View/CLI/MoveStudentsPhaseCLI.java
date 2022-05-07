@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class MoveStudentsPhaseCLI implements MessageCLI{
+public class MoveStudentsPhaseCLI extends MessageCLI{
 	private GameDTO gameState;
 	private int selectedCharacterCard;			//To put in response constructor
 	private boolean characterCardActivated;
@@ -70,26 +70,6 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 		selectedCharacterCard = getOperation(characterCardDTOList.size()) - 1;
 		characterCardActivated = true;
-	}
-
-	private int getOperation(int maxOperationNumber){
-		Scanner scanner = new Scanner(System.in);
-		int operationChoice;
-		try{
-			operationChoice = Integer.parseInt(scanner.nextLine());
-		}catch (Exception e){
-			operationChoice = 0;
-		}
-
-		while(operationChoice < 1 || operationChoice > maxOperationNumber){
-			System.out.println("\ninvalid choice, please select a valid input");
-			try{
-				operationChoice = Integer.parseInt(scanner.nextLine());
-			}catch (Exception e){
-				operationChoice = 0;
-			}
-		}
-		return operationChoice;
 	}
 
 	private void chooseIsland(){

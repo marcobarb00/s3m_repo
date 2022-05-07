@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
 import java.util.Scanner;
 
-public class NewRoomCLI implements MessageCLI{
+public class NewRoomCLI extends MessageCLI{
 
 	public NewRoomCLI(NewRoomMessage newRoomMessage){}
 

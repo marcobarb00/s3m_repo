@@ -10,7 +10,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.MotherNaturePhaseMessage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MotherNaturePhaseCLI implements MessageCLI {
+public class MotherNaturePhaseCLI extends MessageCLI {
 	private GameDTO gameState;
 	private int selectedCharacterCard;
 	private boolean characterCardActivated;
@@ -58,25 +58,5 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 		int operation = getOperation(3);
 		this.selectedCharacterCard = operation - 1;
 		this.characterCardActivated = true;
-	}
-
-	private int getOperation(int maxOperationNumber){
-		Scanner scanner = new Scanner(System.in);
-		int operationChoice;
-		try{
-			operationChoice = Integer.parseInt(scanner.nextLine());
-		}catch (Exception e){
-			operationChoice = 0;
-		}
-
-		while(operationChoice < 1 || operationChoice > maxOperationNumber){
-			System.out.println("\ninvalid choice, please select a valid input");
-			try{
-				operationChoice = Integer.parseInt(scanner.nextLine());
-			}catch (Exception e){
-				operationChoice = 0;
-			}
-		}
-		return operationChoice;
 	}
 }

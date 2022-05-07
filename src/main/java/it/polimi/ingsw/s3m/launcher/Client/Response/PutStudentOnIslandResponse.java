@@ -4,18 +4,18 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
 public class PutStudentOnIslandResponse implements Response{
 	private String color;
-	private boolean movedOnIsland;
+	private int islandPosition;
 
-	public PutStudentOnIslandResponse(String color, boolean movedOnIsland){
+	public PutStudentOnIslandResponse(String color, int islandPosition){
 		this.color = color;
-		this.movedOnIsland = movedOnIsland;
+		this.islandPosition = islandPosition;
 	}
 
 	public String getColor(){
 		return color;
 	}
 
-	public boolean isMovedOnIsland(){
-		return movedOnIsland;
+	public int getIslandPosition(){
+		return islandPosition;
 	}
 }
