@@ -110,6 +110,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	}
 
 	private void chooseColor(){
+		//Do not modify order
 		System.out.println("choose a color");
 		System.out.println("1) RED	2) GREEN");
 		System.out.println("3) BLUE	4) PINK");
@@ -124,8 +125,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 	private HashMap<Integer, Runnable> setOperations(){
 		HashMap<Integer, Runnable> operations = new HashMap<>();
-		operations.put(1, () ->	chooseColor());
-		operations.put(2, () -> chooseIsland() );
+		operations.put(1, () -> chooseColor());
+		operations.put(2, () -> chooseIsland());
 		operations.put(3, () -> chooseCharacterCard() );
 		return operations;
 	}
