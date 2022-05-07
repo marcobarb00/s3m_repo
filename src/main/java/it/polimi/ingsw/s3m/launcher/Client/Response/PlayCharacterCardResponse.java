@@ -2,10 +2,10 @@ package it.polimi.ingsw.s3m.launcher.Client.Response;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
-public class ActivateCharacterCardResponse implements Response{
+public class PlayCharacterCardResponse implements Response{
 	private int characterCardPosition;
 
-	public ActivateCharacterCardResponse(int characterCardPosition){
+	public PlayCharacterCardResponse(int characterCardPosition){
 		this.characterCardPosition = characterCardPosition;
 	}
 

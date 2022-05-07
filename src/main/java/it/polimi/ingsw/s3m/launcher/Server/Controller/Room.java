@@ -1,18 +1,16 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
-import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
-import it.polimi.ingsw.s3m.launcher.Client.Response.StudentMove;
+import it.polimi.ingsw.s3m.launcher.Client.Response.*;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.PlayCharacterCardMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -158,10 +156,59 @@ public class Room {
     }
 
     private void moveStudentPhase(PlayerController player){
+        int movedStudents = 0;
+        int studentsToBeMoved = 3;
+        if(playersNumber == 3){
+            studentsToBeMoved = 4;
+        }
+
+        while(movedStudents < studentsToBeMoved){
+            MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
+            Response response = player.communicateWithClient(moveStudentsPhaseMessage);
+            if(!(response instanceof MoveStudentsPhaseResponse)){
+                sendNotificationToPlayer(player, "the operation received is not the correct type");
+                continue;
+            }
+
+            MoveStudentsPhaseResponse moveStudentsPhaseResponse = (MoveStudentsPhaseResponse) response;
+            switch(moveStudentsPhaseResponse.getOperationChoice()){
+                case 1:
+                    //TODO putStudentOnTable
+                    break;
+                case 2:
+                    //TODO putStudentOnIsland
+                    break;
+                case 3:
+                    if(((ActionPhase) gameState.getTurn().getCurrentPhase()).isActivatedCharacterCard()){
+                        sendNotificationToPlayer(player, "you already activated a character card");
+                        continue;
+                    }
+                    //TODO handle exceptions
+                    playCharacterCard(player);
+                    break;
+            }
+
+            /*
+            if(response instanceof PlayCharacterCardResponse){
+                playCharacterCard(player, (PlayCharacterCardResponse) response);
+            }else if(response instanceof PutStudentOnTableResponse){
+                //TODO fix putStudentOnIslandOperation so that in the constructor parameters there is a String color or a PawnColor and not a Student
+                //PutStudentsOnIslandsOperation putStudentsOnIslandsOperation = new PutStudentsOnIslandsOperation(gameState, player, )
+            }else if(response instanceof PutStudentOnIslandResponse){
+
+            }else{
+                sendNotificationToPlayer(player, "the operation received is not the correct type");
+                continue;
+            }
+             */
+        }
+    }
+
+    /*
+    private void moveStudentPhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to move the students");
 
         boolean successful = false;
-        //TODO fix messages to handle the operations and not the phases to remove this clone (if there is time)
         Game gameStateCopy;
         try{
             gameStateCopy = (Game) gameState.getClass().getMethod("clone").invoke(gameState);
@@ -187,12 +234,11 @@ public class Room {
             }
 
             MoveStudentsResponse moveStudentsResponse = (MoveStudentsResponse) response;
-            if(activateCharacterCard(player, moveStudentsResponse)){
+            if(playCharacterCard(player, moveStudentsResponse)){
                 continue;
             }
 
             ArrayList<StudentMove> studentMoves = moveStudentsResponse.getStudentMoves();
-            //TODO ask to fix the moveStudentOperation
             for(StudentMove studentMove : studentMoves){
 
             }
@@ -200,49 +246,48 @@ public class Room {
             successful = true;
         }
     }
+    */
     
-    public boolean activateCharacterCard(PlayerController player, MoveStudentsResponse moveStudentsResponse){
-        if(moveStudentsResponse.isCharacterCardActivated()){
-            CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(moveStudentsResponse.getCharacterCardPosition());
-            Operation characterCardOperation = null;
-            //TODO fix the activate character card operations parameters
-            switch(playedCharacterCard.getName()){
-                case "Centaur":
-                    characterCardOperation = new ActivateCentaurEffectOperation(gameState, player);
-                    break;
-                case "Knight":
-                    characterCardOperation = new ActivateKnightEffectOperation(gameState, player);
-                    break;
-                case "Minstrel":
-                    //characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player);
-                    break;
-                case "Mushroomer":
-                    //characterCardOperation = new ActivateMushroomerEffectOperation(gameState, player);
-                    break;
-                case "Jester":
-                    //characterCardOperation = new ActivateJesterEffectOperation(gameState, player);
-                    break;
-                case "MagicPostman":
-                    characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
-                    break;
-                default:
-                    sendNotificationToPlayer(player, "character card chosen does not exists");
-                    return false;
-            }
+    public void playCharacterCard(PlayerController player){
+        Response response = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
 
-            try{
-                characterCardOperation.executeOperation();
-            }catch(PlayerNotInListException e){
-                sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
-                RoomsController.instance().deleteRoom(roomID, player);
-                return false;
-            }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException | NotPlayersTurnException | ZeroTowersRemainedException | NotEnoughIslandsException e){
-                //TODO fix exceptions ZeroTowersRemainedException, NotEnoughIslandsException
-                sendNotificationToAll(e.getMessage());
-                return false;
-            }
+        //TODO check if the response is of type PlayCharacterCardResponse
+
+        CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(playCharacterCardResponse.getCharacterCardPosition());
+        Operation characterCardOperation = null;
+        //TODO fix the activate character card operations parameters
+        switch(playedCharacterCard.getName()){
+            case "Centaur":
+                characterCardOperation = new ActivateCentaurEffectOperation(gameState, player);
+                break;
+            case "Knight":
+                characterCardOperation = new ActivateKnightEffectOperation(gameState, player);
+                break;
+            case "Minstrel":
+                //characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player);
+                break;
+            case "Mushroomer":
+                //characterCardOperation = new ActivateMushroomerEffectOperation(gameState, player);
+                break;
+            case "Jester":
+                //characterCardOperation = new ActivateJesterEffectOperation(gameState, player);
+                break;
+            case "MagicPostman":
+                characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
+                break;
+            default:
+                throw new IllegalArgumentException("character card chosen does not exists");
         }
-        return true;
+
+        try{
+            characterCardOperation.executeOperation();
+        }catch(PlayerNotInListException e){
+            sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
+            RoomsController.instance().deleteRoom(roomID, player);
+        }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException | NotPlayersTurnException | ZeroTowersRemainedException | NotEnoughIslandsException e){
+            //TODO fix exceptions ZeroTowersRemainedException, NotEnoughIslandsException
+            sendNotificationToAll(e.getMessage());
+        }
     }
 
     public void motherNaturePhase(PlayerController player){
