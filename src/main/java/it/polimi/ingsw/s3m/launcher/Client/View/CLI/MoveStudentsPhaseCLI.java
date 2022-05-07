@@ -27,6 +27,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
 		this.gameState = moveStudentsPhaseMessage.getGameState();
 		this.characterCardActivated = gameState.getTurn().isActivatedCharacterCard();
+		this.studentsToMove = new ArrayList<>();
 	}
 
 	@Override
@@ -123,8 +124,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 	private HashMap<Integer, Runnable> setOperations(){
 		HashMap<Integer, Runnable> operations = new HashMap<>();
-		operations.put(1, () -> chooseIsland() );
-		operations.put(2, () ->  chooseColor());
+		operations.put(1, () ->	chooseColor());
+		operations.put(2, () -> chooseIsland() );
 		operations.put(3, () -> chooseCharacterCard() );
 		return operations;
 	}
