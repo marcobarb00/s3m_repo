@@ -4,6 +4,7 @@ public class Turn {
     private String firstPlayerNickname;
     private String currentPlayerNickname;
     private Phase currentPhase;
+    private int movedStudents = 0;
 
     public Turn(String firstPlayerNickname) {
         this.firstPlayerNickname = firstPlayerNickname;
@@ -11,10 +12,13 @@ public class Turn {
         this.currentPhase = new PlanningPhase();
     }
 
+    public void incrementMovedStudents() { movedStudents++; }
+
     // GETTER
     public String getFirstPlayerNickname() { return firstPlayerNickname; }
     public String getCurrentPlayerNickname() { return currentPlayerNickname; }
     public Phase getCurrentPhase() { return currentPhase; }
+    public int getMovedStudents() { return movedStudents; }
 
     // SETTER
     public void setFirstPlayerNickname(String firstPlayerNickname) {

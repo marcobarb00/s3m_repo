@@ -322,6 +322,7 @@ public class Game implements Cloneable{
         chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
         ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
+        turn.incrementMovedStudents();
         if (chosenPlayer.getHand().size() == 0) throw new NotEnoughAssistantCardsException();
     }
 
@@ -331,6 +332,7 @@ public class Game implements Cloneable{
         additionalCoins = chosenPlayer.getDashboard().moveSingleStudentFromEntranceToTables(selectedStudent);
         chosenPlayer.addCoins(additionalCoins);
         computeProfessorsDominance();
+        turn.incrementMovedStudents();
     }
 
     public void putStudentOnIslands(String playerNickname, int position, Student selectedStudent) {
@@ -381,6 +383,7 @@ public class Game implements Cloneable{
     public String getFirstPlayerNickname() { return turn.getFirstPlayerNickname(); }
     public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
     public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
+    public int getTurnMovedStudents() { return turn.getMovedStudents(); }
     public boolean isCharacterCardActivated() { return ((ActionPhase) turn.getCurrentPhase()).isActivatedCharacterCard(); }
     public ArrayList<AssistantCard> getTurnPlayedCards() { return new ArrayList<>(((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().values()); }
 
