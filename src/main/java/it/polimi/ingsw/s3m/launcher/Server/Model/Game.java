@@ -3,7 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughIslandsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.ZeroTowersRemainedException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,7 +16,6 @@ public class Game {
     private final HashMap<PawnColor, Player> professorsHashMap = new HashMap<>();
     private final ArrayList<Cloud> cloudsList = new ArrayList<>();
     private final ArrayList<Island> islandsList = new ArrayList<>();
-    private final ArrayList<AssistantCard> playedAssistantCardsList = new ArrayList<>();
     private final ArrayList<CharacterCard> characterCardsList = new ArrayList<>();
     private ComputeDominanceStrategy computeDominanceStrategy = new StandardComputeDominance();
     private GameInitializer gameInitializer;
@@ -176,6 +174,18 @@ public class Game {
         }
     }
 
+    // PROFESSORS
+
+    private void computeProfessorsDominance() {
+        for (PawnColor color : PawnColor.values()) {
+            int maxStudents = 0;
+            Player controllingPlayer = professorsHashMap.get(color);
+            if (controllingPlayer != null) maxStudents = controllingPlayer.getDashboard().getTables().get(color);
+            for (Player player : playerHashMap.values())
+                if (player.getDashboard().getTables().get(color) > maxStudents) professorsHashMap.replace(color, player);
+        }
+    }
+
     // TURN
 
     public void setTurnFirstPlayer() {
@@ -257,7 +267,7 @@ public class Game {
         chosenPlayer.removeCoins(minstrel.getCost());
         minstrel.incrementCost();
         ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
-        //TODO update professors
+        computeProfessorsDominance();
     }
 
     public void activateMushroomerEffect (String playerNickname, PawnColor chosenColor) {
@@ -317,7 +327,6 @@ public class Game {
         chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
         ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
-        playedAssistantCardsList.add(chosenPlayer.getLastPlayedCard());
     }
 
     public void putStudentsOnTables(String playerNickname, ArrayList<Student> selectedStudents) {
@@ -325,7 +334,7 @@ public class Game {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(selectedStudents);
         chosenPlayer.addCoins(additionalCoins);
-        //TODO update professors
+        computeProfessorsDominance();
     }
 
     public void putStudentsOnIslands(String playerNickname, int position, ArrayList<Student> selectedStudents) {
@@ -380,9 +389,6 @@ public class Game {
     public void setCurrentPhase(Phase phase) {
         turn.setCurrentPhase(phase);
     }
-    public void setActivatedCharacterCard() {
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
-    }
 
     // GETTER
     public boolean isExpertMode() { return expertMode; }
@@ -391,6 +397,5 @@ public class Game {
     public HashMap<PawnColor, Player> getProfessorsHashMap() { return professorsHashMap; }
     public ArrayList<Cloud> getCloudsList() { return cloudsList; }
     public ArrayList<Island> getIslandsList() { return islandsList; }
-    public ArrayList<AssistantCard> getPlayedAssistantCardsList() { return playedAssistantCardsList; }
     public ArrayList<CharacterCard> getCharacterCardsList() { return characterCardsList; }
 }
