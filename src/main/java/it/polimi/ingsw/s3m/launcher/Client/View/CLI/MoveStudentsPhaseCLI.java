@@ -21,12 +21,13 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	private GameDTO gameState;
 	private int selectedCharacterCard;			//To put in response constructor
 	private boolean characterCardActivated;
-	private int studentsMoved = 0;
+	private int studentsMoved;
 	private ArrayList<StudentMove> studentsToMove;
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
 		this.gameState = moveStudentsPhaseMessage.getGameState();
 		this.characterCardActivated = gameState.getTurn().isActivatedCharacterCard();
+		this.studentsMoved = 0;
 		this.studentsToMove = new ArrayList<>();
 	}
 
@@ -44,8 +45,8 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			int maxOperationNumber = 2;
 
 			//Options menu
-			System.out.println("choose your operation:");
-			System.out.println("1) move a student from the hall to the tables" +
+			System.out.println("choose your operation:" +
+							   "\n1) move a student from the hall to the tables" +
 							   "\n2) move a student from the hall to an island");
 			//If not activated you can play a character
 			if(gameState.isExpertMode() && !characterCardActivated) {
@@ -59,7 +60,6 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			operations.get(operationChoice).run();
 		}
 
-		//TODO return students response
 		return new MoveStudentsResponse(characterCardActivated, selectedCharacterCard, studentsToMove);
 	}
 
@@ -79,7 +79,13 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 	private int getOperation(int maxOperationNumber){
 		Scanner scanner = new Scanner(System.in);
-		int operationChoice = Integer.parseInt(scanner.nextLine());
+		int operationChoice;
+		try{
+			operationChoice = Integer.parseInt(scanner.nextLine());
+		}catch (Exception e){
+			operationChoice = 0;
+		}
+
 		while(operationChoice < 1 || operationChoice > maxOperationNumber){
 			System.out.println("\ninvalid choice, please select a valid input");
 			try{

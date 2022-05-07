@@ -1,6 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.Response;
 
-public class StudentMove{
+import java.io.Serializable;
+
+public class StudentMove implements Serializable{
 	private String color;
 	private boolean movedOnIsland;
 	private int islandIndex;
