@@ -329,19 +329,19 @@ public class Game implements Cloneable{
         ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
     }
 
-    public void putStudentsOnTables(String playerNickname, ArrayList<Student> selectedStudents) {
+    public void putStudentOnTables(String playerNickname, Student selectedStudent) {
         int additionalCoins;
         Player chosenPlayer = playerHashMap.get(playerNickname);
-        additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(selectedStudents);
+        additionalCoins = chosenPlayer.getDashboard().moveSingleStudentFromEntranceToTables(selectedStudent);
         chosenPlayer.addCoins(additionalCoins);
         computeProfessorsDominance();
     }
 
-    public void putStudentsOnIslands(String playerNickname, int position, ArrayList<Student> selectedStudents) {
+    public void putStudentOnIslands(String playerNickname, int position, Student selectedStudent) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         Island chosenIsland = islandsList.get(position);
-        chosenPlayer.getDashboard().deleteStudentsFromEntrance(selectedStudents);
-        chosenIsland.addStudentsOnIsland(selectedStudents);
+        chosenPlayer.getDashboard().deleteSingleStudentFromEntrance(selectedStudent);
+        chosenIsland.addStudent(selectedStudent);
     }
 
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dashboard {
-    private HashMap<PawnColor, Integer> entrance;
-    private HashMap<PawnColor, Integer> tables;
+    private final HashMap<PawnColor, Integer> entrance;
+    private final HashMap<PawnColor, Integer> tables;
     private int numberOfTowers;
 
     public Dashboard() {
@@ -25,6 +25,11 @@ public class Dashboard {
         }
     }
 
+    public void deleteSingleStudentFromEntrance (Student deletingStudent) {
+        PawnColor color = deletingStudent.getColor();
+        entrance.replace(color, entrance.get(color)-1);
+    }
+
     public void deleteStudentsFromEntrance (ArrayList<Student> deletingStudents) {
         for (Student student : deletingStudents) {
             PawnColor color = student.getColor();
@@ -38,6 +43,15 @@ public class Dashboard {
             PawnColor color = student.getColor();
             tables.replace(color, tables.get(color)-1);
         }
+    }
+
+    public int moveSingleStudentFromEntranceToTables (Student movingStudent) {
+        int earnCoins = 0;
+        PawnColor color = movingStudent.getColor();
+        entrance.replace(color, entrance.get(color)-1);
+        tables.replace(color, tables.get(color)+1);
+        if (tables.get(color) % 3 == 0) earnCoins++;
+        return earnCoins;
     }
 
     public int moveStudentsFromEntranceToTables (ArrayList<Student> movingStudents) {
