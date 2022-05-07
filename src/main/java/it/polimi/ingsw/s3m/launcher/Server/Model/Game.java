@@ -353,6 +353,12 @@ public class Game implements Cloneable{
         for (Player player : playerHashMap.values()) listOfNicknames.add(player.getNickname());
         return listOfNicknames;
     }
+    public Player getCurrentPlayer() {
+        Player currentPlayer = null;
+        for (Player player : playerHashMap.values())
+            if (player.getNickname().equals(turn.getCurrentPlayerNickname())) currentPlayer = player;
+        return currentPlayer;
+    }
     public ArrayList<AssistantCard> getPlayerHand(String playerNickname) {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         return chosenPlayer.getHand();
