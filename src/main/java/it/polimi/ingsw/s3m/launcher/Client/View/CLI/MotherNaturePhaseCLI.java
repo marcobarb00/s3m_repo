@@ -19,7 +19,7 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 
 	public MotherNaturePhaseCLI(MotherNaturePhaseMessage motherNaturePhaseMessage){
 		this.gameState = motherNaturePhaseMessage.getGameState();
-		this.characterCardActivated = gameState.getTurn().isActivatedCharacterCard();
+		this.characterCardActivated = gameState.getTurn().isCharacterCardActivated();
 	}
 
 	@Override

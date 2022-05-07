@@ -12,13 +12,13 @@ import java.util.HashMap;
 
 public class PutStudentsOnIslandsOperation extends Operation{
     private int islandPosition;
-    private ArrayList<Student> selectedStudents;
+    private Student selectedStudent;
 
     public PutStudentsOnIslandsOperation(Game game, PlayerController playerController,
-                                         int islandPosition, ArrayList<Student> selectedStudents) {
+                                         int islandPosition, Student selectedStudent) {
         super(game, playerController);
         this.islandPosition = islandPosition;
-        this.selectedStudents = selectedStudents;
+        this.selectedStudent = selectedStudent;
     }
 
     @Override
@@ -28,18 +28,8 @@ public class PutStudentsOnIslandsOperation extends Operation{
             throw new PlayerNotInListException();
         }
 
-        //checking 3 players mode
-        boolean checkSelectedStudentsNumber;
-        int numberOfPlayers = game.getNumberOfPlayers();
-        if(numberOfPlayers == 3){
-            checkSelectedStudentsNumber = selectedStudents.size() <= 4;
-        }else{
-            checkSelectedStudentsNumber = selectedStudents.size() <= 3;
-        }
+        //3 players mode check REMOVED
 
-        if (!checkSelectedStudentsNumber){
-            throw new IllegalArgumentException("Incorrect selected students number");
-        }
         //Checks if there are the selected students in entrance
         searchStudentsInEntrance();
 
@@ -48,23 +38,17 @@ public class PutStudentsOnIslandsOperation extends Operation{
             throw new IllegalArgumentException("Incorrect island value");
         }
 
-        game.putStudentsOnIslands(playerController.getNickname(), islandPosition, selectedStudents);
+        game.putStudentOnIslands(playerController.getNickname(), islandPosition, selectedStudent);
     }
 
     private void searchStudentsInEntrance(){
         Player player = game.getPlayerHashMap().get(playerController.getNickname());
         HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
 
-        //For each color looks how many students of that color and compares
-        // with entrance of that color
-        for(PawnColor color : PawnColor.values()){
-            int numberOfSelectedStudents = (int) selectedStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
-            boolean notEnoughStudentsInEntrance =
-                    numberOfSelectedStudents > entrance.get(color);
-            if(notEnoughStudentsInEntrance){
-                throw new IllegalArgumentException("Not enough students in entrance");
-            }
+        //Check if at least one student of that color is present in hall
+        boolean studentInEntrance = entrance.get(selectedStudent.getColor()) > 0;
+        if(!studentInEntrance){
+            throw new IllegalArgumentException("Student not in entrance");
         }
     }
 }

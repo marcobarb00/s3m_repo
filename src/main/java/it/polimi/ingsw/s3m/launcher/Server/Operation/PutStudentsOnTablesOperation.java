@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PutStudentsOnTablesOperation extends Operation{
-    ArrayList<Student> selectedStudents;
+    Student selectedStudent;
 
-    public PutStudentsOnTablesOperation(Game game, PlayerController playerController, ArrayList<Student> selectedStudents) {
+    public PutStudentsOnTablesOperation(Game game, PlayerController playerController, Student selectedStudent) {
         super(game, playerController);
-        this.selectedStudents = selectedStudents;
+        this.selectedStudent = selectedStudent;
     }
 
     @Override
@@ -25,38 +25,22 @@ public class PutStudentsOnTablesOperation extends Operation{
             throw new PlayerNotInListException();
         }
 
-        //checking 3 players mode
-        boolean checkSelectedStudentsNumber;
-        int numberOfPlayers = game.getNumberOfPlayers();
-        if(numberOfPlayers == 3){
-            checkSelectedStudentsNumber = selectedStudents.size() <= 4;
-        }else{
-            checkSelectedStudentsNumber = selectedStudents.size() <= 3;
-        }
+        //check on number of player
 
-        if (!checkSelectedStudentsNumber){
-            throw new IllegalArgumentException("Incorrect selected students number");
-        }
         //Checking students in hall
         searchStudentsInEntrance();
 
-        game.putStudentsOnTables(playerController.getNickname(), selectedStudents);
+        game.putStudentOnTables(playerController.getNickname(), selectedStudent);
     }
 
     private void searchStudentsInEntrance(){
         Player player = game.getPlayerHashMap().get(playerController.getNickname());
         HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
 
-        //For each color looks how many students of that color and compares
-        // with entrance of that color
-        for(PawnColor color : PawnColor.values()){
-            int numberOfSelectedStudents = (int) selectedStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
-            boolean notEnoughStudentsInEntrance =
-                    numberOfSelectedStudents > entrance.get(color);
-            if(notEnoughStudentsInEntrance){
-                throw new IllegalArgumentException("Not enough students in entrance");
-            }
+        //Check if at least one student of that color is present in entrance
+        boolean studentInEntrance = entrance.get(selectedStudent.getColor()) > 0;
+        if(!studentInEntrance){
+            throw new IllegalArgumentException("Student not in entrance");
         }
     }
 }
