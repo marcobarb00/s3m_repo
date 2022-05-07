@@ -108,7 +108,6 @@ public class Room {
     }
 
     private void planningPhase(PlayerController player){
-        //TODO change gameState.getPlayedAssistantCardsList() into gameState.getTurn().getPlayedAssistantCardsList()
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(mapper.gameToDTO(gameState));
 
         boolean successful = false;
@@ -147,16 +146,24 @@ public class Room {
     private void moveStudentPhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to move the students");
 
-        MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
-        Response response = player.communicateWithClient(moveStudentsPhaseMessage);
+        boolean successful = false;
 
-        while(!(response instanceof MoveStudentsResponse)){
-            sendNotificationToPlayer(player, "the operation received is not the correct type");
-            response = player.communicateWithClient(moveStudentsPhaseMessage);
+        while(!successful){
+            MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
+            Response response = player.communicateWithClient(moveStudentsPhaseMessage);
+
+            while(!(response instanceof MoveStudentsResponse)){
+                sendNotificationToPlayer(player, "the operation received is not the correct type");
+                response = player.communicateWithClient(moveStudentsPhaseMessage);
+            }
+
+            MoveStudentsResponse moveStudentsResponse = (MoveStudentsResponse) response;
+            successful = activateCharacterCard(player, moveStudentsResponse);
+            //TODO fix successful while loop, maybe a try-catch?
         }
-
-        MoveStudentsResponse moveStudentsResponse = (MoveStudentsResponse) response;
-
+    }
+    
+    public boolean activateCharacterCard(PlayerController player, MoveStudentsResponse moveStudentsResponse){
         if(moveStudentsResponse.isCharacterCardActivated()){
             CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(moveStudentsResponse.getCharacterCardPosition());
             Operation characterCardOperation = null;
@@ -188,15 +195,18 @@ public class Room {
             }catch(PlayerNotInListException e){
                 sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
                 RoomsController.instance().deleteRoom(roomID, player);
+                return false;
             }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException | NotPlayersTurnException | ZeroTowersRemainedException | NotEnoughIslandsException e){
                 //TODO fix exceptions ZeroTowersRemainedException, NotEnoughIslandsException
                 sendNotificationToAll(e.getMessage());
+                return false;
             }
         }
+        return true;
     }
 
     public void motherNaturePhase(PlayerController player){
-        sendNotificationToPlayer(player, "it's your turn to move the students");
+        sendNotificationToPlayer(player, "it's your turn to move mother nature");
     }
 
     public void chooseCloudPhase(PlayerController player){
