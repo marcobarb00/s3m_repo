@@ -1,9 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class TurnDTO{
+public class TurnDTO implements Serializable{
 	private String firstPlayerNickname;
 	private String currentPlayerNickname;
 	private String currentPhase;

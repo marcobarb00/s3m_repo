@@ -80,24 +80,20 @@ public class Room {
             ArrayList<String> nicknameList =  playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
 
             int i = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-            while(i < playersNumber){
-                PlayerController currentPlayer = playersList.get(i);
+            for(;i < playersNumber; i++){
+                PlayerController currentPlayer = playersList.get((i+1) % playersNumber);
                 sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
-                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn to execute the planning phase");
+                sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the planning phase");
                 planningPhase(currentPlayer);
-
-                i = (i+1) % playersNumber;
             }
 
             gameState.setTurnFirstPlayer();
 
             i = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-            while(i < playersNumber){
-                PlayerController currentPlayer = playersList.get(i);
-                sendNotificationToAllButOne(currentPlayer, currentPlayer + "'s turn to execute the action phase");
+            for(; i < playersNumber; i++){
+                PlayerController currentPlayer = playersList.get((i+1) % playersNumber);
+                sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the action phase");
                 actionPhase(currentPlayer);
-
-                i = (i+1) % playersNumber;
             }
         }
     }
@@ -132,8 +128,10 @@ public class Room {
             }catch(PlayerNotInListException e){
                 sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
                 RoomsController.instance().deleteRoom(roomID, player);
+                return;
             }catch(IllegalArgumentException e){
                 sendNotificationToPlayer(player, e.getMessage());
+                continue;
             }
 
             successful = true;

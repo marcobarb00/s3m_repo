@@ -18,7 +18,7 @@ public class GameStateCLI{
 		System.out.println("WIP");
 		//TODO print islands
 
-		System.out.println("\nmother nature position:" + gameState.getMotherNaturePosition());
+		System.out.println("\nmother nature position: " + gameState.getMotherNaturePosition());
 
 		System.out.println("\nprofessors:");
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));

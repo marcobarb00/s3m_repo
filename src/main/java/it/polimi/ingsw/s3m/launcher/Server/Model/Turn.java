@@ -6,6 +6,7 @@ public class Turn {
     private Phase currentPhase;
 
     public Turn(String firstPlayerNickname) {
+        this.firstPlayerNickname = firstPlayerNickname;
         this.currentPlayerNickname = firstPlayerNickname;
         this.currentPhase = new PlanningPhase();
     }
