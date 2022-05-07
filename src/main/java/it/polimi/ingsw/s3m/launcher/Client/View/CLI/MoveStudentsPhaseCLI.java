@@ -8,10 +8,12 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 
 import java.lang.reflect.Executable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -19,12 +21,12 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 	private GameDTO gameState;
 	private int selectedCharacterCard;			//To put in response constructor
 	private boolean characterCardActivated;
-	private int studentsMoved;
-	private int studentsToBeMoved;
-	private ArrayList<StudentMove> studentToMove;
+	private int studentsMoved = 0;
+	private ArrayList<StudentMove> studentsToMove;
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
 		this.gameState = moveStudentsPhaseMessage.getGameState();
+		this.characterCardActivated = gameState.getTurn().isActivatedCharacterCard();
 	}
 
 	@Override
@@ -44,21 +46,20 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			System.out.println("choose your operation:");
 			System.out.println("1) move a student from the hall to the tables" +
 							   "\n2) move a student from the hall to an island");
-			if(gameState.isExpertMode()) {
+			//If not activated you can play a character
+			if(gameState.isExpertMode() && !characterCardActivated) {
 				System.out.println("3) activate a character card" );
 				maxOperationNumber = 3;
 			}
 
-			int operationChoice = getOperation();
-			checkOperation(operationChoice, maxOperationNumber);
+			int operationChoice = getOperation(maxOperationNumber);
 
 			HashMap<Integer, Runnable> operations = setOperations();
 			operations.get(operationChoice).run();
-			}
+		}
 
 		//TODO return students response
-		//return new MoveStudentsResponse(characterCardActivated, selectedCharacterCard, studentsToBeMoved );
-		return null;
+		return new MoveStudentsResponse(characterCardActivated, selectedCharacterCard, studentsToMove);
 	}
 
 	public void chooseCharacterCard(){
@@ -71,24 +72,13 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 			System.out.println((i+1) + ") " + card.getName() + " cost: " + card.getCost());
 		}
 
-		selectedCharacterCard = getOperation() - 1;
-		checkOperation(selectedCharacterCard, characterCardDTOList.size());
+		selectedCharacterCard = getOperation(characterCardDTOList.size()) - 1;
 		characterCardActivated = true;
 	}
 
-	private int getOperation(){
+	private int getOperation(int maxOperationNumber){
 		Scanner scanner = new Scanner(System.in);
-		int operationChoice;
-		try{
-			operationChoice = Integer.parseInt(scanner.nextLine());
-		}catch (Exception e){
-			operationChoice = 0;
-		}
-		return operationChoice;
-	}
-
-	private void checkOperation(int operationChoice, int maxOperationNumber){
-		Scanner scanner = new Scanner(System.in);
+		int operationChoice = Integer.parseInt(scanner.nextLine());
 		while(operationChoice < 1 || operationChoice > maxOperationNumber){
 			System.out.println("\ninvalid choice, please select a valid input");
 			try{
@@ -97,23 +87,37 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 				operationChoice = 0;
 			}
 		}
+		return operationChoice;
 	}
 
-	//TODO needs gameState
 	private void chooseIsland(){
-		//System.out.println("choose an island from 1 to " + (islandList.size() - 1));
+		int islandsNumber = gameState.getIslands().size();
+		System.out.println("choose an island from 1 to " + islandsNumber);
+		int islandPosition = getOperation(islandsNumber) - 1;
 
+		//Do not modify order if care about your life
 		System.out.println("choose a color");
 		System.out.println("1) RED	2) GREEN");
 		System.out.println("3) BLUE	4) PINK");
 		System.out.println("5) YELLOW");
+		int colorCodeChoice = getOperation(5);
+		String studentColor = getCLIColor(colorCodeChoice);
 
-		//studentsToMove.add(new StudentMove(studentColor, true, islandPosition));
+		StudentMove student = new StudentMove(studentColor, true, islandPosition);
+		studentsToMove.add(student);
 		this.studentsMoved++;
 	}
 
 	private void chooseColor(){
 		System.out.println("choose a color");
+		System.out.println("1) RED	2) GREEN");
+		System.out.println("3) BLUE	4) PINK");
+		System.out.println("5) YELLOW");
+		int colorCodeChoice = getOperation(5);
+		String studentColor = getCLIColor(colorCodeChoice);
+
+		StudentMove student = new StudentMove(studentColor, false);
+		studentsToMove.add(student);
 		this.studentsMoved++;
 	}
 
@@ -123,5 +127,13 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 		operations.put(2, () ->  chooseColor());
 		operations.put(3, () -> chooseCharacterCard() );
 		return operations;
+	}
+
+	private String getCLIColor(int code){
+		//Do not modify order
+		ArrayList<String> colors = new ArrayList<>(
+				Arrays.asList("RED", "GREEN", "BLUE",
+				"PINK", "YELLOW"));
+		return colors.get(code - 1);
 	}
 }
