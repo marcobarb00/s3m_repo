@@ -24,9 +24,9 @@ public class GameStateCLI{
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
 
 		System.out.println("\ndashboards:");
-		gameState.getPlayers().forEach((nickname, player) -> {
+		gameState.getDashboards().forEach((nickname, dashboard) -> {
 			System.out.println("\n" + nickname + "'s dashboard:");
-			printDashboard(player.getDashboard());
+			printDashboard(dashboard);
 		});
 	}
 

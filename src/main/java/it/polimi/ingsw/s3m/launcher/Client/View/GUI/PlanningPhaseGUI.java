@@ -50,9 +50,8 @@ public class PlanningPhaseGUI {
 
     public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage, Stage secondaryStage) {
         GameDTO gameState = planningPhaseMessage.getGameState();
-        String currentPlayer = gameState.getCurrentPlayerTurn();
         ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
-        ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(currentPlayer).getHand();
+        ArrayList<AssistantCardDTO> hand = gameState.getCurrentPlayer().getHand();
 
         try{
             insertAssistantZero(hand.get(0));

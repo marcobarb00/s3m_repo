@@ -4,10 +4,10 @@ import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
-public class ActivateCharacterCardMessage implements Message{
+public class PutStudentOnTableMessage implements Message{
 	private GameDTO gameState;
 
-	public ActivateCharacterCardMessage(GameDTO gameState){
+	public PutStudentOnTableMessage(GameDTO gameState){
 		this.gameState = gameState;
 	}
 
@@ -17,6 +17,6 @@ public class ActivateCharacterCardMessage implements Message{
 
 	@Override
 	public void apply(View view){
-		//TODO view.activateCharacterCardMessage(this)
+		view.putStudentOnTable(this);
 	}
 }

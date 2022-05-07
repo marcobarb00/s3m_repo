@@ -16,6 +16,12 @@ public abstract class View{
 
 	public abstract void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage);
 
+	public abstract void playCharacterCard(PlayCharacterCardMessage playCharacterCardMessage);
+
+	public abstract void putStudentOnTable(PutStudentOnTableMessage putStudentOnTableMessage);
+
+	public abstract void putStudentOnIsland(PutStudentOnIslandMessage putStudentOnIslandMessage);
+
 	public abstract void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage);
 
 	public abstract void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage);

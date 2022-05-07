@@ -41,6 +41,21 @@ public class CLIView extends View{
 	}
 
 	@Override
+	public void playCharacterCard(PlayCharacterCardMessage playCharacterCardMessage){
+		client.setMessage(new PlayCharacterCardCLI(playCharacterCardMessage));
+	}
+
+	@Override
+	public void putStudentOnTable(PutStudentOnTableMessage putStudentOnTableMessage){
+		client.setMessage(new PutStudentOnTableCLI(putStudentOnTableMessage));
+	}
+
+	@Override
+	public void putStudentOnIsland(PutStudentOnIslandMessage putStudentOnIslandMessage){
+		client.setMessage(new PutStudentOnIslandCLI(putStudentOnIslandMessage));
+	}
+
+	@Override
 	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
 		client.setMessage(new MotherNaturePhaseCLI(motherNaturePhaseMessage));
 	}

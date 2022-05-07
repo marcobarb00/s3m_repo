@@ -14,9 +14,9 @@ public class Mapper{
 		return new AssistantCardDTO(assistantCard.getType(), assistantCard.getValue(), assistantCard.getMovements());
 	}
 
-	public ArrayList<AssistantCardDTO> assistantCardListToDTO(ArrayList<AssistantCard> hand){
+	public ArrayList<AssistantCardDTO> assistantCardListToDTO(ArrayList<AssistantCard> assistantCardList){
 		ArrayList<AssistantCardDTO> assistantCardDTOList = new ArrayList<>();
-		for(AssistantCard assistantCard : hand){
+		for(AssistantCard assistantCard : assistantCardList){
 			assistantCardDTOList.add(assistantCardToDTO(assistantCard));
 		}
 
@@ -31,6 +31,15 @@ public class Mapper{
 		dashboard.getTables().forEach((color, value) -> tables.put(color.name(), value));
 
 		return new DashboardDTO(entrance, tables, dashboard.getNumberOfTowers());
+	}
+
+	public ArrayList<DashboardDTO> dashboardListToDTO(ArrayList<Dashboard> dashboardList){
+		ArrayList<DashboardDTO> dashboardDTOList = new ArrayList<>();
+		for(Dashboard dashboard : dashboardList){
+			dashboardDTOList.add(dashboardToDTO(dashboard));
+		}
+
+		return dashboardDTOList;
 	}
 
 	public PlayerDTO playerToDTO(Player player){
@@ -123,11 +132,14 @@ public class Mapper{
 	}
 
 	public GameDTO gameToDTO(Game game){
-		HashMap<String, PlayerDTO> playerList = playerHashMapToDTO(game.getPlayerHashMap());
+		PlayerDTO currentPlayer = playerToDTO(game.getCurrentPlayer());
+
+		HashMap<String, DashboardDTO> dashboards = new HashMap<>();
+		game.getPlayerHashMap().forEach((nickname, player) -> dashboards.put(nickname, dashboardToDTO(player.getDashboard())));
 
 		HashMap<String, PlayerDTO> professors = new HashMap<>();
 		game.getProfessorsHashMap().forEach((color, player) -> professors.put(color.name(), playerToDTO(player)));
 
-		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(), playerList, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()), game.getCurrentPlayerNickname(), turnToDTO(game.getTurn()));
+		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(), currentPlayer , game.getPlayersNicknames(), dashboards, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()), turnToDTO(game.getTurn()));
 	}
 }
