@@ -4,10 +4,8 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNatureResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MotherNaturePhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Model.AssistantCard;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,7 +17,7 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 
 	public MotherNaturePhaseCLI(MotherNaturePhaseMessage motherNaturePhaseMessage){
 		this.gameState = motherNaturePhaseMessage.getGameState();
-		this.characterCardActivated = gameState.getTurn().isActivatedCharacterCard();
+		this.characterCardActivated = gameState.getTurn().isCharacterCardActivated();
 	}
 
 	@Override
@@ -44,8 +42,7 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 	}
 
 	private int getMaxMoves(){
-		String currentPlayer = gameState.getCurrentPlayerTurn();
-		AssistantCardDTO assistantCard = gameState.getPlayers().get(currentPlayer).getLastCardPlayed();
+		AssistantCardDTO assistantCard = gameState.getCurrentPlayer().getLastCardPlayed();
 		return assistantCard.getMovements();
 	}
 

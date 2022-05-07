@@ -4,10 +4,10 @@ import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
-public class MoveStudentFromHallToIslandMessage implements Message{
+public class PutStudentOnIslandMessage implements Message{
 	private GameDTO gameState;
 
-	public MoveStudentFromHallToIslandMessage(GameDTO gameState){
+	public PutStudentOnIslandMessage(GameDTO gameState){
 		this.gameState = gameState;
 	}
 
@@ -17,6 +17,6 @@ public class MoveStudentFromHallToIslandMessage implements Message{
 
 	@Override
 	public void apply(View view){
-		//TODO view.moveStudentFromHallToIslandMessage(this)
+		view.putStudentOnIsland(this);
 	}
 }

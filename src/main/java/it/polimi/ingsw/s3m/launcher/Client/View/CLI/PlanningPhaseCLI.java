@@ -21,9 +21,8 @@ public class PlanningPhaseCLI implements MessageCLI{
 		GameStateCLI gameStateCLI = new GameStateCLI(gameState);
 		gameStateCLI.printState();
 
-		String currentPlayer = gameState.getCurrentPlayerTurn();
 		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
-		ArrayList<AssistantCardDTO> hand = gameState.getPlayers().get(currentPlayer).getHand();
+		ArrayList<AssistantCardDTO> hand = gameState.getCurrentPlayer().getHand();
 
 		if(playedAssistantCards.size() != 0){
 			System.out.println("\ncards played by the other players:");

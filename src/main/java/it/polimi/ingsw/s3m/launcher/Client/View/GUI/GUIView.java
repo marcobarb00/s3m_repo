@@ -47,6 +47,21 @@ public class GUIView extends View{
 	}
 
 	@Override
+	public void playCharacterCard(PlayCharacterCardMessage playCharacterCardMessage){
+
+	}
+
+	@Override
+	public void putStudentOnTable(PutStudentOnTableMessage putStudentOnTableMessage){
+
+	}
+
+	@Override
+	public void putStudentOnIsland(PutStudentOnIslandMessage putStudentOnIslandMessage){
+
+	}
+
+	@Override
 	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
 
 	}
