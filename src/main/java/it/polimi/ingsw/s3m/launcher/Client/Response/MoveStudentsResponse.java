@@ -9,7 +9,6 @@ public class MoveStudentsResponse implements Response{
 	private int characterCardPosition;
 	private ArrayList<StudentMove> studentsMove;
 
-	//TODO when cli input ready create new moveStudentsResponse an return it
 	public MoveStudentsResponse(boolean characterCardActivated, int characterCardPosition, ArrayList<StudentMove> studentsMove){
 		this.characterCardActivated = characterCardActivated;
 		this.characterCardPosition = characterCardPosition;
