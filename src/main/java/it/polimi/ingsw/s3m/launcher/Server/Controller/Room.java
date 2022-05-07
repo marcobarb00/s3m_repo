@@ -2,7 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
+import it.polimi.ingsw.s3m.launcher.Client.Response.StudentMove;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
@@ -12,6 +12,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -75,26 +76,33 @@ public class Room {
         this.gameState = new Game(playersNicknameList, expertMode);
 
         while(true){
+            //planning phase
+            //TODO change the phase in game
             gameState.refillClouds();
 
             ArrayList<String> nicknameList =  playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
 
-            int i = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-            for(;i < playersNumber; i++){
-                PlayerController currentPlayer = playersList.get((i+1) % playersNumber);
+            int startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+            for(int i = 0; i < playersNumber; i++){
+                PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                 sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
                 sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the planning phase");
                 planningPhase(currentPlayer);
             }
 
             gameState.setTurnFirstPlayer();
+            //action phase
+            //TODO change the phase in game
 
-            i = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-            for(; i < playersNumber; i++){
-                PlayerController currentPlayer = playersList.get((i+1) % playersNumber);
+            startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+            for(int i = 0; i < playersNumber; i++){
+                PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                 sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the action phase");
                 actionPhase(currentPlayer);
             }
+
+            //reset turn
+            //TODO reset the turn
         }
     }
 
@@ -147,19 +155,43 @@ public class Room {
         sendNotificationToPlayer(player, "it's your turn to move the students");
 
         boolean successful = false;
+        //TODO fix messages to handle the operations and not the phases to remove this clone (if there is time)
+        Game gameStateCopy;
+        try{
+            gameStateCopy = (Game) gameState.getClass().getMethod("clone").invoke(gameState);
+        }catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException e){
+            sendNotificationToAll("there was an error during setup of the phase, the room is being deleted");
+            RoomsController.instance().deleteRoom(roomID, player);
+            return;
+        }
 
         while(!successful){
+            try{
+                gameState = (Game) gameStateCopy.getClass().getMethod("clone").invoke(gameStateCopy);
+            }catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException e){
+                e.printStackTrace();
+            }
+
             MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
             Response response = player.communicateWithClient(moveStudentsPhaseMessage);
 
-            while(!(response instanceof MoveStudentsResponse)){
+            if(!(response instanceof MoveStudentsResponse)){
                 sendNotificationToPlayer(player, "the operation received is not the correct type");
-                response = player.communicateWithClient(moveStudentsPhaseMessage);
+                continue;
             }
 
             MoveStudentsResponse moveStudentsResponse = (MoveStudentsResponse) response;
-            successful = activateCharacterCard(player, moveStudentsResponse);
-            //TODO fix successful while loop, maybe a try-catch?
+            if(activateCharacterCard(player, moveStudentsResponse)){
+                continue;
+            }
+
+            ArrayList<StudentMove> studentMoves = moveStudentsResponse.getStudentMoves();
+            //TODO ask to fix the moveStudentOperation
+            for(StudentMove studentMove : studentMoves){
+
+            }
+
+            successful = true;
         }
     }
     
@@ -167,6 +199,7 @@ public class Room {
         if(moveStudentsResponse.isCharacterCardActivated()){
             CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(moveStudentsResponse.getCharacterCardPosition());
             Operation characterCardOperation = null;
+            //TODO fix the activate character card operations parameters
             switch(playedCharacterCard.getName()){
                 case "Centaur":
                     characterCardOperation = new ActivateCentaurEffectOperation(gameState, player);
@@ -187,7 +220,8 @@ public class Room {
                     characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
                     break;
                 default:
-                    //TODO notificate the error
+                    sendNotificationToPlayer(player, "character card chosen does not exists");
+                    return false;
             }
 
             try{
@@ -207,10 +241,12 @@ public class Room {
 
     public void motherNaturePhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to move mother nature");
+
     }
 
     public void chooseCloudPhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to choose the cloud");
+
     }
 
     public void deleteRoom(PlayerController player){

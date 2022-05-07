@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Game {
+public class Game implements Cloneable{
     private final int numberOfPlayers;
     private final boolean expertMode;
     private final MotherNature motherNature = new MotherNature();

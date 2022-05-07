@@ -4,14 +4,9 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.StudentMove;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 
-import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,7 +21,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 
 	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
 		this.gameState = moveStudentsPhaseMessage.getGameState();
-		this.characterCardActivated = gameState.getTurn().isActivatedCharacterCard();
+		this.characterCardActivated = gameState.getTurn().isCharacterCardActivated();
 		this.studentsMoved = 0;
 		this.studentsToMove = new ArrayList<>();
 	}

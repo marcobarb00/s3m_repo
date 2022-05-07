@@ -40,7 +40,7 @@ public class PlayAssistantCardOperation extends Operation{
     }
 
     private boolean checkPlayableCard(){
-        ArrayList<AssistantCard> cardsPlayedInTurn = game.getPlayedAssistantCardsList();
+        ArrayList<AssistantCard> cardsPlayedInTurn = game.getTurnPlayedCards();
         Player player = game.getPlayerHashMap().get(playerController.getNickname());
         String handCardType = player.getHand().get(assistantCardPosition).getType();
 

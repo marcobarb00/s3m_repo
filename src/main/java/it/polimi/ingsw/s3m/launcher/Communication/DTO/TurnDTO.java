@@ -8,14 +8,14 @@ public class TurnDTO implements Serializable{
 	private String currentPlayerNickname;
 	private String currentPhase;
 	private ArrayList<AssistantCardDTO> playedCards;
-	private boolean activatedCharacterCard;
+	private boolean CharacterCardActivated;
 
-	public TurnDTO(String firstPlayerNickname, String currentPlayerNickname, String currentPhase, ArrayList<AssistantCardDTO> playedCards, boolean activatedCharacterCard){
+	public TurnDTO(String firstPlayerNickname, String currentPlayerNickname, String currentPhase, ArrayList<AssistantCardDTO> playedCards, boolean CharacterCardActivated){
 		this.firstPlayerNickname = firstPlayerNickname;
 		this.currentPlayerNickname = currentPlayerNickname;
 		this.currentPhase = currentPhase;
 		this.playedCards = playedCards;
-		this.activatedCharacterCard = activatedCharacterCard;
+		this.CharacterCardActivated = CharacterCardActivated;
 	}
 
 	public String getFirstPlayerNickname(){
@@ -34,7 +34,7 @@ public class TurnDTO implements Serializable{
 		return playedCards;
 	}
 
-	public boolean isActivatedCharacterCard(){
-		return activatedCharacterCard;
+	public boolean isCharacterCardActivated(){
+		return CharacterCardActivated;
 	}
 }

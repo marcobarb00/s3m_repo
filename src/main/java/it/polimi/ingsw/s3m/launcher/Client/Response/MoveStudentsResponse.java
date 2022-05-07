@@ -7,13 +7,12 @@ import java.util.ArrayList;
 public class MoveStudentsResponse implements Response{
 	private boolean characterCardActivated;
 	private int characterCardPosition;
-	private ArrayList<StudentMove> studentsMove;
+	private ArrayList<StudentMove> studentMoves;
 
-	//TODO when cli input ready create new moveStudentsResponse an return it
-	public MoveStudentsResponse(boolean characterCardActivated, int characterCardPosition, ArrayList<StudentMove> studentsMove){
+	public MoveStudentsResponse(boolean characterCardActivated, int characterCardPosition, ArrayList<StudentMove> studentMoves){
 		this.characterCardActivated = characterCardActivated;
 		this.characterCardPosition = characterCardPosition;
-		this.studentsMove = studentsMove;
+		this.studentMoves = studentMoves;
 	}
 
 	public boolean isCharacterCardActivated(){
@@ -24,7 +23,7 @@ public class MoveStudentsResponse implements Response{
 		return characterCardPosition;
 	}
 
-	public ArrayList<StudentMove> getStudentsMove(){
-		return studentsMove;
+	public ArrayList<StudentMove> getStudentMoves(){
+		return studentMoves;
 	}
 }
