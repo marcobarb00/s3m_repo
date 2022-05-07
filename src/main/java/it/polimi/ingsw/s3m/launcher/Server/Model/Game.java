@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughIslandsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.ZeroTowersRemainedException;
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class Game implements Cloneable{
 
     // CLOUD
 
-    public void refillClouds() {
+    public void refillClouds() throws EmptyBagException {
         int numberOfStudents;
         if (expertMode) numberOfStudents = 4;
         else numberOfStudents = 3;
@@ -90,15 +91,9 @@ public class Game implements Cloneable{
         }
     }
 
-    public void refillCloudStudents(Cloud cloud, int numberOfStudents) {
+    public void refillCloudStudents(Cloud cloud, int numberOfStudents) throws EmptyBagException {
         ArrayList<Student> refillingStudents = new ArrayList<>();
-        for (int i = 0; i < numberOfStudents; i++) {
-            try {
-                refillingStudents.add(extractStudent());
-            } catch (EmptyBagException e) {
-                e.printStackTrace();
-            }
-        }
+        for (int i = 0; i < numberOfStudents; i++) refillingStudents.add(extractStudent());
         cloud.setStudents(refillingStudents);
     }
 
@@ -322,11 +317,12 @@ public class Game implements Cloneable{
         if (islandsList.size() <= 3) throw new NotEnoughIslandsException();
     }
 
-    public void playAssistantCard(String playerNickname, int position) {
+    public void playAssistantCard(String playerNickname, int position) throws NotEnoughAssistantCardsException {
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
         ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
+        if (chosenPlayer.getHand().size() == 0) throw new NotEnoughAssistantCardsException();
     }
 
     public void putStudentOnTables(String playerNickname, Student selectedStudent) {
