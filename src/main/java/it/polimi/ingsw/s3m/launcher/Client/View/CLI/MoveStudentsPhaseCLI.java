@@ -58,7 +58,7 @@ public class MoveStudentsPhaseCLI implements MessageCLI{
 		return new MoveStudentsResponse(characterCardActivated, selectedCharacterCard, studentsToMove);
 	}
 
-	public void chooseCharacterCard(){
+	private void chooseCharacterCard(){
 		ArrayList<CharacterCardDTO> characterCardDTOList = gameState.getCharacterCards();
 
 		System.out.println("choose character card:");
