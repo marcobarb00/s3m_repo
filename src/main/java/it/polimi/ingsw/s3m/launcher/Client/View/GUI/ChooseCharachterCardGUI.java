@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class ChooseCharachterCardGUI {
+public class ChooseCharacterCardGUI {
 
     @FXML
     GridPane gridPane;
