@@ -10,11 +10,11 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 import java.util.HashMap;
 
 public class PutStudentOnTableOperation extends Operation{
-    Student selectedStudent;
+    private PawnColor studentColor;
 
-    public PutStudentOnTableOperation(Game game, PlayerController playerController, Student selectedStudent) {
+    public PutStudentOnTableOperation(Game game, PlayerController playerController, PawnColor studentColor) {
         super(game, playerController);
-        this.selectedStudent = selectedStudent;
+        this.studentColor = studentColor;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class PutStudentOnTableOperation extends Operation{
         //Checking students in hall
         searchStudentsInEntrance();
 
-        game.putStudentOnTables(playerController.getNickname(), selectedStudent);
+        game.putStudentOnTables(playerController.getNickname(), new Student(studentColor));
     }
 
     private void searchStudentsInEntrance(){
@@ -38,7 +38,7 @@ public class PutStudentOnTableOperation extends Operation{
         HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
 
         //Check if at least one student of that color is present in entrance
-        boolean studentInEntrance = entrance.get(selectedStudent.getColor()) > 0;
+        boolean studentInEntrance = entrance.get(studentColor) > 0;
         if(!studentInEntrance){
             throw new IllegalArgumentException("Student not in entrance");
         }
