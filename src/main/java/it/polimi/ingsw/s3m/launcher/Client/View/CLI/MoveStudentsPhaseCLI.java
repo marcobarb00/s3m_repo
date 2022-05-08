@@ -1,18 +1,14 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Client.Response.MoveStudentsPhaseResponse;
-import it.polimi.ingsw.s3m.launcher.Client.Response.StudentMove;
+import it.polimi.ingsw.s3m.launcher.Client.Response.StudentsPhaseResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
-import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import it.polimi.ingsw.s3m.launcher.Server.Message.StudentsPhaseMessage;
 
 public class MoveStudentsPhaseCLI extends MessageCLI{
 	private GameDTO gameState;
 
-	public MoveStudentsPhaseCLI(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
+	public MoveStudentsPhaseCLI(StudentsPhaseMessage moveStudentsPhaseMessage){
 		this.gameState = moveStudentsPhaseMessage.getGameState();
 	}
 
@@ -32,6 +28,6 @@ public class MoveStudentsPhaseCLI extends MessageCLI{
 		}
 
 		int operationChoice = getOperation(maxOperationNumber);
-		return new MoveStudentsPhaseResponse(operationChoice);
+		return new StudentsPhaseResponse(operationChoice);
 	}
 }

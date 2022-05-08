@@ -98,7 +98,7 @@ public class RoomsController{
     }
 
     public synchronized void deleteRoom(Integer roomID, PlayerController player){
-        rooms.get(roomID).deleteRoom(player);
+        rooms.get(roomID).sendNotificationToAllButOne(player, "the room is being deleted");
         Room room = rooms.remove(roomID);
         room = null;
     }

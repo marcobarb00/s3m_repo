@@ -14,7 +14,7 @@ public abstract class View{
 
 	public abstract void planningPhase(PlanningPhaseMessage planningPhaseMessage);
 
-	public abstract void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage);
+	public abstract void moveStudentsPhase(StudentsPhaseMessage moveStudentsPhaseMessage);
 
 	public abstract void playCharacterCard(PlayCharacterCardMessage playCharacterCardMessage);
 
@@ -24,5 +24,5 @@ public abstract class View{
 
 	public abstract void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage);
 
-	public abstract void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage);
+	public abstract void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage);
 }

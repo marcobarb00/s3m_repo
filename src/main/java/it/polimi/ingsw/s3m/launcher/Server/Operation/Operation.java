@@ -4,7 +4,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public abstract class Operation {
 
     public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
             IllegalArgumentException, NotExpertModeException,
-            NotEnoughCoinsException, NotPlayersTurnException,
+            NotEnoughCoinsException, NotPlayerTurnException,
             ZeroTowersRemainedException, NotEnoughIslandsException;
 
     public boolean checkNickname(){

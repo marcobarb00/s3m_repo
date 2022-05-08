@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNatureResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNaturePhaseResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
@@ -22,6 +22,7 @@ public class MotherNaturePhaseCLI extends MessageCLI {
 
 	@Override
 	public Response execute(){
+		//TODO fix motherNaturePhaseCLI to ask only what the player want to do, and create moveMotherNatureCLI
 		System.out.println("move mother nature phase");
 		int maxMoves = getMaxMoves();
 		System.out.println("choose mother nature's moves number from 1 to " + maxMoves +  ":");
@@ -38,7 +39,8 @@ public class MotherNaturePhaseCLI extends MessageCLI {
 			chooseCharacterCard();
 		}
 
-		return new MotherNatureResponse(characterCardActivated, selectedCharacterCard, moves);
+		//return new MotherNaturePhaseResponse(characterCardActivated, selectedCharacterCard, moves);
+		return null;
 	}
 
 	private int getMaxMoves(){

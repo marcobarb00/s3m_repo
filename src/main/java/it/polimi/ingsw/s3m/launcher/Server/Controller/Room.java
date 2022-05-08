@@ -4,10 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.*;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
-import it.polimi.ingsw.s3m.launcher.Server.Message.MoveStudentsPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Message.NotificationMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Message.PlayCharacterCardMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
@@ -73,13 +70,15 @@ public class Room {
         checkGameInstanceConditions(playersNicknameList);
         this.gameState = new Game(playersNicknameList, expertMode);
 
-        while(true){
+        boolean gameEndingFlag = false;
+        while(!gameEndingFlag){
             //planning phase
             //TODO change the phase in game
             try{
                 gameState.refillClouds();
             }catch(EmptyBagException e){
-                //TODO handle exception
+                sendNotificationToAll(e.getMessage());
+                gameEndingFlag = true;
             }
 
             ArrayList<String> nicknameList =  playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
@@ -102,11 +101,20 @@ public class Room {
                 //TODO set current player to turn
                 PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                 sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the action phase");
-                actionPhase(currentPlayer);
+
+                try{
+                    actionPhase(currentPlayer);
+                }catch(ZeroTowersRemainedException | NotEnoughIslandsException e){
+                    //TODO ask for break (setting gameEndingFlag to true and ignoring different methods)??? maybe call different methods based on the exception
+                }
             }
 
             //reset turn
             //TODO reset the turn
+        }
+
+        if(gameEndingFlag){
+            //TODO check win conditions for the possible endings where the turn must continue
         }
     }
 
@@ -149,13 +157,13 @@ public class Room {
         }
     }
 
-    private void actionPhase(PlayerController player){
+    private void actionPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException{
         moveStudentPhase(player);
         motherNaturePhase(player);
         chooseCloudPhase(player);
     }
 
-    private void moveStudentPhase(PlayerController player){
+    private void moveStudentPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException{
         int movedStudents = 0;
         int studentsToBeMoved = 3;
         if(playersNumber == 3){
@@ -163,15 +171,15 @@ public class Room {
         }
 
         while(movedStudents < studentsToBeMoved){
-            MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
-            Response response = player.communicateWithClient(moveStudentsPhaseMessage);
-            if(!(response instanceof MoveStudentsPhaseResponse)){
+            Response response = player.communicateWithClient(new StudentsPhaseMessage(mapper.gameToDTO(gameState)));
+            if(!(response instanceof StudentsPhaseResponse)){
                 sendNotificationToPlayer(player, "the operation received is not the correct type");
                 continue;
             }
 
-            MoveStudentsPhaseResponse moveStudentsPhaseResponse = (MoveStudentsPhaseResponse) response;
-            switch(moveStudentsPhaseResponse.getOperationChoice()){
+            StudentsPhaseResponse studentsPhaseResponse = (StudentsPhaseResponse) response;
+            switch(studentsPhaseResponse.getOperationChoice()){
+                //TODO fix putStudentOnIslandOperation so that in the constructor parameters there is a String color or a PawnColor and not a Student
                 case 1:
                     //TODO putStudentOnTable
                     break;
@@ -183,79 +191,32 @@ public class Room {
                         sendNotificationToPlayer(player, "you already activated a character card");
                         continue;
                     }
-                    //TODO handle exceptions
-                    playCharacterCard(player);
+                    try{
+                        playCharacterCard(player);
+                    }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException e){
+                        //unable to play the character card
+                        sendNotificationToPlayer(player, e.getMessage());
+                        continue;
+                    }
+                    //successful play of character card
+                    //TODO set characterCardActivated to true
+                    //TODO continue?
                     break;
             }
-
-            /*
-            if(response instanceof PlayCharacterCardResponse){
-                playCharacterCard(player, (PlayCharacterCardResponse) response);
-            }else if(response instanceof PutStudentOnTableResponse){
-                //TODO fix putStudentOnIslandOperation so that in the constructor parameters there is a String color or a PawnColor and not a Student
-                //PutStudentsOnIslandsOperation putStudentsOnIslandsOperation = new PutStudentsOnIslandsOperation(gameState, player, )
-            }else if(response instanceof PutStudentOnIslandResponse){
-
-            }else{
-                sendNotificationToPlayer(player, "the operation received is not the correct type");
-                continue;
-            }
-             */
         }
     }
-
-    /*
-    private void moveStudentPhase(PlayerController player){
-        sendNotificationToPlayer(player, "it's your turn to move the students");
-
-        boolean successful = false;
-        Game gameStateCopy;
-        try{
-            gameStateCopy = (Game) gameState.getClass().getMethod("clone").invoke(gameState);
-        }catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException e){
-            sendNotificationToAll("there was an error during setup of the phase, the room is being deleted");
-            RoomsController.instance().deleteRoom(roomID, player);
-            return;
-        }
-
-        while(!successful){
-            try{
-                gameState = (Game) gameStateCopy.getClass().getMethod("clone").invoke(gameStateCopy);
-            }catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException e){
-                e.printStackTrace();
-            }
-
-            MoveStudentsPhaseMessage moveStudentsPhaseMessage = new MoveStudentsPhaseMessage(mapper.gameToDTO(gameState));
-            Response response = player.communicateWithClient(moveStudentsPhaseMessage);
-
-            if(!(response instanceof MoveStudentsResponse)){
-                sendNotificationToPlayer(player, "the operation received is not the correct type");
-                continue;
-            }
-
-            MoveStudentsResponse moveStudentsResponse = (MoveStudentsResponse) response;
-            if(playCharacterCard(player, moveStudentsResponse)){
-                continue;
-            }
-
-            ArrayList<StudentMove> studentMoves = moveStudentsResponse.getStudentMoves();
-            for(StudentMove studentMove : studentMoves){
-
-            }
-
-            successful = true;
-        }
-    }
-    */
     
-    public void playCharacterCard(PlayerController player){
+    private void playCharacterCard(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException, CloudNotInListException{
         Response response = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
-
-        //TODO check if the response is of type PlayCharacterCardResponse
+        if(!(response instanceof PlayCharacterCardResponse)){
+            sendNotificationToPlayer(player, "the operation received is not the correct type");
+            throw new ClassCastException();
+        }
+        PlayCharacterCardResponse playCharacterCardResponse = (PlayCharacterCardResponse) response;
 
         CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(playCharacterCardResponse.getCharacterCardPosition());
         Operation characterCardOperation = null;
-        //TODO fix the activate character card operations parameters
+        //TODO fix playCharacterCardMessage arguments to include minstrel, mushroomer and jester inputs
         switch(playedCharacterCard.getName()){
             case "Centaur":
                 characterCardOperation = new ActivateCentaurEffectOperation(gameState, player);
@@ -284,31 +245,75 @@ public class Room {
         }catch(PlayerNotInListException e){
             sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
             RoomsController.instance().deleteRoom(roomID, player);
-        }catch(CloudNotInListException | NotExpertModeException | NotEnoughCoinsException | NotPlayersTurnException | ZeroTowersRemainedException | NotEnoughIslandsException e){
-            //TODO fix exceptions ZeroTowersRemainedException, NotEnoughIslandsException
-            sendNotificationToAll(e.getMessage());
         }
     }
 
-    public void motherNaturePhase(PlayerController player){
+    private void motherNaturePhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException{
         sendNotificationToPlayer(player, "it's your turn to move mother nature");
 
+        boolean motherNatureMoved = false;
+        while(!motherNatureMoved){
+            Response response = player.communicateWithClient(new MotherNaturePhaseMessage(mapper.gameToDTO(gameState)));
+            if(!(response instanceof MotherNaturePhaseResponse)){
+                sendNotificationToPlayer(player, "the operation received is not the correct type");
+                throw new ClassCastException();
+            }
+
+            MotherNaturePhaseResponse motherNaturePhaseResponse = (MotherNaturePhaseResponse) response;
+            switch(motherNaturePhaseResponse.getOperationChoice()){
+                case 1:
+                    try{
+                        moveMotherNature(player);
+                    }catch(NotPlayerTurnException e){
+                        sendNotificationToPlayer(player, e.getMessage());
+                        continue;
+                    }
+                    motherNatureMoved = true;
+                    break;
+                case 2:
+                    if(((ActionPhase) gameState.getTurn().getCurrentPhase()).isActivatedCharacterCard()){
+                        sendNotificationToPlayer(player, "you already activated a character card");
+                        continue;
+                    }
+                    try{
+                        playCharacterCard(player);
+                    }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException e){
+                        //unable to play the character card
+                        sendNotificationToPlayer(player, e.getMessage());
+                        continue;
+                    }
+                    break;
+            }
+        }
     }
 
-    public void chooseCloudPhase(PlayerController player){
+    private void moveMotherNature(PlayerController player) throws NotPlayerTurnException, ZeroTowersRemainedException, NotEnoughIslandsException{
+        Response response = player.communicateWithClient(new MoveMotherNatureMessage(mapper.gameToDTO(gameState)));
+        if(!(response instanceof MoveMotherNatureResponse)){
+            sendNotificationToPlayer(player, "the operation received is not the correct type");
+            throw new ClassCastException();
+        }
+        MoveMotherNatureResponse moveMotherNatureResponse = (MoveMotherNatureResponse) response;
+
+        MoveMotherNatureOperation moveMotherNatureOperation = new MoveMotherNatureOperation(gameState, player, moveMotherNatureResponse.getMotherNatureMovement());
+        try{
+            moveMotherNatureOperation.executeOperation();
+        }catch(PlayerNotInListException e){
+            sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
+            RoomsController.instance().deleteRoom(roomID, player);
+        }
+    }
+
+    private void chooseCloudPhase(PlayerController player){
         sendNotificationToPlayer(player, "it's your turn to choose the cloud");
-
-    }
-
-    public void deleteRoom(PlayerController player){
-        sendNotificationToAllButOne(player, "the room is being deleted");
+        //TODO implementation
     }
 
     public void sendNotificationToPlayer(PlayerController player, String message){
         player.communicateWithClient(new NotificationMessage(message));
     }
 
-    private void sendNotificationToAllButOne(PlayerController one, String message){
+    public void sendNotificationToAllButOne(PlayerController one, String message){
         NotificationMessage notification = new NotificationMessage(message);
 
         ArrayList<PlayerController> allButOne = new ArrayList<>(playersList);
@@ -318,7 +323,7 @@ public class Room {
         }
     }
 
-    private void sendNotificationToAll(String message){
+    public void sendNotificationToAll(String message){
         NotificationMessage notification = new NotificationMessage(message);
         for(PlayerController player : playersList){
             player.communicateWithClient(notification);

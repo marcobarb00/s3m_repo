@@ -15,7 +15,7 @@ public class MoveMotherNatureOperation extends Operation{
 
     @Override
     public void executeOperation() throws PlayerNotInListException, IllegalArgumentException,
-            NotPlayersTurnException, ZeroTowersRemainedException, NotEnoughIslandsException {
+			NotPlayerTurnException, ZeroTowersRemainedException, NotEnoughIslandsException {
         //check nickname
         boolean playerControllerInList = checkNickname();
         if(!playerControllerInList){
@@ -25,7 +25,7 @@ public class MoveMotherNatureOperation extends Operation{
         //check current player in turn
         boolean playerControllersTurn = checkCurrentPlayer();
         if(!playerControllersTurn){
-            throw new NotPlayersTurnException();
+            throw new NotPlayerTurnException();
         }
 
         //check if movements are legal given currentPlayer's assistantCard
