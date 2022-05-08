@@ -47,4 +47,17 @@ public abstract class Operation {
         String currentPlayer = game.getTurn().getCurrentPlayerNickname();
         return playerController.getNickname().equals(currentPlayer);
     }
+
+    public void checkMovableStudent(){
+        //3 players mode check
+        int maxMovableStudents = 3;
+        boolean threePlayersMode = game.getNumberOfPlayers() == 3;
+        if(threePlayersMode){
+            maxMovableStudents = 4;
+        }
+        int movedStudentsInTurn = game.getTurnMovedStudents();
+        if(movedStudentsInTurn > maxMovableStudents){
+            throw new IllegalArgumentException("Cannot move another student");
+        }
+    }
 }

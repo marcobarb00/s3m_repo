@@ -11,13 +11,13 @@ import java.util.HashMap;
 
 public class PutStudentOnIslandOperation extends Operation{
     private int islandPosition;
-    private Student selectedStudent;
+    private PawnColor studentColor;
 
     public PutStudentOnIslandOperation(Game game, PlayerController playerController,
-                                       int islandPosition, Student selectedStudent) {
+                                       int islandPosition, PawnColor studentColor) {
         super(game, playerController);
         this.islandPosition = islandPosition;
-        this.selectedStudent = selectedStudent;
+        this.studentColor = studentColor;
     }
 
     @Override
@@ -27,7 +27,8 @@ public class PutStudentOnIslandOperation extends Operation{
             throw new PlayerNotInListException();
         }
 
-        //3 players mode check REMOVED
+        //check if student can be moved
+        checkMovableStudent();   
 
         //Checks if there are the selected students in entrance
         searchStudentsInEntrance();
@@ -37,7 +38,7 @@ public class PutStudentOnIslandOperation extends Operation{
             throw new IllegalArgumentException("Incorrect island value");
         }
 
-        game.putStudentOnIslands(playerController.getNickname(), islandPosition, selectedStudent);
+        game.putStudentOnIslands(playerController.getNickname(), islandPosition, new Student(studentColor));
     }
 
     private void searchStudentsInEntrance(){
@@ -45,9 +46,10 @@ public class PutStudentOnIslandOperation extends Operation{
         HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
 
         //Check if at least one student of that color is present in hall
-        boolean studentInEntrance = entrance.get(selectedStudent.getColor()) > 0;
+        boolean studentInEntrance = entrance.get(studentColor) > 0;
         if(!studentInEntrance){
             throw new IllegalArgumentException("Student not in entrance");
         }
     }
+
 }

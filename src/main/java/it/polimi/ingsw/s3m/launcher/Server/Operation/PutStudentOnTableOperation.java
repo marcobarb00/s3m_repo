@@ -24,7 +24,8 @@ public class PutStudentOnTableOperation extends Operation{
             throw new PlayerNotInListException();
         }
 
-        //check on number of player
+        //check movable student
+        checkMovableStudent();
 
         //Checking students in hall
         searchStudentsInEntrance();
