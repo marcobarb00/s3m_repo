@@ -11,8 +11,8 @@ import java.util.HashMap;
 
 // DONE
 public class ActivateJesterEffectOperation extends Operation{
-    private ArrayList<Student> requiredStudents;
-    private ArrayList<Student> givenStudents;
+    private ArrayList<PawnColor> requiredStudents;
+    private ArrayList<PawnColor> givenStudents;
 
     /**
      * Checks if activateJesterEffect method has safe parameters.
@@ -24,8 +24,8 @@ public class ActivateJesterEffectOperation extends Operation{
      * @param givenStudents
      */
     public ActivateJesterEffectOperation(Game game, PlayerController playerController,
-                                         ArrayList<Student> requiredStudents,
-                                         ArrayList<Student> givenStudents) {
+                                         ArrayList<PawnColor> requiredStudents,
+                                         ArrayList<PawnColor> givenStudents) {
         super(game, playerController);
         this.requiredStudents = requiredStudents;
         this.givenStudents = givenStudents;
@@ -70,8 +70,16 @@ public class ActivateJesterEffectOperation extends Operation{
         //Method looks like crap but should work
         searchStudentsInEntrance();
 
+        //FIXME
+        // Temporary ArrayList to change with PawnColor
+        ArrayList<Student> requiredStudentsAL =  new ArrayList<>();
+        ArrayList<Student> givenStudentsAL = new ArrayList<>();
+
+        requiredStudents.forEach(studentColor -> requiredStudentsAL.add(new Student(studentColor)));
+        givenStudents.forEach(studentColor -> givenStudentsAL.add(new Student(studentColor)));
+
         super.game.activateJesterEffect(playerController.getNickname(),
-                requiredStudents, givenStudents);
+                requiredStudentsAL, givenStudentsAL);
     }
 
     /**
@@ -83,7 +91,7 @@ public class ActivateJesterEffectOperation extends Operation{
         //checking on Jester card
         for(PawnColor color : PawnColor.values()){
             int numberOfRequiredStudents = (int) requiredStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
+                    studentColor -> studentColor.equals(color) ).count();
             boolean notEnoughStudentsOnCard =
                     numberOfRequiredStudents > studentsOnJester.get(color);
             if(notEnoughStudentsOnCard){
@@ -100,7 +108,7 @@ public class ActivateJesterEffectOperation extends Operation{
         // with entrance of that color
         for(PawnColor color : PawnColor.values()){
             int numberOfGivenStudents = (int) givenStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
+                    studentColor -> studentColor.equals(color)  ).count();
             boolean notEnoughStudentsInEntrance =
                     numberOfGivenStudents > entrance.get(color);
             if(notEnoughStudentsInEntrance){
