@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Room {
-    private Integer roomID;
+    private final Integer roomID;
     private final int playersNumber;
     private final boolean expertMode;
     private final ArrayList<PlayerController> playersList;
@@ -50,17 +50,20 @@ public class Room {
         new Thread(() -> {
             try {
                 start();
-            } catch (DoubleNicknameException e) {
+            }catch(DoubleNicknameException e) {
                 e.printStackTrace();
+            }catch(NullWinnerException ex){
+                sendNotificationToAll("there was an error during calculation of the winner, everyone wins :)");
+                RoomsController.instance().deleteRoom(roomID);
             }
+            RoomsController.instance().deleteRoom(roomID);
         }).start();
     }
 
     /**
      * Instantiates game if controls are passed, if not an exception is thrown
-     * @throws DoubleNicknameException
      */
-    private void start() throws DoubleNicknameException {
+    private void start() throws DoubleNicknameException, NullWinnerException{
         sendNotificationToAll("the game is starting");
 
         ArrayList<String> playersNicknameList = playersList.stream()
@@ -71,70 +74,80 @@ public class Room {
         this.gameState = new Game(playersNicknameList, expertMode);
 
         boolean gameEndingFlag = false;
-        while(!gameEndingFlag){
-            //planning phase
-            //TODO change the phase in game
-            try{
-                gameState.refillClouds();
-            }catch(EmptyBagException e){
-                sendNotificationToAll(e.getMessage());
-                gameEndingFlag = true;
-            }
-
-            ArrayList<String> nicknameList =  playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
-
-            int startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-            for(int i = 0; i < playersNumber; i++){
-                //TODO set current player to turn
-                PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
-                sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
-                sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the planning phase");
+        try{
+            while(!gameEndingFlag){
+                //initialize planning phase
                 try{
-                    planningPhase(currentPlayer);
-                }catch(NotEnoughAssistantCardsException e){
+                    gameState.refillClouds();
+                }catch(EmptyBagException e){
                     sendNotificationToAll(e.getMessage());
                     gameEndingFlag = true;
                 }
-            }
 
-            gameState.setTurnFirstPlayer();
-            //action phase
-            //TODO change the phase in game
+                ArrayList<String> nicknameList = playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
 
-            startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-            for(int i = 0; i < playersNumber; i++){
-                //TODO set current player to turn
-                PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
-                sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the action phase");
-
-                try{
-                    actionPhase(currentPlayer);
-                }catch(ZeroTowersRemainedException | NotEnoughIslandsException e){
-                    //TODO ask for break (setting gameEndingFlag to true and ignoring different methods)??? maybe call different methods based on the exception
-                }catch(NotEnoughAssistantCardsException e){
-                    //TODO ask how to handle exception
+                int startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+                //cycle all the players to let them play the planning phase
+                for(int i = 0; i < playersNumber; i++){
+                    PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
+                    gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
+                    try{
+                        planningPhase(currentPlayer);
+                    }catch(NotEnoughAssistantCardsException e){
+                        sendNotificationToAll(e.getMessage());
+                        gameEndingFlag = true;
+                    }
                 }
-            }
 
-            //reset turn
-            //TODO reset the turn
+                //initialize action phase
+                gameState.setTurnFirstPlayer();
+
+                startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+                //cycle all the players to let them play the planning phase
+                for(int i = 0; i < playersNumber; i++){
+                    PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
+                    gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
+
+                    try{
+                        actionPhase(currentPlayer);
+                    }catch(NotEnoughAssistantCardsException e){
+                        sendNotificationToAll(e.getMessage());
+                        gameEndingFlag = true;
+                    }catch(NotEnoughIslandsException e){
+                        break;
+                    }
+                }
+
+                //reset turn
+                gameState.resetTurn();
+            }
+        }catch(ZeroTowersRemainedException e){
+            String winnerNickname;
+            winnerNickname = gameState.zeroTowersLeftWinCondition();
+            sendNotificationToAll("the winner is " + winnerNickname);
+            return;
         }
 
-        if(gameEndingFlag){
-            //TODO check win conditions for the possible endings where the turn must continue
+        try{
+            String winnerNickname;
+            winnerNickname = gameState.checkWinCondition();
+            sendNotificationToAll("the winner is " + winnerNickname);
+        }catch(TieException e){
+            sendNotificationToAll("there was a tie! the winners are " + e.getMessage());
         }
     }
 
     private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
         for(String p : players){
             int occurrences = Collections.frequency(players, p);
-            if(occurrences > 1){
+            if(occurrences > 1)
                 throw new DoubleNicknameException();
-            }
         }
     }
 
     private void planningPhase(PlayerController player) throws NotEnoughAssistantCardsException{
+        sendNotificationToPlayer(player, "it's your turn to execute the planning phase");
+        sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the planning phase");
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(mapper.gameToDTO(gameState));
 
         boolean successful = false;
@@ -165,12 +178,10 @@ public class Room {
     }
 
     private void actionPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException{
-        moveStudentPhase(player);
-        motherNaturePhase(player);
-        chooseCloudPhase(player);
-    }
+        sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the action phase");
 
-    private void moveStudentPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException{
+        sendNotificationToPlayer(player, "it's your turn to move the students");
+
         int movedStudents = 0;
         int studentsToBeMoved = 3;
         if(playersNumber == 3){
@@ -179,55 +190,95 @@ public class Room {
 
         while(movedStudents < studentsToBeMoved){
             Response response = player.communicateWithClient(new StudentsPhaseMessage(mapper.gameToDTO(gameState)));
-            if(!(response instanceof StudentsPhaseResponse)){
-                sendNotificationToPlayer(player, "the operation received is not the correct type");
-                continue;
+            try{
+                if(moveStudentPhase(player, response))
+                    movedStudents++;
+            }catch(IncorrectOperationException e){
+                sendNotificationToPlayer(player, e.getMessage());
             }
+        }
 
-            StudentsPhaseResponse studentsPhaseResponse = (StudentsPhaseResponse) response;
-            switch(studentsPhaseResponse.getOperationChoice()){
-                case 1:
-                    try{
-                        Response putStudentOnTableResponse = player.communicateWithClient(new PutStudentOnTableMessage(mapper.gameToDTO(gameState)));
-                        putStudentOnTable(player, putStudentOnTableResponse);
-                    }catch(IncorrectOperationException | PlayerNotInListException e){
-                        //unable to move the student
-                        sendNotificationToPlayer(player, e.getMessage());
-                    }
-                    break;
-                case 2:
-                    try{
-                        Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
-                        putStudentOnIsland(player, putStudentOnIslandResponse);
-                    }catch(IncorrectOperationException | PlayerNotInListException e){
-                        //unable to move the student
-                        sendNotificationToPlayer(player, e.getMessage());
-                    }
-                    break;
-                case 3:
-                    if(gameState.getTurn().isActivatedCharacterCard()){
-                        sendNotificationToPlayer(player, "you already activated a character card");
-                        continue;
-                    }
-                    try{
-                        playCharacterCard(player);
-                    }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException | IncorrectOperationException e){
-                        //unable to play the character card
-                        sendNotificationToPlayer(player, e.getMessage());
-                        continue;
-                    }
-                    //successful play of character card
-                    //TODO set characterCardActivated to true
-                    //TODO continue?
-                    break;
+        sendNotificationToPlayer(player, "it's your turn to move mother nature");
+
+        boolean motherNatureMoved = false;
+        while(!motherNatureMoved){
+            Response response = player.communicateWithClient(new MotherNaturePhaseMessage(mapper.gameToDTO(gameState)));
+            try{
+                motherNatureMoved = motherNaturePhase(player, response);
+            }catch(IncorrectOperationException e){
+                sendNotificationToPlayer(player, e.getMessage());
+            }
+        }
+
+        sendNotificationToPlayer(player, "it's your turn to choose the cloud");
+
+        boolean cloudChosen = false;
+        while(!cloudChosen){
+            Response response = player.communicateWithClient(new CloudPhaseMessage(mapper.gameToDTO(gameState)));
+            try{
+                cloudChosen = chooseCloudPhase(player, response);
+            }catch(IncorrectOperationException e){
+                sendNotificationToPlayer(player, e.getMessage());
             }
         }
     }
 
-    private void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
-        if(!(response instanceof PutStudentOnTableResponse)){
+    /**
+     *
+     * @param player the player who's playing the turn
+     * @param response the response that contains the operation chosen by the player
+     * @return true if a student has been moved successfully, false otherwise
+     */
+    private boolean moveStudentPhase(PlayerController player, Response response) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException{
+        if(!(response instanceof StudentsPhaseResponse))
             throw new IncorrectOperationException();
+
+        StudentsPhaseResponse studentsPhaseResponse = (StudentsPhaseResponse) response;
+        switch(studentsPhaseResponse.getOperationChoice()){
+            case 1:
+                try{
+                    Response putStudentOnTableResponse = player.communicateWithClient(new PutStudentOnTableMessage(mapper.gameToDTO(gameState)));
+                    putStudentOnTable(player, putStudentOnTableResponse);
+                }catch(IncorrectOperationException | PlayerNotInListException e){
+                    //unable to move the student
+                    sendNotificationToPlayer(player, e.getMessage());
+                }
+                //successful play of character card
+                return true;
+            case 2:
+                try{
+                    Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
+                    putStudentOnIsland(player, putStudentOnIslandResponse);
+                }catch(IncorrectOperationException | PlayerNotInListException e){
+                    //unable to move the student
+                    sendNotificationToPlayer(player, e.getMessage());
+                }
+                //successful play of character card
+                return true;
+            case 3:
+                if(gameState.getTurn().isActivatedCharacterCard()){
+                    sendNotificationToPlayer(player, "you already activated a character card");
+                    return false;
+                }
+                try{
+                    Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
+                    playCharacterCard(player, playCharacterCardResponse);
+                }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException | IncorrectOperationException e){
+                    //unable to play the character card
+                    sendNotificationToPlayer(player, e.getMessage());
+                    return false;
+                }catch(BackException e){
+                    return false;
+                }
+                //successful play of character card
+                gameState.getTurn().setActivatedCharacterCard(true);
         }
+        return false;
+    }
+
+    private void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
+        if(!(response instanceof PutStudentOnTableResponse))
+            throw new IncorrectOperationException();
 
         PutStudentOnTableResponse putStudentOnTableResponse = (PutStudentOnTableResponse) response;
 
@@ -236,9 +287,8 @@ public class Room {
     }
 
     private void putStudentOnIsland(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
-        if(!(response instanceof PutStudentOnIslandResponse)){
+        if(!(response instanceof PutStudentOnIslandResponse))
             throw new IncorrectOperationException();
-        }
 
         PutStudentOnIslandResponse putStudentOnIslandResponse = (PutStudentOnIslandResponse) response;
 
@@ -246,11 +296,13 @@ public class Room {
         putStudentOnIslandOperation.executeOperation();
     }
     
-    private void playCharacterCard(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException, CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException{
-        Response response = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
-        if(!(response instanceof PlayCharacterCardResponse)){
+    private void playCharacterCard(PlayerController player, Response response) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException, CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException, BackException{
+        if(response instanceof BackResponse)
+            throw new BackException();
+
+        if(!(response instanceof PlayCharacterCardResponse))
             throw new IncorrectOperationException();
-        }
+
         PlayCharacterCardResponse playCharacterCardResponse = (PlayCharacterCardResponse) response;
 
         CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(playCharacterCardResponse.getCharacterCardPosition());
@@ -287,50 +339,56 @@ public class Room {
         }
     }
 
-    private void motherNaturePhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException{
-        sendNotificationToPlayer(player, "it's your turn to move mother nature");
+    /**
+     *
+     * @param player the player who's playing the turn
+     * @param response the response that contains the operation chosen by the player
+     * @return true if mother nature has been moved successfully, false otherwise
+     */
+    private boolean motherNaturePhase(PlayerController player, Response response) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException{
+        if(!(response instanceof MotherNaturePhaseResponse))
+            throw new IncorrectOperationException();
 
-        boolean motherNatureMoved = false;
-        while(!motherNatureMoved){
-            Response response = player.communicateWithClient(new MotherNaturePhaseMessage(mapper.gameToDTO(gameState)));
-            if(!(response instanceof MotherNaturePhaseResponse)){
-                sendNotificationToPlayer(player, "the operation received is not the correct type");
-                continue;
-            }
-
-            MotherNaturePhaseResponse motherNaturePhaseResponse = (MotherNaturePhaseResponse) response;
-            switch(motherNaturePhaseResponse.getOperationChoice()){
-                case 1:
-                    try{
-                        moveMotherNature(player);
-                    }catch(NotPlayerTurnException | IncorrectOperationException e){
-                        sendNotificationToPlayer(player, e.getMessage());
-                        continue;
-                    }
-                    motherNatureMoved = true;
-                    break;
-                case 2:
-                    if(gameState.getTurn().isActivatedCharacterCard()){
-                        sendNotificationToPlayer(player, "you already activated a character card");
-                        continue;
-                    }
-                    try{
-                        playCharacterCard(player);
-                    }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException | IllegalArgumentException | IncorrectOperationException e){
-                        //unable to play the character card
-                        sendNotificationToPlayer(player, e.getMessage());
-                        continue;
-                    }
-                    break;
-            }
+        MotherNaturePhaseResponse motherNaturePhaseResponse = (MotherNaturePhaseResponse) response;
+        switch(motherNaturePhaseResponse.getOperationChoice()){
+            case 1:
+                try{
+                    Response moveMotherNatureResponse = player.communicateWithClient(new MoveMotherNatureMessage(mapper.gameToDTO(gameState)));
+                    moveMotherNature(player, moveMotherNatureResponse);
+                }catch(NotPlayerTurnException e){
+                    sendNotificationToPlayer(player, e.getMessage());
+                    return false;
+                }catch(BackException e){
+                    return false;
+                }
+                return true;
+            case 2:
+                if(gameState.getTurn().isActivatedCharacterCard()){
+                    sendNotificationToPlayer(player, "you already activated a character card");
+                    return false;
+                }
+                try{
+                    Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
+                    playCharacterCard(player, playCharacterCardResponse);
+                }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException | IllegalArgumentException e){
+                    //unable to play the character card
+                    sendNotificationToPlayer(player, e.getMessage());
+                    return false;
+                }catch(BackException e){
+                    return false;
+                }
         }
+
+        return false;
     }
 
-    private void moveMotherNature(PlayerController player) throws NotPlayerTurnException, ZeroTowersRemainedException, NotEnoughIslandsException, IncorrectOperationException{
-        Response response = player.communicateWithClient(new MoveMotherNatureMessage(mapper.gameToDTO(gameState)));
-        if(!(response instanceof MoveMotherNatureResponse)){
+    private void moveMotherNature(PlayerController player, Response response) throws NotPlayerTurnException, ZeroTowersRemainedException, NotEnoughIslandsException, IncorrectOperationException, BackException{
+        if(response instanceof BackResponse)
+            throw new BackException();
+
+        if(!(response instanceof MoveMotherNatureResponse))
             throw new IncorrectOperationException();
-        }
+
         MoveMotherNatureResponse moveMotherNatureResponse = (MoveMotherNatureResponse) response;
 
         MoveMotherNatureOperation moveMotherNatureOperation = new MoveMotherNatureOperation(gameState, player, moveMotherNatureResponse.getMotherNatureMovement());
@@ -342,9 +400,25 @@ public class Room {
         }
     }
 
-    private void chooseCloudPhase(PlayerController player){
-        sendNotificationToPlayer(player, "it's your turn to choose the cloud");
-        //TODO implementation
+    private boolean chooseCloudPhase(PlayerController player, Response response) throws IncorrectOperationException{
+        if(!(response instanceof CloudResponse))
+            throw new IncorrectOperationException();
+
+        CloudResponse cloudResponse = (CloudResponse) response;
+
+        ChooseCloudOperation chooseCloudOperation = new ChooseCloudOperation(gameState, player, cloudResponse.getCloud());
+
+        try{
+            chooseCloudOperation.executeOperation();
+        }catch(PlayerNotInListException e){
+            sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
+            RoomsController.instance().deleteRoom(roomID, player);
+            return false;
+        }catch(CloudNotInListException e){
+            return false;
+        }
+
+        return true;
     }
 
     public void sendNotificationToPlayer(PlayerController player, String message){

@@ -1,9 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughIslandsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.ZeroTowersRemainedException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -207,11 +205,12 @@ public class Game implements Cloneable{
                 turn.setFirstPlayerNickname(nickname);
             }
         }
+        turn.setPhaseName("ActionPhase");
     }
 
     // WINNING CONDITIONS
 
-    public String checkWinCondition() {
+    public String checkWinCondition() throws NullWinnerException, TieException {
         Player winner = null;
         int maxTowers = 10;
         for (Player player : playerHashMap.values()) {
@@ -220,16 +219,20 @@ public class Game implements Cloneable{
             else if (player.getDashboard().getNumberOfTowers() == maxTowers)
                 if (playerInfluenceOnProfessors(player) > playerInfluenceOnProfessors(winner))
                     winner = player;
+                else if (playerInfluenceOnProfessors(player) == playerInfluenceOnProfessors(winner)) {
+                    assert winner != null;
+                    throw new TieException(player.getNickname(), winner.getNickname());
+                }
         }
-        assert winner != null;
+        if (winner == null) throw new NullWinnerException();
         return winner.getNickname();
     }
 
-    public String zeroTowersLeftWinCondition() {
+    public String zeroTowersLeftWinCondition() throws NullWinnerException {
         Player winner = null;
         for (Player player : playerHashMap.values())
             if (player.getDashboard().getNumberOfTowers() == 0) winner = player;
-        assert winner != null;
+        if (winner == null) throw new NullWinnerException();
         return winner.getNickname();
     }
 

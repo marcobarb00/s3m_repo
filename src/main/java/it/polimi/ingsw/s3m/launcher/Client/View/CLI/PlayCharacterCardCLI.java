@@ -1,6 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
