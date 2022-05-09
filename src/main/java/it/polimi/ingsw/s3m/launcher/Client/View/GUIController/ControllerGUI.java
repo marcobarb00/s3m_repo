@@ -160,6 +160,16 @@ public class ControllerGUI{
 		}
 	}
 
+	public void planningPhase(){
+		try{
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(".fxml"));
+			Parent showNumOfPlayers = (Parent) loader.load();
+			setScene(showNumOfPlayers);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
 	public void closeSocket(){
 		thread.close();
 	}
