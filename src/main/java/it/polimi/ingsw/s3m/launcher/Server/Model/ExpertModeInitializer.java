@@ -1,10 +1,13 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import java.util.ArrayList;
-
 public class ExpertModeInitializer {
-    private Game game;
+    private final Game game;
 
+    /**
+     * Constructor used to initialize a game in expert mode: give one coin to
+     * each player and draw three character cards
+     * @param game game to initialize to expert mode
+     */
     public ExpertModeInitializer (Game game) {
         this.game = game;
         playersUpdate();
@@ -18,12 +21,19 @@ public class ExpertModeInitializer {
         characterCardsSetup();
     }
 
+    /**
+     * Method used to give one coin to each player of the game
+     */
     public void playersUpdate() {
         for (Player player : game.getPlayerHashMap().values()) {
             player.addCoins(1);
         }
     }
 
+    /**
+     * Method used to draw three character cards and to initialize the
+     * Jester character card if present
+     */
     public void characterCardsSetup() {
         game.drawThreeCharacterCards();
         for (CharacterCard characterCard : game.getCharacterCardsList()) {

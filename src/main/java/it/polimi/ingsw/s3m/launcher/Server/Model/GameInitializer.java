@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public abstract class GameInitializer {
     Game game;
 
+    /**
+     * Constructor used to get the game
+     * @param game game to be initialized
+     */
     public GameInitializer(Game game) {
         this.game = game;
     }
@@ -15,6 +19,11 @@ public abstract class GameInitializer {
     public abstract void studentsInEntranceSetup();
 
     // Common method islandsSetup
+
+    /**
+     * Method used to initialize the islands: put one random student on
+     * each island, expect for the first and the mirrored one
+     */
     public void islandsSetup() {
         ArrayList<Student> firstStudentsOnIslands = new ArrayList<>();
         for (PawnColor color : PawnColor.values()) {
@@ -29,6 +38,7 @@ public abstract class GameInitializer {
         }
     }
 
+    //TODO rewatch the extraction of this method
     private Student extractStudent(ArrayList<Student> students) {
         Student returnedStudent;
         int extractedNumber = (int) (Math.random()*(students.size()));

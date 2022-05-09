@@ -5,18 +5,22 @@ import java.util.HashMap;
 
 public class Island {
     private Player dominator = null;
-    private HashMap<PawnColor, Integer> students;
+    private final HashMap<PawnColor, Integer> students;
     private int numberOfTowers;
 
     public Island() {
         students = new HashMap<>();
-        for (PawnColor color : PawnColor.values()) {
+        for (PawnColor color : PawnColor.values())
             students.put(color, 0);
-        }
         this.numberOfTowers = 0;
     }
 
     // Adding students
+
+    /**
+     * Method used to add a single student on the island
+     * @param student student to be added
+     */
     public void addStudent(Student student){
         PawnColor color = student.getColor();
         students.replace(color, students.get(color)+1);
@@ -30,6 +34,7 @@ public class Island {
     }
 
     // Towers
+    public void addTower() { numberOfTowers++; }
     public void sumTower(int addend) { numberOfTowers += addend; }
 
     // GETTER
@@ -40,5 +45,4 @@ public class Island {
 
     // SETTER
     public void setDominator(Player dominator) { this.dominator = dominator; }
-    public void addTower() { numberOfTowers++; }
 }

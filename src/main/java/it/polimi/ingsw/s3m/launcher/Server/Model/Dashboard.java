@@ -18,6 +18,11 @@ public class Dashboard {
     }
 
     // Entrance
+
+    /**
+     * Method used to add students in the entrance of the dashboard
+     * @param enteringStudents students that are going to be added to the entrance
+     */
     public void addStudentsInEntrance (ArrayList<Student> enteringStudents) {
         for (Student student : enteringStudents) {
             PawnColor color = student.getColor();
@@ -25,11 +30,21 @@ public class Dashboard {
         }
     }
 
+    /**
+     * Method used to delete a single student from the entrance, because moved
+     * on tables or an island
+     * @param deletingStudent student to be deleted
+     */
     public void deleteSingleStudentFromEntrance (Student deletingStudent) {
         PawnColor color = deletingStudent.getColor();
         entrance.replace(color, entrance.get(color)-1);
     }
 
+    /**
+     * Method used to delete a bunch of students from the entrance, because moved
+     * on tables or an island
+     * @param deletingStudents students to be deleted
+     */
     public void deleteStudentsFromEntrance (ArrayList<Student> deletingStudents) {
         for (Student student : deletingStudents) {
             PawnColor color = student.getColor();
@@ -38,6 +53,11 @@ public class Dashboard {
     }
 
     // Tables
+
+    /**
+     * Method used to delete a bunch of students from the tables
+     * @param deletingStudents students to be deleted
+     */
     public void deleteStudentsFromTables (ArrayList<Student> deletingStudents) {
         for (Student student : deletingStudents) {
             PawnColor color = student.getColor();
@@ -45,6 +65,11 @@ public class Dashboard {
         }
     }
 
+    /**
+     * Method used to move a single student from the entrance to the tables
+     * @param movingStudent student to be moved
+     * @return the number of coins earned
+     */
     public int moveSingleStudentFromEntranceToTables (Student movingStudent) {
         int earnCoins = 0;
         PawnColor color = movingStudent.getColor();
@@ -54,6 +79,11 @@ public class Dashboard {
         return earnCoins;
     }
 
+    /**
+     * Method used to move a bunch of students from the entrance to the tables
+     * @param movingStudents students to be moved
+     * @return the number of coins earned
+     */
     public int moveStudentsFromEntranceToTables (ArrayList<Student> movingStudents) {
         int earnCoins = 0;
         for (Student student : movingStudents) {

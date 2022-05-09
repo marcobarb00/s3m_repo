@@ -10,11 +10,17 @@ public class Jester extends CharacterCard {
         setName("Jester");
         setCost(1);
         studentsOnCard = new HashMap<>();
-        for (PawnColor color : PawnColor.values()) {
+        for (PawnColor color : PawnColor.values())
             studentsOnCard.put(color, 0);
-        }
     }
 
+    /**
+     * Method used to activate the effect of the Jester: the player asks for a maximum of three students
+     * to be changed with three given students
+     * @param requiredStudents students on the card asked from the player
+     * @param givenStudents students given from the player
+     * @return students required from the player
+     */
     public ArrayList<Student> exchangeStudents (ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
         ArrayList<Student> students = new ArrayList<>(requiredStudents);
         for (Student student : requiredStudents) {

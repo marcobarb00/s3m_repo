@@ -5,6 +5,13 @@ import java.util.HashMap;
 public class MushroomerComputeDominance implements ComputeDominanceStrategy {
     private PawnColor chosenColor;
 
+    /**
+     * Method used to calculate the dominance of an island without counting
+     * the students of a certain chosen color
+     * @param island island in which the computeDominance have to be executed
+     * @param professors list of Game professors
+     * @return the new player dominating the island
+     */
     @Override
     public Player computeDominance(Island island, HashMap<PawnColor, Player> professors) {
         HashMap<Player, Integer> playersInfluence = new HashMap<>();

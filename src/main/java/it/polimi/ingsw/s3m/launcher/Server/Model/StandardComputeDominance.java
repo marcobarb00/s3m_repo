@@ -3,6 +3,13 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 import java.util.HashMap;
 
 public class StandardComputeDominance implements ComputeDominanceStrategy {
+
+    /**
+     * Method used to calculate the dominance of an island
+     * @param island island in which the computeDominance have to be executed
+     * @param professors list of Game professors
+     * @return the new player dominating the island
+     */
     @Override
     public Player computeDominance(Island island, HashMap<PawnColor, Player> professors) {
         HashMap<Player, Integer> playersInfluence = new HashMap<>();

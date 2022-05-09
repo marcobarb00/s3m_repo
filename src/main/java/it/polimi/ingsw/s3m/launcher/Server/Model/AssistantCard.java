@@ -22,6 +22,11 @@ public enum AssistantCard {
         this.movements = movements;
     }
 
+    /**
+     * Method called in the activation of the MagicPostman character card.
+     * The method increases the maximum allowed movement of an assistant
+     * card by two.
+     */
     public void incrementMovementsByTwo() { movements += 2; }
 
     // GETTER

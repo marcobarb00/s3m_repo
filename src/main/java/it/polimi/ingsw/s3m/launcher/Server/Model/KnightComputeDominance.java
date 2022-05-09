@@ -5,6 +5,13 @@ import java.util.HashMap;
 public class KnightComputeDominance implements ComputeDominanceStrategy {
     private Player actingPlayer;
 
+    /**
+     * Method used to calculate the dominance of an island with two additional
+     * points for the acting player that activated the card
+     * @param island island in which the computeDominance have to be executed
+     * @param professors list of Game professors
+     * @return the new player dominating the island
+     */
     @Override
     public Player computeDominance(Island island, HashMap<PawnColor, Player> professors) {
         HashMap<Player, Integer> playersInfluence = new HashMap<>();

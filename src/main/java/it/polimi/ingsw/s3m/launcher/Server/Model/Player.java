@@ -6,11 +6,16 @@ import java.util.Arrays;
 public class Player {
     private final String nickname;
     private final TowerColor color;
-    private Dashboard dashboard;
-    private ArrayList<AssistantCard> hand;
+    private final Dashboard dashboard;
+    private final ArrayList<AssistantCard> hand;
     private AssistantCard lastPlayedCard = null;
     private int coins = 0;
 
+    /**
+     * Constructor used to initialize player's attributes
+     * @param nickname unique nickname of the player
+     * @param color color of the player's towers
+     */
     public Player (String nickname, TowerColor color) {
         this.nickname = nickname;
         this.color = color;
@@ -19,6 +24,11 @@ public class Player {
         hand.addAll(Arrays.asList(AssistantCard.values()));
     }
 
+    /**
+     * Method used to remove an assistant card from the player's hand when played
+     * in the planning phase
+     * @param position position in hand of the card to be removed
+     */
     public void removeAssistantCardFromHand(int position) {
         hand.remove(position);
     }
