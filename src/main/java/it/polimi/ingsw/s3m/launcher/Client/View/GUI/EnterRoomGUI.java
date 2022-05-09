@@ -10,41 +10,41 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class EnterRoomGUI {
+public class EnterRoomGUI{
 
-    @FXML
-    TextField nickname;
-    @FXML
-    TextField roomID;
-    @FXML
-    Label otherIDRoom;
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    GridPane gridPane;
+	@FXML
+	TextField nickname;
+	@FXML
+	TextField roomID;
+	@FXML
+	Label otherIDRoom;
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	GridPane gridPane;
 
-    private EnterRoomResponse enterRoomResponse = new EnterRoomResponse();
+	private EnterRoomResponse enterRoomResponse = new EnterRoomResponse();
 
-    public void enterGame(ActionEvent event) {
-        String nick = nickname.getText();
-        enterRoomResponse.setNickname(nick);
-        Integer roomIDChoice;
-        try{
-             roomIDChoice = Integer.parseInt(roomID.getText());
-        }catch(NumberFormatException e){
-            roomIDChoice = 0;
-        }
-        enterRoomResponse.setRoomID(roomIDChoice);
-        ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().sendResponse(enterRoomResponse);
-    }
+	public void enterGame(ActionEvent event){
+		String nick = nickname.getText();
+		enterRoomResponse.setNickname(nick);
+		Integer roomIDChoice;
+		try{
+			roomIDChoice = Integer.parseInt(roomID.getText());
+		}catch(NumberFormatException e){
+			roomIDChoice = 0;
+		}
+		enterRoomResponse.setRoomID(roomIDChoice);
+		ControllerGUI.getInstance().startLoading();
+		ControllerGUI.getInstance().sendResponse(enterRoomResponse);
+	}
 
-    public void setCreatedRoom(EnterRoomMessage message) {
-        StringBuilder availableRoomList = new StringBuilder();
-        if (message.getAvailableRoomsID() != null) {
-            for (Integer roomID : message.getAvailableRoomsID())
-                availableRoomList.append(roomID).append("\n");
-        }
-        otherIDRoom.setText(availableRoomList.toString());
-    }
+	public void setCreatedRoom(EnterRoomMessage message){
+		StringBuilder availableRoomList = new StringBuilder();
+		if(message.getAvailableRoomsID() != null){
+			for(Integer roomID : message.getAvailableRoomsID())
+				availableRoomList.append(roomID).append("\n");
+		}
+		otherIDRoom.setText(availableRoomList.toString());
+	}
 }

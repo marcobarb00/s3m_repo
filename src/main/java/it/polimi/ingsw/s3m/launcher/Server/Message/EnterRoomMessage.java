@@ -12,7 +12,7 @@ public class EnterRoomMessage implements Message{
 		this.availableRoomsID = availableRoomsID;
 	}
 
-	public ArrayList<Integer> getAvailableRoomsID() {
+	public ArrayList<Integer> getAvailableRoomsID(){
 		return availableRoomsID;
 	}
 

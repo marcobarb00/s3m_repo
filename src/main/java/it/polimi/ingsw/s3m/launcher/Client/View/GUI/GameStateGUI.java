@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-public class GameStateGUI {
+public class GameStateGUI{
 
     /*public void update(GameStateMessage gameStateMessage, Stage secondaryStage) {
         initializeGameboard(gameStateMessage);

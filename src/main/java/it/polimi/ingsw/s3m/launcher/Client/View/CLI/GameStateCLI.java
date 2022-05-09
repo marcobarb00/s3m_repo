@@ -1,6 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
 
 import java.util.HashMap;
 
@@ -13,6 +15,7 @@ public class GameStateCLI{
 
 	public void printState(){
 		//TODO print characterCard
+		//TODO print students of the jester
 
 		System.out.println("\nislands:");
 		System.out.println("WIP");

@@ -6,7 +6,9 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -26,14 +28,14 @@ public class Client{
 		int choiceView;
 		try{
 			choiceView = Integer.parseInt(scanner.nextLine());
-		}catch (Exception e){
+		}catch(Exception e){
 			choiceView = 0;
 		}
 		while(choiceView != 1 && choiceView != 2){
 			System.out.println("\ninvalid choice, please press press 1 or 2 to choose");
 			try{
 				choiceView = Integer.parseInt(scanner.nextLine());
-			}catch (Exception e){
+			}catch(Exception e){
 				choiceView = 0;
 			}
 		}
@@ -67,6 +69,7 @@ public class Client{
 
 	/**
 	 * sends a response to the server
+	 *
 	 * @param response response to be sent
 	 */
 	public void sendResponse(Response response){
@@ -79,6 +82,7 @@ public class Client{
 
 	/**
 	 * receive a message from the server
+	 *
 	 * @return message received
 	 */
 	public Message receiveMessage(){
@@ -90,12 +94,12 @@ public class Client{
 		return null;
 	}
 
-	public void close() {
-		try {
+	public void close(){
+		try{
 			inputStream.close();
 			outputStream.close();
 			socket.close();
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}

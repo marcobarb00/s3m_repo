@@ -1,33 +1,77 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-public class Turn {
-    private String firstPlayerNickname;
-    private String currentPlayerNickname;
-    private Phase currentPhase;
-    private int movedStudents = 0;
+import java.util.HashMap;
 
-    public Turn(String firstPlayerNickname) {
-        this.firstPlayerNickname = firstPlayerNickname;
-        this.currentPlayerNickname = firstPlayerNickname;
-        this.currentPhase = new PlanningPhase();
-    }
+public class Turn{
+	private String firstPlayerNickname;
+	private String currentPlayerNickname;
+	private String phaseName = "PlanningPhase";
+	// Planning phase
+	private int movedStudents = 0;
+	private HashMap<String, AssistantCard> playedCards = new HashMap<>();
+	// Action phase
+	private boolean activatedCharacterCard = false;
 
-    public void incrementMovedStudents() { movedStudents++; }
+	public Turn(String firstPlayerNickname){
+		this.firstPlayerNickname = firstPlayerNickname;
+		this.currentPlayerNickname = firstPlayerNickname;
+	}
 
-    // GETTER
-    public String getFirstPlayerNickname() { return firstPlayerNickname; }
-    public String getCurrentPlayerNickname() { return currentPlayerNickname; }
-    public Phase getCurrentPhase() { return currentPhase; }
-    public int getMovedStudents() { return movedStudents; }
+	public void incrementMovedStudents(){
+		movedStudents++;
+	}
 
-    // SETTER
-    public void setFirstPlayerNickname(String firstPlayerNickname) {
-        this.firstPlayerNickname = firstPlayerNickname;
-    }
-    public void setCurrentPlayerNickname(String currentPlayerNickname) {
-        this.currentPlayerNickname = currentPlayerNickname;
-    }
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
-    }
+	public void resetMovedStudents(){
+		movedStudents = 0;
+	}
+
+	public void addPlayedCard(String playerNickname, AssistantCard assistantCard){
+		playedCards.put(playerNickname, assistantCard);
+	}
+
+	// GETTER
+	public String getFirstPlayerNickname(){
+		return firstPlayerNickname;
+	}
+
+	public String getCurrentPlayerNickname(){
+		return currentPlayerNickname;
+	}
+
+	public String getPhaseName(){
+		return phaseName;
+	}
+
+	public int getMovedStudents(){
+		return movedStudents;
+	}
+
+	public HashMap<String, AssistantCard> getPlayedCards(){
+		return playedCards;
+	}
+
+	public boolean isActivatedCharacterCard(){
+		return activatedCharacterCard;
+	}
+
+	// SETTER
+	public void setFirstPlayerNickname(String firstPlayerNickname){
+		this.firstPlayerNickname = firstPlayerNickname;
+	}
+
+	public void setCurrentPlayerNickname(String currentPlayerNickname){
+		this.currentPlayerNickname = currentPlayerNickname;
+	}
+
+	public void setPhaseName(String phaseName){
+		this.phaseName = phaseName;
+	}
+
+	public void setPlayedCards(HashMap<String, AssistantCard> playedCards){
+		this.playedCards = playedCards;
+	}
+
+	public void setActivatedCharacterCard(boolean activatedCharacterCard){
+		this.activatedCharacterCard = activatedCharacterCard;
+	}
 }

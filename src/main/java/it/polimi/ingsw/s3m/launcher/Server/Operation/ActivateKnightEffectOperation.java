@@ -9,29 +9,35 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 //DONE
 public class ActivateKnightEffectOperation extends Operation{
 
-    public ActivateKnightEffectOperation(Game game, PlayerController playerController) {
-        super(game, playerController);
-    }
+	public ActivateKnightEffectOperation(Game game, PlayerController playerController){
+		super(game, playerController);
+	}
 
-    @Override
-    public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException {
+	@Override
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException{
 
-        boolean playerControllerInList = checkNickname();
-        if(!playerControllerInList){
-            throw new PlayerNotInListException();
-        }
+		boolean playerControllerInList = checkNickname();
+		if(!playerControllerInList){
+			throw new PlayerNotInListException();
+		}
 
-        boolean checkExpertMode = game.isExpertMode();
-        if(!checkExpertMode){
-            throw new NotExpertModeException();
-        }
+		boolean checkExpertMode = game.isExpertMode();
+		if(!checkExpertMode){
+			throw new NotExpertModeException();
+		}
 
-        //checking if player has enough coins
-        boolean checkCost = checkCharacterCardCost("Knight");
-        if(!checkCost){
-            throw new NotEnoughCoinsException();
-        }
+		//checks if CharacterCard already active
+		boolean activatedCharacterCard = game.isCharacterCardActivated();
+		if(activatedCharacterCard){
+			throw new IllegalArgumentException("Cannot play a second character card");
+		}
 
-        super.game.activateKnightEffect(playerController.getNickname());
-    }
+		//checking if player has enough coins
+		boolean checkCost = checkCharacterCardCost("Knight");
+		if(!checkCost){
+			throw new NotEnoughCoinsException();
+		}
+
+		super.game.activateKnightEffect(playerController.getNickname());
+	}
 }

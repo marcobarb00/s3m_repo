@@ -22,41 +22,41 @@ class ActivateJesterEffectOperationTest {
     void executeOperation() {
         ArrayList<String> playerList = new ArrayList<>(Arrays.asList("paolo","nino"));
         PlayerController playerController = new PlayerController(new ClientHandler(new Socket()));
-        ArrayList<Student> requiredStudents = new ArrayList<>(
+        ArrayList<PawnColor> requiredStudents = new ArrayList<>(
                 Arrays.asList(
-                new Student(PawnColor.GREEN),
-                new Student(PawnColor.RED),
-                new Student(PawnColor.BLUE)
+                        PawnColor.GREEN,
+                        PawnColor.RED,
+                        PawnColor.BLUE
                 )
         );
-        ArrayList<Student> givenStudents = new ArrayList<>(
+        ArrayList<PawnColor> givenStudents = new ArrayList<>(
                 Arrays.asList(
-                new Student(PawnColor.GREEN),
-                new Student(PawnColor.YELLOW),
-                new Student(PawnColor.PINK)
+                PawnColor.GREEN,
+                PawnColor.YELLOW,
+                PawnColor.PINK
                 )
         );
 
         //Not expert mode exception
         expertModeException(playerList, playerController,
-                (ArrayList<Student>) requiredStudents.clone(),
-                (ArrayList<Student>) givenStudents.clone());
+                (ArrayList<PawnColor>) requiredStudents.clone(),
+                (ArrayList<PawnColor>) givenStudents.clone());
 
         //PlayerNotInListException
         playerNotInListException(playerList, playerController,
-                (ArrayList<Student>) requiredStudents.clone(),
-                (ArrayList<Student>) givenStudents.clone());
+                (ArrayList<PawnColor>) requiredStudents.clone(),
+                (ArrayList<PawnColor>) givenStudents.clone());
 
         //IllegalArg Exc Incorrect Exchange Students Value
         incorrectStudentsValue(playerList, playerController,
-                (ArrayList<Student>) requiredStudents.clone(),
-                (ArrayList<Student>) givenStudents.clone());
+                (ArrayList<PawnColor>) requiredStudents.clone(),
+                (ArrayList<PawnColor>) givenStudents.clone());
 
         //IllegalArgExc Not enough students on jester card
     }
 
     private void expertModeException(ArrayList<String> playerList, PlayerController playerController,
-                                     ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
+                                     ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
         Game game = new Game(playerList,false);
         playerController.setNickname("paolo");
         Operation operation1 = new ActivateJesterEffectOperation(game, playerController,
@@ -66,7 +66,7 @@ class ActivateJesterEffectOperationTest {
     }
 
     private void playerNotInListException(ArrayList<String> playerList, PlayerController playerController,
-                                           ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
+                                           ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
         Game game = new Game(playerList,true);
         playerController.setNickname("giovanni");
         Operation operation2 = new ActivateJesterEffectOperation(game, playerController,
@@ -76,7 +76,7 @@ class ActivateJesterEffectOperationTest {
     }
 
     private void incorrectStudentsValue(ArrayList<String> playerList, PlayerController playerController,
-                                                ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
+                                                ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
         playerController.setNickname("paolo");
         requiredStudents.remove(0);
         System.out.println(requiredStudents.size());
@@ -88,7 +88,7 @@ class ActivateJesterEffectOperationTest {
         assertEquals("Incorrect exchange students value", e.getMessage());
     }
     private void notStudentsOnJester(ArrayList<String> playerList, PlayerController playerController,
-                                     ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
+                                     ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
         playerController.setNickname("paolo");
         System.out.println(requiredStudents.size());
         Game game = new Game(playerList,true);

@@ -14,79 +14,94 @@ import java.util.HashMap;
 
 //DONE
 public class ActivateMinstrelEffectOperation extends Operation{
-    ArrayList<Student> enteringEntranceStudents;
-    ArrayList<Student> enteringTablesStudents;
+	ArrayList<PawnColor> enteringEntranceStudents;
+	ArrayList<PawnColor> enteringTablesStudents;
 
-    public ActivateMinstrelEffectOperation(Game game, PlayerController playerController,
-                                           ArrayList<Student> enteringEntranceStudents,
-                                           ArrayList<Student> enteringTablesStudents) {
-        super(game, playerController);
-        this.enteringEntranceStudents = enteringEntranceStudents;
-        this.enteringTablesStudents = enteringTablesStudents;
-    }
+	public ActivateMinstrelEffectOperation(Game game, PlayerController playerController,
+										   ArrayList<PawnColor> enteringEntranceStudents,
+										   ArrayList<PawnColor> enteringTablesStudents){
+		super(game, playerController);
+		this.enteringEntranceStudents = enteringEntranceStudents;
+		this.enteringTablesStudents = enteringTablesStudents;
+	}
 
-    @Override
-    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException {
-        //Check for double nicknames
-        boolean playerControllerInList = checkNickname();
-        if(!playerControllerInList){
-            throw new PlayerNotInListException();
-        }
+	@Override
+	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException{
+		//Check for double nicknames
+		boolean playerControllerInList = checkNickname();
+		if(!playerControllerInList){
+			throw new PlayerNotInListException();
+		}
 
-        boolean checkExpertMode = game.isExpertMode();
-        if(!checkExpertMode){
-            throw new NotExpertModeException();
-        }
+		boolean checkExpertMode = game.isExpertMode();
+		if(!checkExpertMode){
+			throw new NotExpertModeException();
+		}
 
-        //checking if player has enough coins
-        boolean checkCost = checkCharacterCardCost("Minstrel");
-        if(!checkCost){
-            throw new NotEnoughCoinsException();
-        }
+		//checks if CharacterCard already active
+		boolean activatedCharacterCard = game.isCharacterCardActivated();
+		if(activatedCharacterCard){
+			throw new IllegalArgumentException("Cannot play a second character card");
+		}
 
-        boolean checkStudentsNumber = enteringEntranceStudents.size() ==  2 && enteringTablesStudents.size() == 2;
-        if(!checkStudentsNumber){
-            throw new IllegalArgumentException("Incorrect students value");
-        }
+		//checking if player has enough coins
+		boolean checkCost = checkCharacterCardCost("Minstrel");
+		if(!checkCost){
+			throw new NotEnoughCoinsException();
+		}
 
-        searchStudentsInEntrance();
-        searchStudentsInTables();
+		boolean checkStudentsNumber = enteringEntranceStudents.size() == 2 && enteringTablesStudents.size() == 2;
+		if(!checkStudentsNumber){
+			throw new IllegalArgumentException("Incorrect students value");
+		}
 
-        game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudents, enteringTablesStudents);
-    }
+		searchStudentsInEntrance();
+		searchStudentsInTables();
 
-    private void searchStudentsInEntrance(){
-        Player player = game.getPlayerHashMap().get(playerController.getNickname());
-        HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
+		//FIXME
+		// Temporary Arrays, change to ArrayList<PawnColor>
+		ArrayList<Student> enteringEntranceStudentsAL = new ArrayList<>();
+		ArrayList<Student> enteringTablesStudentsAL = new ArrayList<>();
 
-        //For each color looks how many students of that color and compares
-        // with entrance of that color
-        for(PawnColor color : PawnColor.values()){
-            int numberOfEnteringTablesStudents = (int) enteringTablesStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
-            boolean notEnoughStudentsInEntrance =
-                    numberOfEnteringTablesStudents > entrance.get(color);
-            if(notEnoughStudentsInEntrance){
-                throw new IllegalArgumentException("Not enough students in entrance");
-            }
-        }
-    }
+		enteringEntranceStudents.forEach(color -> enteringEntranceStudentsAL.add(new Student(color)));
+		enteringTablesStudents.forEach(color -> enteringTablesStudentsAL.add(new Student(color)));
 
-    private void searchStudentsInTables(){
-        Player player = game.getPlayerHashMap().get(playerController.getNickname());
-        HashMap<PawnColor,Integer> tables = player.getDashboard().getTables();
+		game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudentsAL,
+				enteringTablesStudentsAL);
+	}
 
-        //For each color looks how many students of that color and compares
-        // with tables of that color
-        for(PawnColor color : PawnColor.values()){
-            int numberOfEnteringEntranceStudents = (int) enteringEntranceStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
-            boolean notEnoughStudentsInTables =
-                    numberOfEnteringEntranceStudents > tables.get(color);
-            if(notEnoughStudentsInTables){
-                throw new IllegalArgumentException("Not enough students in tables");
-            }
-        }
-    }
+	private void searchStudentsInEntrance(){
+		Player player = game.getPlayerHashMap().get(playerController.getNickname());
+		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
+
+		//For each color looks how many students of that color and compares
+		// with entrance of that color
+		for(PawnColor color : PawnColor.values()){
+			int numberOfEnteringTablesStudents = (int) enteringTablesStudents.stream().filter(
+					studentColor -> studentColor.equals(color)).count();
+			boolean notEnoughStudentsInEntrance =
+					numberOfEnteringTablesStudents > entrance.get(color);
+			if(notEnoughStudentsInEntrance){
+				throw new IllegalArgumentException("Not enough students in entrance");
+			}
+		}
+	}
+
+	private void searchStudentsInTables(){
+		Player player = game.getPlayerHashMap().get(playerController.getNickname());
+		HashMap<PawnColor, Integer> tables = player.getDashboard().getTables();
+
+		//For each color looks how many students of that color and compares
+		// with tables of that color
+		for(PawnColor color : PawnColor.values()){
+			int numberOfEnteringEntranceStudents = (int) enteringEntranceStudents.stream().filter(
+					studentColor -> studentColor.equals(color)).count();
+			boolean notEnoughStudentsInTables =
+					numberOfEnteringEntranceStudents > tables.get(color);
+			if(notEnoughStudentsInTables){
+				throw new IllegalArgumentException("Not enough students in tables");
+			}
+		}
+	}
 
 }

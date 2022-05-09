@@ -5,16 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class NotificationGUI {
+public class NotificationGUI{
 
-    @FXML
-    ImageView backgroundImage;
+	@FXML
+	ImageView backgroundImage;
 
-    @FXML
-    Label notification;
+	@FXML
+	Label notification;
 
-    public void insert(NotificationMessage object) {
-        notification.setText(object.getMessage());
-    }
+	public void insert(NotificationMessage object){
+		notification.setText(object.getMessage());
+	}
 
 }

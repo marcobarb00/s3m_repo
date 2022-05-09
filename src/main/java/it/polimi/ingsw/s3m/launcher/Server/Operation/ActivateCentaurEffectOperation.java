@@ -5,33 +5,38 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import java.util.ArrayList;
 
 //DONE
 public class ActivateCentaurEffectOperation extends Operation{
 
-    public ActivateCentaurEffectOperation(Game game, PlayerController playerController) {
-        super(game, playerController);
-    }
+	public ActivateCentaurEffectOperation(Game game, PlayerController playerController){
+		super(game, playerController);
+	}
 
-    @Override
-    public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException {
-        boolean playerControllerInList = checkNickname();
-        if(!playerControllerInList){
-            throw new PlayerNotInListException();
-        }
+	@Override
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException{
+		boolean playerControllerInList = checkNickname();
+		if(!playerControllerInList){
+			throw new PlayerNotInListException();
+		}
 
-        boolean checkExpertMode = game.isExpertMode();
-        if(!checkExpertMode){
-            throw new NotExpertModeException();
-        }
+		boolean checkExpertMode = game.isExpertMode();
+		if(!checkExpertMode){
+			throw new NotExpertModeException();
+		}
 
-        //checking if player has enough coins
-        boolean checkCost = checkCharacterCardCost("Centaur");
-        if(!checkCost){
-            throw new NotEnoughCoinsException();
-        }
+		//checks if CharacterCard already active
+		boolean activatedCharacterCard = game.isCharacterCardActivated();
+		if(activatedCharacterCard){
+			throw new IllegalArgumentException("Cannot play a second character card");
+		}
 
-        game.activateCentaurEffect(playerController.getNickname());
-    }
+		//checking if player has enough coins
+		boolean checkCost = checkCharacterCardCost("Centaur");
+		if(!checkCost){
+			throw new NotEnoughCoinsException();
+		}
+
+		game.activateCentaurEffect(playerController.getNickname());
+	}
 }

@@ -1,13 +1,12 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class PlanningPhaseCLI extends MessageCLI{
 	GameDTO gameState;
@@ -34,7 +33,7 @@ public class PlanningPhaseCLI extends MessageCLI{
 		System.out.println("\nyour hand:");
 		for(int i = 0; i < hand.size(); i++){
 			AssistantCardDTO assistantCard = hand.get(i);
-			System.out.println("index: " + (i+1) + "name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
+			System.out.println("index: " + (i + 1) + "\tname: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
 		}
 
 		System.out.println("\nselect the index of the assistant card you want to play");
