@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class ChooseCloudPhaseCLI {
+public class ChooseCloudPhaseGUI {
     @FXML
     GridPane gridPaneCloudOne;
     @FXML
