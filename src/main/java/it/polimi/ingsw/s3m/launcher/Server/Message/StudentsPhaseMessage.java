@@ -4,10 +4,11 @@ import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
-public class MoveStudentsPhaseMessage implements Message{
+public class StudentsPhaseMessage implements Message{
 	private GameDTO gameState;
+	//TODO add movedStudents argument?
 
-	public MoveStudentsPhaseMessage(GameDTO gameState){
+	public StudentsPhaseMessage(GameDTO gameState){
 		this.gameState = gameState;
 	}
 

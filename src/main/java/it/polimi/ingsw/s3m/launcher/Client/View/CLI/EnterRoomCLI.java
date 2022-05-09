@@ -7,7 +7,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class EnterRoomCLI implements MessageCLI{
+public class EnterRoomCLI extends MessageCLI{
     private ArrayList<Integer> availableRoomsID;
 
     public EnterRoomCLI(EnterRoomMessage enterRoomMessage) {

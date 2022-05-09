@@ -4,7 +4,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
 
 import java.util.ArrayList;
 
@@ -22,8 +21,8 @@ public abstract class Operation {
 
     public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
             IllegalArgumentException, NotExpertModeException,
-            NotEnoughCoinsException, NotPlayersTurnException,
-            ZeroTowersRemainedException, NotEnoughIslandsException;
+            NotEnoughCoinsException, NotPlayerTurnException,
+            ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException;
 
     public boolean checkNickname(){
         ArrayList<String> playersList = game.getPlayersNicknames();
@@ -47,5 +46,18 @@ public abstract class Operation {
     public boolean checkCurrentPlayer(){
         String currentPlayer = game.getTurn().getCurrentPlayerNickname();
         return playerController.getNickname().equals(currentPlayer);
+    }
+
+    public void checkMovableStudent(){
+        //3 players mode check
+        int maxMovableStudents = 3;
+        boolean threePlayersMode = game.getNumberOfPlayers() == 3;
+        if(threePlayersMode){
+            maxMovableStudents = 4;
+        }
+        int movedStudentsInTurn = game.getTurnMovedStudents();
+        if(movedStudentsInTurn > maxMovableStudents){
+            throw new IllegalArgumentException("Cannot move another student");
+        }
     }
 }

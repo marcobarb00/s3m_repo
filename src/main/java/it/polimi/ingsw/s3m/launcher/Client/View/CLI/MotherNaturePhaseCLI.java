@@ -1,6 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNatureResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNaturePhaseResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
@@ -10,7 +10,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.MotherNaturePhaseMessage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MotherNaturePhaseCLI implements MessageCLI {
+public class MotherNaturePhaseCLI extends MessageCLI {
 	private GameDTO gameState;
 	private int selectedCharacterCard;
 	private boolean characterCardActivated;
@@ -22,6 +22,7 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 
 	@Override
 	public Response execute(){
+		//TODO fix motherNaturePhaseCLI to ask only what the player want to do, and create moveMotherNatureCLI
 		System.out.println("move mother nature phase");
 		int maxMoves = getMaxMoves();
 		System.out.println("choose mother nature's moves number from 1 to " + maxMoves +  ":");
@@ -38,7 +39,8 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 			chooseCharacterCard();
 		}
 
-		return new MotherNatureResponse(characterCardActivated, selectedCharacterCard, moves);
+		//return new MotherNaturePhaseResponse(characterCardActivated, selectedCharacterCard, moves);
+		return null;
 	}
 
 	private int getMaxMoves(){
@@ -58,25 +60,5 @@ public class MotherNaturePhaseCLI implements MessageCLI {
 		int operation = getOperation(3);
 		this.selectedCharacterCard = operation - 1;
 		this.characterCardActivated = true;
-	}
-
-	private int getOperation(int maxOperationNumber){
-		Scanner scanner = new Scanner(System.in);
-		int operationChoice;
-		try{
-			operationChoice = Integer.parseInt(scanner.nextLine());
-		}catch (Exception e){
-			operationChoice = 0;
-		}
-
-		while(operationChoice < 1 || operationChoice > maxOperationNumber){
-			System.out.println("\ninvalid choice, please select a valid input");
-			try{
-				operationChoice = Integer.parseInt(scanner.nextLine());
-			}catch (Exception e){
-				operationChoice = 0;
-			}
-		}
-		return operationChoice;
 	}
 }

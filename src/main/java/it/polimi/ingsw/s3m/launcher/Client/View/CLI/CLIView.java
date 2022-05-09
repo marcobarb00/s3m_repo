@@ -36,7 +36,7 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void moveStudentsPhase(MoveStudentsPhaseMessage moveStudentsPhaseMessage){
+	public void moveStudentsPhase(StudentsPhaseMessage moveStudentsPhaseMessage){
 		client.setMessage(new MoveStudentsPhaseCLI(moveStudentsPhaseMessage));
 	}
 
@@ -61,7 +61,7 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void chooseCloudPhase(ChooseCloudPhaseMessage chooseCloudPhaseMessage){
-		client.setMessage(new ChooseCloudPhaseCLI(chooseCloudPhaseMessage));
+	public void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage){
+		client.setMessage(new ChooseCloudPhaseCLI(cloudPhaseMessage));
 	}
 }

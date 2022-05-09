@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
 import java.util.Scanner;
 
-public class LoginCLI implements MessageCLI{
+public class LoginCLI extends MessageCLI{
 	LoginCLI(LoginMessage loginMessage){}
 
 	@Override

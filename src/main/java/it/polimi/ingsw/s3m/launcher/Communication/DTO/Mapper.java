@@ -7,6 +7,23 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class Mapper{
+	public PawnColor stringToColor(String colorString){
+		switch(colorString){
+			case "RED":
+				return PawnColor.RED;
+			case "BLUE":
+				return PawnColor.BLUE;
+			case "GREEN":
+				return PawnColor.GREEN;
+			case "YELLOW":
+				return PawnColor.YELLOW;
+			case "PINK":
+				return PawnColor.PINK;
+			default:
+				return null;
+		}
+	}
+
 	public AssistantCardDTO assistantCardToDTO(AssistantCard assistantCard){
 		if(assistantCard == null){
 			return new AssistantCardDTO(null, 0, 0);
