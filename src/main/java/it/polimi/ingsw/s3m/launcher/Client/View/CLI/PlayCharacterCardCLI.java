@@ -5,8 +5,6 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlayCharacterCardMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,13 +42,13 @@ public class PlayCharacterCardCLI extends MessageCLI{
 			return new PlayCharacterCardResponse(characterCardPosition,
 					studentsToPutOnJester, studentsToGetFromJester);
 		}
-		if(characterType.equals("Mushroomer")){
-			getMushroomerInputs();
+		if(characterType.equals("Minstrel")){
+			getMinstrelInputs();
 			return new PlayCharacterCardResponse(characterCardPosition,
 					studentsToPutOnTables, studentsToGetFromTables);
 		}
-		if(characterType.equals("Minstrel")){
-			getMinstrelInputs();
+		if(characterType.equals("Mushroomer")){
+			getMushroomerInputs();
 			return new PlayCharacterCardResponse(characterCardPosition, notInfluencingColor);
 		}
 

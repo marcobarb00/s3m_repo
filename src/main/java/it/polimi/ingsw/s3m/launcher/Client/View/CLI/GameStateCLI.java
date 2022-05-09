@@ -13,6 +13,7 @@ public class GameStateCLI{
 
 	public void printState(){
 		//TODO print characterCard
+		//TODO print students of the jester
 
 		System.out.println("\nislands:");
 		System.out.println("WIP");

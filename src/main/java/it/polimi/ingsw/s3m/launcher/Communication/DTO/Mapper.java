@@ -144,7 +144,7 @@ public class Mapper{
 		ArrayList<AssistantCardDTO> playedCards = new ArrayList<>();
 		turn.getPlayedCards().forEach((nickname, card) -> playedCards.add(assistantCardToDTO(card)));
 
-		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, false);
+		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard());
 	}
 
 	public GameDTO gameToDTO(Game game){

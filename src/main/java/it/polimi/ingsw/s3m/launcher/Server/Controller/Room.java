@@ -154,26 +154,29 @@ public class Room {
 
         while(!successful){
             Response response = player.communicateWithClient(planningPhaseMessage);
-            if(!(response instanceof PlayAssistantCardResponse)){
-                sendNotificationToPlayer(player, "the operation received is not the correct type");
-                continue;
-            }
-
-            PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) response;
-            PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
-
             try{
-                playAssistantCardOperation.executeOperation();
-            }catch(PlayerNotInListException e){
-                sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
-                RoomsController.instance().deleteRoom(roomID, player);
-                return;
-            }catch(IllegalArgumentException e){
+                successful = planningPhaseResponse(player, response);
+            }catch(IncorrectOperationException | IllegalArgumentException e){
                 sendNotificationToPlayer(player, e.getMessage());
-                continue;
             }
+        }
+    }
 
-            successful = true;
+    private boolean planningPhaseResponse(PlayerController player, Response response) throws NotEnoughAssistantCardsException, IncorrectOperationException{
+        if(!(response instanceof PlayAssistantCardResponse)){
+            throw new IncorrectOperationException();
+        }
+
+        PlayAssistantCardResponse playAssistantCardResponse = (PlayAssistantCardResponse) response;
+        PlayAssistantCardOperation playAssistantCardOperation = new PlayAssistantCardOperation(gameState, player, playAssistantCardResponse.getCardChosen());
+
+        try{
+            playAssistantCardOperation.executeOperation();
+            return true;
+        }catch(PlayerNotInListException e){
+            sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
+            RoomsController.instance().deleteRoom(roomID, player);
+            return false;
         }
     }
 
@@ -240,22 +243,24 @@ public class Room {
                 try{
                     Response putStudentOnTableResponse = player.communicateWithClient(new PutStudentOnTableMessage(mapper.gameToDTO(gameState)));
                     putStudentOnTable(player, putStudentOnTableResponse);
-                }catch(IncorrectOperationException | PlayerNotInListException e){
+                    //successful play of character card
+                    return true;
+                }catch(IncorrectOperationException | PlayerNotInListException | IllegalArgumentException e){
                     //unable to move the student
                     sendNotificationToPlayer(player, e.getMessage());
+                    return false;
                 }
-                //successful play of character card
-                return true;
             case 2:
                 try{
                     Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
                     putStudentOnIsland(player, putStudentOnIslandResponse);
-                }catch(IncorrectOperationException | PlayerNotInListException e){
+                    //successful play of character card
+                    return true;
+                }catch(IncorrectOperationException | PlayerNotInListException | IllegalArgumentException e){
                     //unable to move the student
                     sendNotificationToPlayer(player, e.getMessage());
+                    return false;
                 }
-                //successful play of character card
-                return true;
             case 3:
                 if(gameState.getTurn().isActivatedCharacterCard()){
                     sendNotificationToPlayer(player, "you already activated a character card");
@@ -264,16 +269,17 @@ public class Room {
                 try{
                     Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
                     playCharacterCard(player, playCharacterCardResponse);
+                    //successful play of character card
+                    gameState.getTurn().setActivatedCharacterCard(true);
+                    return false;
                 }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException |
-                        CloudNotInListException | IncorrectOperationException e){
+                        CloudNotInListException | IncorrectOperationException | IllegalArgumentException e){
                     //unable to play the character card
                     sendNotificationToPlayer(player, e.getMessage());
                     return false;
                 }catch(BackException e){
                     return false;
                 }
-                //successful play of character card
-                gameState.getTurn().setActivatedCharacterCard(true);
         }
         return false;
     }
@@ -366,13 +372,15 @@ public class Room {
                 try{
                     Response moveMotherNatureResponse = player.communicateWithClient(new MoveMotherNatureMessage(mapper.gameToDTO(gameState)));
                     moveMotherNature(player, moveMotherNatureResponse);
-                }catch(NotPlayerTurnException e){
+                    //mother nature moved successfully
+                    return true;
+                }catch(NotPlayerTurnException | IllegalArgumentException e){
+                    //unable to move mother nature
                     sendNotificationToPlayer(player, e.getMessage());
                     return false;
                 }catch(BackException e){
                     return false;
                 }
-                return true;
             case 2:
                 if(gameState.getTurn().isActivatedCharacterCard()){
                     sendNotificationToPlayer(player, "you already activated a character card");
@@ -381,6 +389,8 @@ public class Room {
                 try{
                     Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
                     playCharacterCard(player, playCharacterCardResponse);
+                    //character card played successfully
+                    return true;
                 }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException | IllegalArgumentException e){
                     //unable to play the character card
                     sendNotificationToPlayer(player, e.getMessage());
@@ -389,7 +399,6 @@ public class Room {
                     return false;
                 }
         }
-
         return false;
     }
 
