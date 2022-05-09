@@ -1,16 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNaturePhaseResponse;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MotherNaturePhaseMessage;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class MotherNaturePhaseCLI extends MessageCLI {
+public class MotherNaturePhaseCLI extends MessageCLI{
 	private GameDTO gameState;
 	private boolean characterCardActivated;
 

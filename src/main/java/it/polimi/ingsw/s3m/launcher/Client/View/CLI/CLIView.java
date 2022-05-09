@@ -66,7 +66,7 @@ public class CLIView extends View{
 	}
 
 	@Override
-	public void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage) {
+	public void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage){
 		client.setMessage(new MoveMotherNatureCLI(moveMotherNatureMessage));
 	}
 }

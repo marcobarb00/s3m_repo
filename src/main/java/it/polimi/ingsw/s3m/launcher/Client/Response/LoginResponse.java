@@ -9,7 +9,7 @@ public class LoginResponse implements Response{
 		this.isNewRoom = isNewRoom;
 	}
 
-	public boolean isNewRoom() {
+	public boolean isNewRoom(){
 		return isNewRoom;
 	}
 }

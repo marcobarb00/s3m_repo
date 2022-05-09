@@ -30,9 +30,9 @@ public class PlayCharacterCardCLI extends MessageCLI{
 
 		System.out.println("choose a character card:");
 		int cardsNumber = characterCardDTOList.size();
-		for (int i = 0; i < cardsNumber; i++) {
+		for(int i = 0; i < cardsNumber; i++){
 			CharacterCardDTO card = characterCardDTOList.get(i);
-			System.out.println((i+1) + ") " + card.getName() + " cost: " + card.getCost());
+			System.out.println((i + 1) + ") " + card.getName() + " cost: " + card.getCost());
 		}
 
 		int characterCardPosition = getOperation(characterCardDTOList.size()) - 1;
@@ -63,14 +63,14 @@ public class PlayCharacterCardCLI extends MessageCLI{
 				"between your entrance and your hall:");
 		int studentsNumber = getOperation(2);
 
-		for (int i = 0; i < studentsNumber; i++) {
-			System.out.println("select " +(i+1)+"° student in your entrance to put in your hall");
+		for(int i = 0; i < studentsNumber; i++){
+			System.out.println("select " + (i + 1) + "° student in your entrance to put in your hall");
 			chooseColor();
 			String chosenColor = getCLIColor(getOperation(5));
 			studentsToPutOnTables.add(chosenColor);
 		}
-		for (int i = 0; i < studentsNumber; i++) {
-			System.out.println("select " +(i+1)+"° student in your hall to put in your entrance");
+		for(int i = 0; i < studentsNumber; i++){
+			System.out.println("select " + (i + 1) + "° student in your hall to put in your entrance");
 			chooseColor();
 			String chosenColor = getCLIColor(getOperation(5));
 			studentsToGetFromTables.add(chosenColor);
@@ -90,14 +90,14 @@ public class PlayCharacterCardCLI extends MessageCLI{
 		System.out.println("select how many students do you want to exchange from 1 to 3:");
 		int studentsNumber = getOperation(3);
 
-		for (int i = 0; i < studentsNumber; i++) {
-			System.out.println("select " +(i+1)+"° student in your entrance to put on jester:");
+		for(int i = 0; i < studentsNumber; i++){
+			System.out.println("select " + (i + 1) + "° student in your entrance to put on jester:");
 			chooseColor();
 			String chosenColor = getCLIColor(getOperation(5));
 			studentsToPutOnJester.add(chosenColor);
 		}
-		for (int i = 0; i < studentsNumber; i++) {
-			System.out.println("select " +(i+1)+"° student on jester to put in your entrance:");
+		for(int i = 0; i < studentsNumber; i++){
+			System.out.println("select " + (i + 1) + "° student on jester to put in your entrance:");
 			chooseColor();
 			String chosenColor = getCLIColor(getOperation(5));
 			studentsToPutOnJester.add(chosenColor);

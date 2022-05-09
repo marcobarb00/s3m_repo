@@ -12,74 +12,69 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 
-public class NewRoomGUI {
+public class NewRoomGUI{
 
 
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    VBox vBox;
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	VBox vBox;
 
 
-    @FXML
-    Button normalButton;
-    @FXML
-    Button expertButton;
+	@FXML
+	Button normalButton;
+	@FXML
+	Button expertButton;
 
 
-    @FXML
-    Button twoPlayersButton;
-    @FXML
-    Button threePlayersButton;
+	@FXML
+	Button twoPlayersButton;
+	@FXML
+	Button threePlayersButton;
 
 
-    @FXML
-    TextField nickname;
-    @FXML
-    GridPane gridPane;
+	@FXML
+	TextField nickname;
+	@FXML
+	GridPane gridPane;
 
 
-    public void selectTwoPlayers(MouseEvent event) {
-        ControllerGUI.getInstance().getNewRoomResponse().setNumberOfPlayers(2);
-        ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().launchGameConfigMessage();
-    }
+	public void selectTwoPlayers(MouseEvent event){
+		ControllerGUI.getInstance().getNewRoomResponse().setNumberOfPlayers(2);
+		ControllerGUI.getInstance().startLoading();
+		ControllerGUI.getInstance().launchGameConfigMessage();
+	}
 
-    public void selectThreePlayers(MouseEvent event) {
-        ControllerGUI.getInstance().getNewRoomResponse().setNumberOfPlayers(3);
-        ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().launchGameConfigMessage();
-    }
-    private Rectangle2D takeBorderScreen() {
-        return Screen.getPrimary().getVisualBounds();
-    }
+	public void selectThreePlayers(MouseEvent event){
+		ControllerGUI.getInstance().getNewRoomResponse().setNumberOfPlayers(3);
+		ControllerGUI.getInstance().startLoading();
+		ControllerGUI.getInstance().launchGameConfigMessage();
+	}
 
-
-
+	private Rectangle2D takeBorderScreen(){
+		return Screen.getPrimary().getVisualBounds();
+	}
 
 
-    public void selectNormal(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(false);
-        ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().launchSetNickname();
-    }
+	public void selectNormal(MouseEvent mouseEvent){
+		ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(false);
+		ControllerGUI.getInstance().startLoading();
+		ControllerGUI.getInstance().launchSetNickname();
+	}
 
-    public void selectExpert(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(true);
-        ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().launchSetNickname();
-    }
-
-
+	public void selectExpert(MouseEvent mouseEvent){
+		ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(true);
+		ControllerGUI.getInstance().startLoading();
+		ControllerGUI.getInstance().launchSetNickname();
+	}
 
 
-    public void enterGame(ActionEvent event) {
-        String nick = nickname.getText();
-        ControllerGUI.getInstance().getNewRoomResponse().setNickname(nick);
-        ControllerGUI.getInstance().startLoading();
-        ControllerGUI.getInstance().sendResponse(ControllerGUI.getInstance().getNewRoomResponse());
-    }
-
+	public void enterGame(ActionEvent event){
+		String nick = nickname.getText();
+		ControllerGUI.getInstance().getNewRoomResponse().setNickname(nick);
+		ControllerGUI.getInstance().startLoading();
+		ControllerGUI.getInstance().sendResponse(ControllerGUI.getInstance().getNewRoomResponse());
+	}
 
 
 }

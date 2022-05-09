@@ -1,14 +1,15 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
-import it.polimi.ingsw.s3m.launcher.Server.Message.NewRoomMessage;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.Server.Message.NewRoomMessage;
 
 import java.util.Scanner;
 
 public class NewRoomCLI extends MessageCLI{
 
-	public NewRoomCLI(NewRoomMessage newRoomMessage){}
+	public NewRoomCLI(NewRoomMessage newRoomMessage){
+	}
 
 	@Override
 	public Response execute(){

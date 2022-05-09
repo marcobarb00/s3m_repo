@@ -16,5 +16,7 @@ public class PlayCharacterCardMessage implements Message{
 	}
 
 	@Override
-	public void apply(View view){ view.playCharacterCard(this); }
+	public void apply(View view){
+		view.playCharacterCard(this);
+	}
 }

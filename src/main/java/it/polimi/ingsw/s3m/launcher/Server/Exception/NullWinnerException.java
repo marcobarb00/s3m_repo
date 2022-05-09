@@ -1,5 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Exception;
 
-public class NullWinnerException extends Exception {
-    public NullWinnerException() { super(); }
+public class NullWinnerException extends Exception{
+	public NullWinnerException(){
+		super();
+	}
 }

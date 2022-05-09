@@ -10,46 +10,46 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
 import java.util.HashMap;
 
 public class PutStudentOnIslandOperation extends Operation{
-    private int islandPosition;
-    private PawnColor studentColor;
+	private int islandPosition;
+	private PawnColor studentColor;
 
-    public PutStudentOnIslandOperation(Game game, PlayerController playerController,
-                                       int islandPosition, PawnColor studentColor) {
-        super(game, playerController);
-        this.islandPosition = islandPosition;
-        this.studentColor = studentColor;
-    }
+	public PutStudentOnIslandOperation(Game game, PlayerController playerController,
+									   int islandPosition, PawnColor studentColor){
+		super(game, playerController);
+		this.islandPosition = islandPosition;
+		this.studentColor = studentColor;
+	}
 
-    @Override
-    public void executeOperation() throws PlayerNotInListException, IllegalArgumentException  {
-        boolean playerControllerInList = checkNickname();
-        if(!playerControllerInList){
-            throw new PlayerNotInListException();
-        }
+	@Override
+	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException{
+		boolean playerControllerInList = checkNickname();
+		if(!playerControllerInList){
+			throw new PlayerNotInListException();
+		}
 
-        //check if student can be moved
-        checkMovableStudent();
+		//check if student can be moved
+		checkMovableStudent();
 
-        //Checks if there are the selected students in entrance
-        searchStudentsInEntrance();
+		//Checks if there are the selected students in entrance
+		searchStudentsInEntrance();
 
-        boolean checkIsland = 0 <= islandPosition && islandPosition < game.getIslandsList().size();
-        if (!checkIsland){
-            throw new IllegalArgumentException("Incorrect island value");
-        }
+		boolean checkIsland = 0 <= islandPosition && islandPosition < game.getIslandsList().size();
+		if(!checkIsland){
+			throw new IllegalArgumentException("Incorrect island value");
+		}
 
-        game.putStudentOnIslands(playerController.getNickname(), islandPosition, new Student(studentColor));
-    }
+		game.putStudentOnIslands(playerController.getNickname(), islandPosition, new Student(studentColor));
+	}
 
-    private void searchStudentsInEntrance(){
-        Player player = game.getPlayerHashMap().get(playerController.getNickname());
-        HashMap<PawnColor,Integer> entrance = player.getDashboard().getEntrance();
+	private void searchStudentsInEntrance(){
+		Player player = game.getPlayerHashMap().get(playerController.getNickname());
+		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 
-        //Check if at least one student of that color is present in hall
-        boolean studentInEntrance = entrance.get(studentColor) > 0;
-        if(!studentInEntrance){
-            throw new IllegalArgumentException("Student not in entrance");
-        }
-    }
+		//Check if at least one student of that color is present in hall
+		boolean studentInEntrance = entrance.get(studentColor) > 0;
+		if(!studentInEntrance){
+			throw new IllegalArgumentException("Student not in entrance");
+		}
+	}
 
 }

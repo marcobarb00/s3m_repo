@@ -5,35 +5,35 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 
-public class ClientCLI {
-    private Client client;
-    private CLIView view;
-    private MessageCLI message;
+public class ClientCLI{
+	private Client client;
+	private CLIView view;
+	private MessageCLI message;
 
-    public void start(){
-        this.view = new CLIView(this);
-        this.client = new Client();
-        client.start();
+	public void start(){
+		this.view = new CLIView(this);
+		this.client = new Client();
+		client.start();
 
-        while (true) {
-            try {
-                //TODO client read in a thread
-                Message receivedMessage = client.receiveMessage();
-                receivedMessage.apply(view);
-                if(receivedMessage instanceof Notification){
-                    message.execute();
-                }else{
-                    Response toSendMessage = message.execute();
-                    client.sendResponse(toSendMessage);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                break;
-            }
-        }
-    }
+		while(true){
+			try{
+				//TODO client read in a thread
+				Message receivedMessage = client.receiveMessage();
+				receivedMessage.apply(view);
+				if(receivedMessage instanceof Notification){
+					message.execute();
+				}else{
+					Response toSendMessage = message.execute();
+					client.sendResponse(toSendMessage);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				break;
+			}
+		}
+	}
 
-    public void setMessage(MessageCLI message) {
-        this.message = message;
-    }
+	public void setMessage(MessageCLI message){
+		this.message = message;
+	}
 }

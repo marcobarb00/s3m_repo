@@ -22,11 +22,11 @@ public class MoveStudentsPhaseCLI extends MessageCLI{
 
 		//Options menu
 		System.out.println("choose your operation:" +
-						   "\n1) move a student from the entrance to the tables" +
-						   "\n2) move a student from the entrance to an island");
+				"\n1) move a student from the entrance to the tables" +
+				"\n2) move a student from the entrance to an island");
 		//If not activated you can play a character
-		if(gameState.isExpertMode() && !gameState.getTurn().isCharacterCardActivated()) {
-			System.out.println("3) activate a character card" );
+		if(gameState.isExpertMode() && !gameState.getTurn().isCharacterCardActivated()){
+			System.out.println("3) activate a character card");
 			maxOperationNumber = 3;
 		}
 

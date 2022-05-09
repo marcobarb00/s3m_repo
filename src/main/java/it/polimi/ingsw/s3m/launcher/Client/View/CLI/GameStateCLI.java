@@ -1,6 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
 
 import java.util.HashMap;
 

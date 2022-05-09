@@ -5,21 +5,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-import java.util.List;
+public class ChooseCharacterCardGUI{
 
-public class ChooseCharacterCardGUI {
-
-    @FXML
-    GridPane gridPane;
-    @FXML
-    VBox vBoxCharacterCard;
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    ImageView characterZero;
-    @FXML
-    ImageView characterOne;
-    @FXML
-    ImageView characterTwo;
+	@FXML
+	GridPane gridPane;
+	@FXML
+	VBox vBoxCharacterCard;
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	ImageView characterZero;
+	@FXML
+	ImageView characterOne;
+	@FXML
+	ImageView characterTwo;
 
 }

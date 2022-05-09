@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.Response;
 
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
 
 import java.util.ArrayList;
 
@@ -31,15 +30,15 @@ public class PlayCharacterCardResponse implements Response{
 		this.notInfluencingColor = notInfluencingColor;
 	}
 
-	public ArrayList<String> getStudentsToPutOn() {
+	public ArrayList<String> getStudentsToPutOn(){
 		return studentsToPutOn;
 	}
 
-	public ArrayList<String> getStudentsToGetFrom() {
+	public ArrayList<String> getStudentsToGetFrom(){
 		return studentsToGetFrom;
 	}
 
-	public String getNotInfluencingColor() {
+	public String getNotInfluencingColor(){
 		return notInfluencingColor;
 	}
 

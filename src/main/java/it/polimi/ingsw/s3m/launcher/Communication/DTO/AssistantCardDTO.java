@@ -1,9 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
-import it.polimi.ingsw.s3m.launcher.Server.Model.AssistantCard;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class AssistantCardDTO implements Serializable{
 	private String type;

@@ -6,39 +6,37 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
-import java.util.ArrayList;
-
 //Done
 public class ActivateMagicPostmanEffectOperation extends Operation{
 
-    public ActivateMagicPostmanEffectOperation(Game game, PlayerController playerController) {
-        super(game, playerController);
-    }
+	public ActivateMagicPostmanEffectOperation(Game game, PlayerController playerController){
+		super(game, playerController);
+	}
 
-    @Override
-    public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException {
-        boolean playerControllerInList = checkNickname();
-        if(!playerControllerInList){
-            throw new PlayerNotInListException();
-        }
+	@Override
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException{
+		boolean playerControllerInList = checkNickname();
+		if(!playerControllerInList){
+			throw new PlayerNotInListException();
+		}
 
-        boolean checkExpertMode = game.isExpertMode();
-        if(!checkExpertMode){
-            throw new NotExpertModeException();
-        }
+		boolean checkExpertMode = game.isExpertMode();
+		if(!checkExpertMode){
+			throw new NotExpertModeException();
+		}
 
-        //checks if CharacterCard already active
-        boolean activatedCharacterCard = game.isCharacterCardActivated();
-        if(activatedCharacterCard){
-            throw new IllegalArgumentException("Cannot play a second character card");
-        }
+		//checks if CharacterCard already active
+		boolean activatedCharacterCard = game.isCharacterCardActivated();
+		if(activatedCharacterCard){
+			throw new IllegalArgumentException("Cannot play a second character card");
+		}
 
-        //checking if player has enough coins
-        boolean checkCost = checkCharacterCardCost("MagicPostman");
-        if(!checkCost){
-            throw new NotEnoughCoinsException();
-        }
+		//checking if player has enough coins
+		boolean checkCost = checkCharacterCardCost("MagicPostman");
+		if(!checkCost){
+			throw new NotEnoughCoinsException();
+		}
 
-        super.game.activateMagicPostmanEffect(playerController.getNickname());
-    }
+		super.game.activateMagicPostmanEffect(playerController.getNickname());
+	}
 }
