@@ -50,16 +50,20 @@ public class Room {
         new Thread(() -> {
             try {
                 start();
-            } catch (DoubleNicknameException e) {
+            }catch(DoubleNicknameException e) {
                 e.printStackTrace();
+            }catch(NullWinnerException ex){
+                sendNotificationToAll("there was an error during calculation of the winner, everyone wins :)");
+                RoomsController.instance().deleteRoom(roomID);
             }
+            RoomsController.instance().deleteRoom(roomID);
         }).start();
     }
 
     /**
      * Instantiates game if controls are passed, if not an exception is thrown
      */
-    private void start() throws DoubleNicknameException {
+    private void start() throws DoubleNicknameException, NullWinnerException{
         sendNotificationToAll("the game is starting");
 
         ArrayList<String> playersNicknameList = playersList.stream()
@@ -72,7 +76,7 @@ public class Room {
         boolean gameEndingFlag = false;
         try{
             while(!gameEndingFlag){
-                //planning phase
+                //initialize planning phase
                 try{
                     gameState.refillClouds();
                 }catch(EmptyBagException e){
@@ -83,11 +87,10 @@ public class Room {
                 ArrayList<String> nicknameList = playersList.stream().map(PlayerController::getNickname).collect(Collectors.toCollection(ArrayList::new));
 
                 int startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+                //cycle all the players to let them play the planning phase
                 for(int i = 0; i < playersNumber; i++){
                     PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                     gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
-                    sendNotificationToPlayer(currentPlayer, "it's your turn to execute the planning phase");
-                    sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the planning phase");
                     try{
                         planningPhase(currentPlayer);
                     }catch(NotEnoughAssistantCardsException e){
@@ -96,24 +99,22 @@ public class Room {
                     }
                 }
 
+                //initialize action phase
                 gameState.setTurnFirstPlayer();
-                //action phase
 
                 startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
+                //cycle all the players to let them play the planning phase
                 for(int i = 0; i < playersNumber; i++){
                     PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
                     gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
-                    sendNotificationToAllButOne(currentPlayer, currentPlayer.getNickname() + "'s turn to execute the action phase");
 
                     try{
-                        try{
-                            actionPhase(currentPlayer);
-                        }catch(NotEnoughIslandsException e){
-                            break;
-                        }
+                        actionPhase(currentPlayer);
                     }catch(NotEnoughAssistantCardsException e){
                         sendNotificationToAll(e.getMessage());
                         gameEndingFlag = true;
+                    }catch(NotEnoughIslandsException e){
+                        break;
                     }
                 }
 
@@ -121,31 +122,19 @@ public class Room {
                 gameState.resetTurn();
             }
         }catch(ZeroTowersRemainedException e){
-            String winnerNickname = null;
-            try{
-                winnerNickname = gameState.zeroTowersLeftWinCondition();
-            }catch(NullWinnerException ex){
-                sendNotificationToAll("there was an error during calculation of the winner, everyone wins :)");
-                RoomsController.instance().deleteRoom(roomID);
-                return;
-            }
+            String winnerNickname;
+            winnerNickname = gameState.zeroTowersLeftWinCondition();
             sendNotificationToAll("the winner is " + winnerNickname);
-            RoomsController.instance().deleteRoom(roomID);
             return;
         }
 
-        String winnerNickname = null;
         try{
+            String winnerNickname;
             winnerNickname = gameState.checkWinCondition();
-        }catch(NullWinnerException e){
-            sendNotificationToAll("there was an error during calculation of the winner, everyone wins :)");
-            RoomsController.instance().deleteRoom(roomID);
-            return;
+            sendNotificationToAll("the winner is " + winnerNickname);
         }catch(TieException e){
             sendNotificationToAll("there was a tie! the winners are " + e.getMessage());
         }
-        sendNotificationToAll("the winner is " + winnerNickname);
-        RoomsController.instance().deleteRoom(roomID);
     }
 
     private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
@@ -157,6 +146,8 @@ public class Room {
     }
 
     private void planningPhase(PlayerController player) throws NotEnoughAssistantCardsException{
+        sendNotificationToPlayer(player, "it's your turn to execute the planning phase");
+        sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the planning phase");
         PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(mapper.gameToDTO(gameState));
 
         boolean successful = false;
@@ -187,6 +178,8 @@ public class Room {
     }
 
     private void actionPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException{
+        sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the action phase");
+
         sendNotificationToPlayer(player, "it's your turn to move the students");
 
         int movedStudents = 0;
