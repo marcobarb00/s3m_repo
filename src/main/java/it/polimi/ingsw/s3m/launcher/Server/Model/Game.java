@@ -181,7 +181,22 @@ public class Game implements Cloneable{
         }
     }
 
+    private int playerInfluenceOnProfessors(Player player) {
+        int influenceCounter = 0;
+        for (Player dominator : professorsHashMap.values())
+            if (player.getNickname().equals(dominator.getNickname())) influenceCounter++;
+        return influenceCounter;
+    }
+
     // TURN
+
+    public void resetTurn() {
+        turn.setCurrentPlayerNickname(turn.getFirstPlayerNickname());
+        turn.setPhaseName("PlanningPhase");
+        turn.resetMovedStudents();
+        turn.setPlayedCards(new HashMap<>());
+        turn.setActivatedCharacterCard(false);
+    }
 
     public void setTurnFirstPlayer() {
         int minValue = 11;
@@ -192,6 +207,30 @@ public class Game implements Cloneable{
                 turn.setFirstPlayerNickname(nickname);
             }
         }
+    }
+
+    // WINNING CONDITIONS
+
+    public String checkWinCondition() {
+        Player winner = null;
+        int maxTowers = 10;
+        for (Player player : playerHashMap.values()) {
+            if (player.getDashboard().getNumberOfTowers() < maxTowers)
+                winner = player;
+            else if (player.getDashboard().getNumberOfTowers() == maxTowers)
+                if (playerInfluenceOnProfessors(player) > playerInfluenceOnProfessors(winner))
+                    winner = player;
+        }
+        assert winner != null;
+        return winner.getNickname();
+    }
+
+    public String zeroTowersLeftWinCondition() {
+        Player winner = null;
+        for (Player player : playerHashMap.values())
+            if (player.getDashboard().getNumberOfTowers() == 0) winner = player;
+        assert winner != null;
+        return winner.getNickname();
     }
 
 

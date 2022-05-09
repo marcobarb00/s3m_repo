@@ -5,20 +5,20 @@ import java.util.HashMap;
 public class Turn {
     private String firstPlayerNickname;
     private String currentPlayerNickname;
-    private String phaseName;
+    private String phaseName = "PlanningPhase";
     // Planning phase
     private int movedStudents = 0;
-    private final HashMap<String, AssistantCard> playedCards = new HashMap<>();
+    private HashMap<String, AssistantCard> playedCards = new HashMap<>();
     // Action phase
     private boolean activatedCharacterCard = false;
 
     public Turn(String firstPlayerNickname) {
         this.firstPlayerNickname = firstPlayerNickname;
         this.currentPlayerNickname = firstPlayerNickname;
-        this.phaseName = "PlanningPhase";
     }
 
     public void incrementMovedStudents() { movedStudents++; }
+    public void resetMovedStudents() { movedStudents = 0; }
 
     public void addPlayedCard(String playerNickname, AssistantCard assistantCard) {
         playedCards.put(playerNickname, assistantCard);
@@ -41,6 +41,9 @@ public class Turn {
     }
     public void setPhaseName(String phaseName) {
         this.phaseName = phaseName;
+    }
+    public void setPlayedCards(HashMap<String, AssistantCard> playedCards) {
+        this.playedCards = playedCards;
     }
     public void setActivatedCharacterCard(boolean activatedCharacterCard) {
         this.activatedCharacterCard = activatedCharacterCard;
