@@ -187,10 +187,22 @@ public class Room {
             StudentsPhaseResponse studentsPhaseResponse = (StudentsPhaseResponse) response;
             switch(studentsPhaseResponse.getOperationChoice()){
                 case 1:
-                    //TODO putStudentOnTable
+                    try{
+                        Response putStudentOnTableResponse = player.communicateWithClient(new PutStudentOnTableMessage(mapper.gameToDTO(gameState)));
+                        putStudentOnTable(player, putStudentOnTableResponse);
+                    }catch(IncorrectOperationException | PlayerNotInListException e){
+                        //unable to move the student
+                        sendNotificationToPlayer(player, e.getMessage());
+                    }
                     break;
                 case 2:
-                    //TODO putStudentOnIsland
+                    try{
+                        Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
+                        putStudentOnIsland(player, putStudentOnIslandResponse);
+                    }catch(IncorrectOperationException | PlayerNotInListException e){
+                        //unable to move the student
+                        sendNotificationToPlayer(player, e.getMessage());
+                    }
                     break;
                 case 3:
                     if(gameState.getTurn().isActivatedCharacterCard()){
@@ -212,13 +224,26 @@ public class Room {
         }
     }
 
-    private void putStudentOnTable(PlayerController player) throws IncorrectOperationException{
-        Response response = player.communicateWithClient(new PutStudentOnTableMessage(mapper.gameToDTO(gameState)));
+    private void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
         if(!(response instanceof PutStudentOnTableResponse)){
             throw new IncorrectOperationException();
         }
 
+        PutStudentOnTableResponse putStudentOnTableResponse = (PutStudentOnTableResponse) response;
 
+        PutStudentOnTableOperation putStudentOnTableOperation = new PutStudentOnTableOperation(gameState, player, mapper.stringToColor(putStudentOnTableResponse.getColor()));
+        putStudentOnTableOperation.executeOperation();
+    }
+
+    private void putStudentOnIsland(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
+        if(!(response instanceof PutStudentOnIslandResponse)){
+            throw new IncorrectOperationException();
+        }
+
+        PutStudentOnIslandResponse putStudentOnIslandResponse = (PutStudentOnIslandResponse) response;
+
+        PutStudentOnIslandOperation putStudentOnIslandOperation = new PutStudentOnIslandOperation(gameState, player, putStudentOnIslandResponse.getIslandPosition(), mapper.stringToColor(putStudentOnIslandResponse.getColor()));
+        putStudentOnIslandOperation.executeOperation();
     }
     
     private void playCharacterCard(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException, CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException{
