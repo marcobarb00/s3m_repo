@@ -22,6 +22,9 @@ public class MotherNaturePhaseCLI extends MessageCLI {
 
 	@Override
 	public Response execute(){
+		GameStateCLI gameStateCLI = new GameStateCLI(gameState);
+		gameStateCLI.printState();
+
 		//TODO fix motherNaturePhaseCLI to ask only what the player want to do, and create moveMotherNatureCLI
 		System.out.println("move mother nature phase");
 		int maxMoves = getMaxMoves();

@@ -14,6 +14,9 @@ public class MoveStudentsPhaseCLI extends MessageCLI{
 
 	@Override
 	public Response execute(){
+		GameStateCLI gameStateCLI = new GameStateCLI(gameState);
+		gameStateCLI.printState();
+
 		System.out.println("student allocation phase");
 		int maxOperationNumber = 2;
 
