@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class GameInitializer{
 	Game game;
@@ -41,10 +42,9 @@ public abstract class GameInitializer{
 		}
 	}
 
-	//TODO rewatch the extraction of this method
 	private Student extractStudent(ArrayList<Student> students){
 		Student returnedStudent;
-		int extractedNumber = (int) (Math.random() * (students.size()));
+		int extractedNumber = ThreadLocalRandom.current().nextInt(0, students.size()-1);
 		returnedStudent = students.get(extractedNumber);
 		students.remove(extractedNumber);
 		return returnedStudent;
