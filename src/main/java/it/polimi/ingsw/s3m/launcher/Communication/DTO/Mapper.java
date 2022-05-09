@@ -24,6 +24,12 @@ public class Mapper{
 		}
 	}
 
+	public ArrayList<PawnColor> StringListToColor(ArrayList<String> colorStringList){
+		ArrayList<PawnColor> colorList = new ArrayList<>();
+		colorStringList.forEach(colorString -> colorList.add(stringToColor(colorString)));
+		return colorList;
+	}
+
 	public AssistantCardDTO assistantCardToDTO(AssistantCard assistantCard){
 		if(assistantCard == null){
 			return new AssistantCardDTO(null, 0, 0);

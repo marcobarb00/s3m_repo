@@ -8,6 +8,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -229,7 +230,8 @@ public class Room {
      * @param response the response that contains the operation chosen by the player
      * @return true if a student has been moved successfully, false otherwise
      */
-    private boolean moveStudentPhase(PlayerController player, Response response) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException{
+    private boolean moveStudentPhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
+            NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException{
         if(!(response instanceof StudentsPhaseResponse))
             throw new IncorrectOperationException();
 
@@ -263,7 +265,8 @@ public class Room {
                 try{
                     Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
                     playCharacterCard(player, playCharacterCardResponse);
-                }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException | CloudNotInListException | IncorrectOperationException e){
+                }catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException |
+                        CloudNotInListException | IncorrectOperationException e){
                     //unable to play the character card
                     sendNotificationToPlayer(player, e.getMessage());
                     return false;
@@ -282,7 +285,8 @@ public class Room {
 
         PutStudentOnTableResponse putStudentOnTableResponse = (PutStudentOnTableResponse) response;
 
-        PutStudentOnTableOperation putStudentOnTableOperation = new PutStudentOnTableOperation(gameState, player, mapper.stringToColor(putStudentOnTableResponse.getColor()));
+        PutStudentOnTableOperation putStudentOnTableOperation = new PutStudentOnTableOperation(gameState, player,
+                mapper.stringToColor(putStudentOnTableResponse.getColor()));
         putStudentOnTableOperation.executeOperation();
     }
 
@@ -292,11 +296,14 @@ public class Room {
 
         PutStudentOnIslandResponse putStudentOnIslandResponse = (PutStudentOnIslandResponse) response;
 
-        PutStudentOnIslandOperation putStudentOnIslandOperation = new PutStudentOnIslandOperation(gameState, player, putStudentOnIslandResponse.getIslandPosition(), mapper.stringToColor(putStudentOnIslandResponse.getColor()));
+        PutStudentOnIslandOperation putStudentOnIslandOperation = new PutStudentOnIslandOperation(gameState, player,
+                putStudentOnIslandResponse.getIslandPosition(), mapper.stringToColor(putStudentOnIslandResponse.getColor()));
         putStudentOnIslandOperation.executeOperation();
     }
     
-    private void playCharacterCard(PlayerController player, Response response) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException, CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException, BackException{
+    private void playCharacterCard(PlayerController player, Response response) throws ZeroTowersRemainedException,
+            NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException,
+            CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException, BackException{
         if(response instanceof BackResponse)
             throw new BackException();
 
@@ -306,8 +313,7 @@ public class Room {
         PlayCharacterCardResponse playCharacterCardResponse = (PlayCharacterCardResponse) response;
 
         CharacterCard playedCharacterCard = gameState.getCharacterCardsList().get(playCharacterCardResponse.getCharacterCardPosition());
-        Operation characterCardOperation = null;
-        //TODO fix playCharacterCardMessage arguments to include minstrel, mushroomer and jester inputs
+        Operation characterCardOperation;
         switch(playedCharacterCard.getName()){
             case "Centaur":
                 characterCardOperation = new ActivateCentaurEffectOperation(gameState, player);
@@ -316,13 +322,18 @@ public class Room {
                 characterCardOperation = new ActivateKnightEffectOperation(gameState, player);
                 break;
             case "Minstrel":
-                //characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player);
+                ArrayList<PawnColor> studentsToPutOnEntrance = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
+                ArrayList<PawnColor> studentsToPutOnTables = mapper.StringListToColor(playCharacterCardResponse.getStudentsToPutOn());
+                characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player, studentsToPutOnEntrance, studentsToPutOnTables);
                 break;
             case "Mushroomer":
-                //characterCardOperation = new ActivateMushroomerEffectOperation(gameState, player);
+                characterCardOperation = new ActivateMushroomerEffectOperation(gameState, player,
+                        mapper.stringToColor(playCharacterCardResponse.getNotInfluencingColor()));
                 break;
             case "Jester":
-                //characterCardOperation = new ActivateJesterEffectOperation(gameState, player);
+                ArrayList<PawnColor> studentsToGetFromJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
+                ArrayList<PawnColor> studentsToPutOnJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToPutOn());
+                characterCardOperation = new ActivateJesterEffectOperation(gameState, player, studentsToGetFromJester, studentsToPutOnJester);
                 break;
             case "MagicPostman":
                 characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
@@ -345,7 +356,8 @@ public class Room {
      * @param response the response that contains the operation chosen by the player
      * @return true if mother nature has been moved successfully, false otherwise
      */
-    private boolean motherNaturePhase(PlayerController player, Response response) throws ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException{
+    private boolean motherNaturePhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
+            NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException{
         if(!(response instanceof MotherNaturePhaseResponse))
             throw new IncorrectOperationException();
 
@@ -382,7 +394,8 @@ public class Room {
         return false;
     }
 
-    private void moveMotherNature(PlayerController player, Response response) throws NotPlayerTurnException, ZeroTowersRemainedException, NotEnoughIslandsException, IncorrectOperationException, BackException{
+    private void moveMotherNature(PlayerController player, Response response) throws NotPlayerTurnException,
+            ZeroTowersRemainedException, NotEnoughIslandsException, IncorrectOperationException, BackException{
         if(response instanceof BackResponse)
             throw new BackException();
 

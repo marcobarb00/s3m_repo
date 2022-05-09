@@ -19,11 +19,11 @@ public class PlayCharacterCardResponse implements Response{
 		this.characterCardPosition = characterCardPosition;
 	}
 
-	public PlayCharacterCardResponse(int characterCardPosition, ArrayList<String> studentsToPutOnJester,
-									 ArrayList<String> studentsToGetFromJester){
+	public PlayCharacterCardResponse(int characterCardPosition, ArrayList<String> studentsToPutOn,
+									 ArrayList<String> studentsToGetFrom){
 		this.characterCardPosition = characterCardPosition;
-		this.studentsToGetFrom = studentsToGetFromJester;
-		this.studentsToPutOn = studentsToPutOnJester;
+		this.studentsToGetFrom = studentsToGetFrom;
+		this.studentsToPutOn = studentsToPutOn;
 	}
 
 	public PlayCharacterCardResponse(int characterCardPosition, String notInfluencingColor){
