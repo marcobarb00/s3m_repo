@@ -15,6 +15,9 @@ public class MoveStudentsPhaseCLI extends MessageCLI{
 	//TODO Action phase doesn't start in CLI
 	@Override
 	public Response execute(){
+		GameStateCLI gameStateCLI = new GameStateCLI(gameState);
+		gameStateCLI.printState();
+
 		System.out.println("student allocation phase");
 		int maxOperationNumber = 2;
 

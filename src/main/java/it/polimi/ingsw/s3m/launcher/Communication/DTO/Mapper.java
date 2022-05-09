@@ -7,6 +7,23 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class Mapper{
+	public PawnColor stringToColor(String colorString){
+		switch(colorString){
+			case "RED":
+				return PawnColor.RED;
+			case "BLUE":
+				return PawnColor.BLUE;
+			case "GREEN":
+				return PawnColor.GREEN;
+			case "YELLOW":
+				return PawnColor.YELLOW;
+			case "PINK":
+				return PawnColor.PINK;
+			default:
+				return null;
+		}
+	}
+
 	public AssistantCardDTO assistantCardToDTO(AssistantCard assistantCard){
 		if(assistantCard == null){
 			return new AssistantCardDTO(null, 0, 0);
@@ -118,17 +135,10 @@ public class Mapper{
 	}
 
 	public TurnDTO turnToDTO(Turn turn){
-		if(turn.getCurrentPhase() instanceof PlanningPhase){
-			PlanningPhase phase = (PlanningPhase) turn.getCurrentPhase();
-			ArrayList<AssistantCardDTO> playedCards = new ArrayList<>();
-			phase.getPlayedCards().forEach((nickname, card) -> playedCards.add(assistantCardToDTO(card)));
+		ArrayList<AssistantCardDTO> playedCards = new ArrayList<>();
+		turn.getPlayedCards().forEach((nickname, card) -> playedCards.add(assistantCardToDTO(card)));
 
-			return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), "PlanningPhase", playedCards, false);
-		}else if(turn.getCurrentPhase() instanceof ActionPhase){
-			return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), "PlanningPhase", new ArrayList<>(), ((ActionPhase) turn.getCurrentPhase()).isActivatedCharacterCard());
-		}else{
-			return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), "NoPhase", new ArrayList<>(), false);
-		}
+		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, false);
 	}
 
 	public GameDTO gameToDTO(Game game){

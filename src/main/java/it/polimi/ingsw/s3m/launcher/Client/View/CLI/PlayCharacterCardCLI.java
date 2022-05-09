@@ -16,6 +16,7 @@ public class PlayCharacterCardCLI extends MessageCLI{
 		this.gameState = playCharacterCardMessage.getGameState();
 	}
 
+	//TODO miky handle special character cards inputs (jester. minstrel, mushroomer)
 	@Override
 	public Response execute(){
 		ArrayList<CharacterCardDTO> characterCardDTOList = gameState.getCharacterCards();
