@@ -57,7 +57,7 @@ public class PlayCharacterCardCLI extends MessageCLI{
 		return new PlayCharacterCardResponse(characterCardPosition);
 	}
 
-	private void getMushroomerInputs(){
+	private void getMinstrelInputs(){
 		this.studentsToPutOnTables = new ArrayList<>();
 		this.studentsToGetFromTables = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class PlayCharacterCardCLI extends MessageCLI{
 		}
 	}
 
-	private void getMinstrelInputs(){
+	private void getMushroomerInputs(){
 		System.out.println("Select a color that won't influence dominance in your turn:");
 		chooseColor();
 		notInfluencingColor = getCLIColor(getOperation(5));

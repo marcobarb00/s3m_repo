@@ -14,12 +14,12 @@ import java.util.HashMap;
 
 //DONE
 public class ActivateMinstrelEffectOperation extends Operation{
-    ArrayList<Student> enteringEntranceStudents;
-    ArrayList<Student> enteringTablesStudents;
+    ArrayList<PawnColor> enteringEntranceStudents;
+    ArrayList<PawnColor> enteringTablesStudents;
 
     public ActivateMinstrelEffectOperation(Game game, PlayerController playerController,
-                                           ArrayList<Student> enteringEntranceStudents,
-                                           ArrayList<Student> enteringTablesStudents) {
+                                           ArrayList<PawnColor> enteringEntranceStudents,
+                                           ArrayList<PawnColor> enteringTablesStudents) {
         super(game, playerController);
         this.enteringEntranceStudents = enteringEntranceStudents;
         this.enteringTablesStudents = enteringTablesStudents;
@@ -58,7 +58,16 @@ public class ActivateMinstrelEffectOperation extends Operation{
         searchStudentsInEntrance();
         searchStudentsInTables();
 
-        game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudents, enteringTablesStudents);
+        //FIXME
+        // Temporary Arrays, change to ArrayList<PawnColor>
+        ArrayList<Student> enteringEntranceStudentsAL = new ArrayList<>();
+        ArrayList<Student> enteringTablesStudentsAL = new ArrayList<>();
+
+        enteringEntranceStudents.forEach(color -> enteringEntranceStudentsAL.add(new Student(color)));
+        enteringTablesStudents.forEach(color -> enteringTablesStudentsAL.add(new Student(color)));
+
+        game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudentsAL,
+                enteringTablesStudentsAL);
     }
 
     private void searchStudentsInEntrance(){
@@ -69,7 +78,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
         // with entrance of that color
         for(PawnColor color : PawnColor.values()){
             int numberOfEnteringTablesStudents = (int) enteringTablesStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
+                    studentColor -> studentColor.equals(color) ).count();
             boolean notEnoughStudentsInEntrance =
                     numberOfEnteringTablesStudents > entrance.get(color);
             if(notEnoughStudentsInEntrance){
@@ -86,7 +95,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
         // with tables of that color
         for(PawnColor color : PawnColor.values()){
             int numberOfEnteringEntranceStudents = (int) enteringEntranceStudents.stream().filter(
-                    student -> student.getColor() == color ).count();
+                    studentColor -> studentColor.equals(color) ).count();
             boolean notEnoughStudentsInTables =
                     numberOfEnteringEntranceStudents > tables.get(color);
             if(notEnoughStudentsInTables){
