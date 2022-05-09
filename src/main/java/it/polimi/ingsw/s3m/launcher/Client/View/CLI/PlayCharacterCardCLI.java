@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
@@ -26,6 +27,8 @@ public class PlayCharacterCardCLI extends MessageCLI{
 			System.out.println((i+1) + ") " + card.getName() + " cost: " + card.getCost());
 		}
 
-		return new PlayAssistantCardResponse(getOperation(characterCardDTOList.size() - 1));
+		//TODO miky handle special character cards inputs (jester. minstrel, mushroomer)
+
+		return new PlayCharacterCardResponse(getOperation(characterCardDTOList.size() - 1));
 	}
 }

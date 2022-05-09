@@ -22,7 +22,7 @@ public abstract class Operation {
     public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
             IllegalArgumentException, NotExpertModeException,
             NotEnoughCoinsException, NotPlayerTurnException,
-            ZeroTowersRemainedException, NotEnoughIslandsException;
+            ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException;
 
     public boolean checkNickname(){
         ArrayList<String> playersList = game.getPlayersNicknames();
