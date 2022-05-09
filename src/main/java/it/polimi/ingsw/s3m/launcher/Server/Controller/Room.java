@@ -121,13 +121,29 @@ public class Room {
                 gameState.resetTurn();
             }
         }catch(ZeroTowersRemainedException e){
-            String winnerNickname = gameState.zeroTowersLeftWinCondition();
+            String winnerNickname = null;
+            try{
+                winnerNickname = gameState.zeroTowersLeftWinCondition();
+            }catch(NullWinnerException ex){
+                sendNotificationToAll("there was an error during calculation of the winner, everyone wins :)");
+                RoomsController.instance().deleteRoom(roomID);
+                return;
+            }
             sendNotificationToAll("the winner is " + winnerNickname);
             RoomsController.instance().deleteRoom(roomID);
             return;
         }
 
-        String winnerNickname = gameState.checkWinCondition();
+        String winnerNickname = null;
+        try{
+            winnerNickname = gameState.checkWinCondition();
+        }catch(NullWinnerException e){
+            sendNotificationToAll("there was an error during calculation of the winner, everyone wins :)");
+            RoomsController.instance().deleteRoom(roomID);
+            return;
+        }catch(TieException e){
+            sendNotificationToAll("there was a tie! the winners are " + e.getMessage());
+        }
         sendNotificationToAll("the winner is " + winnerNickname);
         RoomsController.instance().deleteRoom(roomID);
     }
