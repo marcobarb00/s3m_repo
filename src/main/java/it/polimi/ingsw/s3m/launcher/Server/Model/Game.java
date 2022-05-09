@@ -185,8 +185,8 @@ public class Game implements Cloneable{
 
     public void setTurnFirstPlayer() {
         int minValue = 11;
-        for (String nickname : ((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().keySet()) {
-            int cardValue = ((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().get(nickname).getValue();
+        for (String nickname : turn.getPlayedCards().keySet()) {
+            int cardValue = turn.getPlayedCards().get(nickname).getValue();
             if (cardValue < minValue) {
                 minValue = cardValue;
                 turn.setFirstPlayerNickname(nickname);
@@ -206,7 +206,7 @@ public class Game implements Cloneable{
         computeDominanceStrategy = new CentaurComputeDominance();
         chosenPlayer.removeCoins(centaur.getCost());
         centaur.incrementCost();
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        turn.setActivatedCharacterCard(true);
     }
 
     public void activateJesterEffect (String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents) {
@@ -220,7 +220,7 @@ public class Game implements Cloneable{
         chosenPlayer.getDashboard().addStudentsInEntrance(exchangingStudents);
         chosenPlayer.removeCoins(jester.getCost());
         jester.incrementCost();
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        turn.setActivatedCharacterCard(true);
     }
 
     public void activateKnightEffect (String playerNickname) {
@@ -233,7 +233,7 @@ public class Game implements Cloneable{
         ((KnightComputeDominance) computeDominanceStrategy).setActingPlayer(chosenPlayer);
         chosenPlayer.removeCoins(knight.getCost());
         knight.incrementCost();
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        turn.setActivatedCharacterCard(true);
     }
 
     public void activateMagicPostmanEffect (String playerNickname) {
@@ -245,7 +245,7 @@ public class Game implements Cloneable{
         chosenPlayer.getLastPlayedCard().incrementMovementsByTwo();
         chosenPlayer.removeCoins(magicPostman.getCost());
         magicPostman.incrementCost();
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        turn.setActivatedCharacterCard(true);
     }
 
     public void activateMinstrelEffect (String playerNickname, ArrayList<Student> enteringStudents, ArrayList<Student> enteringTablesStudents) {
@@ -261,7 +261,7 @@ public class Game implements Cloneable{
         chosenPlayer.addCoins(additionalCoins);
         chosenPlayer.removeCoins(minstrel.getCost());
         minstrel.incrementCost();
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        turn.setActivatedCharacterCard(true);
         computeProfessorsDominance();
     }
 
@@ -275,7 +275,7 @@ public class Game implements Cloneable{
         ((MushroomerComputeDominance) computeDominanceStrategy).setChosenColor(chosenColor);
         chosenPlayer.removeCoins(mushroomer.getCost());
         mushroomer.incrementCost();
-        ((ActionPhase) turn.getCurrentPhase()).setActivatedCharacterCard(true);
+        turn.setActivatedCharacterCard(true);
     }
 
     public void chooseCloud(String playerNickname, int position) {
@@ -321,7 +321,7 @@ public class Game implements Cloneable{
         Player chosenPlayer = playerHashMap.get(playerNickname);
         chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
         chosenPlayer.removeAssistantCardFromHand(position);
-        ((PlanningPhase) turn.getCurrentPhase()).addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
+        turn.addPlayedCard(chosenPlayer.getNickname(), chosenPlayer.getLastPlayedCard());
         turn.incrementMovedStudents();
         if (chosenPlayer.getHand().size() == 0) throw new NotEnoughAssistantCardsException();
     }
@@ -382,17 +382,17 @@ public class Game implements Cloneable{
     public Turn getTurn() { return turn; }
     public String getFirstPlayerNickname() { return turn.getFirstPlayerNickname(); }
     public String getCurrentPlayerNickname() { return turn.getCurrentPlayerNickname(); }
-    public Phase getCurrentPhase() { return turn.getCurrentPhase(); }
+    public String getCurrentPhase() { return turn.getPhaseName(); }
     public int getTurnMovedStudents() { return turn.getMovedStudents(); }
-    public boolean isCharacterCardActivated() { return ((ActionPhase) turn.getCurrentPhase()).isActivatedCharacterCard(); }
-    public ArrayList<AssistantCard> getTurnPlayedCards() { return new ArrayList<>(((PlanningPhase) turn.getCurrentPhase()).getPlayedCards().values()); }
+    public boolean isCharacterCardActivated() { return turn.isActivatedCharacterCard(); }
+    public ArrayList<AssistantCard> getTurnPlayedCards() { return new ArrayList<>(turn.getPlayedCards().values()); }
 
     // SETTER - Turn
     public void setCurrentPlayerNickname(String nickname) {
         turn.setCurrentPlayerNickname(nickname);
     }
-    public void setCurrentPhase(Phase phase) {
-        turn.setCurrentPhase(phase);
+    public void setCurrentPhase(String phaseName) {
+        turn.setPhaseName(phaseName);
     }
 
     // GETTER
