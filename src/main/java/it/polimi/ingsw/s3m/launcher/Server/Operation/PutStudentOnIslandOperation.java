@@ -28,7 +28,7 @@ public class PutStudentOnIslandOperation extends Operation{
         }
 
         //check if student can be moved
-        checkMovableStudent();   
+        checkMovableStudent();
 
         //Checks if there are the selected students in entrance
         searchStudentsInEntrance();

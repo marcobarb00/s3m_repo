@@ -27,6 +27,12 @@ public class ActivateMagicPostmanEffectOperation extends Operation{
             throw new NotExpertModeException();
         }
 
+        //checks if CharacterCard already active
+        boolean activatedCharacterCard = game.isCharacterCardActivated();
+        if(activatedCharacterCard){
+            throw new IllegalArgumentException("Cannot play a second character card");
+        }
+
         //checking if player has enough coins
         boolean checkCost = checkCharacterCardCost("MagicPostman");
         if(!checkCost){

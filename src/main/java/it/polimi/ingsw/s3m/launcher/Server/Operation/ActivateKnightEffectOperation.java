@@ -26,6 +26,12 @@ public class ActivateKnightEffectOperation extends Operation{
             throw new NotExpertModeException();
         }
 
+        //checks if CharacterCard already active
+        boolean activatedCharacterCard = game.isCharacterCardActivated();
+        if(activatedCharacterCard){
+            throw new IllegalArgumentException("Cannot play a second character card");
+        }
+
         //checking if player has enough coins
         boolean checkCost = checkCharacterCardCost("Knight");
         if(!checkCost){

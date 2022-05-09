@@ -8,9 +8,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import java.util.ArrayList;
 
 public abstract class Operation {
-    //How to get the game reference in Operation?
-    //Solution  - Room class passes it as parameter when instantiating an Operation object
-    //             PS. Game is instantiated in room.start() method
+    //Game is instantiated in room.start() method
     protected Game game;
     protected PlayerController playerController;
 
@@ -22,7 +20,7 @@ public abstract class Operation {
     public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
             IllegalArgumentException, NotExpertModeException,
             NotEnoughCoinsException, NotPlayerTurnException,
-            ZeroTowersRemainedException, NotEnoughIslandsException;
+            ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException;
 
     public boolean checkNickname(){
         ArrayList<String> playersList = game.getPlayersNicknames();
