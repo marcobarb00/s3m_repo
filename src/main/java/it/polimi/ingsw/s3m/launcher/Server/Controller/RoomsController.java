@@ -97,6 +97,12 @@ public class RoomsController{
         player.communicateWithClient(new NotificationMessage(message));
     }
 
+    public synchronized void deleteRoom(Integer roomID){
+        rooms.get(roomID).sendNotificationToAll("the room is being deleted");
+        Room room = rooms.remove(roomID);
+        room = null;
+    }
+
     public synchronized void deleteRoom(Integer roomID, PlayerController player){
         rooms.get(roomID).sendNotificationToAllButOne(player, "the room is being deleted");
         Room room = rooms.remove(roomID);
