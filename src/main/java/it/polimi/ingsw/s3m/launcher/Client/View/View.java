@@ -25,4 +25,6 @@ public abstract class View{
 	public abstract void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage);
 
 	public abstract void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage);
+
+	public abstract void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage);
 }

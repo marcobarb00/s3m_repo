@@ -1,16 +1,24 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.CloudResponse;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.CloudPhaseMessage;
 
 public class ChooseCloudPhaseCLI extends MessageCLI{
-	public ChooseCloudPhaseCLI(CloudPhaseMessage cloudPhaseMessage){
+	private GameDTO gameState;
 
+	public ChooseCloudPhaseCLI(CloudPhaseMessage cloudPhaseMessage){
+		this.gameState = cloudPhaseMessage.getGameState();
 	}
 
 	@Override
 	public Response execute(){
-		System.out.println("choose the cloud to get the students from\n");
-		return null;
+		int maxOperationNumber = gameState.getClouds().size();
+		System.out.println("choose a cloud from 1 to " +
+				maxOperationNumber + " to get the students from: ");
+		int chosenCloudPosition = getOperation(maxOperationNumber) - 1;
+
+		return new CloudResponse(chosenCloudPosition);
 	}
 }

@@ -17,6 +17,6 @@ public class MoveMotherNatureMessage implements Message{
 
 	@Override
 	public void apply(View view){
-
+		view.moveMotherNature(this);
 	}
 }
