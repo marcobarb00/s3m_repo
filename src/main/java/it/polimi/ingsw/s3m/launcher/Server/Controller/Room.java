@@ -8,7 +8,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;

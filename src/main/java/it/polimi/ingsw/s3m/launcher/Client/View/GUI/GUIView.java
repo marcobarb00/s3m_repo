@@ -69,4 +69,9 @@ public class GUIView extends View{
 	public void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage){
 
 	}
+
+	@Override
+	public void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage){
+
+	}
 }
