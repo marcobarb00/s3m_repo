@@ -1,12 +1,19 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ExpertModeInitializer;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.GameInitializer;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ThreePlayersGameInitializer;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.TwoPlayersGameInitializer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Game implements Cloneable{
+public class Game{
 	private final int numberOfPlayers;
 	private final boolean expertMode;
 	private final MotherNature motherNature = new MotherNature();
@@ -21,6 +28,11 @@ public class Game implements Cloneable{
 	private ExpertModeInitializer expertModeInitializer;
 	private final Turn turn;
 
+	/**
+	 * Constructor used to initialize the game attributes
+	 * @param playersNicknameList list of players' nicknames
+	 * @param expertMode boolean for the expert mode
+	 */
 	public Game(ArrayList<String> playersNicknameList, boolean expertMode){
 		this.numberOfPlayers = playersNicknameList.size();
 		this.expertMode = expertMode;
@@ -43,6 +55,11 @@ public class Game implements Cloneable{
 
 	// BAG
 
+	/**
+	 * Method used to extract a random color student from the bag
+	 * @return the extracted student
+	 * @throws EmptyBagException exception if the bag is empty
+	 */
 	public Student extractStudent() throws EmptyBagException{
 		if(bag.getTotalNumberOfStudents() <= 0) throw new EmptyBagException();
 
@@ -54,25 +71,31 @@ public class Game implements Cloneable{
 		return extractedStudent;
 	}
 
+	/**
+	 * Method used to extract a random color
+	 * @return a random extracted color
+	 */
 	private PawnColor extractColor(){
 		float percent = (float) Math.random();
-		if(percent < 0.2){
+		if(percent < 0.2)
 			return PawnColor.BLUE;
-		}else if(percent >= 0.2 && percent < 0.4){
+		else if(percent >= 0.2 && percent < 0.4)
 			return PawnColor.GREEN;
-		}else if(percent >= 0.4 && percent < 0.6){
+		else if(percent >= 0.4 && percent < 0.6)
 			return PawnColor.PINK;
-		}else if(percent >= 0.6 && percent < 0.8){
+		else if(percent >= 0.6 && percent < 0.8)
 			return PawnColor.RED;
-		}else{
+		else
 			return PawnColor.YELLOW;
-		}
 	}
 
 	// CHARACTER CARDS
 
+	/**
+	 * Method used to draw the three character cards to play with
+	 */
 	public void drawThreeCharacterCards(){
-		while(characterCardsList.size() != 3){
+		while(characterCardsList.size() > 3){
 			int extractedNumber = ThreadLocalRandom.current().nextInt(0, characterCardsList.size() - 1);
 			characterCardsList.remove(extractedNumber);
 		}
@@ -80,15 +103,25 @@ public class Game implements Cloneable{
 
 	// CLOUD
 
-	public void refillClouds() throws EmptyBagException{
+	/**
+	 * Method used to refill all the clouds with a number of
+	 * students based on the number of players of the game
+	 * @throws EmptyBagException exception if the bag is empty
+	 */
+	public void refillClouds() throws EmptyBagException {
 		int numberOfStudents;
-		if(expertMode) numberOfStudents = 4;
-		else numberOfStudents = 3;
-		for(int i = 0; i < numberOfPlayers; i++){
+		numberOfStudents = 3;
+		if(numberOfPlayers == 3) numberOfStudents = 4;
+		for(int i = 0; i < numberOfPlayers; i++)
 			refillCloudStudents(cloudsList.get(i), numberOfStudents);
-		}
 	}
 
+	/**
+	 * Method used to refill a single cloud
+	 * @param cloud cloud to be refilled
+	 * @param numberOfStudents number of students to refill the cloud with
+	 * @throws EmptyBagException exception if the bag is empty
+	 */
 	public void refillCloudStudents(Cloud cloud, int numberOfStudents) throws EmptyBagException{
 		ArrayList<Student> refillingStudents = new ArrayList<>();
 		for(int i = 0; i < numberOfStudents; i++) refillingStudents.add(extractStudent());
@@ -97,6 +130,11 @@ public class Game implements Cloneable{
 
 	// ISLAND
 
+	/**
+	 * Method used to check if the current island's dominating player is
+	 * the same as the next island's
+	 * @param currentIsland island to check
+	 */
 	public void samePlayerCheckInNextIsland(Island currentIsland){
 		Player currentIslandDominator = currentIsland.getDominator();
 		int islandIndex = islandsList.indexOf(currentIsland);
@@ -112,6 +150,11 @@ public class Game implements Cloneable{
 			mergeIsland(currentIsland, nextIsland);
 	}
 
+	/**
+	 * Method used to check if the current island's dominating player is
+	 * the same as the previous island's
+	 * @param currentIsland island to check
+	 */
 	public void samePlayerCheckInPreviousIsland(Island currentIsland){
 		Player currentIslandDominator = currentIsland.getDominator();
 		int islandIndex = islandsList.indexOf(currentIsland);
@@ -127,6 +170,13 @@ public class Game implements Cloneable{
 			mergeIsland(currentIsland, previousIsland);
 	}
 
+	/**
+	 * Method used to merge two island and deleting one of them
+	 * @param mergingInIsland island in which transfer students and towers
+	 *                        from the other island
+	 * @param mergingOutIsland island in which take students and towers to
+	 *                         transfer on the other island
+	 */
 	public void mergeIsland(Island mergingInIsland, Island mergingOutIsland){
 		for(PawnColor color : PawnColor.values()){
 			int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
@@ -139,11 +189,14 @@ public class Game implements Cloneable{
 
 	// JESTER
 
+	/**
+	 * Method used to initialize the six students of the card
+	 * @param jester jester card to initialize
+	 */
 	public void initializeJesterStudents(Jester jester){
 		HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
-		for(PawnColor color : PawnColor.values()){
+		for(PawnColor color : PawnColor.values())
 			initialingStudents.put(color, 0);
-		}
 		for(int i = 0; i < 6; i++){
 			try{
 				Student student = extractStudent();
@@ -158,6 +211,10 @@ public class Game implements Cloneable{
 
 	// MOTHER NATURE
 
+	/**
+	 * Method used to update mother nature's position
+	 * @param jump number of jumps
+	 */
 	public void updateMotherNaturePosition(int jump){
 		while(jump != 0){
 			if(motherNature.getCurrentPosition() == islandsList.size() - 1)
@@ -169,6 +226,9 @@ public class Game implements Cloneable{
 
 	// PROFESSORS
 
+	/**
+	 * Method used to update the dominating player of each professor
+	 */
 	private void computeProfessorsDominance(){
 		for(PawnColor color : PawnColor.values()){
 			int maxStudents = 0;
@@ -179,6 +239,11 @@ public class Game implements Cloneable{
 		}
 	}
 
+	/**
+	 * Method used to calculate how many professors are controlled by a player
+	 * @param player player to check
+	 * @return the number of professors controller by the player
+	 */
 	private int playerInfluenceOnProfessors(Player player){
 		int influenceCounter = 0;
 		for(Player dominator : professorsHashMap.values())
@@ -188,14 +253,21 @@ public class Game implements Cloneable{
 
 	// TURN
 
+	/**
+	 * Method used to reset the turn's attributes at the end of the action phase
+	 */
 	public void resetTurn(){
 		turn.setCurrentPlayerNickname(turn.getFirstPlayerNickname());
 		turn.setPhaseName("PlanningPhase");
-		turn.resetMovedStudents();
 		turn.setPlayedCards(new HashMap<>());
 		turn.setActivatedCharacterCard(false);
+		computeDominanceStrategy = new StandardComputeDominance();
 	}
 
+	/**
+	 * Method used to calculate the first player that have to play in the next
+	 * planning and action phases
+	 */
 	public void setTurnFirstPlayer(){
 		int minValue = 11;
 		for(String nickname : turn.getPlayedCards().keySet()){
@@ -210,6 +282,12 @@ public class Game implements Cloneable{
 
 	// WINNING CONDITIONS
 
+	/**
+	 * Method used to calculate the winner
+	 * @return the nickname of the winning player
+	 * @throws NullWinnerException exception if nobody wins
+	 * @throws TieException exception if a tie occurs
+	 */
 	public String checkWinCondition() throws NullWinnerException, TieException{
 		Player winner = null;
 		int maxTowers = 10;
@@ -228,6 +306,11 @@ public class Game implements Cloneable{
 		return winner.getNickname();
 	}
 
+	/**
+	 * Method used to get the winner in the scenario of zero towers left
+	 * @return the nickname of the winning player
+	 * @throws NullWinnerException exception if nobody wins
+	 */
 	public String zeroTowersLeftWinCondition() throws NullWinnerException{
 		Player winner = null;
 		for(Player player : playerHashMap.values())
@@ -239,11 +322,14 @@ public class Game implements Cloneable{
 
 	// Operations
 
+	/**
+	 * Method used to activate the Centaur character card effect
+	 * @param playerNickname nickname of the player who activated the card
+	 */
 	public void activateCentaurEffect(String playerNickname){
 		CharacterCard centaur = new Centaur();
-		for(CharacterCard characterCard : characterCardsList){
+		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Centaur) centaur = characterCard;
-		}
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		computeDominanceStrategy = new CentaurComputeDominance();
 		chosenPlayer.removeCoins(centaur.getCost());
@@ -251,11 +337,16 @@ public class Game implements Cloneable{
 		turn.setActivatedCharacterCard(true);
 	}
 
+	/**
+	 * Method used to activate the Jester character card effect
+	 * @param playerNickname nickname of the player who activated the card
+	 * @param requiredStudents students required from the player
+	 * @param givenStudents students given from the player
+	 */
 	public void activateJesterEffect(String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
 		CharacterCard jester = new Jester();
-		for(CharacterCard characterCard : characterCardsList){
+		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Jester) jester = characterCard;
-		}
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		chosenPlayer.getDashboard().deleteStudentsFromEntrance(givenStudents);
 		ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
@@ -265,11 +356,14 @@ public class Game implements Cloneable{
 		turn.setActivatedCharacterCard(true);
 	}
 
+	/**
+	 * Method used to activate the Knight character card effect
+	 * @param playerNickname nickname of the player who activated the card
+	 */
 	public void activateKnightEffect(String playerNickname){
 		CharacterCard knight = new Knight();
-		for(CharacterCard characterCard : characterCardsList){
+		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Knight) knight = characterCard;
-		}
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		computeDominanceStrategy = new KnightComputeDominance();
 		((KnightComputeDominance) computeDominanceStrategy).setActingPlayer(chosenPlayer);
@@ -278,11 +372,14 @@ public class Game implements Cloneable{
 		turn.setActivatedCharacterCard(true);
 	}
 
+	/**
+	 * Method used to activate the Magic Postman character card effect
+	 * @param playerNickname nickname of the player who activated the card
+	 */
 	public void activateMagicPostmanEffect(String playerNickname){
 		CharacterCard magicPostman = new MagicPostman();
-		for(CharacterCard characterCard : characterCardsList){
+		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof MagicPostman) magicPostman = characterCard;
-		}
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		chosenPlayer.getLastPlayedCard().incrementMovementsByTwo();
 		chosenPlayer.removeCoins(magicPostman.getCost());
@@ -290,12 +387,17 @@ public class Game implements Cloneable{
 		turn.setActivatedCharacterCard(true);
 	}
 
+	/**
+	 * Method used to activate the Minstrel character card effect
+	 * @param playerNickname nickname of the player who activated the card
+	 * @param enteringStudents students entering the entrance
+	 * @param enteringTablesStudents students entering the tables
+	 */
 	public void activateMinstrelEffect(String playerNickname, ArrayList<Student> enteringStudents, ArrayList<Student> enteringTablesStudents){
 		int additionalCoins;
 		CharacterCard minstrel = new Minstrel();
-		for(CharacterCard characterCard : characterCardsList){
+		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Minstrel) minstrel = characterCard;
-		}
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		chosenPlayer.getDashboard().addStudentsInEntrance(enteringStudents);
 		chosenPlayer.getDashboard().deleteStudentsFromTables(enteringStudents);
@@ -307,11 +409,15 @@ public class Game implements Cloneable{
 		computeProfessorsDominance();
 	}
 
+	/**
+	 * Method used to activate Mushroomer character card effect
+	 * @param playerNickname nickname of the player who activated the card
+	 * @param chosenColor chosen color to deactivate
+	 */
 	public void activateMushroomerEffect(String playerNickname, PawnColor chosenColor){
 		CharacterCard mushroomer = new Mushroomer();
-		for(CharacterCard characterCard : characterCardsList){
+		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Mushroomer) mushroomer = characterCard;
-		}
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		computeDominanceStrategy = new MushroomerComputeDominance();
 		((MushroomerComputeDominance) computeDominanceStrategy).setChosenColor(chosenColor);
@@ -320,12 +426,25 @@ public class Game implements Cloneable{
 		turn.setActivatedCharacterCard(true);
 	}
 
+	/**
+	 * Method used to transfer the students on the chosen cloud into the
+	 * player's entrance
+	 * @param playerNickname nickname of the player who choose the cloud
+	 * @param position position of the chosen cloud
+	 */
 	public void chooseCloud(String playerNickname, int position){
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		Cloud chosenCloud = cloudsList.get(position);
 		chosenPlayer.getDashboard().addStudentsInEntrance(chosenCloud.returnStudents());
 	}
 
+	/**
+	 * Method used to move mother nature with the chosen distance and to activate
+	 * the computeDominance with eventual merging of islands
+	 * @param movement movements chosen by the player
+	 * @throws NotEnoughIslandsException exception if the number of islands is less or equal three
+	 * @throws ZeroTowersRemainedException exception if a players remains with zero towers left
+	 */
 	public void moveMotherNature(int movement) throws NotEnoughIslandsException, ZeroTowersRemainedException{
 		updateMotherNaturePosition(movement);
 
@@ -359,6 +478,13 @@ public class Game implements Cloneable{
 		if(islandsList.size() <= 3) throw new NotEnoughIslandsException();
 	}
 
+	/**
+	 * Method used to play the chosen assistant card by the player
+	 * @param playerNickname nickname of the player who played an assistant card
+	 * @param position position of the played assistant card in the player's hand
+	 * @throws NotEnoughAssistantCardsException exception if the player has no assistant
+	 * cards left
+	 */
 	public void playAssistantCard(String playerNickname, int position) throws NotEnoughAssistantCardsException{
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		chosenPlayer.setLastPlayedCard(chosenPlayer.getHand().get(position));
@@ -368,6 +494,11 @@ public class Game implements Cloneable{
 		if(chosenPlayer.getHand().size() == 0) throw new NotEnoughAssistantCardsException();
 	}
 
+	/**
+	 * Method used to move a single student from entrance to tables
+	 * @param playerNickname nickname of the player who moved the student
+	 * @param selectedStudent moved student
+	 */
 	public void putStudentOnTables(String playerNickname, Student selectedStudent){
 		int additionalCoins;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
@@ -377,6 +508,12 @@ public class Game implements Cloneable{
 		turn.incrementMovedStudents();
 	}
 
+	/**
+	 * Method used to move a single student from entrance to a chosen island
+	 * @param playerNickname nickname of the player who moved the student
+	 * @param position position of the chosen island
+	 * @param selectedStudent moved student
+	 */
 	public void putStudentOnIslands(String playerNickname, int position, Student selectedStudent){
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		Island chosenIsland = islandsList.get(position);
@@ -467,6 +604,8 @@ public class Game implements Cloneable{
 	public void setCurrentPhase(String phaseName){
 		turn.setPhaseName(phaseName);
 	}
+
+	public void resetTurnMovedStudents() { turn.resetMovedStudents(); }
 
 	// GETTER
 	public boolean isExpertMode(){

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,8 +112,18 @@ public class Mapper{
 		return islandDTOList;
 	}
 
+	public HashMap<String, Integer> pawnColorHashMapToStringHashMap(HashMap<PawnColor, Integer> pawnColorHashMap){
+		HashMap<String, Integer> stringHashMap = new HashMap<>();
+		pawnColorHashMap.forEach(((pawnColor, value) -> stringHashMap.put(pawnColor.name(), value)));
+		return stringHashMap;
+	}
+
 	public CharacterCardDTO characterCardToDTO(CharacterCard characterCard){
-		return new CharacterCardDTO(characterCard.getName(), characterCard.getCost());
+		if(characterCard instanceof Jester){
+			HashMap<String, Integer> studentsOnCard = pawnColorHashMapToStringHashMap(((Jester) characterCard).getStudentsOnCard());
+			return new CharacterCardDTO(characterCard.getName(), characterCard.getCost(), studentsOnCard);
+		}
+		return new CharacterCardDTO(characterCard.getName(), characterCard.getCost(), null);
 	}
 
 	public ArrayList<CharacterCardDTO> characterCardListToDTO(ArrayList<CharacterCard> characterCardList){

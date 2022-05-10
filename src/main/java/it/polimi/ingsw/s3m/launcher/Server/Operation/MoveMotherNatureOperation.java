@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughIslandsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotPlayerTurnException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.ZeroTowersRemainedException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.AssistantCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 public class MoveMotherNatureOperation extends Operation{

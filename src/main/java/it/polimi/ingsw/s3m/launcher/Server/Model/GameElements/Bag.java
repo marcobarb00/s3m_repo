@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Server.Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model.GameElements;
 
 import java.util.HashMap;
 
@@ -19,7 +19,7 @@ public class Bag{
 	/**
 	 * The method returns the sum of all the students contained in the bag
 	 *
-	 * @return sum
+	 * @return sum of all students
 	 */
 	public int getTotalNumberOfStudents(){
 		int sum = 0;

@@ -1,4 +1,8 @@
-package it.polimi.ingsw.s3m.launcher.Server.Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model.Initializers;
+
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
 
 public class ExpertModeInitializer{
 	private final Game game;
