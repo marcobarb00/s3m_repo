@@ -39,9 +39,10 @@ public class GameStateCLI{
 		ArrayList<IslandDTO> islands = gameState.getIslands();
 		int islandsNumber = islands.size();
 		for (int i = 0; i < islandsNumber; i++) {
-			System.out.println("island " + (i+1));
+			System.out.print("island " + (i+1) + "	");
 			HashMap<String, Integer> studentsOnIsland = islands.get(i).getStudents();
-			studentsOnIsland.forEach((color, number) -> System.out.print(color + "	:" + number + "	"));
+			studentsOnIsland.forEach((color, number) -> System.out.print(color + ":	" + number + "	"));
+			System.out.print("\n");
 		}
 	}
 
@@ -52,7 +53,8 @@ public class GameStateCLI{
 			if(cardDTO.getName().equals("Jester")){
 				//printing the hashmap of Jester
 				HashMap<String, Integer> studentsOnJester = cardDTO.getStudentsOnCard();
-				studentsOnJester.forEach((color, number) -> System.out.print(color + "	:" + number + "	"));
+				studentsOnJester.forEach((color, number) -> System.out.print(color + ":	" + number + "	"));
+				System.out.print("\n");
 			}
 		}
 
@@ -77,6 +79,6 @@ public class GameStateCLI{
 		}
 		System.out.println(students);
 
-		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left");
+		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left\n");
 	}
 }
