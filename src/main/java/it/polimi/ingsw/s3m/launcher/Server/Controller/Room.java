@@ -198,7 +198,8 @@ public class Room{
 			Response response = player.communicateWithClient(new StudentsPhaseMessage(mapper.gameToDTO(gameState)));
 			try{
 				moveStudentPhase(player, response);
-			}catch(IncorrectOperationException | PlayerNotInListException | NotEnoughCoinsException | CloudNotInListException | NotExpertModeException e){
+			}catch(IncorrectOperationException | PlayerNotInListException | NotEnoughCoinsException | CloudNotInListException |
+					NotExpertModeException | CharacterCardAlreadyActivatedException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}catch(BackException e){
 				//don't do anything, just continue while to repeat the moveStudentPhase
@@ -212,7 +213,8 @@ public class Room{
 			Response response = player.communicateWithClient(new MotherNaturePhaseMessage(mapper.gameToDTO(gameState)));
 			try{
 				motherNatureMoved = motherNaturePhase(player, response);
-			}catch(IncorrectOperationException | NotEnoughCoinsException | NotExpertModeException | CloudNotInListException e){
+			}catch(IncorrectOperationException | NotEnoughCoinsException | NotExpertModeException |
+					CloudNotInListException | CharacterCardAlreadyActivatedException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}catch(BackException e){
 				//don't do anything, just continue while to repeat the mother nature phase
@@ -239,7 +241,7 @@ public class Room{
 	private void moveStudentPhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
 			NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException,
 			PlayerNotInListException, NotEnoughCoinsException, NotPlayerTurnException, BackException,
-			NotExpertModeException, CloudNotInListException{
+			NotExpertModeException, CloudNotInListException, CharacterCardAlreadyActivatedException{
 		if(!(response instanceof StudentsPhaseResponse))
 			throw new IncorrectOperationException();
 
@@ -256,10 +258,9 @@ public class Room{
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
 			case 3:
-				if(gameState.getTurn().isActivatedCharacterCard()){
-					sendNotificationToPlayer(player, "you already activated a character card");
-					return;
-				}
+				if(gameState.isCharacterCardActivated())
+					throw new CharacterCardAlreadyActivatedException();
+
 				Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
 				playCharacterCard(player, playCharacterCardResponse);
 				//successful play of character card
@@ -293,7 +294,7 @@ public class Room{
 	private void playCharacterCard(PlayerController player, Response response) throws ZeroTowersRemainedException,
 			NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException,
 			CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException, BackException,
-			PlayerNotInListException{
+			PlayerNotInListException, CharacterCardAlreadyActivatedException{
 		if(response instanceof BackResponse)
 			throw new BackException();
 
@@ -343,7 +344,7 @@ public class Room{
 	private boolean motherNaturePhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
 			NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException,
 			NotPlayerTurnException, BackException, NotEnoughCoinsException, NotExpertModeException, CloudNotInListException,
-			PlayerNotInListException{
+			PlayerNotInListException, CharacterCardAlreadyActivatedException{
 		if(!(response instanceof MotherNaturePhaseResponse))
 			throw new IncorrectOperationException();
 
@@ -356,10 +357,9 @@ public class Room{
 				sendNotificationToPlayer(player, "mother nature moved successfully");
 				return true;
 			case 2:
-				if(gameState.getTurn().isActivatedCharacterCard()){
-					sendNotificationToPlayer(player, "you already activated a character card");
-					return false;
-				}
+				if(gameState.isCharacterCardActivated())
+					throw new CharacterCardAlreadyActivatedException();
+
 				Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
 				playCharacterCard(player, playCharacterCardResponse);
 				//character card played successfully
