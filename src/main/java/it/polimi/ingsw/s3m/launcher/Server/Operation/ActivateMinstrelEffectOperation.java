@@ -1,13 +1,14 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.CharacterCardAlreadyActivatedException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException{
+	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException{
 		//Check for double nicknames
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList){
@@ -41,7 +42,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		//checks if CharacterCard already active
 		boolean activatedCharacterCard = game.isCharacterCardActivated();
 		if(activatedCharacterCard){
-			throw new IllegalArgumentException("Cannot play a second character card");
+			throw new CharacterCardAlreadyActivatedException();
 		}
 
 		//checking if player has enough coins

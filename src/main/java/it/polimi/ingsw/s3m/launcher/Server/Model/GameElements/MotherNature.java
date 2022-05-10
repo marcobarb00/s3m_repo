@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Server.Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model.GameElements;
 
 public class MotherNature{
 	private int currentPosition = 0;

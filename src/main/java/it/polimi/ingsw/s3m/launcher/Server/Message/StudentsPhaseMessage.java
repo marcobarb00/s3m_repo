@@ -6,7 +6,6 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 public class StudentsPhaseMessage implements Message{
 	private GameDTO gameState;
-	//TODO add movedStudents argument?
 
 	public StudentsPhaseMessage(GameDTO gameState){
 		this.gameState = gameState;
