@@ -174,6 +174,7 @@ public class Room{
 
 		try{
 			playAssistantCardOperation.executeOperation();
+			sendNotificationToPlayer(player, "card played successfully");
 			return true;
 		}catch(PlayerNotInListException e){
 			sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
@@ -244,7 +245,8 @@ public class Room{
 				try{
 					Response putStudentOnTableResponse = player.communicateWithClient(new PutStudentOnTableMessage(mapper.gameToDTO(gameState)));
 					putStudentOnTable(player, putStudentOnTableResponse);
-					//successful play of character card
+					//student moved successfully
+					sendNotificationToPlayer(player, "student moved successfully");
 					return true;
 				}catch(IncorrectOperationException | PlayerNotInListException | IllegalArgumentException e){
 					//unable to move the student
@@ -255,7 +257,8 @@ public class Room{
 				try{
 					Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
 					putStudentOnIsland(player, putStudentOnIslandResponse);
-					//successful play of character card
+					//student moved successfully
+					sendNotificationToPlayer(player, "student moved successfully");
 					return true;
 				}catch(IncorrectOperationException | PlayerNotInListException | IllegalArgumentException e){
 					//unable to move the student
@@ -271,6 +274,7 @@ public class Room{
 					Response playCharacterCardResponse = player.communicateWithClient(new PlayCharacterCardMessage(mapper.gameToDTO(gameState)));
 					playCharacterCard(player, playCharacterCardResponse);
 					//successful play of character card
+					sendNotificationToPlayer(player, "character card activated successfully");
 					gameState.getTurn().setActivatedCharacterCard(true);
 					return false;
 				}catch(NotEnoughCoinsException | NotPlayerTurnException | NotExpertModeException |
@@ -373,6 +377,7 @@ public class Room{
 					Response moveMotherNatureResponse = player.communicateWithClient(new MoveMotherNatureMessage(mapper.gameToDTO(gameState)));
 					moveMotherNature(player, moveMotherNatureResponse);
 					//mother nature moved successfully
+					sendNotificationToPlayer(player, "mother nature moved successfully");
 					return true;
 				}catch(NotPlayerTurnException | IllegalArgumentException e){
 					//unable to move mother nature
@@ -431,15 +436,17 @@ public class Room{
 
 		try{
 			chooseCloudOperation.executeOperation();
+			//cloud chosen successfully
+			//TODO notification??
+			return true;
 		}catch(PlayerNotInListException e){
+			//unable to choose the cloud
 			sendNotificationToAll("a player not supposed to be in the room tried to do an operation, the room is being deleted");
 			RoomsController.instance().deleteRoom(roomID, player);
 			return false;
 		}catch(CloudNotInListException e){
 			return false;
 		}
-
-		return true;
 	}
 
 	public void sendNotificationToPlayer(PlayerController player, String message){
