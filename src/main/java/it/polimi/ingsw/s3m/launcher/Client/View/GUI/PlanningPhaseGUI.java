@@ -663,7 +663,7 @@ public class PlanningPhaseGUI{
 	Label numGreenStudentsIsland11;
 	@FXML
 	Label numRedStudentsIsland11;
-	
+
 
 
 

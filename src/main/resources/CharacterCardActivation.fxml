@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.s3m.launcher.Client.View.GUI.CharacterCardActivationGUI">
+   <children>
+      <ImageView fx:id="backgroundImage" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true">
+         <image>
+            <Image url="@eriantysImage.png" />
+         </image>
+         <effect>
+            <BoxBlur />
+         </effect>
+      </ImageView>
+      <VBox fx:id="vBox" layoutX="89.0" layoutY="139.0" prefHeight="303.0" prefWidth="783.0">
+         <children>
+            <GridPane prefHeight="266.0" prefWidth="783.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="firstCharacter" fitHeight="271.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="secondCharacter" fitHeight="271.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="thirdCharacter" fitHeight="271.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <Label layoutX="201.0" layoutY="79.0" prefHeight="54.0" prefWidth="560.0" text="Select the Character Card you want to Activate:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="submit" layoutX="830.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#submit" text="SUBMIT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="back" layoutX="39.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="50.0" prefWidth="100.0" text="BACK">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <RadioButton fx:id="active1" layoutX="163.0" layoutY="470.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="116.0" text="Activate" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="activeRadios" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="active2" layoutX="422.0" layoutY="470.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="116.0" text="Activate" textFill="WHITE" toggleGroup="$activeRadios">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="active3" layoutX="684.0" layoutY="470.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="116.0" text="Activate" textFill="WHITE">
+         <toggleGroup>
+            <ToggleGroup fx:id="activeRadios1" />
+         </toggleGroup>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </RadioButton>
+   </children>
+</AnchorPane>
