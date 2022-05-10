@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 
 public class ActivateMushroomerEffectOperation extends Operation{
 	private PawnColor notInfluencingColor;

@@ -1,4 +1,8 @@
-package it.polimi.ingsw.s3m.launcher.Server.Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model.Initializers;
+
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;

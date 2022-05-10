@@ -3,9 +3,9 @@ package it.polimi.ingsw.s3m.launcher.Server.Operation;
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Player;
-import it.polimi.ingsw.s3m.launcher.Server.Model.Student;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 
 import java.util.HashMap;
 

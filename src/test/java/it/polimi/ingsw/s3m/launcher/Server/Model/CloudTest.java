@@ -1,5 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Cloud;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
