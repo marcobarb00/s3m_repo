@@ -18,17 +18,17 @@ public class JesterGUI {
     @FXML
     Button back;
     @FXML
-    ComboBox colorOfStudent1;
+    ComboBox<String> colorOfStudent1;
     @FXML
-    ComboBox colorOfStudent2;
+    ComboBox<String> colorOfStudent2;
     @FXML
-    ComboBox colorOfStudent3;
+    ComboBox<String> colorOfStudent3;
     @FXML
-    ComboBox colorOfChange1;
+    ComboBox<String> colorOfChange1;
     @FXML
-    ComboBox colorOfChange2;
+    ComboBox<String> colorOfChange2;
     @FXML
-    ComboBox colorOfChange3;
+    ComboBox<String> colorOfChange3;
 
 
     public void submitJester(ActionEvent action){

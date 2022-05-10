@@ -19,13 +19,13 @@ public class MinstrelGUI {
     @FXML
     Button back;
     @FXML
-    ComboBox colorOfStudent1;
+    ComboBox<String> colorOfStudent1;
     @FXML
-    ComboBox colorOfStudent2;
+    ComboBox<String> colorOfStudent2;
     @FXML
-    ComboBox colorOfChange1;
+    ComboBox<String> colorOfChange1;
     @FXML
-    ComboBox colorOfChange2;
+    ComboBox<String> colorOfChange2;
 
     public void submitMinstrel(ActionEvent action){
 

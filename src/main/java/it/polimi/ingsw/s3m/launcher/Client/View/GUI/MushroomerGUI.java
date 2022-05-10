@@ -18,7 +18,7 @@ public class MushroomerGUI {
     @FXML
     Button back;
     @FXML
-    ComboBox colorOfStudent1;
+    ComboBox<String> colorOfStudent1;
 
 
     public void submitMushroomer(ActionEvent action){
