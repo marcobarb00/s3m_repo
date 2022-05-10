@@ -33,7 +33,7 @@ public class Game{
 	 * @param playersNicknameList list of players' nicknames
 	 * @param expertMode boolean for the expert mode
 	 */
-	public Game(ArrayList<String> playersNicknameList, boolean expertMode){
+	public Game(ArrayList<String> playersNicknameList, boolean expertMode) throws EmptyBagException {
 		this.numberOfPlayers = playersNicknameList.size();
 		this.expertMode = expertMode;
 		// Professors
@@ -193,18 +193,14 @@ public class Game{
 	 * Method used to initialize the six students of the card
 	 * @param jester jester card to initialize
 	 */
-	public void initializeJesterStudents(Jester jester){
+	public void initializeJesterStudents(Jester jester) throws EmptyBagException {
 		HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
 		for(PawnColor color : PawnColor.values())
 			initialingStudents.put(color, 0);
 		for(int i = 0; i < 6; i++){
-			try{
 				Student student = extractStudent();
 				PawnColor color = student.getColor();
 				initialingStudents.replace(color, initialingStudents.get(color) + 1);
-			}catch(EmptyBagException e){
-				e.printStackTrace();
-			}
 		}
 		jester.setStudentsOnCard(initialingStudents);
 	}

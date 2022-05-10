@@ -4,30 +4,27 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Cloud;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CloudTest {
+    @Test
+    void emptyStudentsArrayListAfterReturnOfStudents() {
+        Cloud cloud = new Cloud();
+        ArrayList<Student> refillingCloudStudents = new ArrayList<>();
+        refillingCloudStudents.add(new Student(PawnColor.BLUE));
+        refillingCloudStudents.add(new Student(PawnColor.GREEN));
+        refillingCloudStudents.add(new Student(PawnColor.PINK));
+        cloud.setStudents(refillingCloudStudents);
+        assertEquals(3, cloud.getStudents().size());
+
+        cloud.returnStudents();
+        assertEquals(0, cloud.getStudents().size());
+    }
 
     @Test
-    void returnThreeStudents() {
+    void newCloudStudentsArrayListIsEmpty() {
         Cloud cloud = new Cloud();
-        ArrayList<Student> setStudents = new ArrayList<>();
-        ArrayList<Student> returnedStudents;
-        returnedStudents = cloud.returnStudents();
-        assertNull(returnedStudents);
-        setStudents.add(new Student(PawnColor.BLUE));
-        setStudents.add(new Student(PawnColor.GREEN));
-        cloud.setStudents(setStudents);
-        assertEquals(2, cloud.getStudents().size());
-        returnedStudents = cloud.returnStudents();
-        assertNull(returnedStudents);
-        setStudents.add(new Student(PawnColor.PINK));
-        assertEquals(3, cloud.getStudents().size());
-        returnedStudents = cloud.returnStudents();
-        assertEquals(3, returnedStudents.size());
         assertEquals(0, cloud.getStudents().size());
     }
 }
