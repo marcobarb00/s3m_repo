@@ -10,7 +10,6 @@ public class ClientGUI extends Thread{
 	private Client client;
 	private ControllerGUI controllerGUI;
 	private GUIView view;
-	private MessageGUI message;
 
 	public ClientGUI(ControllerGUI controllerGUI){
 		this.view = new GUIView(this, controllerGUI);
@@ -37,10 +36,6 @@ public class ClientGUI extends Thread{
 				}
 			}
 		}
-	}
-
-	public void setMessage(MessageGUI message){
-		this.message = message;
 	}
 
 	public void communicate(Response response){

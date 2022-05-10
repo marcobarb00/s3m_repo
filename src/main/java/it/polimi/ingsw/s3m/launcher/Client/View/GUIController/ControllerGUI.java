@@ -26,7 +26,7 @@ public class ControllerGUI{
 	private EnterRoomGUI enterRoomGUI;
 	private NotificationGUI notificationGUI;
 	private NewRoomResponse newRoomResponse = new NewRoomResponse();
-	private CharacterCardActivationGUI characterCardActivationGUI;
+	private PlayCharacterCardGUI playCharacterCardGUI;
 
 	private ControllerGUI(){
 		secondaryStage = new Stage();
@@ -160,7 +160,6 @@ public class ControllerGUI{
 		}
 	}
 
-
 	public void closeSocket(){
 		thread.close();
 	}
@@ -219,8 +218,8 @@ public class ControllerGUI{
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CharacterCardActivation.fxml"));
 			Parent leaderActivation = (Parent) loader.load();
-			characterCardActivationGUI = loader.getController();
-			characterCardActivationGUI.inizialize(object);
+			playCharacterCardGUI = loader.getController();
+			playCharacterCardGUI.inizialize(object);
 			setScene(leaderActivation);
 		} catch (IOException e) {
 			e.printStackTrace();

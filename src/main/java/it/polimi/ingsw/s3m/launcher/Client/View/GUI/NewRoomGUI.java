@@ -55,7 +55,6 @@ public class NewRoomGUI{
 		return Screen.getPrimary().getVisualBounds();
 	}
 
-
 	public void selectNormal(MouseEvent mouseEvent){
 		ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(false);
 		ControllerGUI.getInstance().startLoading();

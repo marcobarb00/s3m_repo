@@ -7,11 +7,12 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class Mapper{
 	public PawnColor stringToColor(String colorString){
-		switch(colorString){
+		switch(colorString.toUpperCase(Locale.ROOT)){
 			case "RED":
 				return PawnColor.RED;
 			case "BLUE":

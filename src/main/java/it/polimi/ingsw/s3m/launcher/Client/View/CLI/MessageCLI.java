@@ -12,7 +12,7 @@ public abstract class MessageCLI{
 		int operationChoice;
 		try{
 			operationChoice = Integer.parseInt(scanner.nextLine());
-		}catch(Exception e){
+		}catch(NumberFormatException e){
 			operationChoice = 0;
 		}
 
@@ -20,7 +20,7 @@ public abstract class MessageCLI{
 			System.out.println("\ninvalid choice, please select a valid input");
 			try{
 				operationChoice = Integer.parseInt(scanner.nextLine());
-			}catch(Exception e){
+			}catch(NumberFormatException e){
 				operationChoice = 0;
 			}
 		}

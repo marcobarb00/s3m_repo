@@ -62,7 +62,7 @@ public class CLIView extends View{
 
 	@Override
 	public void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage){
-		client.setMessage(new ChooseCloudPhaseCLI(cloudPhaseMessage));
+		client.setMessage(new CloudPhaseCLI(cloudPhaseMessage));
 	}
 
 	@Override
