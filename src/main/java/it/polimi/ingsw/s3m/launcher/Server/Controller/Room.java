@@ -252,11 +252,13 @@ public class Room{
 				putStudentOnTable(player, putStudentOnTableResponse);
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
+				break;
 			case 2:
 				Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
 				putStudentOnIsland(player, putStudentOnIslandResponse);
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
+				break;
 			case 3:
 				if(gameState.isCharacterCardActivated())
 					throw new CharacterCardAlreadyActivatedException();
@@ -266,6 +268,7 @@ public class Room{
 				//successful play of character card
 				sendNotificationToPlayer(player, "character card activated successfully");
 				gameState.getTurn().setActivatedCharacterCard(true);
+				break;
 		}
 	}
 
