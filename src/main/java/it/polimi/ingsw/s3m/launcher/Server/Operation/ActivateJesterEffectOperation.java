@@ -1,10 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.CharacterCardAlreadyActivatedException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
@@ -37,7 +34,15 @@ public class ActivateJesterEffectOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException{
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
+			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+		//check null args
+		boolean checkArgs = game != null && playerController != null && requiredStudents != null
+				&& givenStudents != null && !requiredStudents.contains(null) && !givenStudents.contains(null);
+		if(!checkArgs){
+			throw new IncorrectOperationException("Invalid arguments");
+		}
+
 		//Check for double nicknames
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList){
@@ -62,10 +67,12 @@ public class ActivateJesterEffectOperation extends Operation{
 			throw new NotEnoughCoinsException();
 		}
 
-		boolean checkRequired = requiredStudents.size() == 3;
-		boolean checkGiven = givenStudents.size() == 3;
-		if(!(checkGiven && checkRequired)){
-			throw new IllegalArgumentException("Incorrect exchange students value");
+		boolean checkRequired = requiredStudents.size() <= 3;
+		boolean checkGiven = givenStudents.size() <= 3;
+		boolean checkStudents = (givenStudents.size() == requiredStudents.size()) &&
+				checkGiven && checkRequired;
+		if(!checkStudents){
+			throw new IncorrectOperationException("Incorrect exchange students value");
 		}
 
 		//Search students on card
@@ -90,7 +97,7 @@ public class ActivateJesterEffectOperation extends Operation{
 	/**
 	 * Checks if on Jester card the students are enough
 	 */
-	private void searchStudentsOnCard() throws IllegalArgumentException{
+	private void searchStudentsOnCard() throws IncorrectOperationException {
 		HashMap<PawnColor, Integer> studentsOnJester = game.getJesterStudentsOnCard();
 
 		//checking on Jester card
@@ -100,12 +107,12 @@ public class ActivateJesterEffectOperation extends Operation{
 			boolean notEnoughStudentsOnCard =
 					numberOfRequiredStudents > studentsOnJester.get(color);
 			if(notEnoughStudentsOnCard){
-				throw new IllegalArgumentException("Not enough students on jester card");
+				throw new IncorrectOperationException("Not enough students on jester card");
 			}
 		}
 	}
 
-	private void searchStudentsInEntrance() throws IllegalArgumentException{
+	private void searchStudentsInEntrance() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 
@@ -117,7 +124,7 @@ public class ActivateJesterEffectOperation extends Operation{
 			boolean notEnoughStudentsInEntrance =
 					numberOfGivenStudents > entrance.get(color);
 			if(notEnoughStudentsInEntrance){
-				throw new IllegalArgumentException("Not enough students in entrance");
+				throw new IncorrectOperationException("Not enough students in entrance");
 			}
 		}
 
