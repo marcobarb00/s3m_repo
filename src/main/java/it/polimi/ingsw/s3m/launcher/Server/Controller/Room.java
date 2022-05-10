@@ -5,9 +5,9 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-import it.polimi.ingsw.s3m.launcher.Server.Model.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
 
 import java.util.ArrayList;

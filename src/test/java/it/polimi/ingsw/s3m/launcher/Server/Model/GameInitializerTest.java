@@ -1,5 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

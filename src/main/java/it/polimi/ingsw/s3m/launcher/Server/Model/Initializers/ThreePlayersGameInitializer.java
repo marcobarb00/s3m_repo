@@ -1,19 +1,23 @@
-package it.polimi.ingsw.s3m.launcher.Server.Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model.Initializers;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.TowerColor;
 
 import java.util.ArrayList;
 
-public class TwoPlayersGameInitializer extends GameInitializer{
+public class ThreePlayersGameInitializer extends GameInitializer{
 
 	/**
 	 * Constructor used to call the methods needed to initialize
-	 * a two players game
+	 * a three players game
 	 *
 	 * @param game             game to be initialized
 	 * @param playersNicknames list of the players' nicknames given from the game
 	 */
-	public TwoPlayersGameInitializer(Game game, ArrayList<String> playersNicknames){
+	public ThreePlayersGameInitializer(Game game, ArrayList<String> playersNicknames){
 		super(game);
 		playersSetup(playersNicknames);
 		dashboardsSetup();
@@ -31,28 +35,29 @@ public class TwoPlayersGameInitializer extends GameInitializer{
 	public void playersSetup(ArrayList<String> nicknames){
 		String firstPlayerNickname = nicknames.get(0);
 		String secondPlayerNickname = nicknames.get(1);
+		String thirdPlayerNickname = nicknames.get(2);
 		game.getPlayerHashMap().put(firstPlayerNickname, new Player(firstPlayerNickname, TowerColor.WHITE));
 		game.getPlayerHashMap().put(secondPlayerNickname, new Player(secondPlayerNickname, TowerColor.BLACK));
+		game.getPlayerHashMap().put(thirdPlayerNickname, new Player(thirdPlayerNickname, TowerColor.GREY));
 	}
 
 	/**
-	 * Method used to initialize the number of towers in dashboard to 8
+	 * Method used to initialize the number of towers in dashboard to 6
 	 */
 	@Override
 	public void dashboardsSetup(){
-		for(Player player : game.getPlayerHashMap().values()){
-			player.getDashboard().setNumberOfTowers(8);
-		}
+		for(Player player : game.getPlayerHashMap().values())
+			player.getDashboard().setNumberOfTowers(6);
 	}
 
 	/**
-	 * Method used to give the first 7 students to the entrance of each player
+	 * Method used to give the first 9 students to the entrance of each player
 	 */
 	@Override
 	public void studentsInEntranceSetup(){
 		for(Player player : game.getPlayerHashMap().values()){
 			ArrayList<Student> enteringHallStudents = new ArrayList<>();
-			for(int j = 0; j < 7; j++){
+			for(int j = 0; j < 9; j++){
 				try{
 					Student student = game.extractStudent();
 					enteringHallStudents.add(student);

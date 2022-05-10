@@ -1,6 +1,14 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ExpertModeInitializer;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.GameInitializer;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ThreePlayersGameInitializer;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.TwoPlayersGameInitializer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -87,7 +95,7 @@ public class Game{
 	 * Method used to draw the three character cards to play with
 	 */
 	public void drawThreeCharacterCards(){
-		while(characterCardsList.size() != 3){
+		while(characterCardsList.size() > 3){
 			int extractedNumber = ThreadLocalRandom.current().nextInt(0, characterCardsList.size() - 1);
 			characterCardsList.remove(extractedNumber);
 		}
@@ -102,8 +110,8 @@ public class Game{
 	 */
 	public void refillClouds() throws EmptyBagException {
 		int numberOfStudents;
+		numberOfStudents = 3;
 		if(numberOfPlayers == 3) numberOfStudents = 4;
-		else numberOfStudents = 3;
 		for(int i = 0; i < numberOfPlayers; i++)
 			refillCloudStudents(cloudsList.get(i), numberOfStudents);
 	}
@@ -596,6 +604,8 @@ public class Game{
 	public void setCurrentPhase(String phaseName){
 		turn.setPhaseName(phaseName);
 	}
+
+	public void resetTurnMovedStudents() { turn.resetMovedStudents(); }
 
 	// GETTER
 	public boolean isExpertMode(){

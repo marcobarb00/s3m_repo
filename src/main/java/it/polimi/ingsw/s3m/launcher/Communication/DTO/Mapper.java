@@ -1,6 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
 import it.polimi.ingsw.s3m.launcher.Server.Model.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

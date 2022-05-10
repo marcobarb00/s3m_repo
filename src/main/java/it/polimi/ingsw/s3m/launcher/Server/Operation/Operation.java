@@ -2,7 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 import java.util.ArrayList;

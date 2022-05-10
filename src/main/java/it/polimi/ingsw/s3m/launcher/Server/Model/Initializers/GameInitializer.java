@@ -1,4 +1,8 @@
-package it.polimi.ingsw.s3m.launcher.Server.Model;
+package it.polimi.ingsw.s3m.launcher.Server.Model.Initializers;
+
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -35,7 +39,7 @@ public abstract class GameInitializer{
 			firstStudentsOnIslands.add(new Student(color));
 		}
 		for(int i = 1; i < game.getIslandsList().size(); i++){
-			if(i != 6){
+			if (i != 6) {
 				Student student = extractStudent(firstStudentsOnIslands);
 				game.getIslandsList().get(i).addStudent(student);
 			}
@@ -45,10 +49,8 @@ public abstract class GameInitializer{
 	private Student extractStudent(ArrayList<Student> students){
 		Student returnedStudent;
 		int extractedNumber;
-		if(students.size() <= 1)
-			extractedNumber = 0;
-		else
-			extractedNumber = ThreadLocalRandom.current().nextInt(0, students.size()-1);
+		if (students.size() <= 1) extractedNumber = 0;
+		else extractedNumber = ThreadLocalRandom.current().nextInt(0, students.size()-1);
 		returnedStudent = students.get(extractedNumber);
 		students.remove(extractedNumber);
 		return returnedStudent;

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.ComputeDominanceStrategy;
+import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.StandardComputeDominance;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashMap;
