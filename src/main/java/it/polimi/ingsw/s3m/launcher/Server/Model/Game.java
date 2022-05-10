@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Game implements Cloneable{
+public class Game{
 	private final int numberOfPlayers;
 	private final boolean expertMode;
 	private final MotherNature motherNature = new MotherNature();
@@ -251,7 +251,6 @@ public class Game implements Cloneable{
 	public void resetTurn(){
 		turn.setCurrentPlayerNickname(turn.getFirstPlayerNickname());
 		turn.setPhaseName("PlanningPhase");
-		turn.resetMovedStudents();
 		turn.setPlayedCards(new HashMap<>());
 		turn.setActivatedCharacterCard(false);
 		computeDominanceStrategy = new StandardComputeDominance();

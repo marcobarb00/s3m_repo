@@ -188,17 +188,16 @@ public class Room{
 
 		sendNotificationToPlayer(player, "it's your turn to move the students");
 
-		int movedStudents = 0;
+		gameState.getTurn().resetMovedStudents();
 		int studentsToBeMoved = 3;
 		if(playersNumber == 3){
 			studentsToBeMoved = 4;
 		}
 
-		while(movedStudents < studentsToBeMoved){
+		while(gameState.getTurnMovedStudents() < studentsToBeMoved){
 			Response response = player.communicateWithClient(new StudentsPhaseMessage(mapper.gameToDTO(gameState)));
 			try{
-				if(moveStudentPhase(player, response))
-					movedStudents++;
+				moveStudentPhase(player, response);
 			}catch(IncorrectOperationException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}
