@@ -1,9 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameStateCLI{
@@ -14,14 +16,14 @@ public class GameStateCLI{
 	}
 
 	public void printState(){
-		//TODO print characterCard
-		//TODO print students of the jester
+		System.out.println("CHARACTER CARDS");
+		printCharacterCards();
 
-		System.out.println("\nislands:");
-		System.out.println("WIP");
 		//TODO print islands
+		System.out.println("\nISLANDS:");
+		printIslands();
 
-		System.out.println("\nmother nature position: " + gameState.getMotherNaturePosition());
+		System.out.println("\nMother Nature position: " + gameState.getMotherNaturePosition());
 
 		System.out.println("\nprofessors:");
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
@@ -33,7 +35,27 @@ public class GameStateCLI{
 		});
 	}
 
-	private void printIsland(IslandDTO island){
+	private void printIslands(){
+		ArrayList<IslandDTO> islands = gameState.getIslands();
+		int islandsNumber = islands.size();
+		for (int i = 0; i < islandsNumber; i++) {
+			System.out.println("island " + (i+1));
+			HashMap<String, Integer> studentsOnIsland = islands.get(i).getStudents();
+			studentsOnIsland.forEach((color, number) -> System.out.print(color + "	:" + number + "	"));
+		}
+	}
+
+	private void printCharacterCards(){
+		ArrayList<CharacterCardDTO> characterCardsDTO = gameState.getCharacterCards();
+		for(CharacterCardDTO cardDTO : characterCardsDTO){
+			System.out.println(cardDTO.getName() + " cost:	" + cardDTO.getCost());
+			if(cardDTO.getName().equals("Jester")){
+				//printing the hashmap of Jester
+				HashMap<String, Integer> studentsOnJester = cardDTO.getStudentsOnCard();
+				studentsOnJester.forEach((color, number) -> System.out.print(color + "	:" + number + "	"));
+			}
+		}
+
 	}
 
 	private void printDashboard(DashboardDTO dashboard){
