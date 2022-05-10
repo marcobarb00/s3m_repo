@@ -56,6 +56,13 @@ public class Island{
 		return students.get(pawnColor);
 	}
 
+	public int getTotalNumberOfStudents() {
+		int sum = 0;
+		for (PawnColor color : PawnColor.values())
+			sum += students.get(color);
+		return sum;
+	}
+
 	public int getNumberOfTowers(){
 		return numberOfTowers;
 	}
