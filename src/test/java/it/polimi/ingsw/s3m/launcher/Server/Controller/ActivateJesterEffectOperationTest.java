@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
@@ -56,7 +57,12 @@ class ActivateJesterEffectOperationTest {
 
     private void expertModeException(ArrayList<String> playerList, PlayerController playerController,
                                      ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
-        Game game = new Game(playerList,false);
+        Game game = null;
+        try{
+            game = new Game(playerList,false);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         playerController.setNickname("paolo");
         Operation operation1 = new ActivateJesterEffectOperation(game, playerController,
                 requiredStudents, givenStudents);
@@ -66,7 +72,12 @@ class ActivateJesterEffectOperationTest {
 
     private void playerNotInListException(ArrayList<String> playerList, PlayerController playerController,
                                            ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
-        Game game = new Game(playerList,true);
+        Game game = null;
+        try{
+            game = new Game(playerList,true);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         playerController.setNickname("giovanni");
         Operation operation2 = new ActivateJesterEffectOperation(game, playerController,
                 requiredStudents, givenStudents);
@@ -79,7 +90,12 @@ class ActivateJesterEffectOperationTest {
         playerController.setNickname("paolo");
         requiredStudents.remove(0);
         System.out.println(requiredStudents.size());
-        Game game = new Game(playerList,true);
+        Game game = null;
+        try{
+            game = new Game(playerList,true);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         Operation operation = new ActivateJesterEffectOperation(game, playerController,
                 requiredStudents, givenStudents);
         Exception e = assertThrows(IllegalArgumentException.class,
@@ -90,7 +106,12 @@ class ActivateJesterEffectOperationTest {
                                      ArrayList<PawnColor> requiredStudents, ArrayList<PawnColor> givenStudents){
         playerController.setNickname("paolo");
         System.out.println(requiredStudents.size());
-        Game game = new Game(playerList,true);
+        Game game = null;
+        try{
+            game = new Game(playerList,true);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         Operation operation = new ActivateJesterEffectOperation(game, playerController,
                 requiredStudents, givenStudents);
         Exception e = assertThrows(IllegalArgumentException.class,

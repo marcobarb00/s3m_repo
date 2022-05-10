@@ -77,7 +77,12 @@ public class Room{
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		checkGameInstanceConditions(playersNicknameList);
-		this.gameState = new Game(playersNicknameList, expertMode);
+		try{
+			this.gameState = new Game(playersNicknameList, expertMode);
+		}catch(EmptyBagException e){
+			sendNotificationToAll("error during the initialization of the game, the room is being deleted");
+			return;
+		}
 
 		boolean gameEndingFlag = false;
 		try{
