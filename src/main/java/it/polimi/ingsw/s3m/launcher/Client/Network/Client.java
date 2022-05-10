@@ -9,6 +9,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -62,6 +63,8 @@ public class Client{
 			socket = new Socket(serverip, port);
 			outputStream = new ObjectOutputStream(socket.getOutputStream());
 			inputStream = new ObjectInputStream(socket.getInputStream());
+		}catch(ConnectException e){
+			System.out.println("unable to connect to the server");
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -90,6 +93,8 @@ public class Client{
 			return (Message) inputStream.readObject();
 		}catch(IOException | ClassNotFoundException e){
 			e.printStackTrace();
+		}catch(NullPointerException e){
+			System.out.println("unable to create an input stream");
 		}
 		return null;
 	}

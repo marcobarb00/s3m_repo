@@ -204,7 +204,7 @@ public class Room{
 			try{
 				moveStudentPhase(player, response);
 			}catch(IncorrectOperationException | PlayerNotInListException | NotEnoughCoinsException | CloudNotInListException |
-					NotExpertModeException | CharacterCardAlreadyActivatedException e){
+					NotExpertModeException | CharacterCardAlreadyActivatedException | IllegalArgumentException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}catch(BackException e){
 				//don't do anything, just continue while to repeat the moveStudentPhase
@@ -219,7 +219,7 @@ public class Room{
 			try{
 				motherNatureMoved = motherNaturePhase(player, response);
 			}catch(IncorrectOperationException | NotEnoughCoinsException | NotExpertModeException |
-					CloudNotInListException | CharacterCardAlreadyActivatedException e){
+					CloudNotInListException | CharacterCardAlreadyActivatedException | IllegalArgumentException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}catch(BackException e){
 				//don't do anything, just continue while to repeat the mother nature phase

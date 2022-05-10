@@ -26,6 +26,9 @@ public class ClientCLI{
 					Response toSendMessage = message.execute();
 					client.sendResponse(toSendMessage);
 				}
+			}catch(NullPointerException e){
+				System.out.println("received a null message, the application is closing");
+				break;
 			}catch(Exception e){
 				e.printStackTrace();
 				break;
