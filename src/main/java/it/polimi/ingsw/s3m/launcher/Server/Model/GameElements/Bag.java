@@ -7,9 +7,8 @@ public class Bag{
 
 	public Bag(){
 		students = new HashMap<>();
-		for(PawnColor color : PawnColor.values()){
+		for(PawnColor color : PawnColor.values())
 			students.put(color, 24);
-		}
 	}
 
 	public HashMap<PawnColor, Integer> getStudents(){
@@ -23,9 +22,8 @@ public class Bag{
 	 */
 	public int getTotalNumberOfStudents(){
 		int sum = 0;
-		for(PawnColor color : PawnColor.values()){
+		for(PawnColor color : PawnColor.values())
 			sum += students.get(color);
-		}
 		return sum;
 	}
 
