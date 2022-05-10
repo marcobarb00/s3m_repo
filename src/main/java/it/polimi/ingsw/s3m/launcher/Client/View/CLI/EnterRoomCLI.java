@@ -27,14 +27,14 @@ public class EnterRoomCLI extends MessageCLI{
 		int roomID;
 		try{
 			roomID = Integer.parseInt(scanner.nextLine());
-		}catch(Exception e){
+		}catch(NumberFormatException e){
 			roomID = -1;
 		}
 		while(roomID < 0 || !availableRoomsID.contains(roomID)){
 			System.out.println("\ninvalid room ID");
 			try{
 				roomID = Integer.parseInt(scanner.nextLine());
-			}catch(Exception e){
+			}catch(NumberFormatException e){
 				roomID = -1;
 			}
 		}

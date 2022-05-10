@@ -28,14 +28,14 @@ public class Client{
 		int choiceView;
 		try{
 			choiceView = Integer.parseInt(scanner.nextLine());
-		}catch(Exception e){
+		}catch(NumberFormatException e){
 			choiceView = 0;
 		}
 		while(choiceView != 1 && choiceView != 2){
 			System.out.println("\ninvalid choice, please press press 1 or 2 to choose");
 			try{
 				choiceView = Integer.parseInt(scanner.nextLine());
-			}catch(Exception e){
+			}catch(NumberFormatException e){
 				choiceView = 0;
 			}
 		}

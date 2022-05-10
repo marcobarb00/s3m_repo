@@ -18,14 +18,14 @@ public class NewRoomCLI extends MessageCLI{
 		int numbersOfPlayers;
 		try{
 			numbersOfPlayers = Integer.parseInt(scanner.nextLine());
-		}catch(Exception e){
+		}catch(NumberFormatException e){
 			numbersOfPlayers = 0;
 		}
 		while(numbersOfPlayers != 2 && numbersOfPlayers != 3){
 			System.out.println("\nyou inserted an invalid input");
 			try{
 				numbersOfPlayers = Integer.parseInt(scanner.nextLine());
-			}catch(Exception e){
+			}catch(NumberFormatException e){
 				numbersOfPlayers = 0;
 			}
 		}

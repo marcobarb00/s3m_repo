@@ -21,14 +21,14 @@ public class LoginCLI extends MessageCLI{
 		int choiceRoom;
 		try{
 			choiceRoom = Integer.parseInt(scanner.nextLine());
-		}catch(Exception e){
+		}catch(NumberFormatException e){
 			choiceRoom = 0;
 		}
 		while(choiceRoom != 1 && choiceRoom != 2){
 			System.out.println("\ninvalid choice, please press press 1 or 2 to choose");
 			try{
 				choiceRoom = Integer.parseInt(scanner.nextLine());
-			}catch(Exception e){
+			}catch(NumberFormatException e){
 				choiceRoom = 0;
 			}
 		}
