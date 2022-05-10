@@ -30,6 +30,13 @@ public class PlayCharacterCardResponse implements Response{
 		this.notInfluencingColor = notInfluencingColor;
 	}
 
+	public PlayCharacterCardResponse(){
+		this.characterCardPosition = -1;
+		this.studentsToGetFrom = null;
+		this.studentsToPutOn = null;
+		this.notInfluencingColor = null;
+	}
+
 	public ArrayList<String> getStudentsToPutOn(){
 		return studentsToPutOn;
 	}
@@ -44,5 +51,21 @@ public class PlayCharacterCardResponse implements Response{
 
 	public int getCharacterCardPosition(){
 		return characterCardPosition;
+	}
+
+	public void setCharacterCardPosition(int characterCardPosition){
+		this.characterCardPosition = characterCardPosition;
+	}
+
+	public void setStudentsToPutOn(ArrayList<String> studentsToPutOn){
+		this.studentsToPutOn = studentsToPutOn;
+	}
+
+	public void setStudentsToGetFrom(ArrayList<String> studentsToGetFrom){
+		this.studentsToGetFrom = studentsToGetFrom;
+	}
+
+	public void setNotInfluencingColor(String notInfluencingColor){
+		this.notInfluencingColor = notInfluencingColor;
 	}
 }

@@ -30,6 +30,9 @@ public class JesterGUI {
     @FXML
     ComboBox<String> colorOfChange3;
 
+    public void showJesterInfo(){
+
+    }
 
     public void submitJester(ActionEvent action){
 
@@ -39,5 +42,4 @@ public class JesterGUI {
         ControllerGUI.getInstance().sendResponse(new BackResponse());
         ControllerGUI.getInstance().startLoading();
     }
-
 }

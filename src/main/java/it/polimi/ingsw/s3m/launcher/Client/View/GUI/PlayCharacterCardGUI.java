@@ -80,24 +80,20 @@ public class PlayCharacterCardGUI{
             characterCardPosition = 1;
         if(active3.isSelected())
             characterCardPosition = 2;
-        
+
+        ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
         String characterName = cards.get(characterCardPosition).getName();
         if(characterName.equals("Jester")){
-            getJesterInputs();
-            return new PlayCharacterCardResponse(characterCardPosition,
-                    studentsToPutOnJester, studentsToGetFromJester);
+            ControllerGUI.getInstance().launcherJester();
         }
         if(characterName.equals("Minstrel")){
-            getMinstrelInputs();
-            return new PlayCharacterCardResponse(characterCardPosition,
-                    studentsToPutOnTables, studentsToGetFromTables);
+            ControllerGUI.getInstance().launcherMinstrel();
         }
         if(characterName.equals("Mushroomer")){
-            getMushroomerInputs();
-            return new PlayCharacterCardResponse(characterCardPosition, notInfluencingColor);
+            ControllerGUI.getInstance().launcherMushroomer();
         }
 
-        ControllerGUI.getInstance().sendResponse();
+        ControllerGUI.getInstance().sendResponse(ControllerGUI.getInstance().getPlayCharacterCardResponse());
         ControllerGUI.getInstance().startLoading();
     }
 

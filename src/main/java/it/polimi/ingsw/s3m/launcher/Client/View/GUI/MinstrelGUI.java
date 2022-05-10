@@ -27,6 +27,10 @@ public class MinstrelGUI {
     @FXML
     ComboBox<String> colorOfChange2;
 
+    public void showMinstrelInfo(){
+
+    }
+
     public void submitMinstrel(ActionEvent action){
 
     }

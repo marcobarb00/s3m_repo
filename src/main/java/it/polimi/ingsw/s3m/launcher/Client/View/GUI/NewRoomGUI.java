@@ -51,10 +51,6 @@ public class NewRoomGUI{
 		ControllerGUI.getInstance().launchGameConfigMessage();
 	}
 
-	private Rectangle2D takeBorderScreen(){
-		return Screen.getPrimary().getVisualBounds();
-	}
-
 	public void selectNormal(MouseEvent mouseEvent){
 		ControllerGUI.getInstance().getNewRoomResponse().setExpertMode(false);
 		ControllerGUI.getInstance().startLoading();

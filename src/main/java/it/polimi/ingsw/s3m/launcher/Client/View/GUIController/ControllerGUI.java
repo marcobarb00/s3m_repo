@@ -1,9 +1,11 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Mushroomer;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +27,11 @@ public class ControllerGUI {
 	private NewRoomGUI newRoomGUI;
 	private EnterRoomGUI enterRoomGUI;
 	private NotificationGUI notificationGUI;
+	private JesterGUI jesterGUI;
+	private MinstrelGUI minstrelGUI;
+	private MushroomerGUI mushroomerGUI;
 	private NewRoomResponse newRoomResponse = new NewRoomResponse();
+	private PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse();
 	private PlayCharacterCardGUI playCharacterCardGUI;
 
 	private ControllerGUI() {
@@ -65,6 +71,10 @@ public class ControllerGUI {
 			Platform.exit();
 			System.exit(0);
 		}));
+	}
+
+	public PlayCharacterCardResponse getPlayCharacterCardResponse(){
+		return playCharacterCardResponse;
 	}
 
 	public void threadSleep(int millis) {
@@ -217,13 +227,14 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launchCharacterCardActivation(CharacterCardActivationMessage object) {
+	public void launchPlayCharacterCard(PlayCharacterCardMessage message) {
+		playCharacterCardResponse = new PlayCharacterCardResponse();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CharacterCardActivation.fxml"));
-			Parent leaderActivation = (Parent) loader.load();
+			Parent playCharacterCard = (Parent) loader.load();
 			playCharacterCardGUI = loader.getController();
-			playCharacterCardGUI.inizialize(object);
-			setScene(leaderActivation);
+			playCharacterCardGUI.inizialize(message);
+			setScene(playCharacterCard);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -233,24 +244,32 @@ public class ControllerGUI {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Mushroomer.fxml"));
 			Parent setMushroomerGUI = (Parent) loader.load();
+			mushroomerGUI = loader.getController();
+			mushroomerGUI.showMushroomerInfo();
 			setScene(setMushroomerGUI);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void launcherMinstrel() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Minstrel.fxml"));
 			Parent setMinstrelGUI = (Parent) loader.load();
+			minstrelGUI = loader.getController();
+			minstrelGUI.showMinstrelInfo();
 			setScene(setMinstrelGUI);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void launcherJester() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Jester.fxml"));
 			Parent setJesterGUI = (Parent) loader.load();
+			jesterGUI = loader.getController();
+			jesterGUI.showJesterInfo();
 			setScene(setJesterGUI);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -20,6 +20,9 @@ public class MushroomerGUI {
     @FXML
     ComboBox<String> colorOfStudent1;
 
+    public void showMushroomerInfo(){
+
+    }
 
     public void submitMushroomer(ActionEvent action){
 
