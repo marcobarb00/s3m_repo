@@ -87,7 +87,7 @@ public class Game{
 	 * Method used to draw the three character cards to play with
 	 */
 	public void drawThreeCharacterCards(){
-		while(characterCardsList.size() != 3){
+		while(characterCardsList.size() > 3){
 			int extractedNumber = ThreadLocalRandom.current().nextInt(0, characterCardsList.size() - 1);
 			characterCardsList.remove(extractedNumber);
 		}
@@ -102,8 +102,8 @@ public class Game{
 	 */
 	public void refillClouds() throws EmptyBagException {
 		int numberOfStudents;
+		numberOfStudents = 3;
 		if(numberOfPlayers == 3) numberOfStudents = 4;
-		else numberOfStudents = 3;
 		for(int i = 0; i < numberOfPlayers; i++)
 			refillCloudStudents(cloudsList.get(i), numberOfStudents);
 	}
@@ -596,6 +596,8 @@ public class Game{
 	public void setCurrentPhase(String phaseName){
 		turn.setPhaseName(phaseName);
 	}
+
+	public void resetTurnMovedStudents() { turn.resetMovedStudents(); }
 
 	// GETTER
 	public boolean isExpertMode(){
