@@ -19,14 +19,13 @@ public class GameStateCLI{
 		System.out.println("CHARACTER CARDS");
 		printCharacterCards();
 
-		//TODO print islands
 		System.out.println("\nISLANDS:");
 		printIslands();
 
 		System.out.println("\nMother Nature position: " + (gameState.getMotherNaturePosition() + 1));
 
 		System.out.println("\nprofessors:");
-		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
+		gameState.getProfessors().forEach((color, nickname) -> System.out.println(color + ": " + nickname));
 
 		System.out.println("\ndashboards:");
 		gameState.getDashboards().forEach((nickname, dashboard) -> {
