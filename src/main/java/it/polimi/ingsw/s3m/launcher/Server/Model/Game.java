@@ -396,7 +396,6 @@ public class Game{
 	 * @param enteringEntranceColors colors of the students entering the entrance
 	 * @param enteringTablesColors colors of the students entering the tables
 	 */
-	//TODO change with color
 	public void activateMinstrelEffect(String playerNickname, ArrayList<PawnColor> enteringEntranceColors, ArrayList<PawnColor> enteringTablesColors){
 		int additionalCoins;
 		CharacterCard minstrel = new Minstrel();

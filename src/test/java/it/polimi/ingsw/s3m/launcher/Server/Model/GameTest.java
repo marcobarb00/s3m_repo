@@ -2,10 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Cloud;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Island;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -270,5 +267,33 @@ class GameTest {
 
         game.updateMotherNaturePosition(3);
         assertEquals(2, game.getMotherNature().getCurrentPosition());
+    }
+
+    // TURN
+    @Test
+    void resetTurnVerifyTest() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        Game game = new Game(nicknames, false);
+        assertEquals("PlanningPhase", game.getTurn().getPhaseName());
+
+        game.getTurn().setFirstPlayerNickname("FirstPlayer");
+        game.getTurn().setCurrentPlayerNickname("SecondPlayer");
+        game.getTurn().setPhaseName("ActionPhase");
+        game.getTurn().getPlayedCards().put("Card", AssistantCard.CAT);
+        game.getTurn().setActivatedCharacterCard(true);
+        assertEquals("FirstPlayer", game.getTurn().getFirstPlayerNickname());
+        assertEquals("SecondPlayer", game.getTurn().getCurrentPlayerNickname());
+        assertEquals("ActionPhase", game.getTurn().getPhaseName());
+        assertEquals(1, game.getTurnPlayedCards().size());
+        assertTrue(game.getTurn().isActivatedCharacterCard());
+
+        game.resetTurn();
+        assertEquals("FirstPlayer", game.getTurn().getFirstPlayerNickname());
+        assertEquals("FirstPlayer", game.getTurn().getCurrentPlayerNickname());
+        assertEquals("PlanningPhase", game.getTurn().getPhaseName());
+        assertEquals(0, game.getTurnPlayedCards().size());
+        assertFalse(game.getTurn().isActivatedCharacterCard());
     }
 }
