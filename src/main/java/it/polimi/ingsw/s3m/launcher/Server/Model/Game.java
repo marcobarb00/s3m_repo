@@ -469,7 +469,6 @@ public class Game{
 
 		if(newDominatingPlayer != null){
 			if(currentPlayer == null){
-				//TODO fix problem maybe here
 				currentIsland.setDominator(newDominatingPlayer);
 				currentIsland.addTower();
 				newDominatingPlayer.getDashboard().decrementTowers();
@@ -484,10 +483,10 @@ public class Game{
 						throw new ZeroTowersRemainedException();
 				}
 				currentIsland.setDominator(newDominatingPlayer);
-
-				samePlayerCheckInNextIsland(currentIsland);
-				samePlayerCheckInPreviousIsland(currentIsland);
 			}
+			
+			samePlayerCheckInNextIsland(currentIsland);
+			samePlayerCheckInPreviousIsland(currentIsland);
 		}
 
 		if(islandsList.size() <= 3) throw new NotEnoughIslandsException();
