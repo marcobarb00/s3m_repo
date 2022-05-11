@@ -4,7 +4,9 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class PlanningPhaseGUI{
@@ -889,7 +892,7 @@ public class PlanningPhaseGUI{
 
 	//public void AssistantChoiceGUI(){}
 
-	public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage, Stage secondaryStage){
+	public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage){
 		GameDTO gameState = planningPhaseMessage.getGameState();
 		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
 		ArrayList<AssistantCardDTO> hand = gameState.getCurrentPlayer().getHand();
@@ -908,6 +911,105 @@ public class PlanningPhaseGUI{
 		}catch(ArrayIndexOutOfBoundsException e){
 			return;
 		}
+	}
+
+	public void setGameState(GameDTO gameState){
+		//character card
+
+		//print islands
+		ArrayList<IslandDTO> islandList = gameState.getIslands();
+		int index = 0;
+		try{
+			printIslandZero(islandList.get(0));
+			index++;
+			printIslandOne(islandList.get(1));
+			index++;
+			printIslandTwo(islandList.get(2));
+			index++;
+			printIslandThree(islandList.get(3));
+			index++;
+			printIslandFour(islandList.get(4));
+			index++;
+			printIslandFive(islandList.get(5));
+			index++;
+			printIslandSix(islandList.get(6));
+			index++;
+			printIslandSeven(islandList.get(7));
+			index++;
+			printIslandEight(islandList.get(8));
+			index++;
+			printIslandNine(islandList.get(9));
+			index++;
+			printIslandTen(islandList.get(10));
+			index++;
+			printIslandEleven(islandList.get(11));
+		}catch(ArrayIndexOutOfBoundsException e){
+			//all the island are printed
+			if(index <= 0)
+				setNotVisibleIslandZero();
+			if(index <= 1)
+				setNotVisibleIslandOne();
+			if(index <= 2)
+				setNotVisibleIslandTwo();
+			if(index <= 3)
+				setNotVisibleIslandThree();
+			if(index <= 4)
+				setNotVisibleIslandFour();
+			if(index <= 5)
+				setNotVisibleIslandFive();
+			if(index <= 6)
+				setNotVisibleIslandSix();
+			if(index <= 7)
+				setNotVisibleIslandSeven();
+			if(index <= 8)
+				setNotVisibleIslandEight();
+			if(index <= 9)
+				setNotVisibleIslandNine();
+			if(index <= 10)
+				setNotVisibleIslandTen();
+			if(index <= 11)
+				setNotVisibleIslandEleven();
+		}
+
+		//set mother nature position
+
+		//set professors value
+
+		//print dashboards information
+	}
+
+	public void printIslandZero(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland0.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland0.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland0.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland0.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland0.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland0.setImage(image);
+
+		numTowersIsland0.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandZero(){
+		islandZero.setVisible(false);
+
+		redStudentsIsland0.setVisible(false);
+		greenStudentsIsland0.setVisible(false);
+		blueStudentsIsland0.setVisible(false);
+		pinkStudentsIsland0.setVisible(false);
+		yellowStudentsIsland0.setVisible(false);
+
+		numRedStudentsIsland0.setVisible(false);
+		numGreenStudentsIsland0.setVisible(false);
+		numBlueStudentsIsland0.setVisible(false);
+		numPinkStudentsIsland0.setVisible(false);
+		numYellowStudentsIsland0.setVisible(false);
+
+		towersIsland0.setVisible(false);
+
+		numTowersIsland0.setVisible(false);
 	}
 
 	public void insertAssistantZero(AssistantCardDTO assistantCardDTO){

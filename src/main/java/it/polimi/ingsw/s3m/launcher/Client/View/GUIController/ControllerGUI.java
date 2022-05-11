@@ -33,8 +33,7 @@ public class ControllerGUI {
 	private NewRoomResponse newRoomResponse = new NewRoomResponse();
 	private PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse();
 	private PlayCharacterCardGUI playCharacterCardGUI;
-	private PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse();
-	private PlayCharacterCardGUI playAssistantCardGUI;
+	private PlanningPhaseGUI planningPhaseGUI;
 
 	private ControllerGUI() {
 		secondaryStage = new Stage();
@@ -80,7 +79,7 @@ public class ControllerGUI {
 
 	public void threadSleep(int millis) {
 		try {
-			thread.sleep(millis);
+			Thread.sleep(millis);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -198,12 +197,11 @@ public class ControllerGUI {
 	}
 
 	public void launchPlanningPhase(PlanningPhaseMessage message){
-		PlayAssistantCardResponse = new PlayAssistantCardResponse();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PlanningPhase.fxml"));
 			Parent playCharacterCard = (Parent) loader.load();
-			playAssistantCardGUI = loader.getController();
-			playAssistantCardGUI.inizialize(message);
+			planningPhaseGUI = loader.getController();
+			planningPhaseGUI.printMessageInformation(message);
 			setScene(playCharacterCard);
 		} catch (IOException e) {
 			e.printStackTrace();
