@@ -12,12 +12,12 @@ public class GameDTO implements Serializable{
 	private ArrayList<String> playerNicknames;
 	private HashMap<String, DashboardDTO> dashboards;
 	private ArrayList<CloudDTO> clouds;
-	private HashMap<String, PlayerDTO> professors;
+	private HashMap<String, String> professors;
 	private ArrayList<IslandDTO> islands;
 	private ArrayList<CharacterCardDTO> characterCards;
 	private TurnDTO turn;
 
-	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, PlayerDTO currentPlayer, ArrayList<String> playerNicknames, HashMap<String, DashboardDTO> dashboards, ArrayList<CloudDTO> clouds, HashMap<String, PlayerDTO> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards, TurnDTO turn){
+	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, PlayerDTO currentPlayer, ArrayList<String> playerNicknames, HashMap<String, DashboardDTO> dashboards, ArrayList<CloudDTO> clouds, HashMap<String, String> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards, TurnDTO turn){
 		this.expertMode = expertMode;
 		this.motherNaturePosition = motherNaturePosition;
 		this.currentPlayer = currentPlayer;
@@ -59,7 +59,7 @@ public class GameDTO implements Serializable{
 		return clouds;
 	}
 
-	public HashMap<String, PlayerDTO> getProfessors(){
+	public HashMap<String, String> getProfessors(){
 		return professors;
 	}
 

@@ -24,6 +24,7 @@ public class ClientGUI extends Thread{
 			try{
 				Message msg;
 				msg = client.receiveMessage();
+				System.out.println(msg.getClass());
 				msg.apply(view);
 			}catch(Exception e){
 				try{
