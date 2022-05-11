@@ -36,7 +36,7 @@ public class PutStudentOnTableOperation extends Operation{
 		//Checking students in hall
 		searchStudentsInEntrance();
 
-		game.putStudentOnTables(playerController.getNickname(), new Student(studentColor));
+		game.putStudentOnTables(playerController.getNickname(), studentColor);
 	}
 
 	private void searchStudentsInEntrance() throws IncorrectOperationException {

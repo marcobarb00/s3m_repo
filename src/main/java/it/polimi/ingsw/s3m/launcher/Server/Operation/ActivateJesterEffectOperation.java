@@ -82,16 +82,8 @@ public class ActivateJesterEffectOperation extends Operation{
 		//Method looks like crap but should work
 		searchStudentsInEntrance();
 
-		//FIXME
-		// Temporary ArrayList to change with PawnColor
-		ArrayList<Student> requiredStudentsAL = new ArrayList<>();
-		ArrayList<Student> givenStudentsAL = new ArrayList<>();
-
-		requiredStudents.forEach(studentColor -> requiredStudentsAL.add(new Student(studentColor)));
-		givenStudents.forEach(studentColor -> givenStudentsAL.add(new Student(studentColor)));
-
 		super.game.activateJesterEffect(playerController.getNickname(),
-				requiredStudentsAL, givenStudentsAL);
+				requiredStudents, givenStudents);
 	}
 
 	/**

@@ -47,8 +47,7 @@ public class PutStudentOnIslandOperation extends Operation{
 			throw new IncorrectOperationException("Incorrect island value");
 		}
 
-		//TODO change temporary
-		game.putStudentOnIslands(playerController.getNickname(), islandPosition, new Student(studentColor));
+		game.putStudentOnIslands(playerController.getNickname(), islandPosition, studentColor);
 	}
 
 	private void searchStudentsInEntrance() throws IncorrectOperationException {

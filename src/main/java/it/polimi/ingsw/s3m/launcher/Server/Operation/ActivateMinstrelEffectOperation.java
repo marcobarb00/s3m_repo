@@ -64,16 +64,8 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		searchStudentsInEntrance();
 		searchStudentsInTables();
 
-		//FIXME
-		// Temporary Arrays, change to ArrayList<PawnColor>
-		ArrayList<Student> enteringEntranceStudentsAL = new ArrayList<>();
-		ArrayList<Student> enteringTablesStudentsAL = new ArrayList<>();
-
-		enteringEntranceStudents.forEach(color -> enteringEntranceStudentsAL.add(new Student(color)));
-		enteringTablesStudents.forEach(color -> enteringTablesStudentsAL.add(new Student(color)));
-
-		game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudentsAL,
-				enteringTablesStudentsAL);
+		game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudents,
+				enteringTablesStudents);
 	}
 
 	private void searchStudentsInEntrance() throws IncorrectOperationException {
