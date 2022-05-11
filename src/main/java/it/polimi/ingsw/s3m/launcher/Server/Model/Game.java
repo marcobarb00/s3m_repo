@@ -529,6 +529,7 @@ public class Game{
 		Island chosenIsland = islandsList.get(position);
 		chosenPlayer.getDashboard().deleteSingleStudentFromEntrance(studentColor);
 		chosenIsland.addStudent(studentColor);
+		turn.incrementMovedStudents();
 	}
 
 
