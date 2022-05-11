@@ -26,7 +26,12 @@ public class GameStateCLI{
 		System.out.println("\nMother Nature position: " + (gameState.getMotherNaturePosition() + 1));
 
 		System.out.println("\nprofessors:");
-		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
+		gameState.getProfessors().forEach((color, nickname) -> {
+			if(nickname == null)
+				System.out.println(color + ":");
+			else
+				System.out.println(color + ": " + nickname);
+		});
 
 		System.out.println("\ndashboards:");
 		gameState.getDashboards().forEach((nickname, dashboard) -> {

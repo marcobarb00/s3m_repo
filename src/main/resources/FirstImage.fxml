@@ -10,7 +10,7 @@
    <children>
       <ImageView fx:id="firstScreen" fitHeight="400.0" fitWidth="466.0" layoutX="2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@fotoscatolaeriantys.png" />
+            <Image url="@FirstImage.png" />
          </image>
       </ImageView>
       <Label layoutX="409.0" layoutY="175.0" text="ERIANTYS">

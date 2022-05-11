@@ -11,18 +11,26 @@ public class GameDTO implements Serializable{
 	private PlayerDTO currentPlayer;
 	private ArrayList<String> playerNicknames;
 	private HashMap<String, DashboardDTO> dashboards;
+	private HashMap<String, Integer> coins;
+	private HashMap<String, String> towerColor;
 	private ArrayList<CloudDTO> clouds;
-	private HashMap<String, PlayerDTO> professors;
+	private HashMap<String, String> professors;
 	private ArrayList<IslandDTO> islands;
 	private ArrayList<CharacterCardDTO> characterCards;
 	private TurnDTO turn;
 
-	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, PlayerDTO currentPlayer, ArrayList<String> playerNicknames, HashMap<String, DashboardDTO> dashboards, ArrayList<CloudDTO> clouds, HashMap<String, PlayerDTO> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards, TurnDTO turn){
+	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, PlayerDTO currentPlayer,
+				   ArrayList<String> playerNicknames, HashMap<String, DashboardDTO> dashboards,
+				   HashMap<String, Integer> coins, HashMap<String, String> towerColor, ArrayList<CloudDTO> clouds,
+				   HashMap<String, String> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards,
+				   TurnDTO turn){
 		this.expertMode = expertMode;
 		this.motherNaturePosition = motherNaturePosition;
 		this.currentPlayer = currentPlayer;
 		this.playerNicknames = playerNicknames;
 		this.dashboards = dashboards;
+		this.coins = coins;
+		this.towerColor = towerColor;
 		this.clouds = clouds;
 		this.professors = professors;
 		this.islands = islands;
@@ -55,11 +63,19 @@ public class GameDTO implements Serializable{
 		return dashboards;
 	}
 
+	public HashMap<String, Integer> getCoins(){
+		return coins;
+	}
+
+	public HashMap<String, String> getTowerColor(){
+		return towerColor;
+	}
+
 	public ArrayList<CloudDTO> getClouds(){
 		return clouds;
 	}
 
-	public HashMap<String, PlayerDTO> getProfessors(){
+	public HashMap<String, String> getProfessors(){
 		return professors;
 	}
 

@@ -37,7 +37,7 @@ public class GUIView extends View{
 
 	@Override
 	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
-
+		controllerGUI.launchPlanningPhase(planningPhaseMessage);
 	}
 
 	@Override

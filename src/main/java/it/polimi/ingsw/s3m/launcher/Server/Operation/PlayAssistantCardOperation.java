@@ -20,7 +20,7 @@ public class PlayAssistantCardOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException,
+	public void executeOperation() throws PlayerNotInListException,
 			NotEnoughAssistantCardsException, IncorrectOperationException {
 		//check args
 		boolean checkArgs = game != null && playerController != null;

@@ -101,6 +101,7 @@ public class Mapper{
 		if(island.getDominator() == null){
 			return new IslandDTO(students, "", 0);
 		}
+
 		return new IslandDTO(students, island.getDominator().getColor().name(), island.getNumberOfTowers());
 	}
 
@@ -167,9 +168,23 @@ public class Mapper{
 		HashMap<String, DashboardDTO> dashboards = new HashMap<>();
 		game.getPlayerHashMap().forEach((nickname, player) -> dashboards.put(nickname, dashboardToDTO(player.getDashboard())));
 
-		HashMap<String, PlayerDTO> professors = new HashMap<>();
-		game.getProfessorsHashMap().forEach((color, player) -> professors.put(color.name(), playerToDTO(player)));
+		HashMap<String, String> professors = new HashMap<>();
+		game.getProfessorsHashMap().forEach((color, player) -> {
+			if(player == null)
+				professors.put(color.name(), null);
+			else
+				professors.put(color.name(), player.getNickname());
+		});
 
-		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(), currentPlayer, game.getPlayersNicknames(), dashboards, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()), turnToDTO(game.getTurn()));
+		HashMap<String, Integer> coins = new HashMap<>();
+		game.getPlayersNicknames().forEach((nickname) -> coins.put(nickname, game.getPlayerCoins(nickname)));
+
+		HashMap<String, String> towerColor = new HashMap<>();
+		game.getPlayersNicknames().forEach((nickname) -> towerColor.put(nickname, game.getPlayerHashMap().get(nickname).getColor().name()));
+
+		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(),
+				currentPlayer, game.getPlayersNicknames(), dashboards, coins, towerColor, cloudListToDTO(game.getCloudsList()),
+				professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()),
+				turnToDTO(game.getTurn()));
 	}
 }
