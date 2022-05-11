@@ -167,7 +167,7 @@ public class Room{
 			Response response = player.communicateWithClient(planningPhaseMessage);
 			try{
 				successful = planningPhaseResponse(player, response);
-			}catch(IncorrectOperationException | IllegalArgumentException e){
+			}catch(IncorrectOperationException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}
 		}
@@ -204,7 +204,7 @@ public class Room{
 			try{
 				moveStudentPhase(player, response);
 			}catch(IncorrectOperationException | PlayerNotInListException | NotEnoughCoinsException | CloudNotInListException |
-					NotExpertModeException | CharacterCardAlreadyActivatedException | IllegalArgumentException e){
+					NotExpertModeException | CharacterCardAlreadyActivatedException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}catch(BackException e){
 				//don't do anything, just continue while to repeat the moveStudentPhase
@@ -219,7 +219,7 @@ public class Room{
 			try{
 				motherNatureMoved = motherNaturePhase(player, response);
 			}catch(IncorrectOperationException | NotEnoughCoinsException | NotExpertModeException |
-					CloudNotInListException | CharacterCardAlreadyActivatedException | IllegalArgumentException e){
+					CloudNotInListException | CharacterCardAlreadyActivatedException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}catch(BackException e){
 				//don't do anything, just continue while to repeat the mother nature phase
@@ -338,7 +338,7 @@ public class Room{
 				characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
 				break;
 			default:
-				throw new IllegalArgumentException("character card chosen does not exists");
+				throw new IncorrectOperationException("character card chosen does not exists");
 		}
 
 		characterCardOperation.executeOperation();
