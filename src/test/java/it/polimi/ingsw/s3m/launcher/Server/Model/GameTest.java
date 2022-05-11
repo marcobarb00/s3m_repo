@@ -1,10 +1,13 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
@@ -220,13 +223,13 @@ class GameTest {
         game.getIslandsList().get(5).addStudentsOnIsland(addingStudents);
         assertEquals(2, game.getIslandsList().get(5).getNumberOfTowers());
         assertEquals(5, game.getIslandsList().get(5).getTotalNumberOfStudents());
-        Island elimnatingIsland = game.getIslandsList().get(5);
+        Island eliminatingIsland = game.getIslandsList().get(5);
 
         game.mergeIsland(game.getIslandsList().get(4), game.getIslandsList().get(5));
         assertEquals(11, game.getIslandsList().size());
         assertEquals(3, game.getIslandsList().get(4).getNumberOfTowers());
         assertEquals(10, game.getIslandsList().get(4).getTotalNumberOfStudents());
-        assertFalse(game.getIslandsList().contains(elimnatingIsland));
+        assertFalse(game.getIslandsList().contains(eliminatingIsland));
     }
 
     // MOTHER NATURE
@@ -272,9 +275,7 @@ class GameTest {
     // TURN
     @Test
     void resetTurnVerifyTest() throws EmptyBagException {
-        ArrayList<String> nicknames = new ArrayList<>();
-        nicknames.add("FirstPlayer");
-        nicknames.add("SecondPlayer");
+        ArrayList<String> nicknames = new ArrayList<>(Arrays.asList("FirstPlayer", "SecondPlayer"));
         Game game = new Game(nicknames, false);
         assertEquals("PlanningPhase", game.getTurn().getPhaseName());
 
@@ -296,4 +297,48 @@ class GameTest {
         assertEquals(0, game.getTurnPlayedCards().size());
         assertFalse(game.getTurn().isActivatedCharacterCard());
     }
+
+    @Test
+    void setTurnFirstPlayerTest() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>(Arrays.asList("FirstPlayer", "SecondPlayer"));
+        Game game = new Game(nicknames, false);
+
+        game.getTurn().setFirstPlayerNickname("FirstPlayer");
+        game.getTurn().setCurrentPlayerNickname("FirstPlayer");
+        game.getTurn().getPlayedCards().put("FirstPlayer", AssistantCard.DOG);
+        game.getTurn().getPlayedCards().put("SecondPlayer", AssistantCard.ELEPHANT);
+        game.setTurnFirstPlayer();
+        assertEquals("SecondPlayer", game.getTurn().getFirstPlayerNickname());
+        assertEquals("ActionPhase", game.getTurn().getPhaseName());
+    }
+
+    @Test
+    void playAssistantCardTest() throws EmptyBagException, NotEnoughAssistantCardsException {
+        ArrayList<String> nicknames = new ArrayList<>(Arrays.asList("FirstPlayer", "SecondPlayer"));
+        Game game = new Game(nicknames, false);
+
+        game.playAssistantCard("FirstPlayer", 8);
+        game.playAssistantCard("SecondPlayer", 9);
+        assertTrue(game.getTurnPlayedCards().contains(AssistantCard.OSTRICH));
+        assertTrue(game.getTurnPlayedCards().contains(AssistantCard.CHEETAH));
+
+        //Raising the exception
+        Game game2 = new Game(nicknames, false);
+        Player player = game2.getPlayerHashMap().get("FirstPlayer");
+        ArrayList<AssistantCard> cards = player.getHand();
+        for(int i = 0; i < 9; i++){
+            cards.remove(0);
+        }
+        Exception e = assertThrows(NotEnoughAssistantCardsException.class,
+                () ->  game2.playAssistantCard("FirstPlayer", 0)  );
+        assertEquals("someone doesn't have any more assistant cards, this is the last turn",
+                e.getMessage());
+    }
+
+    @Test
+    void checkWinCondition() {
+
+    }
+
+
 }
