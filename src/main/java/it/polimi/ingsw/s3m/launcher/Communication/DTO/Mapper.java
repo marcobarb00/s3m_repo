@@ -179,6 +179,12 @@ public class Mapper{
 		HashMap<String, Integer> coins = new HashMap<>();
 		game.getPlayersNicknames().forEach((nickname) -> coins.put(nickname, game.getPlayerCoins(nickname)));
 
-		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(), currentPlayer, game.getPlayersNicknames(), dashboards, coins, cloudListToDTO(game.getCloudsList()), professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()), turnToDTO(game.getTurn()));
+		HashMap<String, String> towerColor = new HashMap<>();
+		game.getPlayersNicknames().forEach((nickname) -> towerColor.put(nickname, game.getPlayerHashMap().get(nickname).getColor().name()));
+
+		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(),
+				currentPlayer, game.getPlayersNicknames(), dashboards, coins, towerColor, cloudListToDTO(game.getCloudsList()),
+				professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()),
+				turnToDTO(game.getTurn()));
 	}
 }
