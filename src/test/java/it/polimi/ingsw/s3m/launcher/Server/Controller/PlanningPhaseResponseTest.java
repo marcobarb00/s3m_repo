@@ -9,10 +9,8 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.net.Socket;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlanningPhaseResponseTest{
@@ -40,9 +38,9 @@ public class PlanningPhaseResponseTest{
 	}
 
 	@Test
-	void chooseAnInvalidPositionToPlayAnAssistantCardThrowsIllegalArgumentException(){
+	void chooseAnInvalidPositionToPlayAnAssistantCardThrowsIncorrectOperationException(){
 		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(-1);
-		Exception e = assertThrows(IllegalArgumentException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
+		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals("Incorrect card position value", e.getMessage());
 	}
 
@@ -70,23 +68,23 @@ public class PlanningPhaseResponseTest{
 	}
 
 	@Test
-	void playTheAssistantCardInTheLastPositionTwiceThrowsIllegalArgumentException() throws NotEnoughAssistantCardsException, PlayerNotInListException, IncorrectOperationException {
+	void playTheAssistantCardInTheLastPositionTwiceThrowsIncorrectOperationException() throws NotEnoughAssistantCardsException, PlayerNotInListException, IncorrectOperationException {
 		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(9);
 		assertTrue(room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals(9, room.getGameState().getPlayerHashMap().get("FirstPlayer").getHand().size());
 
-		Exception e = assertThrows(IllegalArgumentException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
+		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals("Incorrect card position value", e.getMessage());
 	}
 
 	@Test
-	void ifTheSecondPlayerTriesToPlayTheSameAssistantCardPlayedByTheFirstPlayerThrowsIllegalArgumentException() throws NotEnoughAssistantCardsException, PlayerNotInListException, IncorrectOperationException {
+	void ifTheSecondPlayerTriesToPlayTheSameAssistantCardPlayedByTheFirstPlayerThrowsIncorrectOperationException() throws NotEnoughAssistantCardsException, PlayerNotInListException, IncorrectOperationException {
 		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(9);
 		assertTrue(room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals(9, room.getGameState().getPlayerHashMap().get("FirstPlayer").getHand().size());
 
 		player.setNickname("SecondPlayer");
-		Exception e = assertThrows(IllegalArgumentException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
+		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals("AssistantCard already played", e.getMessage());
 	}
 }
