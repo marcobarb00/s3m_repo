@@ -18,8 +18,7 @@ public class RoomsController{
 	private static RoomsController instance = null;
 	private final static HashMap<Integer, Room> rooms = new HashMap<>();
 
-	private RoomsController(){
-	}
+	private RoomsController(){}
 
 	public static RoomsController instance(){
 		return Objects.requireNonNullElseGet(instance, RoomsController::new);
@@ -60,8 +59,9 @@ public class RoomsController{
 	}
 
 	private synchronized boolean enterRoom(PlayerController player){
+		ArrayList<Integer> availableRoomIDs = rooms.keySet().stream().filter(roomID -> !rooms.get(roomID).isFull())
+				.collect(Collectors.toCollection(ArrayList::new));
 
-		ArrayList<Integer> availableRoomIDs = rooms.keySet().stream().filter(roomID -> !rooms.get(roomID).isFull()).collect(Collectors.toCollection(ArrayList::new));
 		if(availableRoomIDs.isEmpty()){
 			sendNotificationToPlayer(player, "there are no rooms to join in");
 			return false;

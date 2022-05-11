@@ -15,4 +15,13 @@ module it.polimi.ingsw.s3m.launcher{
 
     opens it.polimi.ingsw.s3m.launcher.Client.View.GUI to javafx.fxml;
     exports it.polimi.ingsw.s3m.launcher.Client.View.GUI;
+
+    opens it.polimi.ingsw.s3m.launcher.Server.Message to javafx.fxml;
+    exports it.polimi.ingsw.s3m.launcher.Server.Message;
+
+    opens it.polimi.ingsw.s3m.launcher.Client.Response to javafx.fxml;
+    exports it.polimi.ingsw.s3m.launcher.Client.Response;
+
+    opens it.polimi.ingsw.s3m.launcher.Communication to javafx.fxml;
+    exports it.polimi.ingsw.s3m.launcher.Communication;
 }

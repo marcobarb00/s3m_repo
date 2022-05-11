@@ -38,7 +38,6 @@ public class ControllerGUI {
 		secondaryStage.setTitle("Eriantys");
 		secondaryStage.getIcons().add(new Image("eriantysImage.png"));
 		secondaryStage.setResizable(false);
-
 	}
 
 	public static ControllerGUI getInstance() {
