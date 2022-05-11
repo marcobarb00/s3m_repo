@@ -1012,6 +1012,370 @@ public class PlanningPhaseGUI{
 		numTowersIsland0.setVisible(false);
 	}
 
+	public void printIslandOne(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland1.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland1.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland1.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland1.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland1.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland1.setImage(image);
+
+		numTowersIsland1.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandOne(){
+		islandOne.setVisible(false);
+
+		redStudentsIsland1.setVisible(false);
+		greenStudentsIsland1.setVisible(false);
+		blueStudentsIsland1.setVisible(false);
+		pinkStudentsIsland1.setVisible(false);
+		yellowStudentsIsland1.setVisible(false);
+
+		numRedStudentsIsland1.setVisible(false);
+		numGreenStudentsIsland1.setVisible(false);
+		numBlueStudentsIsland1.setVisible(false);
+		numPinkStudentsIsland1.setVisible(false);
+		numYellowStudentsIsland1.setVisible(false);
+
+		towersIsland1.setVisible(false);
+
+		numTowersIsland1.setVisible(false);
+	}
+	public void printIslandTwo(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland2.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland2.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland2.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland2.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland2.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland2.setImage(image);
+
+		numTowersIsland2.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandTwo(){
+		islandTwo.setVisible(false);
+
+		redStudentsIsland2.setVisible(false);
+		greenStudentsIsland2.setVisible(false);
+		blueStudentsIsland2.setVisible(false);
+		pinkStudentsIsland2.setVisible(false);
+		yellowStudentsIsland2.setVisible(false);
+
+		numRedStudentsIsland2.setVisible(false);
+		numGreenStudentsIsland2.setVisible(false);
+		numBlueStudentsIsland2.setVisible(false);
+		numPinkStudentsIsland2.setVisible(false);
+		numYellowStudentsIsland2.setVisible(false);
+
+		towersIsland2.setVisible(false);
+
+		numTowersIsland2.setVisible(false);
+	}
+	public void printIslandThree(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland3.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland3.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland3.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland3.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland3.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland3.setImage(image);
+
+		numTowersIsland3.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandThree(){
+		islandThree.setVisible(false);
+
+		redStudentsIsland3.setVisible(false);
+		greenStudentsIsland3.setVisible(false);
+		blueStudentsIsland3.setVisible(false);
+		pinkStudentsIsland3.setVisible(false);
+		yellowStudentsIsland3.setVisible(false);
+
+		numRedStudentsIsland3.setVisible(false);
+		numGreenStudentsIsland3.setVisible(false);
+		numBlueStudentsIsland3.setVisible(false);
+		numPinkStudentsIsland3.setVisible(false);
+		numYellowStudentsIsland3.setVisible(false);
+
+		towersIsland3.setVisible(false);
+
+		numTowersIsland3.setVisible(false);
+	}
+	public void printIslandFour(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland4.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland4.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland4.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland4.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland4.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland4.setImage(image);
+
+		numTowersIsland4.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandFour(){
+		islandFour.setVisible(false);
+
+		redStudentsIsland4.setVisible(false);
+		greenStudentsIsland4.setVisible(false);
+		blueStudentsIsland4.setVisible(false);
+		pinkStudentsIsland4.setVisible(false);
+		yellowStudentsIsland4.setVisible(false);
+
+		numRedStudentsIsland4.setVisible(false);
+		numGreenStudentsIsland4.setVisible(false);
+		numBlueStudentsIsland4.setVisible(false);
+		numPinkStudentsIsland4.setVisible(false);
+		numYellowStudentsIsland4.setVisible(false);
+
+		towersIsland4.setVisible(false);
+
+		numTowersIsland4.setVisible(false);
+	}
+	public void printIslandFive(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland5.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland5.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland5.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland5.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland5.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland5.setImage(image);
+
+		numTowersIsland5.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandFive(){
+		islandFive.setVisible(false);
+
+		redStudentsIsland5.setVisible(false);
+		greenStudentsIsland5.setVisible(false);
+		blueStudentsIsland5.setVisible(false);
+		pinkStudentsIsland5.setVisible(false);
+		yellowStudentsIsland5.setVisible(false);
+
+		numRedStudentsIsland5.setVisible(false);
+		numGreenStudentsIsland5.setVisible(false);
+		numBlueStudentsIsland5.setVisible(false);
+		numPinkStudentsIsland5.setVisible(false);
+		numYellowStudentsIsland5.setVisible(false);
+
+		towersIsland5.setVisible(false);
+
+		numTowersIsland5.setVisible(false);
+	}
+	public void printIslandSix(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland6.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland6.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland6.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland6.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland6.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland6.setImage(image);
+
+		numTowersIsland6.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandSix(){
+		islandSix.setVisible(false);
+
+		redStudentsIsland6.setVisible(false);
+		greenStudentsIsland6.setVisible(false);
+		blueStudentsIsland6.setVisible(false);
+		pinkStudentsIsland6.setVisible(false);
+		yellowStudentsIsland6.setVisible(false);
+
+		numRedStudentsIsland6.setVisible(false);
+		numGreenStudentsIsland6.setVisible(false);
+		numBlueStudentsIsland6.setVisible(false);
+		numPinkStudentsIsland6.setVisible(false);
+		numYellowStudentsIsland6.setVisible(false);
+
+		towersIsland6.setVisible(false);
+
+		numTowersIsland6.setVisible(false);
+	}
+	public void printIslandSeven(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland7.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland7.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland7.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland7.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland7.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland7.setImage(image);
+
+		numTowersIsland7.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandSeven(){
+		islandSeven.setVisible(false);
+
+		redStudentsIsland7.setVisible(false);
+		greenStudentsIsland7.setVisible(false);
+		blueStudentsIsland7.setVisible(false);
+		pinkStudentsIsland7.setVisible(false);
+		yellowStudentsIsland7.setVisible(false);
+
+		numRedStudentsIsland7.setVisible(false);
+		numGreenStudentsIsland7.setVisible(false);
+		numBlueStudentsIsland7.setVisible(false);
+		numPinkStudentsIsland7.setVisible(false);
+		numYellowStudentsIsland7.setVisible(false);
+
+		towersIsland7.setVisible(false);
+
+		numTowersIsland7.setVisible(false);
+	}
+	public void printIslandEight(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland8.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland8.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland8.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland8.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland8.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland8.setImage(image);
+
+		numTowersIsland8.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandEight(){
+		islandEight.setVisible(false);
+
+		redStudentsIsland8.setVisible(false);
+		greenStudentsIsland8.setVisible(false);
+		blueStudentsIsland8.setVisible(false);
+		pinkStudentsIsland8.setVisible(false);
+		yellowStudentsIsland8.setVisible(false);
+
+		numRedStudentsIsland8.setVisible(false);
+		numGreenStudentsIsland8.setVisible(false);
+		numBlueStudentsIsland8.setVisible(false);
+		numPinkStudentsIsland8.setVisible(false);
+		numYellowStudentsIsland8.setVisible(false);
+
+		towersIsland8.setVisible(false);
+
+		numTowersIsland8.setVisible(false);
+	}
+	public void printIslandNine(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland9.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland9.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland9.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland9.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland9.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland9.setImage(image);
+
+		numTowersIsland9.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandNine(){
+		islandNine.setVisible(false);
+
+		redStudentsIsland9.setVisible(false);
+		greenStudentsIsland9.setVisible(false);
+		blueStudentsIsland9.setVisible(false);
+		pinkStudentsIsland9.setVisible(false);
+		yellowStudentsIsland9.setVisible(false);
+
+		numRedStudentsIsland9.setVisible(false);
+		numGreenStudentsIsland9.setVisible(false);
+		numBlueStudentsIsland9.setVisible(false);
+		numPinkStudentsIsland9.setVisible(false);
+		numYellowStudentsIsland9.setVisible(false);
+
+		towersIsland9.setVisible(false);
+
+		numTowersIsland9.setVisible(false);
+	}
+	public void printIslandTen(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland10.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland10.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland10.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland10.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland10.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland10.setImage(image);
+
+		numTowersIsland10.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandTen(){
+		islandTen.setVisible(false);
+
+		redStudentsIsland10.setVisible(false);
+		greenStudentsIsland10.setVisible(false);
+		blueStudentsIsland10.setVisible(false);
+		pinkStudentsIsland10.setVisible(false);
+		yellowStudentsIsland10.setVisible(false);
+
+		numRedStudentsIsland10.setVisible(false);
+		numGreenStudentsIsland10.setVisible(false);
+		numBlueStudentsIsland10.setVisible(false);
+		numPinkStudentsIsland10.setVisible(false);
+		numYellowStudentsIsland10.setVisible(false);
+
+		towersIsland10.setVisible(false);
+
+		numTowersIsland10.setVisible(false);
+	}
+	public void printIslandEleven(int index, IslandDTO islandDTO){
+		HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+		numRedStudentsIsland11.setText(studentsOnIsland.get("RED").toString());
+		numGreenStudentsIsland11.setText(studentsOnIsland.get("GREEN").toString());
+		numBlueStudentsIsland11.setText(studentsOnIsland.get("BLUE").toString());
+		numPinkStudentsIsland11.setText(studentsOnIsland.get("PINK").toString());
+		numYellowStudentsIsland11.setText(studentsOnIsland.get("YELLOW").toString());
+
+		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+		towersIsland11.setImage(image);
+
+		numTowersIsland11.setText(String.valueOf(islandDTO.getNumberOfTowers()));
+	}
+
+	public void setNotVisibleIslandEleven(){
+		islandEleven.setVisible(false);
+
+		redStudentsIsland11.setVisible(false);
+		greenStudentsIsland11.setVisible(false);
+		blueStudentsIsland11.setVisible(false);
+		pinkStudentsIsland11.setVisible(false);
+		yellowStudentsIsland11.setVisible(false);
+
+		numRedStudentsIsland11.setVisible(false);
+		numGreenStudentsIsland11.setVisible(false);
+		numBlueStudentsIsland11.setVisible(false);
+		numPinkStudentsIsland11.setVisible(false);
+		numYellowStudentsIsland11.setVisible(false);
+
+		towersIsland11.setVisible(false);
+
+		numTowersIsland11.setVisible(false);
+	}
+
 	public void insertAssistantZero(AssistantCardDTO assistantCardDTO){
 		Image view = new Image(assistantCardDTO.getType() + ".jpg");
 		assistantZero.setImage(view);
