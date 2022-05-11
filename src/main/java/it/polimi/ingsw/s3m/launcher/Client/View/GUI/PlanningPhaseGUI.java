@@ -1071,9 +1071,58 @@ public class PlanningPhaseGUI{
 		});
 
 		printEntranceStudentOnePOne(entranceStudentColors.get(0));
+		printEntranceStudentTwoPOne(entranceStudentColors.get(1));
+		printEntranceStudentThreePOne(entranceStudentColors.get(2));
+		printEntranceStudentFourPOne(entranceStudentColors.get(3));
+		printEntranceStudentFivePOne(entranceStudentColors.get(4));
+		printEntranceStudentSixPOne(entranceStudentColors.get(5));
+		printEntranceStudentSevenPOne(entranceStudentColors.get(6));
 		
 		if(playersNumber == 3){
-			printEntranceStudentEightPOne(entranceStudentColors.get(8));
+			printEntranceStudentEightPOne(entranceStudentColors.get(7));
+			printEntranceStudentNinePOne(entranceStudentColors.get(8));
+		}
+	}
+	public void printDashboardTwo(DashboardDTO dashboardDTO, int playersNumber){
+		ArrayList<String> entranceStudentColors = new ArrayList<>();
+		dashboardDTO.getEntrance().forEach((color, value) -> {
+			for(int i = 0; i < value; i++){
+				entranceStudentColors.add(color);
+			}
+		});
+
+		printEntranceStudentOnePTwo(entranceStudentColors.get(0));
+		printEntranceStudentTwoPTwo(entranceStudentColors.get(1));
+		printEntranceStudentThreePTwo(entranceStudentColors.get(2));
+		printEntranceStudentFourPTwo(entranceStudentColors.get(3));
+		printEntranceStudentFivePTwo(entranceStudentColors.get(4));
+		printEntranceStudentSixPTwo(entranceStudentColors.get(5));
+		printEntranceStudentSevenPTwo(entranceStudentColors.get(6));
+
+		if(playersNumber == 3){
+			printEntranceStudentEightPTwo(entranceStudentColors.get(7));
+			printEntranceStudentNinePTwo(entranceStudentColors.get(8));
+		}
+	}
+	public void printDashboardThree(DashboardDTO dashboardDTO, int playersNumber){
+		ArrayList<String> entranceStudentColors = new ArrayList<>();
+		dashboardDTO.getEntrance().forEach((color, value) -> {
+			for(int i = 0; i < value; i++){
+				entranceStudentColors.add(color);
+			}
+		});
+
+		printEntranceStudentOnePThree(entranceStudentColors.get(0));
+		printEntranceStudentTwoPThree(entranceStudentColors.get(1));
+		printEntranceStudentThreePThree(entranceStudentColors.get(2));
+		printEntranceStudentFourPThree(entranceStudentColors.get(3));
+		printEntranceStudentFivePThree(entranceStudentColors.get(4));
+		printEntranceStudentSixPThree(entranceStudentColors.get(5));
+		printEntranceStudentSevenPThree(entranceStudentColors.get(6));
+
+		if(playersNumber == 3){
+			printEntranceStudentEightPThree(entranceStudentColors.get(7));
+			printEntranceStudentNinePThree(entranceStudentColors.get(8));
 		}
 	}
 
