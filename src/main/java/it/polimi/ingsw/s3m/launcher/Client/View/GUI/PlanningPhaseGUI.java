@@ -6,6 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class PlanningPhaseGUI{
@@ -893,6 +895,8 @@ public class PlanningPhaseGUI{
 
 	public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage){
 		GameDTO gameState = planningPhaseMessage.getGameState();
+		setGameState(gameState);
+
 		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
 		ArrayList<AssistantCardDTO> hand = gameState.getCurrentPlayer().getHand();
 
@@ -915,8 +919,10 @@ public class PlanningPhaseGUI{
 	public void setGameState(GameDTO gameState){
 		//character card
 
+
 		//print islands
 		ArrayList<IslandDTO> islandList = gameState.getIslands();
+
 		int index = 0;
 		try{
 			printIslandZero(islandList.get(0));
@@ -970,6 +976,7 @@ public class PlanningPhaseGUI{
 				setNotVisibleIslandEleven();
 		}
 
+
 		//set mother nature position
 		Image motherNatureImage = new Image("MotherNature.jpeg");
 		switch(gameState.getMotherNaturePosition()){
@@ -1011,6 +1018,7 @@ public class PlanningPhaseGUI{
 				break;
 		}
 
+
 		//TODO print dashboards information
 		//TODO print students on tables
 		//TODO print remaining towers
@@ -1020,6 +1028,7 @@ public class PlanningPhaseGUI{
 		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
 		
 		printDashboardOne(dashboardList.get(nicknameList.get(0)), nicknameList.get(0), gameState.getPlayersNumber(), gameState.getProfessors());
+
 		/*
 		printDashboardTwo();
 		if(gameState.getPlayersNumber() == 3)
@@ -1038,8 +1047,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland0.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland0.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland0.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image towerImage = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland0.setImage(towerImage);
+		}
 
 		numTowersIsland0.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1072,8 +1083,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland1.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland1.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland1.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland1.setImage(image);
+		}
 
 		numTowersIsland1.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1105,8 +1118,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland2.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland2.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland2.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland2.setImage(image);
+		}
 
 		numTowersIsland2.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1138,8 +1153,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland3.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland3.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland3.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland3.setImage(image);
+		}
 
 		numTowersIsland3.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1171,8 +1188,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland4.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland4.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland4.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland4.setImage(image);
+		}
 
 		numTowersIsland4.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1204,8 +1223,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland5.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland5.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland5.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland5.setImage(image);
+		}
 
 		numTowersIsland5.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1237,8 +1258,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland6.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland6.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland6.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland6.setImage(image);
+		}
 
 		numTowersIsland6.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1270,8 +1293,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland7.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland7.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland7.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland7.setImage(image);
+		}
 
 		numTowersIsland7.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1303,8 +1328,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland8.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland8.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland8.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland8.setImage(image);
+		}
 
 		numTowersIsland8.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1336,8 +1363,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland9.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland9.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland9.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland9.setImage(image);
+		}
 
 		numTowersIsland9.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1369,8 +1398,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland10.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland10.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland10.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland10.setImage(image);
+		}
 
 		numTowersIsland10.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}
@@ -1402,8 +1433,10 @@ public class PlanningPhaseGUI{
 		numPinkStudentsIsland11.setText(studentsOnIsland.get("PINK").toString());
 		numYellowStudentsIsland11.setText(studentsOnIsland.get("YELLOW").toString());
 
-		Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
-		towersIsland11.setImage(image);
+		if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+			Image image = new Image(islandDTO.getDominatorColor() + "Tower.jpeg");
+			towersIsland11.setImage(image);
+		}
 
 		numTowersIsland11.setText(String.valueOf(islandDTO.getNumberOfTowers()));
 	}

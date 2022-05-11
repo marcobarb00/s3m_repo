@@ -101,6 +101,7 @@ public class Mapper{
 		if(island.getDominator() == null){
 			return new IslandDTO(students, "", 0);
 		}
+
 		return new IslandDTO(students, island.getDominator().getColor().name(), island.getNumberOfTowers());
 	}
 
