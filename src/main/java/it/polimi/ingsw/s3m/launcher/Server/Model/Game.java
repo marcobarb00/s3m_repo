@@ -469,6 +469,7 @@ public class Game{
 
 		if(newDominatingPlayer != null){
 			if(currentPlayer == null){
+				//TODO fix problem maybe here
 				currentIsland.setDominator(newDominatingPlayer);
 				currentIsland.addTower();
 				newDominatingPlayer.getDashboard().decrementTowers();

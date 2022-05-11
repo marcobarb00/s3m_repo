@@ -56,4 +56,6 @@ public class PlayAssistantCardOperation extends Operation{
 		return cardsPlayedInTurn.stream().map(AssistantCard::getType).
 				noneMatch(type -> type.equals(handCardType));
 	}
+
+
 }

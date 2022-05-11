@@ -43,7 +43,6 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		if(!checkExpertMode){
 			throw new NotExpertModeException();
 		}
-
 		//checks if CharacterCard already active
 		boolean activatedCharacterCard = game.isCharacterCardActivated();
 		if(activatedCharacterCard){
