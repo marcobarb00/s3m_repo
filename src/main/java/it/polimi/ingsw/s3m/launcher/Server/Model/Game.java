@@ -8,7 +8,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ExpertModeInitiali
 import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.GameInitializer;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ThreePlayersGameInitializer;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.TwoPlayersGameInitializer;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -146,7 +145,8 @@ public class Game{
 			nextIsland = islandsList.get(islandIndex + 1);
 		Player nextIslandDominator = nextIsland.getDominator();
 
-		if(currentIslandDominator.equals(nextIslandDominator))
+		if (nextIslandDominator == null) return;
+		if(currentIslandDominator.getNickname().equals(nextIslandDominator.getNickname()))
 			mergeIsland(currentIsland, nextIsland);
 	}
 
@@ -166,7 +166,8 @@ public class Game{
 			previousIsland = islandsList.get(islandIndex - 1);
 		Player previousIslandDominator = previousIsland.getDominator();
 
-		if(currentIslandDominator.equals(previousIslandDominator))
+		if (previousIslandDominator == null) return;
+		if(currentIslandDominator.getNickname().equals(previousIslandDominator.getNickname()))
 			mergeIsland(currentIsland, previousIsland);
 	}
 
@@ -484,7 +485,6 @@ public class Game{
 				}
 				currentIsland.setDominator(newDominatingPlayer);
 			}
-			
 			samePlayerCheckInNextIsland(currentIsland);
 			samePlayerCheckInPreviousIsland(currentIsland);
 		}
