@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +12,12 @@ public class PlanningPhaseResponseTest{
 
 	@Test
 	void nullResponseThrowsIncorrectOperation(){
-		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, null));
-		assertEquals("the operation received is not the correct type", e.getMessage());
+		assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, null));
 	}
 
-	void responseWithNullCardChosenAttributeThrowsIncorrectOperation(){
-		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, null));
-		assertEquals("the operation received is not the correct type", e.getMessage());
+	@Test
+	void responseWithWrongCardChosenAttributeThrowsIncorrectOperation(){
+		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(-1);
+		assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
 	}
 }
