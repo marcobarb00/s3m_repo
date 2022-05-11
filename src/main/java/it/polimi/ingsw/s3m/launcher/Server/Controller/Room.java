@@ -274,6 +274,8 @@ public class Room{
 				sendNotificationToPlayer(player, "character card activated successfully");
 				gameState.getTurn().setActivatedCharacterCard(true);
 				break;
+			default:
+				throw new IncorrectOperationException("invalid input");
 		}
 	}
 
@@ -377,8 +379,9 @@ public class Room{
 				playCharacterCard(player, playCharacterCardResponse);
 				//character card played successfully
 				return false;
+			default:
+				throw new IncorrectOperationException("invalid input");
 		}
-		return false;
 	}
 
 	public void moveMotherNature(PlayerController player, Response response) throws NotPlayerTurnException,
