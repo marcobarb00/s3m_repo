@@ -251,13 +251,16 @@ public class Game{
 
 	/**
 	 * Method used to reset the turn's attributes at the end of the action phase
+	 * and to recreate clouds
 	 */
 	public void resetTurn(){
+		computeDominanceStrategy = new StandardComputeDominance();
+		for (int i = 0; i < numberOfPlayers; i++)
+			cloudsList.add(new Cloud());
 		turn.setCurrentPlayerNickname(turn.getFirstPlayerNickname());
 		turn.setPhaseName("PlanningPhase");
 		turn.setPlayedCards(new HashMap<>());
 		turn.setActivatedCharacterCard(false);
-		computeDominanceStrategy = new StandardComputeDominance();
 	}
 
 	/**
@@ -446,6 +449,7 @@ public class Game{
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		Cloud chosenCloud = cloudsList.get(position);
 		chosenPlayer.getDashboard().addStudentsInEntrance(chosenCloud.returnStudents());
+		cloudsList.remove(position);
 	}
 
 	/**
