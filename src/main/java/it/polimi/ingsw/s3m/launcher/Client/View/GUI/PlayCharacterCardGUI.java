@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
-import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
@@ -84,13 +83,13 @@ public class PlayCharacterCardGUI{
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
         String characterName = cards.get(characterCardPosition).getName();
         if(characterName.equals("Jester")){
-            ControllerGUI.getInstance().launcherJester();
+            ControllerGUI.getInstance().launchJester();
         }
         if(characterName.equals("Minstrel")){
-            ControllerGUI.getInstance().launcherMinstrel();
+            ControllerGUI.getInstance().launchMinstrel();
         }
         if(characterName.equals("Mushroomer")){
-            ControllerGUI.getInstance().launcherMushroomer();
+            ControllerGUI.getInstance().launchMushroomer();
         }
 
         ControllerGUI.getInstance().sendResponse(ControllerGUI.getInstance().getPlayCharacterCardResponse());

@@ -324,7 +324,7 @@ public class Room{
 				break;
 			case "Mushroomer":
 				characterCardOperation = new ActivateMushroomerEffectOperation(gameState, player,
-						mapper.stringToColor(playCharacterCardResponse.getNotInfluencingColor()));
+						mapper.stringToColor(playCharacterCardResponse.getNonInfluencingColor()));
 				break;
 			case "Jester":
 				ArrayList<PawnColor> studentsToGetFromJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());

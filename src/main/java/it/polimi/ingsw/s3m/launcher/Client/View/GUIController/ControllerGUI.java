@@ -5,7 +5,6 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Mushroomer;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -217,7 +216,7 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launchPutMotherNatureOnIsland() {
+	public void launchMoveMotherNature() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutMotherNatureOnIsland.fxml"));
 			Parent setMotherNatureOnIslandGUI = (Parent) loader.load();
@@ -240,7 +239,7 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launcherMushroomer() {
+	public void launchMushroomer() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Mushroomer.fxml"));
 			Parent setMushroomerGUI = (Parent) loader.load();
@@ -252,7 +251,7 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launcherMinstrel() {
+	public void launchMinstrel() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Minstrel.fxml"));
 			Parent setMinstrelGUI = (Parent) loader.load();
@@ -264,7 +263,7 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launcherJester() {
+	public void launchJester() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Jester.fxml"));
 			Parent setJesterGUI = (Parent) loader.load();

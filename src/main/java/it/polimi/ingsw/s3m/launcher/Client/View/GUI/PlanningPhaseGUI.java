@@ -664,18 +664,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	Label numRedStudentsIsland11;
 
-
-
-
-
-
-
-
-
-
-
-
-
 	//public void AssistantChoiceGUI(){}
 
 	public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage, Stage secondaryStage){
@@ -697,7 +685,6 @@ public class PlanningPhaseGUI{
 		}catch(ArrayIndexOutOfBoundsException e){
 			return;
 		}
-
 	}
 
 	public void insertAssistantZero(AssistantCardDTO assistantCardDTO){

@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class PlayCharacterCardResponse implements Response{
 	private int characterCardPosition;
 
-	//jester and mushroomer inputs
+	//jester and minstrel inputs
 	private ArrayList<String> studentsToPutOn;
 	private ArrayList<String> studentsToGetFrom;
 
-	//minstrel input
-	private String notInfluencingColor;
+	//mushroomer input
+	private String nonInfluencingColor;
 
 	public PlayCharacterCardResponse(int characterCardPosition){
 		this.characterCardPosition = characterCardPosition;
@@ -25,16 +25,16 @@ public class PlayCharacterCardResponse implements Response{
 		this.studentsToPutOn = studentsToPutOn;
 	}
 
-	public PlayCharacterCardResponse(int characterCardPosition, String notInfluencingColor){
+	public PlayCharacterCardResponse(int characterCardPosition, String nonInfluencingColor){
 		this.characterCardPosition = characterCardPosition;
-		this.notInfluencingColor = notInfluencingColor;
+		this.nonInfluencingColor = nonInfluencingColor;
 	}
 
 	public PlayCharacterCardResponse(){
 		this.characterCardPosition = -1;
 		this.studentsToGetFrom = null;
 		this.studentsToPutOn = null;
-		this.notInfluencingColor = null;
+		this.nonInfluencingColor = null;
 	}
 
 	public ArrayList<String> getStudentsToPutOn(){
@@ -45,8 +45,8 @@ public class PlayCharacterCardResponse implements Response{
 		return studentsToGetFrom;
 	}
 
-	public String getNotInfluencingColor(){
-		return notInfluencingColor;
+	public String getNonInfluencingColor(){
+		return nonInfluencingColor;
 	}
 
 	public int getCharacterCardPosition(){
@@ -65,7 +65,7 @@ public class PlayCharacterCardResponse implements Response{
 		this.studentsToGetFrom = studentsToGetFrom;
 	}
 
-	public void setNotInfluencingColor(String notInfluencingColor){
-		this.notInfluencingColor = notInfluencingColor;
+	public void setNonInfluencingColor(String nonInfluencingColor){
+		this.nonInfluencingColor = nonInfluencingColor;
 	}
 }
