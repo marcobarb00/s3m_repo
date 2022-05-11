@@ -1100,12 +1100,12 @@
             <ImageView fx:id="professorBluePone" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="66.0" layoutY="705.0" text="Coin Player 1:">
+      <Label layoutX="66.0" layoutY="705.0" text="CoinPlayer1:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="444.0" layoutY="630.0" text="Coin Player 2:">
+      <Label layoutX="444.0" layoutY="630.0" text="CoinPlayer2:">
          <font>
             <Font size="18.0" />
          </font>
@@ -1159,7 +1159,7 @@
             <ImageView fx:id="professorBluePThree" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="1021.0" layoutY="236.0" text="Coin PLayer 3:">
+      <Label layoutX="1021.0" layoutY="236.0" text="CoinPLayer3:">
          <font>
             <Font size="18.0" />
          </font>
