@@ -36,13 +36,13 @@ public class PlayAssistantCardOperation extends Operation{
 		ArrayList<AssistantCard> hand = game.getPlayerHand(playerController.getNickname());
 		boolean checkAssistantCard = 0 <= assistantCardPosition && assistantCardPosition < hand.size();
 		if(!checkAssistantCard){
-			throw new IllegalArgumentException("Incorrect card position value");
+			throw new IncorrectOperationException("Incorrect card position value");
 		}
 
 		//check if already played in turn
 		boolean checkCard = checkPlayableCard();
 		if(!checkCard){
-			throw new IllegalArgumentException("AssistantCard already played");
+			throw new IncorrectOperationException("AssistantCard already played");
 		}
 
 		game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
@@ -56,4 +56,6 @@ public class PlayAssistantCardOperation extends Operation{
 		return cardsPlayedInTurn.stream().map(AssistantCard::getType).
 				noneMatch(type -> type.equals(handCardType));
 	}
+
+
 }
