@@ -278,6 +278,8 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView motherNatureIsland11;
 	@FXML
+	Label coinPlayer3;
+	@FXML
 	Label numTowersIsland0;
 	@FXML
 	Label numTowersIsland1;
