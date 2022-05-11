@@ -24,7 +24,61 @@ public class PlanningPhaseGUI{
 	@FXML
 	VBox vBoxAssistantCard;
 	@FXML
-	ImageView backgroundImage;
+	ImageView blueScreen;
+	@FXML
+	ImageView islandZero;
+	@FXML
+	ImageView islandOne;
+	@FXML
+	ImageView islandTwo;
+	@FXML
+	ImageView islandThree;
+	@FXML
+	ImageView islandFour;
+	@FXML
+	ImageView islandFive;
+	@FXML
+	ImageView islandSix;
+	@FXML
+	ImageView islandSeven;
+	@FXML
+	ImageView islandEight;
+	@FXML
+	ImageView islandNine;
+	@FXML
+	ImageView islandTen;
+	@FXML
+	ImageView cloudOne;
+	@FXML
+	ImageView cloudTwo;
+	@FXML
+	ImageView cloudThree;
+	@FXML
+	ImageView islandEleven;
+	@FXML
+	GridPane gridPaneIsland0;
+	@FXML
+	GridPane gridPaneIsland1;
+	@FXML
+	GridPane gridPaneIsland2;
+	@FXML
+	GridPane gridPaneIsland3;
+	@FXML
+	GridPane gridPaneIsland4;
+	@FXML
+	GridPane gridPaneIsland5;
+	@FXML
+	GridPane gridPaneIsland6;
+	@FXML
+	GridPane gridPaneIsland7;
+	@FXML
+	GridPane gridPaneIsland8;
+	@FXML
+	GridPane gridPaneIsland9;
+	@FXML
+	GridPane gridPaneIsland10;
+	@FXML
+	GridPane gridPaneIsland11;
 	@FXML
 	ImageView assistantZero;
 	@FXML
@@ -51,6 +105,206 @@ public class PlanningPhaseGUI{
 	Label coinPlayerTwo;
 	@FXML
 	Label coinPlayerThree;
+	@FXML
+	ImageView blueStudentsIsland0;
+	@FXML
+	ImageView redStudentsIsland0;
+	@FXML
+	ImageView yellowStudentsIsland0;
+	@FXML
+	ImageView pinkStudentsIsland0;
+	@FXML
+	ImageView greenStudentsIsland0;
+	@FXML
+	ImageView blueStudentsIsland1;
+	@FXML
+	ImageView redStudentsIsland1;
+	@FXML
+	ImageView yellowStudentsIsland1;
+	@FXML
+	ImageView pinkStudentsIsland1;
+	@FXML
+	ImageView greenStudentsIsland1;
+	@FXML
+	ImageView blueStudentsIsland2;
+	@FXML
+	ImageView redStudentsIsland2;
+	@FXML
+	ImageView yellowStudentsIsland2;
+	@FXML
+	ImageView pinkStudentsIsland2;
+	@FXML
+	ImageView greenStudentsIsland2;
+	@FXML
+	ImageView blueStudentsIsland3;
+	@FXML
+	ImageView redStudentsIsland3;
+	@FXML
+	ImageView yellowStudentsIsland3;
+	@FXML
+	ImageView pinkStudentsIsland3;
+	@FXML
+	ImageView greenStudentsIsland3;
+	@FXML
+	ImageView blueStudentsIsland4;
+	@FXML
+	ImageView redStudentsIsland4;
+	@FXML
+	ImageView yellowStudentsIsland4;
+	@FXML
+	ImageView pinkStudentsIsland4;
+	@FXML
+	ImageView greenStudentsIsland4;
+	@FXML
+	ImageView blueStudentsIsland5;
+	@FXML
+	ImageView redStudentsIsland5;
+	@FXML
+	ImageView yellowStudentsIsland5;
+	@FXML
+	ImageView pinkStudentsIsland5;
+	@FXML
+	ImageView greenStudentsIsland5;
+	@FXML
+	ImageView blueStudentsIsland6;
+	@FXML
+	ImageView redStudentsIsland6;
+	@FXML
+	ImageView yellowStudentsIsland6;
+	@FXML
+	ImageView pinkStudentsIsland6;
+	@FXML
+	ImageView greenStudentsIsland6;
+	@FXML
+	ImageView blueStudentsIsland7;
+	@FXML
+	ImageView redStudentsIsland7;
+	@FXML
+	ImageView yellowStudentsIsland7;
+	@FXML
+	ImageView pinkStudentsIsland7;
+	@FXML
+	ImageView greenStudentsIsland7;
+	@FXML
+	ImageView blueStudentsIsland8;
+	@FXML
+	ImageView redStudentsIsland8;
+	@FXML
+	ImageView yellowStudentsIsland8;
+	@FXML
+	ImageView pinkStudentsIsland8;
+	@FXML
+	ImageView greenStudentsIsland8;
+	@FXML
+	ImageView blueStudentsIsland9;
+	@FXML
+	ImageView redStudentsIsland9;
+	@FXML
+	ImageView yellowStudentsIsland9;
+	@FXML
+	ImageView pinkStudentsIsland9;
+	@FXML
+	ImageView greenStudentsIsland9;
+	@FXML
+	ImageView blueStudentsIsland10;
+	@FXML
+	ImageView redStudentsIsland10;
+	@FXML
+	ImageView yellowStudentsIsland10;
+	@FXML
+	ImageView pinkStudentsIsland10;
+	@FXML
+	ImageView greenStudentsIsland10;
+	@FXML
+	ImageView blueStudentsIsland11;
+	@FXML
+	ImageView redStudentsIsland11;
+	@FXML
+	ImageView yellowStudentsIsland11;
+	@FXML
+	ImageView pinkStudentsIsland11;
+	@FXML
+	ImageView greenStudentsIsland11;
+	@FXML
+	ImageView towersIsland0;
+	@FXML
+	ImageView towersIsland1;
+	@FXML
+	ImageView towersIsland2;
+	@FXML
+	ImageView towersIsland3;
+	@FXML
+	ImageView towersIsland4;
+	@FXML
+	ImageView towersIsland5;
+	@FXML
+	ImageView towersIsland6;
+	@FXML
+	ImageView towersIsland7;
+	@FXML
+	ImageView towersIsland8;
+	@FXML
+	ImageView towersIsland9;
+	@FXML
+	ImageView towersIsland10;
+	@FXML
+	ImageView towersIsland11;
+	@FXML
+	ImageView motherNatureIsland0;
+	@FXML
+	ImageView motherNatureIsland1;
+	@FXML
+	ImageView motherNatureIsland2;
+	@FXML
+	ImageView motherNatureIsland3;
+	@FXML
+	ImageView motherNatureIsland4;
+	@FXML
+	ImageView motherNatureIsland5;
+	@FXML
+	ImageView motherNatureIsland6;
+	@FXML
+	ImageView motherNatureIsland7;
+	@FXML
+	ImageView motherNatureIsland8;
+	@FXML
+	ImageView motherNatureIsland9;
+	@FXML
+	ImageView motherNatureIsland10;
+	@FXML
+	ImageView motherNatureIsland11;
+	@FXML
+	Label numTowersIsland0;
+	@FXML
+	Label numTowersIsland1;
+	@FXML
+	Label numTowersIsland2;
+	@FXML
+	Label numTowersIsland3;
+	@FXML
+	Label numTowersIsland4;
+	@FXML
+	Label numTowersIsland5;
+	@FXML
+	Label numTowersIsland6;
+	@FXML
+	Label numTowersIsland7;
+	@FXML
+	Label numTowersIsland8;
+	@FXML
+	Label numTowersIsland9;
+	@FXML
+	Label numTowersIsland10;
+	@FXML
+	Label numTowersIsland11;
+	@FXML
+	ImageView dashboardPlayerOne;
+	@FXML
+	ImageView dashboardPlayerTwo;
+	@FXML
+	ImageView dashboardPlayerThree;
+	@FXML
+	ImageView coinImage;
 	@FXML
 	ImageView hallStudentOnePone;
 	@FXML
@@ -102,15 +356,13 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView hallStudentSevenPThree;
 	@FXML
-	ImageView hallStudentEightPv;
+	ImageView hallStudentEightPThree;
 	@FXML
 	ImageView hallStudentNinePThree;
 	@FXML
 	ImageView studGreenOnePone;
 	@FXML
 	ImageView studGreenTwoPone;
-	@FXML
-	ImageView StudGreenTwoPone;
 	@FXML
 	ImageView studGreenThreePone;
 	@FXML
@@ -131,18 +383,17 @@ public class PlanningPhaseGUI{
 	ImageView studGreenOnePTwo;
 	@FXML
 	ImageView studGreenTwoPTwo;
-	@FXML
-	ImageView StudGreenTwoPTwo;
+
 	@FXML
 	ImageView studGreenThreePTwo;
 	@FXML
 	ImageView studGreenFourPTwo;
 	@FXML
-	ImageView studGreenFiveTwo;
+	ImageView studGreenFivePTwo;
 	@FXML
-	ImageView studGreenSixTwo;
+	ImageView studGreenSixPTwo;
 	@FXML
-	ImageView studGreenSevenTwo;
+	ImageView studGreenSevenPTwo;
 	@FXML
 	ImageView studGreenEightPTwo;
 	@FXML
@@ -153,8 +404,6 @@ public class PlanningPhaseGUI{
 	ImageView studGreenOnePThree;
 	@FXML
 	ImageView studGreenTwoPThree;
-	@FXML
-	ImageView StudGreenTwoPThree;
 	@FXML
 	ImageView studGreenThreePThree;
 	@FXML
@@ -176,8 +425,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studRedTwoPone;
 	@FXML
-	ImageView StudRedTwoPone;
-	@FXML
 	ImageView studRedThreePone;
 	@FXML
 	ImageView studRedFourPone;
@@ -198,17 +445,15 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studRedTwoPTwo;
 	@FXML
-	ImageView StudRedTwoPTwo;
-	@FXML
 	ImageView studRedThreePTwo;
 	@FXML
 	ImageView studRedFourPTwo;
 	@FXML
-	ImageView studRedFiveTwo;
+	ImageView studRedFivePTwo;
 	@FXML
-	ImageView studRedSixTwo;
+	ImageView studRedSixPTwo;
 	@FXML
-	ImageView studRedSevenTwo;
+	ImageView studRedSevenPTwo;
 	@FXML
 	ImageView studRedEightPTwo;
 	@FXML
@@ -219,8 +464,6 @@ public class PlanningPhaseGUI{
 	ImageView studRedOnePThree;
 	@FXML
 	ImageView studRedTwoPThree;
-	@FXML
-	ImageView StudRedTwoPThree;
 	@FXML
 	ImageView studRedThreePThree;
 	@FXML
@@ -242,8 +485,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studYellowTwoPone;
 	@FXML
-	ImageView StudYellowTwoPone;
-	@FXML
 	ImageView studYellowThreePone;
 	@FXML
 	ImageView studYellowFourPone;
@@ -264,17 +505,15 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studYellowTwoPTwo;
 	@FXML
-	ImageView StudYellowTwoPTwo;
-	@FXML
 	ImageView studYellowThreePTwo;
 	@FXML
 	ImageView studYellowFourPTwo;
 	@FXML
-	ImageView studYellowFiveTwo;
+	ImageView studYellowFivePTwo;
 	@FXML
-	ImageView studYellowSixTwo;
+	ImageView studYellowSixPTwo;
 	@FXML
-	ImageView studYellowSevenTwo;
+	ImageView studYellowSevenPTwo;
 	@FXML
 	ImageView studYellowEightPTwo;
 	@FXML
@@ -285,8 +524,6 @@ public class PlanningPhaseGUI{
 	ImageView studYellowOnePThree;
 	@FXML
 	ImageView studYellowTwoPThree;
-	@FXML
-	ImageView StudYellowTwoPThree;
 	@FXML
 	ImageView studYellowThreePThree;
 	@FXML
@@ -308,8 +545,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studPinkTwoPone;
 	@FXML
-	ImageView StudPinkTwoPone;
-	@FXML
 	ImageView studPinkThreePone;
 	@FXML
 	ImageView studPinkFourPone;
@@ -329,18 +564,17 @@ public class PlanningPhaseGUI{
 	ImageView studPinkOnePTwo;
 	@FXML
 	ImageView studPinkTwoPTwo;
-	@FXML
-	ImageView StudPinkTwoPTwo;
+
 	@FXML
 	ImageView studPinkThreePTwo;
 	@FXML
 	ImageView studPinkFourPTwo;
 	@FXML
-	ImageView studPinkFiveTwo;
+	ImageView studPinkFivePTwo;
 	@FXML
-	ImageView studPinkSixTwo;
+	ImageView studPinkSixPTwo;
 	@FXML
-	ImageView studPinkSevenTwo;
+	ImageView studPinkSevenPTwo;
 	@FXML
 	ImageView studPinkEightPTwo;
 	@FXML
@@ -351,8 +585,7 @@ public class PlanningPhaseGUI{
 	ImageView studPinkOnePThree;
 	@FXML
 	ImageView studPinkTwoPThree;
-	@FXML
-	ImageView StudPinkTwoPThree;
+
 	@FXML
 	ImageView studPinkThreePThree;
 	@FXML
@@ -374,8 +607,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studBlueTwoPone;
 	@FXML
-	ImageView StudBlueTwoPone;
-	@FXML
 	ImageView studBlueThreePone;
 	@FXML
 	ImageView studBlueFourPone;
@@ -396,17 +627,15 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView studBlueTwoPTwo;
 	@FXML
-	ImageView StudBlueTwoPTwo;
-	@FXML
 	ImageView studBlueThreePTwo;
 	@FXML
 	ImageView studBlueFourPTwo;
 	@FXML
-	ImageView studBlueFiveTwo;
+	ImageView studBlueFivePTwo;
 	@FXML
-	ImageView studBlueSixTwo;
+	ImageView studBlueSixPTwo;
 	@FXML
-	ImageView studBlueSevenTwo;
+	ImageView studBlueSevenPTwo;
 	@FXML
 	ImageView studBlueEightPTwo;
 	@FXML
@@ -417,8 +646,6 @@ public class PlanningPhaseGUI{
 	ImageView studBlueOnePThree;
 	@FXML
 	ImageView studBlueTwoPThree;
-	@FXML
-	ImageView StudBlueTwoPThree;
 	@FXML
 	ImageView studBlueThreePThree;
 	@FXML
@@ -509,10 +736,6 @@ public class PlanningPhaseGUI{
 	ImageView towerFivePThree;
 	@FXML
 	ImageView towerSixPThree;
-	@FXML
-	ImageView towerSevenPThree;
-	@FXML
-	ImageView towerEightPThree;
 	@FXML
 	GridPane gridPaneCloudOne;
 	@FXML
@@ -806,4 +1029,7 @@ public class PlanningPhaseGUI{
 	}
 
 
+	public void chooseAssistant(MouseEvent mouseEvent) {
+
+	}
 }
