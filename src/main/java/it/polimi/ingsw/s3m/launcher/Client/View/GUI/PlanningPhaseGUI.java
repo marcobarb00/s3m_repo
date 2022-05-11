@@ -3,6 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
@@ -16,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -972,10 +974,61 @@ public class PlanningPhaseGUI{
 		}
 
 		//set mother nature position
+		Image motherNatureImage = new Image("MotherNature.jpeg");
+		switch(gameState.getMotherNaturePosition()){
+			case 0:
+				motherNatureIsland0.setImage(motherNatureImage);
+				break;
+			case 1:
+				motherNatureIsland1.setImage(motherNatureImage);
+				break;
+			case 2:
+				motherNatureIsland2.setImage(motherNatureImage);
+				break;
+			case 3:
+				motherNatureIsland3.setImage(motherNatureImage);
+				break;
+			case 4:
+				motherNatureIsland4.setImage(motherNatureImage);
+				break;
+			case 5:
+				motherNatureIsland5.setImage(motherNatureImage);
+				break;
+			case 6:
+				motherNatureIsland6.setImage(motherNatureImage);
+				break;
+			case 7:
+				motherNatureIsland7.setImage(motherNatureImage);
+				break;
+			case 8:
+				motherNatureIsland8.setImage(motherNatureImage);
+				break;
+			case 9:
+				motherNatureIsland9.setImage(motherNatureImage);
+				break;
+			case 10:
+				motherNatureIsland10.setImage(motherNatureImage);
+				break;
+			case 11:
+				motherNatureIsland11.setImage(motherNatureImage);
+				break;
+		}
 
-		//set professors value
-
-		//print dashboards information
+		//TODO print dashboards information
+		//TODO print students in entrance
+		//TODO print students on tables
+		//TODO print remaining towers
+		//TODO print professors
+		//TODO print coins
+		HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
+		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
+		
+		printDashboardOne(dashboardList.get(nicknameList.get(0)));
+		printDashboardTwo();
+		if(gameState.getPlayersNumber() == 3)
+			printDashboardThree();
+		else
+			hideDashboardThree();
 	}
 
 	public void printIslandZero(int index, IslandDTO islandDTO){
@@ -1010,6 +1063,22 @@ public class PlanningPhaseGUI{
 		towersIsland0.setVisible(false);
 
 		numTowersIsland0.setVisible(false);
+	}
+
+	public void printDashboardOne(DashboardDTO dashboardDTO){
+		ArrayList<String> entranceStudentColors = new ArrayList<>();
+		dashboardDTO.getEntrance().forEach((color, value) -> {
+			for(int i = 0; i < value; i++){
+				entranceStudentColors.add(color);
+			}
+		});
+
+		printEntranceStudentOnePOne(entranceStudentColors.get(0));
+	}
+
+	public void printEntranceStudentOnePOne(String color){
+		Image studentImage = new Image(color + "Stud.jpeg");
+		hallStudentOnePone.setImage(studentImage);
 	}
 
 	public void insertAssistantZero(AssistantCardDTO assistantCardDTO){
@@ -1061,7 +1130,6 @@ public class PlanningPhaseGUI{
 		Image view = new Image(assistantCardDTO.getType() + ".jpg");
 		assistantNine.setImage(view);
 	}
-
 
 	public void chooseAssistantCard(MouseEvent event){
 		String name = event.getPickResult().getIntersectedNode().getId();
