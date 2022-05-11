@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
@@ -32,6 +33,8 @@ public class ControllerGUI {
 	private NewRoomResponse newRoomResponse = new NewRoomResponse();
 	private PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse();
 	private PlayCharacterCardGUI playCharacterCardGUI;
+	private PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse();
+	private PlayCharacterCardGUI playAssistantCardGUI;
 
 	private ControllerGUI() {
 		secondaryStage = new Stage();
@@ -195,6 +198,19 @@ public class ControllerGUI {
 		}
 	}
 
+	public void launchPlanningPhase(PlanningPhaseMessage message){
+		PlayAssistantCardResponse = new PlayAssistantCardResponse();
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PlanningPhase.fxml"));
+			Parent playCharacterCard = (Parent) loader.load();
+			playAssistantCardGUI = loader.getController();
+			playAssistantCardGUI.inizialize(message);
+			setScene(playCharacterCard);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public void launchPutStudentOnTable() {
 		try {
