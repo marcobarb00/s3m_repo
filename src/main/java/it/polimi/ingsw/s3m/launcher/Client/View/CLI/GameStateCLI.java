@@ -23,7 +23,7 @@ public class GameStateCLI{
 		System.out.println("\nISLANDS:");
 		printIslands();
 
-		System.out.println("\nMother Nature position: " + gameState.getMotherNaturePosition());
+		System.out.println("\nMother Nature position: " + (gameState.getMotherNaturePosition() + 1));
 
 		System.out.println("\nprofessors:");
 		gameState.getProfessors().forEach((color, player) -> System.out.println(color + ": " + player.getNickname()));
@@ -63,21 +63,15 @@ public class GameStateCLI{
 	private void printDashboard(DashboardDTO dashboard){
 		StringBuilder students;
 
-		System.out.println("\nentrance:");
+		//System.out.println("\nentrance:");
 		HashMap<String, Integer> entrance = dashboard.getEntrance();
-		students = new StringBuilder();
-		for(String color : entrance.keySet()){
-			students.append(color).append(": ").append(entrance.get(color)).append(" ");
-		}
-		System.out.println(students);
-
-		System.out.println("\nhall:");
 		HashMap<String, Integer> hall = dashboard.getTables();
-		students = new StringBuilder();
-		for(String color : hall.keySet()){
-			students.append(color).append(": ").append(hall.get(color)).append(" ");
+		System.out.println("ENTRANCE			HALL");
+		for(String color : entrance.keySet()){
+			System.out.println(color + ":	" + entrance.get(color) + "				" + color
+								+ ":	" + hall.get(color));
+
 		}
-		System.out.println(students);
 
 		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left\n");
 	}
