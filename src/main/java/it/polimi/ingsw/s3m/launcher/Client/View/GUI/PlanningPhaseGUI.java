@@ -1622,16 +1622,14 @@ public class PlanningPhaseGUI{
 			printTowerSevenPOne(towerColor);
 		if(numberOfTowers >= 8)
 			printTowerEightPOne(towerColor);
-		if(numberOfTowers >= 9)
-			printTowerNinePOne(towerColor);
-		if(numberOfTowers >= 10)
-			printTowerTenPOne(towerColor);
+		
 
 
 
 	}
 
 	public void printDashboardTwo(DashboardDTO dashboardDTO, int playersNumber){
+		//print entrance
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
 		dashboardDTO.getEntrance().forEach((color, value) -> {
 			for(int i = 0; i < value; i++){
@@ -1651,6 +1649,148 @@ public class PlanningPhaseGUI{
 			printEntranceStudentEightPTwo(entranceStudentColors.get(7));
 			printEntranceStudentNinePTwo(entranceStudentColors.get(8));
 		}
+
+		//print tables
+		HashMap<String, Integer> tables = dashboardDTO.getTables();
+		if(tables.get("RED") >= 1)
+			printTableStudentOnePTwoRed();
+		if(tables.get("RED") >= 2)
+			printTableStudentTwoPTwoRed();
+		if(tables.get("RED") >= 3)
+			printTableStudentThreePTwoRed();
+		if(tables.get("RED") >= 4)
+			printTableStudentFourPTwoRed();
+		if(tables.get("RED") >= 5)
+			printTableStudentFivePTwoRed();
+		if(tables.get("RED") >= 6)
+			printTableStudentSixPTwoRed();
+		if(tables.get("RED") >= 7)
+			printTableStudentSevenPTwoRed();
+		if(tables.get("RED") >= 8)
+			printTableStudentEightPTwoRed();
+		if(tables.get("RED") >= 9)
+			printTableStudentNinePTwoRed();
+		if(tables.get("RED") >= 10)
+			printTableStudentTenPTwoRed();
+
+		if(tables.get("GREEN") >= 1)
+			printTableStudentOnePTwoGreen();
+		if(tables.get("GREEN") >= 2)
+			printTableStudentTwoPTwoGreen();
+		if(tables.get("GREEN") >= 3)
+			printTableStudentThreePTwoGreen();
+		if(tables.get("GREEN") >= 4)
+			printTableStudentFourPTwoGreen();
+		if(tables.get("GREEN") >= 5)
+			printTableStudentFivePTwoGreen();
+		if(tables.get("GREEN") >= 6)
+			printTableStudentSixPTwoGreen();
+		if(tables.get("GREEN") >= 7)
+			printTableStudentSevenPTwoGreen();
+		if(tables.get("GREEN") >= 8)
+			printTableStudentEightPTwoGreen();
+		if(tables.get("GREEN") >= 9)
+			printTableStudentNinePTwoGreen();
+		if(tables.get("GREEN") >= 10)
+			printTableStudentTenPTwoGreen();
+
+		if(tables.get("BLUE") >= 1)
+			printTableStudentOnePTwoBlue();
+		if(tables.get("BLUE") >= 2)
+			printTableStudentTwoPTwoBlue();
+		if(tables.get("BLUE") >= 3)
+			printTableStudentThreePTwoBlue();
+		if(tables.get("BLUE") >= 4)
+			printTableStudentFourPTwoBlue();
+		if(tables.get("BLUE") >= 5)
+			printTableStudentFivePTwoBlue();
+		if(tables.get("BLUE") >= 6)
+			printTableStudentSixPTwoBlue();
+		if(tables.get("BLUE") >= 7)
+			printTableStudentSevenPTwoBlue();
+		if(tables.get("BLUE") >= 8)
+			printTableStudentEightPTwoBlue();
+		if(tables.get("BLUE") >= 9)
+			printTableStudentNinePTwoBlue();
+		if(tables.get("BLUE") >= 10)
+			printTableStudentTenPTwoBlue();
+
+		if(tables.get("PINK") >= 1)
+			printTableStudentOnePTwoPink();
+		if(tables.get("PINK") >= 2)
+			printTableStudentTwoPTwoPink();
+		if(tables.get("PINK") >= 3)
+			printTableStudentThreePTwoPink();
+		if(tables.get("PINK") >= 4)
+			printTableStudentFourPTwoPink();
+		if(tables.get("PINK") >= 5)
+			printTableStudentFivePTwoPink();
+		if(tables.get("PINK") >= 6)
+			printTableStudentSixPTwoPink();
+		if(tables.get("PINK") >= 7)
+			printTableStudentSevenPTwoPink();
+		if(tables.get("PINK") >= 8)
+			printTableStudentEightPTwoPink();
+		if(tables.get("PINK") >= 9)
+			printTableStudentNinePTwoPink();
+		if(tables.get("PINK") >= 10)
+			printTableStudentTenPTwoPink();
+
+		if(tables.get("YELLOW") >= 1)
+			printTableStudentOnePTwoYellow();
+		if(tables.get("YELLOW") >= 2)
+			printTableStudentTwoPTwoYellow();
+		if(tables.get("YELLOW") >= 3)
+			printTableStudentThreePTwoYellow();
+		if(tables.get("YELLOW") >= 4)
+			printTableStudentFourPTwoYellow();
+		if(tables.get("YELLOW") >= 5)
+			printTableStudentFivePTwoYellow();
+		if(tables.get("YELLOW") >= 6)
+			printTableStudentSixPTwoYellow();
+		if(tables.get("YELLOW") >= 7)
+			printTableStudentSevenPTwoYellow();
+		if(tables.get("YELLOW") >= 8)
+			printTableStudentEightPTwoYellow();
+		if(tables.get("YELLOW") >= 9)
+			printTableStudentNinePTwoYellow();
+		if(tables.get("YELLOW") >= 10)
+			printTableStudentTenPTwoYellow();
+
+		//print professors
+		if(playerNickname.equals(professors.get("RED")))
+			printRedProfessorPTwo();
+		if(playerNickname.equals(professors.get("GREEN")))
+			printGreenProfessorPTwo();
+		if(playerNickname.equals(professors.get("BLUE")))
+			printBlueProfessorPTwo();
+		if(playerNickname.equals(professors.get("PINK")))
+			printPinkProfessorPTwo();
+		if(playerNickname.equals(professors.get("YELLOW")))
+			printYellowProfessorPTwo();
+
+
+		//print towers
+		int numberOfTowers = dashboardDTO.getNumberOfTowers();
+
+		if(numberOfTowers >= 1)
+			printTowerOnePTwo(towerColor);
+		if(numberOfTowers >= 2)
+			printTowerTwoPTwo(towerColor);
+		if(numberOfTowers >= 3)
+			printTowerThreePTwo(towerColor);
+		if(numberOfTowers >= 4)
+			printTowerFourPTwo(towerColor);
+		if(numberOfTowers >= 5)
+			printTowerFivePTwo(towerColor);
+		if(numberOfTowers >= 6)
+			printTowerSixPTwo(towerColor);
+		if(numberOfTowers >= 7)
+			printTowerSevenPTwo(towerColor);
+		if(numberOfTowers >= 8)
+			printTowerEightPTwo(towerColor);
+
+
 	}
 
 	public void printDashboardThree(DashboardDTO dashboardDTO, int playersNumber){
@@ -1673,6 +1813,142 @@ public class PlanningPhaseGUI{
 			printEntranceStudentEightPThree(entranceStudentColors.get(7));
 			printEntranceStudentNinePThree(entranceStudentColors.get(8));
 		}
+
+		//print tables
+		HashMap<String, Integer> tables = dashboardDTO.getTables();
+		if(tables.get("RED") >= 1)
+			printTableStudentOnePThreeRed();
+		if(tables.get("RED") >= 2)
+			printTableStudentTwoPThreeRed();
+		if(tables.get("RED") >= 3)
+			printTableStudentThreePThreeRed();
+		if(tables.get("RED") >= 4)
+			printTableStudentFourPThreeRed();
+		if(tables.get("RED") >= 5)
+			printTableStudentFivePThreeRed();
+		if(tables.get("RED") >= 6)
+			printTableStudentSixPThreeRed();
+		if(tables.get("RED") >= 7)
+			printTableStudentSevenPThreeRed();
+		if(tables.get("RED") >= 8)
+			printTableStudentEightPThreeRed();
+		if(tables.get("RED") >= 9)
+			printTableStudentNinePThreeRed();
+		if(tables.get("RED") >= 10)
+			printTableStudentTenPThreeRed();
+
+		if(tables.get("GREEN") >= 1)
+			printTableStudentOnePThreeGreen();
+		if(tables.get("GREEN") >= 2)
+			printTableStudentTwoPThreeGreen();
+		if(tables.get("GREEN") >= 3)
+			printTableStudentThreePThreeGreen();
+		if(tables.get("GREEN") >= 4)
+			printTableStudentFourPThreeGreen();
+		if(tables.get("GREEN") >= 5)
+			printTableStudentFivePThreeGreen();
+		if(tables.get("GREEN") >= 6)
+			printTableStudentSixPThreeGreen();
+		if(tables.get("GREEN") >= 7)
+			printTableStudentSevenPThreeGreen();
+		if(tables.get("GREEN") >= 8)
+			printTableStudentEightPThreeGreen();
+		if(tables.get("GREEN") >= 9)
+			printTableStudentNinePThreeGreen();
+		if(tables.get("GREEN") >= 10)
+			printTableStudentTenPThreeGreen();
+
+		if(tables.get("BLUE") >= 1)
+			printTableStudentOnePThreeBlue();
+		if(tables.get("BLUE") >= 2)
+			printTableStudentTwoPThreeBlue();
+		if(tables.get("BLUE") >= 3)
+			printTableStudentThreePThreeBlue();
+		if(tables.get("BLUE") >= 4)
+			printTableStudentFourPThreeBlue();
+		if(tables.get("BLUE") >= 5)
+			printTableStudentFivePThreeBlue();
+		if(tables.get("BLUE") >= 6)
+			printTableStudentSixPThreeBlue();
+		if(tables.get("BLUE") >= 7)
+			printTableStudentSevenPThreeBlue();
+		if(tables.get("BLUE") >= 8)
+			printTableStudentEightPThreeBlue();
+		if(tables.get("BLUE") >= 9)
+			printTableStudentNinePThreeBlue();
+		if(tables.get("BLUE") >= 10)
+			printTableStudentTenPThreeBlue();
+
+		if(tables.get("PINK") >= 1)
+			printTableStudentOnePThreePink();
+		if(tables.get("PINK") >= 2)
+			printTableStudentTwoPThreePink();
+		if(tables.get("PINK") >= 3)
+			printTableStudentThreePThreePink();
+		if(tables.get("PINK") >= 4)
+			printTableStudentFourPThreePink();
+		if(tables.get("PINK") >= 5)
+			printTableStudentFivePThreePink();
+		if(tables.get("PINK") >= 6)
+			printTableStudentSixPThreePink();
+		if(tables.get("PINK") >= 7)
+			printTableStudentSevenPThreePink();
+		if(tables.get("PINK") >= 8)
+			printTableStudentEightPThreePink();
+		if(tables.get("PINK") >= 9)
+			printTableStudentNinePThreePink();
+		if(tables.get("PINK") >= 10)
+			printTableStudentTenPThreePink();
+
+		if(tables.get("YELLOW") >= 1)
+			printTableStudentOnePThreeYellow();
+		if(tables.get("YELLOW") >= 2)
+			printTableStudentTwoPThreeYellow();
+		if(tables.get("YELLOW") >= 3)
+			printTableStudentThreePThreeYellow();
+		if(tables.get("YELLOW") >= 4)
+			printTableStudentFourPThreeYellow();
+		if(tables.get("YELLOW") >= 5)
+			printTableStudentFivePThreeYellow();
+		if(tables.get("YELLOW") >= 6)
+			printTableStudentSixPThreeYellow();
+		if(tables.get("YELLOW") >= 7)
+			printTableStudentSevenPThreeYellow();
+		if(tables.get("YELLOW") >= 8)
+			printTableStudentEightPThreeYellow();
+		if(tables.get("YELLOW") >= 9)
+			printTableStudentNinePThreeYellow();
+		if(tables.get("YELLOW") >= 10)
+			printTableStudentTenPThreeYellow();
+
+		//print professors
+		if(playerNickname.equals(professors.get("RED")))
+			printRedProfessorPThree();
+		if(playerNickname.equals(professors.get("GREEN")))
+			printGreenProfessorPThree();
+		if(playerNickname.equals(professors.get("BLUE")))
+			printBlueProfessorPThree();
+		if(playerNickname.equals(professors.get("PINK")))
+			printPinkProfessorPThree();
+		if(playerNickname.equals(professors.get("YELLOW")))
+			printYellowProfessorPThree();
+
+
+		//print towers
+		int numberOfTowers = dashboardDTO.getNumberOfTowers();
+
+		if(numberOfTowers >= 1)
+			printTowerOnePThree(towerColor);
+		if(numberOfTowers >= 2)
+			printTowerTwoPThree(towerColor);
+		if(numberOfTowers >= 3)
+			printTowerThreePThree(towerColor);
+		if(numberOfTowers >= 4)
+			printTowerFourPThree(towerColor);
+		if(numberOfTowers >= 5)
+			printTowerFivePThree(towerColor);
+		if(numberOfTowers >= 6)
+			printTowerSixPThree(towerColor);
 	}
 
 	public void printEntranceStudentOnePOne(String color){
@@ -2519,78 +2795,212 @@ public class PlanningPhaseGUI{
 		Image view = new Image("YELLOWProf.jpeg");
 		professorYellowPone.setImage(view);
 	}
+	public void printRedProfessorPTwo(){
+		Image view = new Image("REDProf.jpeg");
+		professorRedPTwo.setImage(view);
+	}
+
+	public void printGreenProfessorPTwo(){
+		Image view = new Image("GREENProf.jpeg");
+		professorGreenPTwo.setImage(view);
+	}
+
+	public void printBlueProfessorPTwo(){
+		Image view = new Image("BLUEProf.jpeg");
+		professorBluePTwo.setImage(view);
+	}
+
+	public void printPinkProfessorPTwo(){
+		Image view = new Image("PINKProf.jpeg");
+		professorPinkPTwo.setImage(view);
+	}
+
+	public void printYellowProfessorPTwo(){
+		Image view = new Image("YELLOWProf.jpeg");
+		professorYellowPTwo.setImage(view);
+	}
+	public void printRedProfessorPThree(){
+		Image view = new Image("REDProf.jpeg");
+		professorRedPThree.setImage(view);
+	}
+
+	public void printGreenProfessorPThree(){
+		Image view = new Image("GREENProf.jpeg");
+		professorGreenPThree.setImage(view);
+	}
+
+	public void printBlueProfessorPThree(){
+		Image view = new Image("BLUEProf.jpeg");
+		professorBluePThree.setImage(view);
+	}
+
+	public void printPinkProfessorPThree(){
+		Image view = new Image("PINKProf.jpeg");
+		professorPinkPThree.setImage(view);
+	}
+
+	public void printYellowProfessorPThree(){
+		Image view = new Image("YELLOWProf.jpeg");
+		professorYellowPThree.setImage(view);
+	}
 
 
 	//towers
 	public void printTowerOnePOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerOnePone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerTwoPOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerTwoPone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerThreePOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerThreePone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerFourPOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerFourPone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerFivePOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerFivePone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerSixPOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerSixPone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerSevenPOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerSevenPone.setImage(towerImage);
 		}
 	}
 
 	public void printTowerEightPOne(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerEightPone.setImage(towerImage);
 		}
 	}
 
-	public void printTowerNinePOne(String color){
+	public void printTowerOnePTwo(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerOnePTwo.setImage(towerImage);
 		}
 	}
 
-	public void printTowerTenPOne(String color){
+	public void printTowerTwoPTwo(String color){
 		if(!Objects.equals(color, "")){
 			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
+			towerTwoPTwo.setImage(towerImage);
 		}
 	}
+
+	public void printTowerThreePTwo(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerThreePTwo.setImage(towerImage);
+		}
+	}
+
+	public void printTowerFourPTwo(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerFourPTwo.setImage(towerImage);
+		}
+	}
+
+	public void printTowerFivePTwo(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerFivePTwo.setImage(towerImage);
+		}
+	}
+
+	public void printTowerSixPTwo(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerSixPTwo.setImage(towerImage);
+		}
+	}
+
+	public void printTowerSevenPTwo(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerSevenPTwo.setImage(towerImage);
+		}
+	}
+
+	public void printTowerEightPTwo(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerEightPTwo.setImage(towerImage);
+		}
+	}
+
+
+	public void printTowerOnePThree(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerOnePThree.setImage(towerImage);
+		}
+	}
+
+	public void printTowerTwoPThree(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerTwoPThree.setImage(towerImage);
+		}
+	}
+
+	public void printTowerThreePThree(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerThreePThree.setImage(towerImage);
+		}
+	}
+
+	public void printTowerFourPThree(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerFourPThree.setImage(towerImage);
+		}
+	}
+
+	public void printTowerFivePThree(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerFivePThree.setImage(towerImage);
+		}
+	}
+
+	public void printTowerSixPThree(String color){
+		if(!Objects.equals(color, "")){
+			Image towerImage = new Image(color + "Tower.jpeg");
+			towerSixPThree.setImage(towerImage);
+		}
+	}
+
 
 	public void chooseAssistant(MouseEvent mouseEvent) {
 
