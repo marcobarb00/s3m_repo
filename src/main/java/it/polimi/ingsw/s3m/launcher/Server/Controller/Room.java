@@ -433,4 +433,17 @@ public class Room{
 			player.communicateWithClient(notification);
 		}
 	}
+
+	// GETTER
+	public Game getGameState() {
+		return gameState;
+	}
+	public boolean isExpertMode() {
+		return expertMode;
+	}
+
+	// SETTER
+	public void setGameState(Game gameState) {
+		this.gameState = gameState;
+	}
 }
