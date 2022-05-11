@@ -891,8 +891,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	Label numRedStudentsIsland11;
 
-	//public void AssistantChoiceGUI(){}
-
 	public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage){
 		GameDTO gameState = planningPhaseMessage.getGameState();
 		setGameState(gameState);
@@ -917,7 +915,7 @@ public class PlanningPhaseGUI{
 	}
 
 	public void setGameState(GameDTO gameState){
-		//character card
+		//TODO character cards???
 
 
 		//print islands
@@ -1018,9 +1016,6 @@ public class PlanningPhaseGUI{
 				break;
 		}
 
-
-		//TODO print dashboards information
-		//TODO print coins
 		HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
 		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
 		String towerColor = gameState.getCurrentPlayer().getColor();
@@ -1036,7 +1031,10 @@ public class PlanningPhaseGUI{
 
 		 */
 
-		gameState.getCoins();
+		HashMap<String, Integer> coins = gameState.getCoins();
+		printCoinsPOne(coins.get(nicknameList.get(0)));
+		printCoinsPTwo(coins.get(nicknameList.get(0)));
+		printCoinsPThree(coins.get(nicknameList.get(0)));
 	}
 
 	public void printIslandZero(IslandDTO islandDTO){
@@ -1622,12 +1620,6 @@ public class PlanningPhaseGUI{
 			printTowerSevenPOne(towerColor);
 		if(numberOfTowers >= 8)
 			printTowerEightPOne(towerColor);
-		if(numberOfTowers >= 9)
-			printTowerNinePOne(towerColor);
-		if(numberOfTowers >= 10)
-			printTowerTenPOne(towerColor);
-
-
 
 	}
 
@@ -2413,7 +2405,7 @@ public class PlanningPhaseGUI{
 
 	public void insertAssistantThree(AssistantCardDTO assistantCardDTO){
 		Image view = new Image(assistantCardDTO.getType() + ".jpg");
-		assistantFour.setImage(view);
+		assistantThree.setImage(view);
 	}
 
 	public void insertAssistantFour(AssistantCardDTO assistantCardDTO){
@@ -2578,18 +2570,16 @@ public class PlanningPhaseGUI{
 		}
 	}
 
-	public void printTowerNinePOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
-		}
+	public void printCoinsPOne(Integer coins){
+		coinPlayerOne.setText(coins.toString());
 	}
 
-	public void printTowerTenPOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.jpeg");
-			towersIsland0.setImage(towerImage);
-		}
+	public void printCoinsPTwo(Integer coins){
+		coinPlayerTwo.setText(coins.toString());
+	}
+
+	public void printCoinsPThree(Integer coins){
+		coinPlayerThree.setText(coins.toString());
 	}
 
 	public void chooseAssistant(MouseEvent mouseEvent) {
