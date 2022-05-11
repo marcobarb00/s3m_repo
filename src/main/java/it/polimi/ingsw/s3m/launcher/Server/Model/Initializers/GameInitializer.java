@@ -41,7 +41,7 @@ public abstract class GameInitializer{
 		for(int i = 1; i < game.getIslandsList().size(); i++){
 			if (i != 6) {
 				Student student = extractStudent(firstStudentsOnIslands);
-				game.getIslandsList().get(i).addStudent(student);
+				game.getIslandsList().get(i).addStudent(student.getColor());
 			}
 		}
 	}

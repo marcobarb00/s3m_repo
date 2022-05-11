@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
@@ -17,7 +18,12 @@ class GameInitializerTest {
         playersNickname.add("User1");
         playersNickname.add("User2");
         playersNickname.add("User3");
-        Game game = new Game(playersNickname, true);
+        Game game = null;
+        try{
+            game = new Game(playersNickname, true);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         for (CharacterCard characterCard : game.getCharacterCardsList()) {
             if (characterCard instanceof Jester) {
                 int sumOfStudents = 0;

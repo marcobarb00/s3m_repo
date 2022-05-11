@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
@@ -21,7 +22,14 @@ public class PutStudentOnIslandOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException{
+	public void executeOperation() throws PlayerNotInListException, IncorrectOperationException {
+		//check null
+		boolean checkArgs = studentColor != null && game != null && playerController != null;
+		if(!checkArgs){
+			throw new IncorrectOperationException("Invalid arguments");
+		}
+
+		//
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList){
 			throw new PlayerNotInListException();
@@ -33,22 +41,23 @@ public class PutStudentOnIslandOperation extends Operation{
 		//Checks if there are the selected students in entrance
 		searchStudentsInEntrance();
 
+		//TODO changing every Illegal arg exception in custom exception (a class for each)
 		boolean checkIsland = 0 <= islandPosition && islandPosition < game.getIslandsList().size();
 		if(!checkIsland){
-			throw new IllegalArgumentException("Incorrect island value");
+			throw new IncorrectOperationException("Incorrect island value");
 		}
 
-		game.putStudentOnIslands(playerController.getNickname(), islandPosition, new Student(studentColor));
+		game.putStudentOnIslands(playerController.getNickname(), islandPosition, studentColor);
 	}
 
-	private void searchStudentsInEntrance(){
+	private void searchStudentsInEntrance() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 
 		//Check if at least one student of that color is present in hall
 		boolean studentInEntrance = entrance.get(studentColor) > 0;
 		if(!studentInEntrance){
-			throw new IllegalArgumentException("Student not in entrance");
+			throw new IncorrectOperationException("Student not in entrance");
 		}
 	}
 

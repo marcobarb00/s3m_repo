@@ -1,10 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.CharacterCardAlreadyActivatedException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
@@ -27,7 +24,15 @@ public class ActivateMinstrelEffectOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException{
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+		//check args
+		boolean checkArgs = game != null && playerController != null && enteringEntranceStudents != null
+				&& enteringTablesStudents != null && !enteringEntranceStudents.contains(null) &&
+				!enteringTablesStudents.contains(null);
+		if(!checkArgs){
+			throw new IncorrectOperationException("Invalid arguments");
+		}
+
 		//Check for double nicknames
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList){
@@ -53,25 +58,17 @@ public class ActivateMinstrelEffectOperation extends Operation{
 
 		boolean checkStudentsNumber = enteringEntranceStudents.size() == 2 && enteringTablesStudents.size() == 2;
 		if(!checkStudentsNumber){
-			throw new IllegalArgumentException("Incorrect students value");
+			throw new IncorrectOperationException("Incorrect students value");
 		}
 
 		searchStudentsInEntrance();
 		searchStudentsInTables();
 
-		//FIXME
-		// Temporary Arrays, change to ArrayList<PawnColor>
-		ArrayList<Student> enteringEntranceStudentsAL = new ArrayList<>();
-		ArrayList<Student> enteringTablesStudentsAL = new ArrayList<>();
-
-		enteringEntranceStudents.forEach(color -> enteringEntranceStudentsAL.add(new Student(color)));
-		enteringTablesStudents.forEach(color -> enteringTablesStudentsAL.add(new Student(color)));
-
-		game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudentsAL,
-				enteringTablesStudentsAL);
+		game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudents,
+				enteringTablesStudents);
 	}
 
-	private void searchStudentsInEntrance(){
+	private void searchStudentsInEntrance() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 
@@ -83,12 +80,12 @@ public class ActivateMinstrelEffectOperation extends Operation{
 			boolean notEnoughStudentsInEntrance =
 					numberOfEnteringTablesStudents > entrance.get(color);
 			if(notEnoughStudentsInEntrance){
-				throw new IllegalArgumentException("Not enough students in entrance");
+				throw new IncorrectOperationException("Not enough students in entrance");
 			}
 		}
 	}
 
-	private void searchStudentsInTables(){
+	private void searchStudentsInTables() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> tables = player.getDashboard().getTables();
 
@@ -100,7 +97,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
 			boolean notEnoughStudentsInTables =
 					numberOfEnteringEntranceStudents > tables.get(color);
 			if(notEnoughStudentsInTables){
-				throw new IllegalArgumentException("Not enough students in tables");
+				throw new IncorrectOperationException("Not enough students in tables");
 			}
 		}
 	}

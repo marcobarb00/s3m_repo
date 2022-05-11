@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.Operation;
@@ -17,7 +18,12 @@ class PlayAssistantCardOperationTest {
     @Test
     void executeOperation() {
         ArrayList<String> playerList = new ArrayList<>(Arrays.asList("paolo","nino"));
-        Game game = new Game(playerList,false);
+        Game game = null;
+        try{
+            game = new Game(playerList,false);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         PlayerController playerController = new PlayerController(new ClientHandler(new Socket()));
 
         //PlayerNotInListException

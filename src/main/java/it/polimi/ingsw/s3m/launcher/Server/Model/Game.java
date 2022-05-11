@@ -33,7 +33,7 @@ public class Game{
 	 * @param playersNicknameList list of players' nicknames
 	 * @param expertMode boolean for the expert mode
 	 */
-	public Game(ArrayList<String> playersNicknameList, boolean expertMode){
+	public Game(ArrayList<String> playersNicknameList, boolean expertMode) throws EmptyBagException {
 		this.numberOfPlayers = playersNicknameList.size();
 		this.expertMode = expertMode;
 		// Professors
@@ -193,18 +193,14 @@ public class Game{
 	 * Method used to initialize the six students of the card
 	 * @param jester jester card to initialize
 	 */
-	public void initializeJesterStudents(Jester jester){
+	public void initializeJesterStudents(Jester jester) throws EmptyBagException {
 		HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
 		for(PawnColor color : PawnColor.values())
 			initialingStudents.put(color, 0);
 		for(int i = 0; i < 6; i++){
-			try{
 				Student student = extractStudent();
 				PawnColor color = student.getColor();
 				initialingStudents.replace(color, initialingStudents.get(color) + 1);
-			}catch(EmptyBagException e){
-				e.printStackTrace();
-			}
 		}
 		jester.setStudentsOnCard(initialingStudents);
 	}
@@ -340,14 +336,21 @@ public class Game{
 	/**
 	 * Method used to activate the Jester character card effect
 	 * @param playerNickname nickname of the player who activated the card
-	 * @param requiredStudents students required from the player
-	 * @param givenStudents students given from the player
+	 * @param requiredColors colors of the students required from the player
+	 * @param givenColors colors of the students given from the player
 	 */
-	public void activateJesterEffect(String playerNickname, ArrayList<Student> requiredStudents, ArrayList<Student> givenStudents){
+	public void activateJesterEffect(String playerNickname, ArrayList<PawnColor> requiredColors, ArrayList<PawnColor> givenColors){
 		CharacterCard jester = new Jester();
 		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Jester) jester = characterCard;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
+		ArrayList<Student> givenStudents = new ArrayList<>();
+		for (PawnColor color : givenColors)
+			givenStudents.add(new Student(color));
+		ArrayList<Student> requiredStudents = new ArrayList<>();
+		for (PawnColor color : requiredColors)
+			requiredStudents.add(new Student(color));
+
 		chosenPlayer.getDashboard().deleteStudentsFromEntrance(givenStudents);
 		ArrayList<Student> exchangingStudents = ((Jester) jester).exchangeStudents(requiredStudents, givenStudents);
 		chosenPlayer.getDashboard().addStudentsInEntrance(exchangingStudents);
@@ -390,17 +393,24 @@ public class Game{
 	/**
 	 * Method used to activate the Minstrel character card effect
 	 * @param playerNickname nickname of the player who activated the card
-	 * @param enteringStudents students entering the entrance
-	 * @param enteringTablesStudents students entering the tables
+	 * @param enteringEntranceColors colors of the students entering the entrance
+	 * @param enteringTablesColors colors of the students entering the tables
 	 */
-	public void activateMinstrelEffect(String playerNickname, ArrayList<Student> enteringStudents, ArrayList<Student> enteringTablesStudents){
+	public void activateMinstrelEffect(String playerNickname, ArrayList<PawnColor> enteringEntranceColors, ArrayList<PawnColor> enteringTablesColors){
 		int additionalCoins;
 		CharacterCard minstrel = new Minstrel();
 		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof Minstrel) minstrel = characterCard;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
-		chosenPlayer.getDashboard().addStudentsInEntrance(enteringStudents);
-		chosenPlayer.getDashboard().deleteStudentsFromTables(enteringStudents);
+		ArrayList<Student> enteringEntranceStudents = new ArrayList<>();
+		for (PawnColor color : enteringEntranceColors)
+			enteringEntranceStudents.add(new Student(color));
+		ArrayList<Student> enteringTablesStudents = new ArrayList<>();
+		for (PawnColor color : enteringTablesColors)
+			enteringTablesStudents.add(new Student(color));
+
+		chosenPlayer.getDashboard().addStudentsInEntrance(enteringEntranceStudents);
+		chosenPlayer.getDashboard().deleteStudentsFromTables(enteringEntranceStudents);
 		additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(enteringTablesStudents);
 		chosenPlayer.addCoins(additionalCoins);
 		chosenPlayer.removeCoins(minstrel.getCost());
@@ -497,12 +507,12 @@ public class Game{
 	/**
 	 * Method used to move a single student from entrance to tables
 	 * @param playerNickname nickname of the player who moved the student
-	 * @param selectedStudent moved student
+	 * @param studentColor color of the student to be moved
 	 */
-	public void putStudentOnTables(String playerNickname, Student selectedStudent){
+	public void putStudentOnTables(String playerNickname, PawnColor studentColor){
 		int additionalCoins;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
-		additionalCoins = chosenPlayer.getDashboard().moveSingleStudentFromEntranceToTables(selectedStudent);
+		additionalCoins = chosenPlayer.getDashboard().moveSingleStudentFromEntranceToTables(studentColor);
 		chosenPlayer.addCoins(additionalCoins);
 		computeProfessorsDominance();
 		turn.incrementMovedStudents();
@@ -512,13 +522,14 @@ public class Game{
 	 * Method used to move a single student from entrance to a chosen island
 	 * @param playerNickname nickname of the player who moved the student
 	 * @param position position of the chosen island
-	 * @param selectedStudent moved student
+	 * @param studentColor color of the student to be moved
 	 */
-	public void putStudentOnIslands(String playerNickname, int position, Student selectedStudent){
+	public void putStudentOnIslands(String playerNickname, int position, PawnColor studentColor){
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		Island chosenIsland = islandsList.get(position);
-		chosenPlayer.getDashboard().deleteSingleStudentFromEntrance(selectedStudent);
-		chosenIsland.addStudent(selectedStudent);
+		chosenPlayer.getDashboard().deleteSingleStudentFromEntrance(studentColor);
+		chosenIsland.addStudent(studentColor);
+		turn.incrementMovedStudents();
 	}
 
 

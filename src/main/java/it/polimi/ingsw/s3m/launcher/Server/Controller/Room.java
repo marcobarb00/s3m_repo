@@ -77,7 +77,12 @@ public class Room{
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		checkGameInstanceConditions(playersNicknameList);
-		this.gameState = new Game(playersNicknameList, expertMode);
+		try{
+			this.gameState = new Game(playersNicknameList, expertMode);
+		}catch(EmptyBagException e){
+			sendNotificationToAll("error during the initialization of the game, the room is being deleted");
+			return;
+		}
 
 		boolean gameEndingFlag = false;
 		try{
@@ -162,7 +167,7 @@ public class Room{
 			Response response = player.communicateWithClient(planningPhaseMessage);
 			try{
 				successful = planningPhaseResponse(player, response);
-			}catch(IncorrectOperationException | IllegalArgumentException e){
+			}catch(IncorrectOperationException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}
 		}
@@ -252,11 +257,13 @@ public class Room{
 				putStudentOnTable(player, putStudentOnTableResponse);
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
+				break;
 			case 2:
 				Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
 				putStudentOnIsland(player, putStudentOnIslandResponse);
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
+				break;
 			case 3:
 				if(gameState.isCharacterCardActivated())
 					throw new CharacterCardAlreadyActivatedException();
@@ -266,6 +273,7 @@ public class Room{
 				//successful play of character card
 				sendNotificationToPlayer(player, "character card activated successfully");
 				gameState.getTurn().setActivatedCharacterCard(true);
+				break;
 		}
 	}
 
@@ -335,7 +343,7 @@ public class Room{
 				characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
 				break;
 			default:
-				throw new IllegalArgumentException("character card chosen does not exists");
+				throw new IncorrectOperationException("character card chosen does not exists");
 		}
 
 		characterCardOperation.executeOperation();

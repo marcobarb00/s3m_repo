@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
@@ -22,14 +23,23 @@ class ActivateCentaurEffectOperationTest {
         PlayerController playerController = new PlayerController(new ClientHandler(new Socket()));
 
         //Not expert mode exception test
-        Game game = new Game(playerList,false);
+        Game game = null;
+        try{
+            game = new Game(playerList,false);
+        }catch(EmptyBagException e){
+            e.printStackTrace();
+        }
         playerController.setNickname("paolo");
         Operation operation1 = new ActivateCentaurEffectOperation(game, playerController);
         Exception e = assertThrows(NotExpertModeException.class,() -> operation1.executeOperation() );
         assertEquals("Not in expert mode", e.getMessage());
 
         //Player not in list exception test
-        game = new Game(playerList,true);
+        try{
+            game = new Game(playerList,true);
+        }catch(EmptyBagException ex){
+            ex.printStackTrace();
+        }
         playerController.setNickname("giovanni");
         Operation operation2 = new ActivateCentaurEffectOperation(game, playerController);
         e = assertThrows(PlayerNotInListException.class,() -> operation2.executeOperation() );

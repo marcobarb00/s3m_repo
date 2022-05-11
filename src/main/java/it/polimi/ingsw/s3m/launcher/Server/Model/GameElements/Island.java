@@ -20,11 +20,10 @@ public class Island{
 	/**
 	 * Method used to add a single student on the island
 	 *
-	 * @param student student to be added
+	 * @param studentColor color of the student to be added
 	 */
-	public void addStudent(Student student){
-		PawnColor color = student.getColor();
-		students.replace(color, students.get(color) + 1);
+	public void addStudent(PawnColor studentColor){
+		students.replace(studentColor, students.get(studentColor) + 1);
 	}
 
 	public void addStudentsOnIsland(ArrayList<Student> islandStudents){
@@ -54,6 +53,13 @@ public class Island{
 
 	public int getStudentsPerColor(PawnColor pawnColor){
 		return students.get(pawnColor);
+	}
+
+	public int getTotalNumberOfStudents() {
+		int sum = 0;
+		for (PawnColor color : PawnColor.values())
+			sum += students.get(color);
+		return sum;
 	}
 
 	public int getNumberOfTowers(){
