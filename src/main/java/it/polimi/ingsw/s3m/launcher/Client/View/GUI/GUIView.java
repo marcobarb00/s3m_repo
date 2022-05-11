@@ -47,17 +47,17 @@ public class GUIView extends View{
 
 	@Override
 	public void playCharacterCard(PlayCharacterCardMessage playCharacterCardMessage){
-
+		controllerGUI.launchPlayCharacterCard(playCharacterCardMessage);
 	}
 
 	@Override
 	public void putStudentOnTable(PutStudentOnTableMessage putStudentOnTableMessage){
-
+		controllerGUI.launchPutStudentOnTable();
 	}
 
 	@Override
 	public void putStudentOnIsland(PutStudentOnIslandMessage putStudentOnIslandMessage){
-
+		controllerGUI.launchPutStudentOnIsland();
 	}
 
 	@Override
@@ -72,6 +72,6 @@ public class GUIView extends View{
 
 	@Override
 	public void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage){
-
+		controllerGUI.launchMoveMotherNature();
 	}
 }
