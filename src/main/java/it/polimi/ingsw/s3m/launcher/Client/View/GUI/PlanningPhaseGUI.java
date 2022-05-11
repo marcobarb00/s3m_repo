@@ -3010,6 +3010,89 @@ public class PlanningPhaseGUI{
 		}
 	}
 
+	public void hideDashboardThree(){
+		//dashboard image
+		dashboardPlayerThree.setVisible(false);
+
+		//entrance
+		hallStudentOnePThree.setVisible(false);
+		hallStudentTwoPThree.setVisible(false);
+		hallStudentThreePThree.setVisible(false);
+		hallStudentFourPThree.setVisible(false);
+		hallStudentFivePThree.setVisible(false);
+		hallStudentSixPThree.setVisible(false);
+		hallStudentSevenPThree.setVisible(false);
+		hallStudentEightPThree.setVisible(false);
+		hallStudentNinePThree.setVisible(false);
+
+		//tables
+		studRedOnePThree.setVisible(false);
+		studRedTwoPThree.setVisible(false);
+		studRedThreePThree.setVisible(false);
+		studRedFourPThree.setVisible(false);
+		studRedFivePThree.setVisible(false);
+		studRedSixPThree.setVisible(false);
+		studRedSevenPThree.setVisible(false);
+		studRedEightPThree.setVisible(false);
+		studRedNinePThree.setVisible(false);
+		studRedTenPThree.setVisible(false);
+
+		studBlueOnePThree.setVisible(false);
+		studBlueTwoPThree.setVisible(false);
+		studBlueThreePThree.setVisible(false);
+		studBlueFourPThree.setVisible(false);
+		studBlueFivePThree.setVisible(false);
+		studBlueSixPThree.setVisible(false);
+		studBlueSevenPThree.setVisible(false);
+		studBlueEightPThree.setVisible(false);
+		studBlueNinePThree.setVisible(false);
+		studBlueTenPThree.setVisible(false);
+
+		studGreenOnePThree.setVisible(false);
+		studGreenTwoPThree.setVisible(false);
+		studGreenThreePThree.setVisible(false);
+		studGreenFourPThree.setVisible(false);
+		studGreenFivePThree.setVisible(false);
+		studGreenSixPThree.setVisible(false);
+		studGreenSevenPThree.setVisible(false);
+		studGreenEightPThree.setVisible(false);
+		studGreenNinePThree.setVisible(false);
+		studGreenTenPThree.setVisible(false);
+
+		studPinkOnePThree.setVisible(false);
+		studPinkTwoPThree.setVisible(false);
+		studPinkThreePThree.setVisible(false);
+		studPinkFourPThree.setVisible(false);
+		studPinkFivePThree.setVisible(false);
+		studPinkSixPThree.setVisible(false);
+		studPinkSevenPThree.setVisible(false);
+		studPinkEightPThree.setVisible(false);
+		studPinkNinePThree.setVisible(false);
+		studPinkTenPThree.setVisible(false);
+
+		studYellowOnePThree.setVisible(false);
+		studYellowTwoPThree.setVisible(false);
+		studYellowThreePThree.setVisible(false);
+		studYellowFourPThree.setVisible(false);
+		studYellowFivePThree.setVisible(false);
+		studYellowSixPThree.setVisible(false);
+		studYellowSevenPThree.setVisible(false);
+		studYellowEightPThree.setVisible(false);
+		studYellowNinePThree.setVisible(false);
+		studYellowTenPThree.setVisible(false);
+
+		//towers
+		towerOnePThree.setVisible(false);
+		towerTwoPThree.setVisible(false);
+		towerThreePThree.setVisible(false);
+		towerFourPThree.setVisible(false);
+		towerFivePThree.setVisible(false);
+		towerSixPThree.setVisible(false);
+
+		//coins
+		coinPlayerThree.setVisible(false);
+	}
+
 
 	public void chooseAssistant(MouseEvent mouseEvent) {
 
