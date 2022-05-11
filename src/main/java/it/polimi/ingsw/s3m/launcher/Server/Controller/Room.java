@@ -69,7 +69,7 @@ public class Room{
 	/**
 	 * Instantiates game if controls are passed, if not an exception is thrown
 	 */
-	private void start() throws DoubleNicknameException, NullWinnerException, NotPlayerTurnException, PlayerNotInListException{
+	public void start() throws DoubleNicknameException, NullWinnerException, NotPlayerTurnException, PlayerNotInListException{
 		sendNotificationToAll("the game is starting");
 
 		ArrayList<String> playersNicknameList = playersList.stream()
@@ -77,7 +77,12 @@ public class Room{
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		checkGameInstanceConditions(playersNicknameList);
-		this.gameState = new Game(playersNicknameList, expertMode);
+		try{
+			this.gameState = new Game(playersNicknameList, expertMode);
+		}catch(EmptyBagException e){
+			sendNotificationToAll("error during the initialization of the game, the room is being deleted");
+			return;
+		}
 
 		boolean gameEndingFlag = false;
 		try{
@@ -143,7 +148,7 @@ public class Room{
 		}
 	}
 
-	private void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
+	public void checkGameInstanceConditions(ArrayList<String> players) throws DoubleNicknameException{
 		for(String p : players){
 			int occurrences = Collections.frequency(players, p);
 			if(occurrences > 1)
@@ -151,7 +156,7 @@ public class Room{
 		}
 	}
 
-	private void planningPhase(PlayerController player) throws NotEnoughAssistantCardsException, PlayerNotInListException{
+	public void planningPhase(PlayerController player) throws NotEnoughAssistantCardsException, PlayerNotInListException{
 		sendNotificationToPlayer(player, "it's your turn to execute the planning phase");
 		sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the planning phase");
 		PlanningPhaseMessage planningPhaseMessage = new PlanningPhaseMessage(mapper.gameToDTO(gameState));
@@ -162,13 +167,13 @@ public class Room{
 			Response response = player.communicateWithClient(planningPhaseMessage);
 			try{
 				successful = planningPhaseResponse(player, response);
-			}catch(IncorrectOperationException | IllegalArgumentException e){
+			}catch(IncorrectOperationException e){
 				sendNotificationToPlayer(player, e.getMessage());
 			}
 		}
 	}
 
-	private boolean planningPhaseResponse(PlayerController player, Response response) throws NotEnoughAssistantCardsException,
+	public boolean planningPhaseResponse(PlayerController player, Response response) throws NotEnoughAssistantCardsException,
 			IncorrectOperationException, PlayerNotInListException{
 		if(!(response instanceof PlayAssistantCardResponse)){
 			throw new IncorrectOperationException();
@@ -182,7 +187,7 @@ public class Room{
 		return true;
 	}
 
-	private void actionPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException,
+	public void actionPhase(PlayerController player) throws ZeroTowersRemainedException, NotEnoughIslandsException,
 			NotEnoughAssistantCardsException, NotPlayerTurnException, PlayerNotInListException{
 		sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the action phase");
 
@@ -238,7 +243,7 @@ public class Room{
 	 * @param player   the player who's playing the turn
 	 * @param response the response that contains the operation chosen by the player
 	 */
-	private void moveStudentPhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
+	public void moveStudentPhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
 			NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException,
 			PlayerNotInListException, NotEnoughCoinsException, NotPlayerTurnException, BackException,
 			NotExpertModeException, CloudNotInListException, CharacterCardAlreadyActivatedException{
@@ -252,11 +257,13 @@ public class Room{
 				putStudentOnTable(player, putStudentOnTableResponse);
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
+				break;
 			case 2:
 				Response putStudentOnIslandResponse = player.communicateWithClient(new PutStudentOnIslandMessage(mapper.gameToDTO(gameState)));
 				putStudentOnIsland(player, putStudentOnIslandResponse);
 				//student moved successfully
 				sendNotificationToPlayer(player, "student moved successfully");
+				break;
 			case 3:
 				if(gameState.isCharacterCardActivated())
 					throw new CharacterCardAlreadyActivatedException();
@@ -266,10 +273,11 @@ public class Room{
 				//successful play of character card
 				sendNotificationToPlayer(player, "character card activated successfully");
 				gameState.getTurn().setActivatedCharacterCard(true);
+				break;
 		}
 	}
 
-	private void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
+	public void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
 		if(!(response instanceof PutStudentOnTableResponse))
 			throw new IncorrectOperationException();
 
@@ -280,7 +288,7 @@ public class Room{
 		putStudentOnTableOperation.executeOperation();
 	}
 
-	private void putStudentOnIsland(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
+	public void putStudentOnIsland(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
 		if(!(response instanceof PutStudentOnIslandResponse))
 			throw new IncorrectOperationException();
 
@@ -291,7 +299,7 @@ public class Room{
 		putStudentOnIslandOperation.executeOperation();
 	}
 
-	private void playCharacterCard(PlayerController player, Response response) throws ZeroTowersRemainedException,
+	public void playCharacterCard(PlayerController player, Response response) throws ZeroTowersRemainedException,
 			NotEnoughIslandsException, NotEnoughCoinsException, NotPlayerTurnException, NotExpertModeException,
 			CloudNotInListException, IncorrectOperationException, NotEnoughAssistantCardsException, BackException,
 			PlayerNotInListException, CharacterCardAlreadyActivatedException{
@@ -335,7 +343,7 @@ public class Room{
 				characterCardOperation = new ActivateMagicPostmanEffectOperation(gameState, player);
 				break;
 			default:
-				throw new IllegalArgumentException("character card chosen does not exists");
+				throw new IncorrectOperationException("character card chosen does not exists");
 		}
 
 		characterCardOperation.executeOperation();
@@ -346,7 +354,7 @@ public class Room{
 	 * @param response the response that contains the operation chosen by the player
 	 * @return true if mother nature has been moved, false otherwise
 	 */
-	private boolean motherNaturePhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
+	public boolean motherNaturePhase(PlayerController player, Response response) throws ZeroTowersRemainedException,
 			NotEnoughIslandsException, NotEnoughAssistantCardsException, IncorrectOperationException,
 			NotPlayerTurnException, BackException, NotEnoughCoinsException, NotExpertModeException, CloudNotInListException,
 			PlayerNotInListException, CharacterCardAlreadyActivatedException{
@@ -373,7 +381,7 @@ public class Room{
 		return false;
 	}
 
-	private void moveMotherNature(PlayerController player, Response response) throws NotPlayerTurnException,
+	public void moveMotherNature(PlayerController player, Response response) throws NotPlayerTurnException,
 			ZeroTowersRemainedException, NotEnoughIslandsException, IncorrectOperationException, BackException, PlayerNotInListException{
 		if(response instanceof BackResponse)
 			throw new BackException();
@@ -387,7 +395,7 @@ public class Room{
 		moveMotherNatureOperation.executeOperation();
 	}
 
-	private boolean chooseCloudPhase(PlayerController player, Response response) throws IncorrectOperationException,
+	public boolean chooseCloudPhase(PlayerController player, Response response) throws IncorrectOperationException,
 			PlayerNotInListException, CloudNotInListException{
 		if(!(response instanceof CloudResponse))
 			throw new IncorrectOperationException();

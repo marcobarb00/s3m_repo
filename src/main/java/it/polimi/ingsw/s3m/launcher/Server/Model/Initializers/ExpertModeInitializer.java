@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model.Initializers;
 
+import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
@@ -13,7 +14,7 @@ public class ExpertModeInitializer{
 	 *
 	 * @param game game to initialize to expert mode
 	 */
-	public ExpertModeInitializer(Game game){
+	public ExpertModeInitializer(Game game) throws EmptyBagException {
 		this.game = game;
 		playersUpdate();
 		// Character cards
@@ -39,7 +40,7 @@ public class ExpertModeInitializer{
 	 * Method used to draw three character cards and to initialize the
 	 * Jester character card if present
 	 */
-	public void characterCardsSetup(){
+	public void characterCardsSetup() throws EmptyBagException {
 		game.drawThreeCharacterCards();
 		for(CharacterCard characterCard : game.getCharacterCardsList()){
 			if(characterCard instanceof Jester){

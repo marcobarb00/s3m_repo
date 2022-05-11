@@ -1,10 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughIslandsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotPlayerTurnException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.ZeroTowersRemainedException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
@@ -17,8 +14,16 @@ public class MoveMotherNatureOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException,
-			NotPlayerTurnException, ZeroTowersRemainedException, NotEnoughIslandsException{
+	public void executeOperation() throws PlayerNotInListException,
+			NotPlayerTurnException, ZeroTowersRemainedException,
+			NotEnoughIslandsException, IncorrectOperationException {
+
+		//check args
+		boolean checkArgs = game != null && playerController != null;
+		if(!checkArgs){
+			throw new IncorrectOperationException("Invalid arguments");
+		}
+
 		//check nickname
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList){
@@ -37,7 +42,7 @@ public class MoveMotherNatureOperation extends Operation{
 		int maxMoves = lastPlayedAssistantCard.getMovements();
 		boolean checkMoves = 0 < movements && movements <= maxMoves;
 		if(!checkMoves){
-			throw new IllegalArgumentException("Incorrect motherNatureMoves value");
+			throw new IncorrectOperationException("Incorrect motherNatureMoves value");
 		}
 
 		//these exceptions are handled in Room

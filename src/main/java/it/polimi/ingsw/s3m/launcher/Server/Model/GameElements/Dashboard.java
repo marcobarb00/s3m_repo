@@ -35,11 +35,10 @@ public class Dashboard{
 	 * Method used to delete a single student from the entrance, because moved
 	 * on tables or an island
 	 *
-	 * @param deletingStudent student to be deleted
+	 * @param studentColor color of the student to be deleted
 	 */
-	public void deleteSingleStudentFromEntrance(Student deletingStudent){
-		PawnColor color = deletingStudent.getColor();
-		entrance.replace(color, entrance.get(color) - 1);
+	public void deleteSingleStudentFromEntrance(PawnColor studentColor){
+		entrance.replace(studentColor, entrance.get(studentColor) - 1);
 	}
 
 	/**
@@ -72,15 +71,14 @@ public class Dashboard{
 	/**
 	 * Method used to move a single student from the entrance to the tables
 	 *
-	 * @param movingStudent student to be moved
+	 * @param studentColor color of the student to be moved
 	 * @return the number of coins earned
 	 */
-	public int moveSingleStudentFromEntranceToTables(Student movingStudent){
+	public int moveSingleStudentFromEntranceToTables(PawnColor studentColor){
 		int earnCoins = 0;
-		PawnColor color = movingStudent.getColor();
-		entrance.replace(color, entrance.get(color) - 1);
-		tables.replace(color, tables.get(color) + 1);
-		if(tables.get(color) % 3 == 0) earnCoins++;
+		entrance.replace(studentColor, entrance.get(studentColor) - 1);
+		tables.replace(studentColor, tables.get(studentColor) + 1);
+		if(tables.get(studentColor) % 3 == 0) earnCoins++;
 		return earnCoins;
 	}
 

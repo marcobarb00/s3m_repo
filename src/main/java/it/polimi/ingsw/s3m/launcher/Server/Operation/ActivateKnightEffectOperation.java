@@ -1,10 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Operation;
 
 import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.CharacterCardAlreadyActivatedException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughCoinsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotExpertModeException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 //DONE
@@ -15,7 +12,12 @@ public class ActivateKnightEffectOperation extends Operation{
 	}
 
 	@Override
-	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException{
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+		//check args
+		boolean checkArgs = game != null && playerController != null;
+		if(!checkArgs){
+			throw new IncorrectOperationException("Invalid arguments");
+		}
 
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList){

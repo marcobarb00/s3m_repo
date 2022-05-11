@@ -30,9 +30,9 @@ class StandardComputeDominanceTest {
         Island island = new Island();
         island.setDominator(firstPlayer);
         island.addTower();
-        island.addStudent(new Student(PawnColor.BLUE));
-        island.addStudent(new Student(PawnColor.RED));
-        island.addStudent(new Student(PawnColor.RED));
+        island.addStudent(PawnColor.BLUE);
+        island.addStudent(PawnColor.RED);
+        island.addStudent(PawnColor.RED);
 
         HashMap<PawnColor, Player> professors = new HashMap<>();
         professors.put(PawnColor.BLUE, firstPlayer);
@@ -50,8 +50,8 @@ class StandardComputeDominanceTest {
         Player dominatorPlayer;
 
         Island island = new Island();
-        island.addStudent(new Student(PawnColor.BLUE));
-        island.addStudent(new Student(PawnColor.RED));
+        island.addStudent(PawnColor.BLUE);
+        island.addStudent(PawnColor.RED);
 
         HashMap<PawnColor, Player> professors = new HashMap<>();
         professors.put(PawnColor.BLUE, firstPlayer);
@@ -70,10 +70,10 @@ class StandardComputeDominanceTest {
         Player dominatorPlayer;
 
         Island island = new Island();
-        island.addStudent(new Student(PawnColor.BLUE));
-        island.addStudent(new Student(PawnColor.RED));
-        island.addStudent(new Student(PawnColor.RED));
-        island.addStudent(new Student(PawnColor.YELLOW));
+        island.addStudent(PawnColor.BLUE);
+        island.addStudent(PawnColor.RED);
+        island.addStudent(PawnColor.RED);
+        island.addStudent(PawnColor.YELLOW);
 
         HashMap<PawnColor, Player> professors = new HashMap<>();
         professors.put(PawnColor.BLUE, firstPlayer);
@@ -93,10 +93,10 @@ class StandardComputeDominanceTest {
         Player dominatorPlayer;
 
         Island island = new Island();
-        island.addStudent(new Student(PawnColor.BLUE));
-        island.addStudent(new Student(PawnColor.RED));
-        island.addStudent(new Student(PawnColor.YELLOW));
-        island.addStudent(new Student(PawnColor.YELLOW));
+        island.addStudent(PawnColor.BLUE);
+        island.addStudent(PawnColor.RED);
+        island.addStudent(PawnColor.YELLOW);
+        island.addStudent(PawnColor.YELLOW);
 
         HashMap<PawnColor, Player> professors = new HashMap<>();
         professors.put(PawnColor.BLUE, firstPlayer);
@@ -109,9 +109,9 @@ class StandardComputeDominanceTest {
         island.setDominator(thirdPlayer);
         island.addTower();
 
-        island.addStudent(new Student(PawnColor.GREEN));
-        island.addStudent(new Student(PawnColor.GREEN));
-        island.addStudent(new Student(PawnColor.RED));
+        island.addStudent(PawnColor.GREEN);
+        island.addStudent(PawnColor.GREEN);
+        island.addStudent(PawnColor.RED);
         professors.put(PawnColor.GREEN, secondPlayer);
 
         dominatorPlayer = computeDominanceStrategy.computeDominance(island, professors);
