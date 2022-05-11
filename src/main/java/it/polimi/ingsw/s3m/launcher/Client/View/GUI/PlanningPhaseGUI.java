@@ -1020,7 +1020,7 @@ public class PlanningPhaseGUI{
 		HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
 		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
 		
-		printDashboardOne(dashboardList.get(nicknameList.get(0)));
+		printDashboardOne(dashboardList.get(nicknameList.get(0)), gameState.getPlayersNumber());
 		printDashboardTwo();
 		if(gameState.getPlayersNumber() == 3)
 			printDashboardThree();
@@ -1062,7 +1062,7 @@ public class PlanningPhaseGUI{
 		numTowersIsland0.setVisible(false);
 	}
 
-	public void printDashboardOne(DashboardDTO dashboardDTO){
+	public void printDashboardOne(DashboardDTO dashboardDTO, int playersNumber){
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
 		dashboardDTO.getEntrance().forEach((color, value) -> {
 			for(int i = 0; i < value; i++){
@@ -1071,6 +1071,10 @@ public class PlanningPhaseGUI{
 		});
 
 		printEntranceStudentOnePOne(entranceStudentColors.get(0));
+		
+		if(playersNumber == 3){
+			printEntranceStudentEightPOne(entranceStudentColors.get(8));
+		}
 	}
 
 	public void printEntranceStudentOnePOne(String color){
