@@ -2,7 +2,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
