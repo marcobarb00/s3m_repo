@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
+package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

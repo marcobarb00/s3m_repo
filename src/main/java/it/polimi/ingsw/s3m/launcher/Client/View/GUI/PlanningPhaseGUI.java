@@ -1,14 +1,12 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.CLI.IslandGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Island;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -907,9 +905,6 @@ public class PlanningPhaseGUI{
 	}
 
 	public void setGameState(GameDTO gameState){
-		List<ImageView> islandsImageView = Arrays.asList(islandZero, islandOne, islandTwo, islandThree, islandFour,
-				islandFive, islandSeven, islandEight, islandNine, islandTen, islandEleven);
-		
 		List<IslandGUI> islandInfoList = Arrays.asList(
 				new IslandGUI(islandZero, redStudentsIsland0, greenStudentsIsland0, blueStudentsIsland0, pinkStudentsIsland0, yellowStudentsIsland0, numRedStudentsIsland0, numGreenStudentsIsland0, numBlueStudentsIsland0, numPinkStudentsIsland0, numYellowStudentsIsland0, towersIsland0, numTowersIsland0),
 				new IslandGUI(islandOne, redStudentsIsland1, greenStudentsIsland1, blueStudentsIsland1, pinkStudentsIsland1, yellowStudentsIsland1, numRedStudentsIsland1, numGreenStudentsIsland1, numBlueStudentsIsland1, numPinkStudentsIsland1, numYellowStudentsIsland1, towersIsland1, numTowersIsland1),
@@ -1003,6 +998,17 @@ public class PlanningPhaseGUI{
 	//dashboards
 
 	public void printDashboardOne(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
+		//TODO b
+		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePone, );
+
+		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePone, );
+		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePone, );
+		//...
+
+		List<ImageView> towerImages = Arrays.asList(towerOnePone, );
+
+		DashboardGUI
+
 		//print entrance
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
 		dashboardDTO.getEntrance().forEach((color, value) -> {
