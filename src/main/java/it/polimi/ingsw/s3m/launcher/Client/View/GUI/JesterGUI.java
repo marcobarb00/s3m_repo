@@ -22,6 +22,8 @@ public class JesterGUI {
     @FXML
     GridPane gridPane;
     @FXML
+    GridPane gridPaneJesterStudents;
+    @FXML
     Button back;
     @FXML
     ComboBox<String> colorOfStudent1; //student from jester to entrance
@@ -35,6 +37,19 @@ public class JesterGUI {
     ComboBox<String> colorOfChange2; //student from entrance to jester
     @FXML
     ComboBox<String> colorOfChange3; //student from entrance to jester
+    @FXML
+    ImageView jesterStudentOne;
+    @FXML
+    ImageView jesterStudentTwo;
+    @FXML
+    ImageView jesterStudentThree;
+    @FXML
+    ImageView jesterStudentFour;
+    @FXML
+    ImageView jesterStudentFive;
+    @FXML
+    ImageView jesterStudentSix;
+
 
     public void showJesterInfo(){
         colorOfStudent1.setValue("Choose the student color");
