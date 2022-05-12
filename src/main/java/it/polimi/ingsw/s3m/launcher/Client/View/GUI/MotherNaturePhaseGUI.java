@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.MotherNaturePhaseResponse;
-import it.polimi.ingsw.s3m.launcher.Client.Response.StudentsPhaseResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.CloudDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
