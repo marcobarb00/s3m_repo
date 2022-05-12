@@ -20,7 +20,7 @@ public class PutStudentOnIslandGUI {
     @FXML
     ComboBox<String> colorOfStudent;
     @FXML
-    ComboBox<String> numOfIsland;
+    TextField numOfIsland;
     @FXML
     GridPane gridPane;
     @FXML
