@@ -15,7 +15,7 @@ public class GUIView extends View{
 
 	@Override
 	public void login(LoginMessage loginMessage){
-		controllerGUI.threadSleep(3000);
+		controllerGUI.threadSleep(1500);
 		controllerGUI.launchLogin(loginMessage);
 		controllerGUI.closePrimaryStage();
 	}
