@@ -106,6 +106,12 @@ public class PlanningPhaseGUI{
 	@FXML
 	Label coinPlayerThree;
 	@FXML
+	ImageView coinImagePlayer1;
+	@FXML
+	ImageView coinImagePlayer2;
+	@FXML
+	ImageView coinImagePlayer3;
+	@FXML
 	ImageView blueStudentsIsland0;
 	@FXML
 	ImageView redStudentsIsland0;
@@ -999,15 +1005,25 @@ public class PlanningPhaseGUI{
 
 	public void printDashboardOne(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
 		//TODO b
-		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePone, );
+		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePone,hallStudentTwoPone,hallStudentThreePone,
+				hallStudentFourPone,hallStudentFivePone,hallStudentSixPone,hallStudentSevenPone,
+				hallStudentEightPone,hallStudentNinePone);
 
-		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePone, );
-		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePone, );
-		//...
+		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePone,studRedTwoPone,studRedThreePone,studRedFourPone,
+				studRedFivePone,studRedSixPone,studRedSevenPone,studRedEightPone,studRedNinePone,studRedTenPone);
+		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePone,studGreenTwoPone,studGreenThreePone,studGreenFourPone,
+				studGreenFivePone,studGreenSixPone,studGreenSevenPone,studGreenEightPone,studGreenNinePone,studGreenTenPone);
+		List<ImageView> blueStudentsTable = Arrays.asList(studBlueOnePone,studBlueTwoPone,studBlueThreePone,studBlueFourPone,
+				studBlueFivePone,studBlueSixPone,studBlueSevenPone,studBlueEightPone,studBlueNinePone,studBlueTenPone);
+		List<ImageView> pinkStudentsTable = Arrays.asList(studPinkOnePone,studPinkTwoPone,studPinkThreePone,studPinkFourPone,
+				studPinkFivePone,studPinkSixPone,studPinkSevenPone,studPinkEightPone,studPinkNinePone,studPinkTenPone);
+		List<ImageView> yellowStudentsTable = Arrays.asList(studYellowOnePone,studYellowTwoPone,studYellowThreePone,studYellowFourPone,
+				studYellowFivePone,studYellowSixPone,studYellowSevenPone,studYellowEightPone,studYellowNinePone,studYellowTenPone);
 
-		List<ImageView> towerImages = Arrays.asList(towerOnePone, );
+		List<ImageView> towerImages = Arrays.asList(towerOnePone,towerTwoPone,towerThreePone,towerFourPone,
+				towerFivePone,towerSixPone,towerSevenPone,towerEightPone);
 
-		DashboardGUI
+		//DashboardGUI
 
 		//print entrance
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
@@ -1174,6 +1190,26 @@ public class PlanningPhaseGUI{
 	}
 
 	public void printDashboardTwo(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
+
+		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePTwo,hallStudentTwoPTwo,hallStudentThreePTwo,
+				hallStudentFourPTwo,hallStudentFivePTwo,hallStudentSixPTwo,hallStudentSevenPTwo,
+				hallStudentEightPTwo,hallStudentNinePTwo);
+
+		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePTwo,studRedTwoPTwo,studRedThreePTwo,studRedFourPTwo,
+				studRedFivePTwo,studRedSixPTwo,studRedSevenPTwo,studRedEightPTwo,studRedNinePTwo,studRedTenPTwo);
+		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePTwo,studGreenTwoPTwo,studGreenThreePTwo,studGreenFourPTwo,
+				studGreenFivePTwo,studGreenSixPTwo,studGreenSevenPTwo,studGreenEightPTwo,studGreenNinePTwo,studGreenTenPTwo);
+		List<ImageView> blueStudentsTable = Arrays.asList(studBlueOnePTwo,studBlueTwoPTwo,studBlueThreePTwo,studBlueFourPTwo,
+				studBlueFivePTwo,studBlueSixPTwo,studBlueSevenPTwo,studBlueEightPTwo,studBlueNinePTwo,studBlueTenPTwo);
+		List<ImageView> pinkStudentsTable = Arrays.asList(studPinkOnePTwo,studPinkTwoPTwo,studPinkThreePTwo,studPinkFourPTwo,
+				studPinkFivePTwo,studPinkSixPTwo,studPinkSevenPTwo,studPinkEightPTwo,studPinkNinePTwo,studPinkTenPTwo);
+		List<ImageView> yellowStudentsTable = Arrays.asList(studYellowOnePTwo,studYellowTwoPTwo,studYellowThreePTwo,studYellowFourPTwo,
+				studYellowFivePTwo,studYellowSixPTwo,studYellowSevenPTwo,studYellowEightPTwo,studYellowNinePTwo,studYellowTenPTwo);
+
+		List<ImageView> towerImages = Arrays.asList(towerOnePTwo,towerTwoPTwo,towerThreePTwo,towerFourPTwo,
+				towerFivePTwo,towerSixPTwo,towerSevenPTwo,towerEightPTwo);
+		
+		
 		//print entrance
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
 		dashboardDTO.getEntrance().forEach((color, value) -> {
@@ -1339,6 +1375,26 @@ public class PlanningPhaseGUI{
 	}
 
 	public void printDashboardThree(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
+
+		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePThree,hallStudentTwoPThree,hallStudentThreePThree,
+				hallStudentFourPThree,hallStudentFivePThree,hallStudentSixPThree,hallStudentSevenPThree,
+				hallStudentEightPThree,hallStudentNinePThree);
+
+		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePThree,studRedTwoPThree,studRedThreePThree,studRedFourPThree,
+				studRedFivePThree,studRedSixPThree,studRedSevenPThree,studRedEightPThree,studRedNinePThree,studRedTenPThree);
+		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePThree,studGreenTwoPThree,studGreenThreePThree,studGreenFourPThree,
+				studGreenFivePThree,studGreenSixPThree,studGreenSevenPThree,studGreenEightPThree,studGreenNinePThree,studGreenTenPThree);
+		List<ImageView> blueStudentsTable = Arrays.asList(studBlueOnePThree,studBlueTwoPThree,studBlueThreePThree,studBlueFourPThree,
+				studBlueFivePThree,studBlueSixPThree,studBlueSevenPThree,studBlueEightPThree,studBlueNinePThree,studBlueTenPThree);
+		List<ImageView> pinkStudentsTable = Arrays.asList(studPinkOnePThree,studPinkTwoPThree,studPinkThreePThree,studPinkFourPThree,
+				studPinkFivePThree,studPinkSixPThree,studPinkSevenPThree,studPinkEightPThree,studPinkNinePThree,studPinkTenPThree);
+		List<ImageView> yellowStudentsTable = Arrays.asList(studYellowOnePThree,studYellowTwoPThree,studYellowThreePThree,studYellowFourPThree,
+				studYellowFivePThree,studYellowSixPThree,studYellowSevenPThree,studYellowEightPThree,studYellowNinePThree,studYellowTenPThree);
+
+		List<ImageView> towerImages = Arrays.asList(towerOnePThree,towerTwoPThree,towerThreePThree,towerFourPThree,
+				towerFivePThree,towerSixPThree);
+
+		
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
 		dashboardDTO.getEntrance().forEach((color, value) -> {
 			for(int i = 0; i < value; i++){
@@ -2513,6 +2569,14 @@ public class PlanningPhaseGUI{
 	public void hideDashboardThree(){
 		//dashboard image
 		dashboardPlayerThree.setVisible(false);
+
+		//cloud image
+		cloudThree.setVisible(false);
+
+		//coin image
+		coinPlayer3.setVisible(false);
+		coinPlayerThree.setVisible(false);
+		coinImagePlayer3.setVisible(false);
 
 		//entrance
 		hallStudentOnePThree.setVisible(false);
