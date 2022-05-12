@@ -208,6 +208,19 @@ public class ControllerGUI {
 		}
 
 	}
+	public void launchMoveStudentsPhase(PlanningPhaseMessage message){
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PlanningPhase.fxml"));
+			Parent playCharacterCard = (Parent) loader.load();
+			planningPhaseGUI = loader.getController();
+			planningPhaseGUI.printMessageInformation(message);
+			setScene(playCharacterCard);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 	public void launchPutStudentOnTable() {
 		try {

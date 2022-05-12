@@ -312,8 +312,6 @@ public class PlanningPhaseGUI{
 	@FXML
 	ImageView dashboardPlayerThree;
 	@FXML
-	ImageView coinImage;
-	@FXML
 	ImageView hallStudentOnePone;
 	@FXML
 	ImageView hallStudentTwoPone;
