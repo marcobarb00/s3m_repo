@@ -3,12 +3,18 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+
 
 public class MoveStudentsPhaseGUI{
+
     @FXML
-    GridPane gridPane;
+    ImageView studentOnTable;
+    @FXML
+    ImageView studentOnIsland;
+    @FXML
+    ImageView characterCardList;
 
     @FXML
     ImageView blueScreen;
@@ -859,4 +865,7 @@ public class MoveStudentsPhaseGUI{
     Label numGreenStudentsIsland11;
     @FXML
     Label numRedStudentsIsland11;
+
+    public void choiceAction(MouseEvent mouseEvent) {
+    }
 }
