@@ -29,6 +29,9 @@ public class Mapper{
 	}
 
 	public ArrayList<PawnColor> StringListToColor(ArrayList<String> colorStringList){
+		if(colorStringList == null)
+			return null;
+
 		ArrayList<PawnColor> colorList = new ArrayList<>();
 		colorStringList.forEach(colorString -> colorList.add(stringToColor(colorString)));
 		return colorList;

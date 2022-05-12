@@ -65,6 +65,7 @@ public class MinstrelGUI {
 
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToPutOn(studentsToPutOnTable);
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToGetFrom(studentsToGetFromTable);
+        ControllerGUI.getInstance().sendCharacterCardResponse();
     }
 
     private boolean isAColor(String string){

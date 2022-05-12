@@ -80,18 +80,20 @@ public class PlayCharacterCardGUI{
 
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
         String characterName = cards.get(characterCardPosition).getName();
-        if(characterName.equals("Jester")){
-            ControllerGUI.getInstance().launchJester();
+        switch(characterName){
+            case "Jester":
+                ControllerGUI.getInstance().launchJester();
+                break;
+            case "Minstrel":
+                ControllerGUI.getInstance().launchMinstrel();
+                break;
+            case "Mushroomer":
+                ControllerGUI.getInstance().launchMushroomer();
+                break;
+            default:
+                ControllerGUI.getInstance().sendCharacterCardResponse();
+                break;
         }
-        if(characterName.equals("Minstrel")){
-            ControllerGUI.getInstance().launchMinstrel();
-        }
-        if(characterName.equals("Mushroomer")){
-            ControllerGUI.getInstance().launchMushroomer();
-        }
-
-        ControllerGUI.getInstance().sendResponse(ControllerGUI.getInstance().getPlayCharacterCardResponse());
-        ControllerGUI.getInstance().startLoading();
     }
 
     public void back(MouseEvent mouseEvent) {

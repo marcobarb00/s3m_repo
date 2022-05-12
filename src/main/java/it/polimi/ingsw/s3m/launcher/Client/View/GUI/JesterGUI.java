@@ -76,6 +76,7 @@ public class JesterGUI {
 
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToPutOn(studentsToPutOnJester);
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToGetFrom(studentsToGetFromJester);
+        ControllerGUI.getInstance().sendCharacterCardResponse();
     }
 
     private boolean isAColor(String string){

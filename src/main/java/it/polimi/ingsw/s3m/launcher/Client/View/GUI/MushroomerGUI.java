@@ -36,6 +36,7 @@ public class MushroomerGUI {
             nonInfluencingColor = colorOfStudent1.getValue();
 
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setNonInfluencingColor(nonInfluencingColor);
+        ControllerGUI.getInstance().sendCharacterCardResponse();
     }
 
     private boolean isAColor(String string){

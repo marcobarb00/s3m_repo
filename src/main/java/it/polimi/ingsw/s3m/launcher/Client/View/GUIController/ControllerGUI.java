@@ -292,6 +292,11 @@ public class ControllerGUI {
 		}
 	}
 
+	public void sendCharacterCardResponse(){
+		this.sendResponse(ControllerGUI.getInstance().getPlayCharacterCardResponse());
+		this.startLoading();
+	}
+
 	public void launchMushroomer() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Mushroomer.fxml"));
