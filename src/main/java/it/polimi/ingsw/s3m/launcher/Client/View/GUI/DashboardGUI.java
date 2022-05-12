@@ -6,14 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DashboardGUI{
-	List<ImageView> entranceImages;
-	HashMap<String, List<ImageView>> tablesImages;
-	List<ImageView> towerImages;
+	private List<ImageView> entranceImages;
+	private HashMap<String, List<ImageView>> tablesImages;
+	private HashMap<String, ImageView> professorsImages;
+	private List<ImageView> towerImages;
 
 	public DashboardGUI(List<ImageView> entranceImages, List<ImageView> redStudentsTable, List<ImageView> greenStudentsTable,
 						List<ImageView> blueStudentsTable, List<ImageView> pinkStudentsTable, List<ImageView> yellowStudentsTable,
-						List<ImageView> towerImages){
+						HashMap<String, ImageView> professorsImages, List<ImageView> towerImages){
 		this.entranceImages = entranceImages;
+		this.professorsImages = professorsImages;
 
 		this.tablesImages = new HashMap<>();
 		this.tablesImages.put("RED", redStudentsTable);
@@ -22,7 +24,22 @@ public class DashboardGUI{
 		this.tablesImages.put("PINK", pinkStudentsTable);
 		this.tablesImages.put("YELLOW", yellowStudentsTable);
 
-
 		this.towerImages = towerImages;
+	}
+
+	public List<ImageView> getEntranceImages(){
+		return entranceImages;
+	}
+
+	public HashMap<String, List<ImageView>> getTablesImages(){
+		return tablesImages;
+	}
+
+	public HashMap<String, ImageView> getProfessorsImages(){
+		return professorsImages;
+	}
+
+	public List<ImageView> getTowerImages(){
+		return towerImages;
 	}
 }

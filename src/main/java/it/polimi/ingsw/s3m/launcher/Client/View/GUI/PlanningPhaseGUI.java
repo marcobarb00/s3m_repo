@@ -928,26 +928,87 @@ public class PlanningPhaseGUI{
 				motherNatureIsland3, motherNatureIsland4, motherNatureIsland5, motherNatureIsland6, motherNatureIsland7,
 				motherNatureIsland8, motherNatureIsland9, motherNatureIsland10, motherNatureIsland11);
 
-		//dashboard player one
+		//dashboard player two
 
-		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePTwo,hallStudentTwoPTwo,hallStudentThreePTwo,
+		List<ImageView> entranceImagesPone = Arrays.asList(hallStudentOnePone,hallStudentTwoPone,hallStudentThreePone,
+				hallStudentFourPone,hallStudentFivePone,hallStudentSixPone,hallStudentSevenPone,
+				hallStudentEightPone,hallStudentNinePone);
+
+		List<ImageView> redStudentsTablePone = Arrays.asList(studRedOnePone,studRedTwoPone,studRedThreePone,studRedFourPone,
+				studRedFivePone,studRedSixPone,studRedSevenPone,studRedEightPone,studRedNinePone,studRedTenPone);
+		List<ImageView> greenStudentsTablePone = Arrays.asList(studGreenOnePone,studGreenTwoPone,studGreenThreePone,studGreenFourPone,
+				studGreenFivePone,studGreenSixPone,studGreenSevenPone,studGreenEightPone,studGreenNinePone,studGreenTenPone);
+		List<ImageView> blueStudentsTablePone = Arrays.asList(studBlueOnePone,studBlueTwoPone,studBlueThreePone,studBlueFourPone,
+				studBlueFivePone,studBlueSixPone,studBlueSevenPone,studBlueEightPone,studBlueNinePone,studBlueTenPone);
+		List<ImageView> pinkStudentsTablePone = Arrays.asList(studPinkOnePone,studPinkTwoPone,studPinkThreePone,studPinkFourPone,
+				studPinkFivePone,studPinkSixPone,studPinkSevenPone,studPinkEightPone,studPinkNinePone,studPinkTenPone);
+		List<ImageView> yellowStudentsTablePone = Arrays.asList(studYellowOnePone,studYellowTwoPone,studYellowThreePone,studYellowFourPone,
+				studYellowFivePone,studYellowSixPone,studYellowSevenPone,studYellowEightPone,studYellowNinePone,studYellowTenPone);
+
+		HashMap<String, ImageView> professorsPone = new HashMap<>();
+		professorsPone.put("RED", professorRedPone);
+		professorsPone.put("GREEN", professorGreenPone);
+		professorsPone.put("BLUE", professorBluePone);
+		professorsPone.put("PINK", professorPinkPone);
+		professorsPone.put("YELLOW", professorYellowPone);
+
+		List<ImageView> towerImagesPone = Arrays.asList(towerOnePone,towerTwoPone,towerThreePone,towerFourPone,
+				towerFivePone,towerSixPone,towerSevenPone,towerEightPone);
+		
+		
+		//dashboard player two
+
+		List<ImageView> entranceImagesPTwo = Arrays.asList(hallStudentOnePTwo,hallStudentTwoPTwo,hallStudentThreePTwo,
 				hallStudentFourPTwo,hallStudentFivePTwo,hallStudentSixPTwo,hallStudentSevenPTwo,
 				hallStudentEightPTwo,hallStudentNinePTwo);
 
-		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePTwo,studRedTwoPTwo,studRedThreePTwo,studRedFourPTwo,
+		List<ImageView> redStudentsTablePTwo = Arrays.asList(studRedOnePTwo,studRedTwoPTwo,studRedThreePTwo,studRedFourPTwo,
 				studRedFivePTwo,studRedSixPTwo,studRedSevenPTwo,studRedEightPTwo,studRedNinePTwo,studRedTenPTwo);
-		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePTwo,studGreenTwoPTwo,studGreenThreePTwo,studGreenFourPTwo,
+		List<ImageView> greenStudentsTablePTwo = Arrays.asList(studGreenOnePTwo,studGreenTwoPTwo,studGreenThreePTwo,studGreenFourPTwo,
 				studGreenFivePTwo,studGreenSixPTwo,studGreenSevenPTwo,studGreenEightPTwo,studGreenNinePTwo,studGreenTenPTwo);
-		List<ImageView> blueStudentsTable = Arrays.asList(studBlueOnePTwo,studBlueTwoPTwo,studBlueThreePTwo,studBlueFourPTwo,
+		List<ImageView> blueStudentsTablePTwo = Arrays.asList(studBlueOnePTwo,studBlueTwoPTwo,studBlueThreePTwo,studBlueFourPTwo,
 				studBlueFivePTwo,studBlueSixPTwo,studBlueSevenPTwo,studBlueEightPTwo,studBlueNinePTwo,studBlueTenPTwo);
-		List<ImageView> pinkStudentsTable = Arrays.asList(studPinkOnePTwo,studPinkTwoPTwo,studPinkThreePTwo,studPinkFourPTwo,
+		List<ImageView> pinkStudentsTablePTwo = Arrays.asList(studPinkOnePTwo,studPinkTwoPTwo,studPinkThreePTwo,studPinkFourPTwo,
 				studPinkFivePTwo,studPinkSixPTwo,studPinkSevenPTwo,studPinkEightPTwo,studPinkNinePTwo,studPinkTenPTwo);
-		List<ImageView> yellowStudentsTable = Arrays.asList(studYellowOnePTwo,studYellowTwoPTwo,studYellowThreePTwo,studYellowFourPTwo,
+		List<ImageView> yellowStudentsTablePTwo = Arrays.asList(studYellowOnePTwo,studYellowTwoPTwo,studYellowThreePTwo,studYellowFourPTwo,
 				studYellowFivePTwo,studYellowSixPTwo,studYellowSevenPTwo,studYellowEightPTwo,studYellowNinePTwo,studYellowTenPTwo);
 
-		List<ImageView> towerImages = Arrays.asList(towerOnePTwo,towerTwoPTwo,towerThreePTwo,towerFourPTwo,
-				towerFivePTwo,towerSixPTwo,towerSevenPTwo,towerEightPTwo);
+		HashMap<String, ImageView> professorsPTwo = new HashMap<>();
+		professorsPTwo.put("RED", professorRedPTwo);
+		professorsPTwo.put("GREEN", professorGreenPTwo);
+		professorsPTwo.put("BLUE", professorBluePTwo);
+		professorsPTwo.put("PINK", professorPinkPTwo);
+		professorsPTwo.put("YELLOW", professorYellowPTwo);
 
+		List<ImageView> towerImagesPTwo = Arrays.asList(towerOnePTwo,towerTwoPTwo,towerThreePTwo,towerFourPTwo,
+				towerFivePTwo,towerSixPTwo,towerSevenPTwo,towerEightPTwo);
+		
+		//dashboard player three
+
+		List<ImageView> entranceImagesPThree = Arrays.asList(hallStudentOnePThree,hallStudentTwoPThree,hallStudentThreePThree,
+				hallStudentFourPThree,hallStudentFivePThree,hallStudentSixPThree,hallStudentSevenPThree,
+				hallStudentEightPThree,hallStudentNinePThree);
+
+		List<ImageView> redStudentsTablePThree = Arrays.asList(studRedOnePThree,studRedTwoPThree,studRedThreePThree,studRedFourPThree,
+				studRedFivePThree,studRedSixPThree,studRedSevenPThree,studRedEightPThree,studRedNinePThree,studRedTenPThree);
+		List<ImageView> greenStudentsTablePThree = Arrays.asList(studGreenOnePThree,studGreenTwoPThree,studGreenThreePThree,studGreenFourPThree,
+				studGreenFivePThree,studGreenSixPThree,studGreenSevenPThree,studGreenEightPThree,studGreenNinePThree,studGreenTenPThree);
+		List<ImageView> blueStudentsTablePThree = Arrays.asList(studBlueOnePThree,studBlueTwoPThree,studBlueThreePThree,studBlueFourPThree,
+				studBlueFivePThree,studBlueSixPThree,studBlueSevenPThree,studBlueEightPThree,studBlueNinePThree,studBlueTenPThree);
+		List<ImageView> pinkStudentsTablePThree = Arrays.asList(studPinkOnePThree,studPinkTwoPThree,studPinkThreePThree,studPinkFourPThree,
+				studPinkFivePThree,studPinkSixPThree,studPinkSevenPThree,studPinkEightPThree,studPinkNinePThree,studPinkTenPThree);
+		List<ImageView> yellowStudentsTablePThree = Arrays.asList(studYellowOnePThree,studYellowTwoPThree,studYellowThreePThree,studYellowFourPThree,
+				studYellowFivePThree,studYellowSixPThree,studYellowSevenPThree,studYellowEightPThree,studYellowNinePThree,studYellowTenPThree);
+		
+		HashMap<String, ImageView> professorsPThree = new HashMap<>();
+		professorsPThree.put("RED", professorRedPThree);
+		professorsPThree.put("GREEN", professorGreenPThree);
+		professorsPThree.put("BLUE", professorBluePThree);
+		professorsPThree.put("PINK", professorPinkPThree);
+		professorsPThree.put("YELLOW", professorYellowPThree);
+
+		List<ImageView> towerImagesPThree = Arrays.asList(towerOnePThree,towerTwoPThree,towerThreePThree,towerFourPThree,
+				towerFivePThree,towerSixPThree);
 
 		//TODO character cards???
 
@@ -970,26 +1031,41 @@ public class PlanningPhaseGUI{
 		
 		//dashboards
 
-		HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
 		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
-		HashMap<String, String> towerColors = gameState.getTowerColor();
+		HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
+		HashMap<String, DashboardGUI> dashboardGUIList = new HashMap<>();
 		
-		printDashboardOne(dashboardList.get(nicknameList.get(0)), nicknameList.get(0), gameState.getPlayersNumber(),
-				gameState.getProfessors(), towerColors.get(nicknameList.get(0)));
-
-		printDashboardTwo(dashboardList.get(nicknameList.get(1)), nicknameList.get(1), gameState.getPlayersNumber(),
-				gameState.getProfessors(), towerColors.get(nicknameList.get(1)));
+		
+		dashboardGUIList.put(nicknameList.get(0), new DashboardGUI(entranceImagesPone, redStudentsTablePone, greenStudentsTablePone, blueStudentsTablePone, pinkStudentsTablePone, yellowStudentsTablePone, professorsPone, towerImagesPone));
+		dashboardGUIList.put(nicknameList.get(1), new DashboardGUI(entranceImagesPTwo, redStudentsTablePTwo, greenStudentsTablePTwo, blueStudentsTablePTwo, pinkStudentsTablePTwo, yellowStudentsTablePTwo, professorsPTwo, towerImagesPTwo));
 		if(gameState.getPlayersNumber() == 3)
-			printDashboardThree(dashboardList.get(nicknameList.get(2)), nicknameList.get(2), gameState.getPlayersNumber(),
-					gameState.getProfessors(), towerColors.get(nicknameList.get(2)));
+			dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
+		
+		HashMap<String, String> towerColors = gameState.getTowerColor();
+
+		String firstPlayerNick = nicknameList.get(0);
+		String secondPlayerNick = nicknameList.get(1);
+
+		printDashboard(dashboardList.get(firstPlayerNick), dashboardGUIList.get(firstPlayerNick), firstPlayerNick,
+				gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(firstPlayerNick));
+
+		printDashboard(dashboardList.get(secondPlayerNick), dashboardGUIList.get(secondPlayerNick), secondPlayerNick,
+				gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(secondPlayerNick));
+
+		if(gameState.getPlayersNumber() == 3){
+			String thirdPlayerNick = nicknameList.get(2);
+			printDashboard(dashboardList.get(thirdPlayerNick), dashboardGUIList.get(thirdPlayerNick), thirdPlayerNick,
+					gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(thirdPlayerNick));
+		}
 		else
 			hideDashboardThree();
 
 
 		HashMap<String, Integer> coins = gameState.getCoins();
 		printCoinsPOne(coins.get(nicknameList.get(0)));
-		printCoinsPTwo(coins.get(nicknameList.get(0)));
-		printCoinsPThree(coins.get(nicknameList.get(0)));
+		printCoinsPTwo(coins.get(nicknameList.get(1)));
+		if(gameState.getPlayersNumber() == 3)
+			printCoinsPThree(coins.get(nicknameList.get(2)));
 	}
 
 	//islands
@@ -1022,28 +1098,9 @@ public class PlanningPhaseGUI{
 
 	//dashboards
 
-	public void printDashboardOne(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
-		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePone,hallStudentTwoPone,hallStudentThreePone,
-				hallStudentFourPone,hallStudentFivePone,hallStudentSixPone,hallStudentSevenPone,
-				hallStudentEightPone,hallStudentNinePone);
-
-		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePone,studRedTwoPone,studRedThreePone,studRedFourPone,
-				studRedFivePone,studRedSixPone,studRedSevenPone,studRedEightPone,studRedNinePone,studRedTenPone);
-		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePone,studGreenTwoPone,studGreenThreePone,studGreenFourPone,
-				studGreenFivePone,studGreenSixPone,studGreenSevenPone,studGreenEightPone,studGreenNinePone,studGreenTenPone);
-		List<ImageView> blueStudentsTable = Arrays.asList(studBlueOnePone,studBlueTwoPone,studBlueThreePone,studBlueFourPone,
-				studBlueFivePone,studBlueSixPone,studBlueSevenPone,studBlueEightPone,studBlueNinePone,studBlueTenPone);
-		List<ImageView> pinkStudentsTable = Arrays.asList(studPinkOnePone,studPinkTwoPone,studPinkThreePone,studPinkFourPone,
-				studPinkFivePone,studPinkSixPone,studPinkSevenPone,studPinkEightPone,studPinkNinePone,studPinkTenPone);
-		List<ImageView> yellowStudentsTable = Arrays.asList(studYellowOnePone,studYellowTwoPone,studYellowThreePone,studYellowFourPone,
-				studYellowFivePone,studYellowSixPone,studYellowSevenPone,studYellowEightPone,studYellowNinePone,studYellowTenPone);
-
-		List<ImageView> towerImages = Arrays.asList(towerOnePone,towerTwoPone,towerThreePone,towerFourPone,
-				towerFivePone,towerSixPone,towerSevenPone,towerEightPone);
-
-		//DashboardGUI
-
-		//print entrance
+	public void printDashboard(DashboardDTO dashboardDTO, DashboardGUI dashboardGUI, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
+		//entrance
+		List<ImageView> entranceStudentImages = dashboardGUI.getEntranceImages();
 		ArrayList<String> entranceStudentColors = new ArrayList<>();
 		dashboardDTO.getEntrance().forEach((color, value) -> {
 			for(int i = 0; i < value; i++){
@@ -1051,1224 +1108,65 @@ public class PlanningPhaseGUI{
 			}
 		});
 
-		printEntranceStudentOnePOne(entranceStudentColors.get(0));
-		printEntranceStudentTwoPOne(entranceStudentColors.get(1));
-		printEntranceStudentThreePOne(entranceStudentColors.get(2));
-		printEntranceStudentFourPOne(entranceStudentColors.get(3));
-		printEntranceStudentFivePOne(entranceStudentColors.get(4));
-		printEntranceStudentSixPOne(entranceStudentColors.get(5));
-		printEntranceStudentSevenPOne(entranceStudentColors.get(6));
+		int maxEntranceStudents = 7;
+		if(playersNumber == 3)
+			maxEntranceStudents = 9;
 
-		if(playersNumber == 3){
-			printEntranceStudentEightPOne(entranceStudentColors.get(7));
-			printEntranceStudentNinePOne(entranceStudentColors.get(8));
+		for(int i = 0; i < maxEntranceStudents; i++){
+			printEntranceStudent(entranceStudentImages.get(i), entranceStudentColors.get(i));
 		}
 
-		//print tables
-		HashMap<String, Integer> tables = dashboardDTO.getTables();
-		if(tables.get("RED") >= 1)
-			printTableStudentOnePOneRed();
-		if(tables.get("RED") >= 2)
-			printTableStudentTwoPOneRed();
-		if(tables.get("RED") >= 3)
-			printTableStudentThreePOneRed();
-		if(tables.get("RED") >= 4)
-			printTableStudentFourPOneRed();
-		if(tables.get("RED") >= 5)
-			printTableStudentFivePOneRed();
-		if(tables.get("RED") >= 6)
-			printTableStudentSixPOneRed();
-		if(tables.get("RED") >= 7)
-			printTableStudentSevenPOneRed();
-		if(tables.get("RED") >= 8)
-			printTableStudentEightPOneRed();
-		if(tables.get("RED") >= 9)
-			printTableStudentNinePOneRed();
-		if(tables.get("RED") >= 10)
-			printTableStudentTenPOneRed();
+		//tables
+		HashMap<String, List<ImageView>> tablesStudentImages = dashboardGUI.getTablesImages();
+		HashMap<String, Integer> tablesStudents = dashboardDTO.getTables();
 
-		if(tables.get("GREEN") >= 1)
-			printTableStudentOnePOneGreen();
-		if(tables.get("GREEN") >= 2)
-			printTableStudentTwoPOneGreen();
-		if(tables.get("GREEN") >= 3)
-			printTableStudentThreePOneGreen();
-		if(tables.get("GREEN") >= 4)
-			printTableStudentFourPOneGreen();
-		if(tables.get("GREEN") >= 5)
-			printTableStudentFivePOneGreen();
-		if(tables.get("GREEN") >= 6)
-			printTableStudentSixPOneGreen();
-		if(tables.get("GREEN") >= 7)
-			printTableStudentSevenPOneGreen();
-		if(tables.get("GREEN") >= 8)
-			printTableStudentEightPOneGreen();
-		if(tables.get("GREEN") >= 9)
-			printTableStudentNinePOneGreen();
-		if(tables.get("GREEN") >= 10)
-			printTableStudentTenPOneGreen();
-
-		if(tables.get("BLUE") >= 1)
-			printTableStudentOnePOneBlue();
-		if(tables.get("BLUE") >= 2)
-			printTableStudentTwoPOneBlue();
-		if(tables.get("BLUE") >= 3)
-			printTableStudentThreePOneBlue();
-		if(tables.get("BLUE") >= 4)
-			printTableStudentFourPOneBlue();
-		if(tables.get("BLUE") >= 5)
-			printTableStudentFivePOneBlue();
-		if(tables.get("BLUE") >= 6)
-			printTableStudentSixPOneBlue();
-		if(tables.get("BLUE") >= 7)
-			printTableStudentSevenPOneBlue();
-		if(tables.get("BLUE") >= 8)
-			printTableStudentEightPOneBlue();
-		if(tables.get("BLUE") >= 9)
-			printTableStudentNinePOneBlue();
-		if(tables.get("BLUE") >= 10)
-			printTableStudentTenPOneBlue();
-
-		if(tables.get("PINK") >= 1)
-			printTableStudentOnePOnePink();
-		if(tables.get("PINK") >= 2)
-			printTableStudentTwoPOnePink();
-		if(tables.get("PINK") >= 3)
-			printTableStudentThreePOnePink();
-		if(tables.get("PINK") >= 4)
-			printTableStudentFourPOnePink();
-		if(tables.get("PINK") >= 5)
-			printTableStudentFivePOnePink();
-		if(tables.get("PINK") >= 6)
-			printTableStudentSixPOnePink();
-		if(tables.get("PINK") >= 7)
-			printTableStudentSevenPOnePink();
-		if(tables.get("PINK") >= 8)
-			printTableStudentEightPOnePink();
-		if(tables.get("PINK") >= 9)
-			printTableStudentNinePOnePink();
-		if(tables.get("PINK") >= 10)
-			printTableStudentTenPOnePink();
-
-		if(tables.get("YELLOW") >= 1)
-			printTableStudentOnePOneYellow();
-		if(tables.get("YELLOW") >= 2)
-			printTableStudentTwoPOneYellow();
-		if(tables.get("YELLOW") >= 3)
-			printTableStudentThreePOneYellow();
-		if(tables.get("YELLOW") >= 4)
-			printTableStudentFourPOneYellow();
-		if(tables.get("YELLOW") >= 5)
-			printTableStudentFivePOneYellow();
-		if(tables.get("YELLOW") >= 6)
-			printTableStudentSixPOneYellow();
-		if(tables.get("YELLOW") >= 7)
-			printTableStudentSevenPOneYellow();
-		if(tables.get("YELLOW") >= 8)
-			printTableStudentEightPOneYellow();
-		if(tables.get("YELLOW") >= 9)
-			printTableStudentNinePOneYellow();
-		if(tables.get("YELLOW") >= 10)
-			printTableStudentTenPOneYellow();
-
-		//print professors
-		if(playerNickname.equals(professors.get("RED")))
-			printRedProfessorPOne();
-		if(playerNickname.equals(professors.get("GREEN")))
-			printGreenProfessorPOne();
-		if(playerNickname.equals(professors.get("BLUE")))
-			printBlueProfessorPOne();
-		if(playerNickname.equals(professors.get("PINK")))
-			printPinkProfessorPOne();
-		if(playerNickname.equals(professors.get("YELLOW")))
-			printYellowProfessorPOne();
-
-		
-		//print towers
-		int numberOfTowers = dashboardDTO.getNumberOfTowers();
-		
-		if(numberOfTowers >= 1)
-			printTowerOnePOne(towerColor);
-		if(numberOfTowers >= 2)
-			printTowerTwoPOne(towerColor);
-		if(numberOfTowers >= 3)
-			printTowerThreePOne(towerColor);
-		if(numberOfTowers >= 4)
-			printTowerFourPOne(towerColor);
-		if(numberOfTowers >= 5)
-			printTowerFivePOne(towerColor);
-		if(numberOfTowers >= 6)
-			printTowerSixPOne(towerColor);
-		if(numberOfTowers >= 7)
-			printTowerSevenPOne(towerColor);
-		if(numberOfTowers >= 8)
-			printTowerEightPOne(towerColor);
-
-
-	}
-
-	public void printDashboardTwo(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
-		
-		//print entrance
-		ArrayList<String> entranceStudentColors = new ArrayList<>();
-		dashboardDTO.getEntrance().forEach((color, value) -> {
+		tablesStudents.forEach((color, value) -> {
+			List<ImageView> currentColorTable = tablesStudentImages.get(color);
 			for(int i = 0; i < value; i++){
-				entranceStudentColors.add(color);
+				printTableStudent(currentColorTable.get(i), color);
 			}
 		});
 
-		printEntranceStudentOnePTwo(entranceStudentColors.get(0));
-		printEntranceStudentTwoPTwo(entranceStudentColors.get(1));
-		printEntranceStudentThreePTwo(entranceStudentColors.get(2));
-		printEntranceStudentFourPTwo(entranceStudentColors.get(3));
-		printEntranceStudentFivePTwo(entranceStudentColors.get(4));
-		printEntranceStudentSixPTwo(entranceStudentColors.get(5));
-		printEntranceStudentSevenPTwo(entranceStudentColors.get(6));
-
-		if(playersNumber == 3){
-			printEntranceStudentEightPTwo(entranceStudentColors.get(7));
-			printEntranceStudentNinePTwo(entranceStudentColors.get(8));
-		}
-
-		//print tables
-		HashMap<String, Integer> tables = dashboardDTO.getTables();
-		if(tables.get("RED") >= 1)
-			printTableStudentOnePTwoRed();
-		if(tables.get("RED") >= 2)
-			printTableStudentTwoPTwoRed();
-		if(tables.get("RED") >= 3)
-			printTableStudentThreePTwoRed();
-		if(tables.get("RED") >= 4)
-			printTableStudentFourPTwoRed();
-		if(tables.get("RED") >= 5)
-			printTableStudentFivePTwoRed();
-		if(tables.get("RED") >= 6)
-			printTableStudentSixPTwoRed();
-		if(tables.get("RED") >= 7)
-			printTableStudentSevenPTwoRed();
-		if(tables.get("RED") >= 8)
-			printTableStudentEightPTwoRed();
-		if(tables.get("RED") >= 9)
-			printTableStudentNinePTwoRed();
-		if(tables.get("RED") >= 10)
-			printTableStudentTenPTwoRed();
-
-		if(tables.get("GREEN") >= 1)
-			printTableStudentOnePTwoGreen();
-		if(tables.get("GREEN") >= 2)
-			printTableStudentTwoPTwoGreen();
-		if(tables.get("GREEN") >= 3)
-			printTableStudentThreePTwoGreen();
-		if(tables.get("GREEN") >= 4)
-			printTableStudentFourPTwoGreen();
-		if(tables.get("GREEN") >= 5)
-			printTableStudentFivePTwoGreen();
-		if(tables.get("GREEN") >= 6)
-			printTableStudentSixPTwoGreen();
-		if(tables.get("GREEN") >= 7)
-			printTableStudentSevenPTwoGreen();
-		if(tables.get("GREEN") >= 8)
-			printTableStudentEightPTwoGreen();
-		if(tables.get("GREEN") >= 9)
-			printTableStudentNinePTwoGreen();
-		if(tables.get("GREEN") >= 10)
-			printTableStudentTenPTwoGreen();
-
-		if(tables.get("BLUE") >= 1)
-			printTableStudentOnePTwoBlue();
-		if(tables.get("BLUE") >= 2)
-			printTableStudentTwoPTwoBlue();
-		if(tables.get("BLUE") >= 3)
-			printTableStudentThreePTwoBlue();
-		if(tables.get("BLUE") >= 4)
-			printTableStudentFourPTwoBlue();
-		if(tables.get("BLUE") >= 5)
-			printTableStudentFivePTwoBlue();
-		if(tables.get("BLUE") >= 6)
-			printTableStudentSixPTwoBlue();
-		if(tables.get("BLUE") >= 7)
-			printTableStudentSevenPTwoBlue();
-		if(tables.get("BLUE") >= 8)
-			printTableStudentEightPTwoBlue();
-		if(tables.get("BLUE") >= 9)
-			printTableStudentNinePTwoBlue();
-		if(tables.get("BLUE") >= 10)
-			printTableStudentTenPTwoBlue();
-
-		if(tables.get("PINK") >= 1)
-			printTableStudentOnePTwoPink();
-		if(tables.get("PINK") >= 2)
-			printTableStudentTwoPTwoPink();
-		if(tables.get("PINK") >= 3)
-			printTableStudentThreePTwoPink();
-		if(tables.get("PINK") >= 4)
-			printTableStudentFourPTwoPink();
-		if(tables.get("PINK") >= 5)
-			printTableStudentFivePTwoPink();
-		if(tables.get("PINK") >= 6)
-			printTableStudentSixPTwoPink();
-		if(tables.get("PINK") >= 7)
-			printTableStudentSevenPTwoPink();
-		if(tables.get("PINK") >= 8)
-			printTableStudentEightPTwoPink();
-		if(tables.get("PINK") >= 9)
-			printTableStudentNinePTwoPink();
-		if(tables.get("PINK") >= 10)
-			printTableStudentTenPTwoPink();
-
-		if(tables.get("YELLOW") >= 1)
-			printTableStudentOnePTwoYellow();
-		if(tables.get("YELLOW") >= 2)
-			printTableStudentTwoPTwoYellow();
-		if(tables.get("YELLOW") >= 3)
-			printTableStudentThreePTwoYellow();
-		if(tables.get("YELLOW") >= 4)
-			printTableStudentFourPTwoYellow();
-		if(tables.get("YELLOW") >= 5)
-			printTableStudentFivePTwoYellow();
-		if(tables.get("YELLOW") >= 6)
-			printTableStudentSixPTwoYellow();
-		if(tables.get("YELLOW") >= 7)
-			printTableStudentSevenPTwoYellow();
-		if(tables.get("YELLOW") >= 8)
-			printTableStudentEightPTwoYellow();
-		if(tables.get("YELLOW") >= 9)
-			printTableStudentNinePTwoYellow();
-		if(tables.get("YELLOW") >= 10)
-			printTableStudentTenPTwoYellow();
-
-		//print professors
-		if(playerNickname.equals(professors.get("RED")))
-			printRedProfessorPTwo();
-		if(playerNickname.equals(professors.get("GREEN")))
-			printGreenProfessorPTwo();
-		if(playerNickname.equals(professors.get("BLUE")))
-			printBlueProfessorPTwo();
-		if(playerNickname.equals(professors.get("PINK")))
-			printPinkProfessorPTwo();
-		if(playerNickname.equals(professors.get("YELLOW")))
-			printYellowProfessorPTwo();
-
-
-		//print towers
-		int numberOfTowers = dashboardDTO.getNumberOfTowers();
-
-		if(numberOfTowers >= 1)
-			printTowerOnePTwo(towerColor);
-		if(numberOfTowers >= 2)
-			printTowerTwoPTwo(towerColor);
-		if(numberOfTowers >= 3)
-			printTowerThreePTwo(towerColor);
-		if(numberOfTowers >= 4)
-			printTowerFourPTwo(towerColor);
-		if(numberOfTowers >= 5)
-			printTowerFivePTwo(towerColor);
-		if(numberOfTowers >= 6)
-			printTowerSixPTwo(towerColor);
-		if(numberOfTowers >= 7)
-			printTowerSevenPTwo(towerColor);
-		if(numberOfTowers >= 8)
-			printTowerEightPTwo(towerColor);
-
-
-	}
-
-	public void printDashboardThree(DashboardDTO dashboardDTO, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
-
-		List<ImageView> entranceImages = Arrays.asList(hallStudentOnePThree,hallStudentTwoPThree,hallStudentThreePThree,
-				hallStudentFourPThree,hallStudentFivePThree,hallStudentSixPThree,hallStudentSevenPThree,
-				hallStudentEightPThree,hallStudentNinePThree);
-
-		List<ImageView> redStudentsTable = Arrays.asList(studRedOnePThree,studRedTwoPThree,studRedThreePThree,studRedFourPThree,
-				studRedFivePThree,studRedSixPThree,studRedSevenPThree,studRedEightPThree,studRedNinePThree,studRedTenPThree);
-		List<ImageView> greenStudentsTable = Arrays.asList(studGreenOnePThree,studGreenTwoPThree,studGreenThreePThree,studGreenFourPThree,
-				studGreenFivePThree,studGreenSixPThree,studGreenSevenPThree,studGreenEightPThree,studGreenNinePThree,studGreenTenPThree);
-		List<ImageView> blueStudentsTable = Arrays.asList(studBlueOnePThree,studBlueTwoPThree,studBlueThreePThree,studBlueFourPThree,
-				studBlueFivePThree,studBlueSixPThree,studBlueSevenPThree,studBlueEightPThree,studBlueNinePThree,studBlueTenPThree);
-		List<ImageView> pinkStudentsTable = Arrays.asList(studPinkOnePThree,studPinkTwoPThree,studPinkThreePThree,studPinkFourPThree,
-				studPinkFivePThree,studPinkSixPThree,studPinkSevenPThree,studPinkEightPThree,studPinkNinePThree,studPinkTenPThree);
-		List<ImageView> yellowStudentsTable = Arrays.asList(studYellowOnePThree,studYellowTwoPThree,studYellowThreePThree,studYellowFourPThree,
-				studYellowFivePThree,studYellowSixPThree,studYellowSevenPThree,studYellowEightPThree,studYellowNinePThree,studYellowTenPThree);
-
-		List<ImageView> towerImages = Arrays.asList(towerOnePThree,towerTwoPThree,towerThreePThree,towerFourPThree,
-				towerFivePThree,towerSixPThree);
-
-		
-		ArrayList<String> entranceStudentColors = new ArrayList<>();
-		dashboardDTO.getEntrance().forEach((color, value) -> {
-			for(int i = 0; i < value; i++){
-				entranceStudentColors.add(color);
-			}
+		//professors
+		HashMap<String, ImageView> professorsImages = dashboardGUI.getProfessorsImages();
+		professors.forEach((color, nickname) -> {
+			if(playerNickname.equals(nickname))
+				printProfessor(professorsImages.get(color), color);
 		});
 
-		printEntranceStudentOnePThree(entranceStudentColors.get(0));
-		printEntranceStudentTwoPThree(entranceStudentColors.get(1));
-		printEntranceStudentThreePThree(entranceStudentColors.get(2));
-		printEntranceStudentFourPThree(entranceStudentColors.get(3));
-		printEntranceStudentFivePThree(entranceStudentColors.get(4));
-		printEntranceStudentSixPThree(entranceStudentColors.get(5));
-		printEntranceStudentSevenPThree(entranceStudentColors.get(6));
-
-		if(playersNumber == 3){
-			printEntranceStudentEightPThree(entranceStudentColors.get(7));
-			printEntranceStudentNinePThree(entranceStudentColors.get(8));
-		}
-
-		//print tables
-		HashMap<String, Integer> tables = dashboardDTO.getTables();
-		if(tables.get("RED") >= 1)
-			printTableStudentOnePThreeRed();
-		if(tables.get("RED") >= 2)
-			printTableStudentTwoPThreeRed();
-		if(tables.get("RED") >= 3)
-			printTableStudentThreePThreeRed();
-		if(tables.get("RED") >= 4)
-			printTableStudentFourPThreeRed();
-		if(tables.get("RED") >= 5)
-			printTableStudentFivePThreeRed();
-		if(tables.get("RED") >= 6)
-			printTableStudentSixPThreeRed();
-		if(tables.get("RED") >= 7)
-			printTableStudentSevenPThreeRed();
-		if(tables.get("RED") >= 8)
-			printTableStudentEightPThreeRed();
-		if(tables.get("RED") >= 9)
-			printTableStudentNinePThreeRed();
-		if(tables.get("RED") >= 10)
-			printTableStudentTenPThreeRed();
-
-		if(tables.get("GREEN") >= 1)
-			printTableStudentOnePThreeGreen();
-		if(tables.get("GREEN") >= 2)
-			printTableStudentTwoPThreeGreen();
-		if(tables.get("GREEN") >= 3)
-			printTableStudentThreePThreeGreen();
-		if(tables.get("GREEN") >= 4)
-			printTableStudentFourPThreeGreen();
-		if(tables.get("GREEN") >= 5)
-			printTableStudentFivePThreeGreen();
-		if(tables.get("GREEN") >= 6)
-			printTableStudentSixPThreeGreen();
-		if(tables.get("GREEN") >= 7)
-			printTableStudentSevenPThreeGreen();
-		if(tables.get("GREEN") >= 8)
-			printTableStudentEightPThreeGreen();
-		if(tables.get("GREEN") >= 9)
-			printTableStudentNinePThreeGreen();
-		if(tables.get("GREEN") >= 10)
-			printTableStudentTenPThreeGreen();
-
-		if(tables.get("BLUE") >= 1)
-			printTableStudentOnePThreeBlue();
-		if(tables.get("BLUE") >= 2)
-			printTableStudentTwoPThreeBlue();
-		if(tables.get("BLUE") >= 3)
-			printTableStudentThreePThreeBlue();
-		if(tables.get("BLUE") >= 4)
-			printTableStudentFourPThreeBlue();
-		if(tables.get("BLUE") >= 5)
-			printTableStudentFivePThreeBlue();
-		if(tables.get("BLUE") >= 6)
-			printTableStudentSixPThreeBlue();
-		if(tables.get("BLUE") >= 7)
-			printTableStudentSevenPThreeBlue();
-		if(tables.get("BLUE") >= 8)
-			printTableStudentEightPThreeBlue();
-		if(tables.get("BLUE") >= 9)
-			printTableStudentNinePThreeBlue();
-		if(tables.get("BLUE") >= 10)
-			printTableStudentTenPThreeBlue();
-
-		if(tables.get("PINK") >= 1)
-			printTableStudentOnePThreePink();
-		if(tables.get("PINK") >= 2)
-			printTableStudentTwoPThreePink();
-		if(tables.get("PINK") >= 3)
-			printTableStudentThreePThreePink();
-		if(tables.get("PINK") >= 4)
-			printTableStudentFourPThreePink();
-		if(tables.get("PINK") >= 5)
-			printTableStudentFivePThreePink();
-		if(tables.get("PINK") >= 6)
-			printTableStudentSixPThreePink();
-		if(tables.get("PINK") >= 7)
-			printTableStudentSevenPThreePink();
-		if(tables.get("PINK") >= 8)
-			printTableStudentEightPThreePink();
-		if(tables.get("PINK") >= 9)
-			printTableStudentNinePThreePink();
-		if(tables.get("PINK") >= 10)
-			printTableStudentTenPThreePink();
-
-		if(tables.get("YELLOW") >= 1)
-			printTableStudentOnePThreeYellow();
-		if(tables.get("YELLOW") >= 2)
-			printTableStudentTwoPThreeYellow();
-		if(tables.get("YELLOW") >= 3)
-			printTableStudentThreePThreeYellow();
-		if(tables.get("YELLOW") >= 4)
-			printTableStudentFourPThreeYellow();
-		if(tables.get("YELLOW") >= 5)
-			printTableStudentFivePThreeYellow();
-		if(tables.get("YELLOW") >= 6)
-			printTableStudentSixPThreeYellow();
-		if(tables.get("YELLOW") >= 7)
-			printTableStudentSevenPThreeYellow();
-		if(tables.get("YELLOW") >= 8)
-			printTableStudentEightPThreeYellow();
-		if(tables.get("YELLOW") >= 9)
-			printTableStudentNinePThreeYellow();
-		if(tables.get("YELLOW") >= 10)
-			printTableStudentTenPThreeYellow();
-
-		//print professors
-		if(playerNickname.equals(professors.get("RED")))
-			printRedProfessorPThree();
-		if(playerNickname.equals(professors.get("GREEN")))
-			printGreenProfessorPThree();
-		if(playerNickname.equals(professors.get("BLUE")))
-			printBlueProfessorPThree();
-		if(playerNickname.equals(professors.get("PINK")))
-			printPinkProfessorPThree();
-		if(playerNickname.equals(professors.get("YELLOW")))
-			printYellowProfessorPThree();
-
-
-		//print towers
+		//towers
+		List<ImageView> towerImages = dashboardGUI.getTowerImages();
 		int numberOfTowers = dashboardDTO.getNumberOfTowers();
 
-		if(numberOfTowers >= 1)
-			printTowerOnePThree(towerColor);
-		if(numberOfTowers >= 2)
-			printTowerTwoPThree(towerColor);
-		if(numberOfTowers >= 3)
-			printTowerThreePThree(towerColor);
-		if(numberOfTowers >= 4)
-			printTowerFourPThree(towerColor);
-		if(numberOfTowers >= 5)
-			printTowerFivePThree(towerColor);
-		if(numberOfTowers >= 6)
-			printTowerSixPThree(towerColor);
+		for(int i = 0; i < numberOfTowers; i++){
+			printTower(towerImages.get(i), towerColor);
+		}
 	}
 
-	public void printEntranceStudentOnePOne(String color){
+	//dashboards
+
+	public void printEntranceStudent(ImageView entranceStudent, String color){
 		Image studentImage = new Image(color + "Stud.png");
-		hallStudentOnePone.setImage(studentImage);
-	}
-	public void printEntranceStudentTwoPOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentTwoPone.setImage(studentImage);
-	}
-	public void printEntranceStudentThreePOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentThreePone.setImage(studentImage);
-	}
-	public void printEntranceStudentFourPOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentFourPone.setImage(studentImage);
-	}
-	public void printEntranceStudentFivePOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentFivePone.setImage(studentImage);
-	}
-	public void printEntranceStudentSixPOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentSixPone.setImage(studentImage);
-	}
-	public void printEntranceStudentSevenPOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentSevenPone.setImage(studentImage);
-	}
-	public void printEntranceStudentEightPOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentEightPone.setImage(studentImage);
-	}
-	public void printEntranceStudentNinePOne(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentNinePone.setImage(studentImage);
-	}
-	public void printEntranceStudentOnePTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentOnePTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentTwoPTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentTwoPTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentThreePTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentThreePTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentFourPTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentFourPTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentFivePTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentFivePTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentSixPTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentSixPTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentSevenPTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentSevenPTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentEightPTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentEightPTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentNinePTwo(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentNinePTwo.setImage(studentImage);
-	}
-	public void printEntranceStudentOnePThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentOnePThree.setImage(studentImage);
-	}
-	public void printEntranceStudentTwoPThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentTwoPThree.setImage(studentImage);
-	}
-	public void printEntranceStudentThreePThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentThreePThree.setImage(studentImage);
-	}
-	public void printEntranceStudentFourPThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentFourPThree.setImage(studentImage);
-	}
-	public void printEntranceStudentFivePThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentFivePThree.setImage(studentImage);
-	}
-	public void printEntranceStudentSixPThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentSixPThree.setImage(studentImage);
-	}
-	public void printEntranceStudentSevenPThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentSevenPThree.setImage(studentImage);
-	}
-	public void printEntranceStudentEightPThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentEightPThree.setImage(studentImage);
-	}
-	public void printEntranceStudentNinePThree(String color){
-		Image studentImage = new Image(color + "Stud.png");
-		hallStudentNinePThree.setImage(studentImage);
+		entranceStudent.setImage(studentImage);
 	}
 
-	//tables p1
-	public void printTableStudentOnePOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedOnePone.setImage(studentImage);
-	}
-	public void printTableStudentTwoPOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedTwoPone.setImage(studentImage);
-	}
-	public void printTableStudentThreePOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedThreePone.setImage(studentImage);
-	}
-	public void printTableStudentFourPOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedFourPone.setImage(studentImage);
-	}
-	public void printTableStudentFivePOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedFivePone.setImage(studentImage);
-	}
-	public void printTableStudentSixPOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedSixPone.setImage(studentImage);
-	}
-	public void printTableStudentSevenPOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedSevenPone.setImage(studentImage);
-	}
-	public void printTableStudentEightPOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedEightPone.setImage(studentImage);
-	}
-	public void printTableStudentNinePOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedNinePone.setImage(studentImage);
-	}
-	public void printTableStudentTenPOneRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedTenPone.setImage(studentImage);
-	}
-	public void printTableStudentOnePOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenOnePone.setImage(studentImage);
-	}
-	public void printTableStudentTwoPOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenTwoPone.setImage(studentImage);
-	}
-	public void printTableStudentThreePOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenThreePone.setImage(studentImage);
-	}
-	public void printTableStudentFourPOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenFourPone.setImage(studentImage);
-	}
-	public void printTableStudentFivePOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenFivePone.setImage(studentImage);
-	}
-	public void printTableStudentSixPOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenSixPone.setImage(studentImage);
-	}public void printTableStudentSevenPOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenSevenPone.setImage(studentImage);
-	}
-	public void printTableStudentEightPOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenEightPone.setImage(studentImage);
-	}
-	public void printTableStudentNinePOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenNinePone.setImage(studentImage);
-	}
-	public void printTableStudentTenPOneGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenTenPone.setImage(studentImage);
-	}
-	public void printTableStudentOnePOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueOnePone.setImage(studentImage);
-	}
-	public void printTableStudentTwoPOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueTwoPone.setImage(studentImage);
-	}
-	public void printTableStudentThreePOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueThreePone.setImage(studentImage);
-	}
-	public void printTableStudentFourPOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueFourPone.setImage(studentImage);
-	}
-	public void printTableStudentFivePOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueFivePone.setImage(studentImage);
-	}
-	public void printTableStudentSixPOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueSixPone.setImage(studentImage);
-	}
-	public void printTableStudentSevenPOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueSevenPone.setImage(studentImage);
-	}
-	public void printTableStudentEightPOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueEightPone.setImage(studentImage);
-	}
-	public void printTableStudentNinePOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueNinePone.setImage(studentImage);
-	}
-	public void printTableStudentTenPOneBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueTenPone.setImage(studentImage);
-	}
-	public void printTableStudentOnePOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkOnePone.setImage(studentImage);
-	}
-	public void printTableStudentTwoPOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkTwoPone.setImage(studentImage);
-	}
-	public void printTableStudentThreePOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkThreePone.setImage(studentImage);
-	}
-	public void printTableStudentFourPOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkFourPone.setImage(studentImage);
-	}
-	public void printTableStudentFivePOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkFivePone.setImage(studentImage);
-	}
-	public void printTableStudentSixPOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkSixPone.setImage(studentImage);
-	}
-	public void printTableStudentSevenPOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkSevenPone.setImage(studentImage);
-	}
-	public void printTableStudentEightPOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkEightPone.setImage(studentImage);
-	}
-	public void printTableStudentNinePOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkNinePone.setImage(studentImage);
-	}
-	public void printTableStudentTenPOnePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkTenPone.setImage(studentImage);
-	}
-	public void printTableStudentOnePOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowOnePone.setImage(studentImage);
-	}
-	public void printTableStudentTwoPOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowTwoPone.setImage(studentImage);
-	}
-	public void printTableStudentThreePOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowThreePone.setImage(studentImage);
-	}
-	public void printTableStudentFourPOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowFourPone.setImage(studentImage);
-	}
-	public void printTableStudentFivePOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowFivePone.setImage(studentImage);
-	}
-	public void printTableStudentSixPOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowSixPone.setImage(studentImage);
-	}
-	public void printTableStudentSevenPOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowSevenPone.setImage(studentImage);
-	}
-	public void printTableStudentEightPOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowEightPone.setImage(studentImage);
-	}
-	public void printTableStudentNinePOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowNinePone.setImage(studentImage);
-	}
-	public void printTableStudentTenPOneYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowTenPone.setImage(studentImage);
+	public void printTableStudent(ImageView tableStudent, String color){
+		Image studentImage = new Image(color + "Stud.png");
+		tableStudent.setImage(studentImage);
 	}
 
-
-	//tables p2
-	public void printTableStudentOnePTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedOnePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTwoPTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedTwoPTwo.setImage(studentImage);
-	}
-	public void printTableStudentThreePTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedThreePTwo.setImage(studentImage);
-	}
-	public void printTableStudentFourPTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedFourPTwo.setImage(studentImage);
-	}
-	public void printTableStudentFivePTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedFivePTwo.setImage(studentImage);
-	}
-	public void printTableStudentSixPTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedSixPTwo.setImage(studentImage);
-	}
-	public void printTableStudentSevenPTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedSevenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentEightPTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedEightPTwo.setImage(studentImage);
-	}
-	public void printTableStudentNinePTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedNinePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTenPTwoRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedTenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentOnePTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenOnePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTwoPTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenTwoPTwo.setImage(studentImage);
-	}
-	public void printTableStudentThreePTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenThreePTwo.setImage(studentImage);
-	}
-	public void printTableStudentFourPTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenFourPTwo.setImage(studentImage);
-	}
-	public void printTableStudentFivePTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenFivePTwo.setImage(studentImage);
-	}
-	public void printTableStudentSixPTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenSixPTwo.setImage(studentImage);
-	}public void printTableStudentSevenPTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenSevenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentEightPTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenEightPTwo.setImage(studentImage);
-	}
-	public void printTableStudentNinePTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenNinePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTenPTwoGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenTenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentOnePTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueOnePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTwoPTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueTwoPTwo.setImage(studentImage);
-	}
-	public void printTableStudentThreePTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueThreePTwo.setImage(studentImage);
-	}
-	public void printTableStudentFourPTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueFourPTwo.setImage(studentImage);
-	}
-	public void printTableStudentFivePTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueFivePTwo.setImage(studentImage);
-	}
-	public void printTableStudentSixPTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueSixPTwo.setImage(studentImage);
-	}
-	public void printTableStudentSevenPTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueSevenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentEightPTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueEightPTwo.setImage(studentImage);
-	}
-	public void printTableStudentNinePTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueNinePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTenPTwoBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueTenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentOnePTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkOnePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTwoPTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkTwoPTwo.setImage(studentImage);
-	}
-	public void printTableStudentThreePTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkThreePTwo.setImage(studentImage);
-	}
-	public void printTableStudentFourPTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkFourPTwo.setImage(studentImage);
-	}
-	public void printTableStudentFivePTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkFivePTwo.setImage(studentImage);
-	}
-	public void printTableStudentSixPTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkSixPTwo.setImage(studentImage);
-	}
-	public void printTableStudentSevenPTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkSevenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentEightPTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkEightPTwo.setImage(studentImage);
-	}
-	public void printTableStudentNinePTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkNinePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTenPTwoPink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkTenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentOnePTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowOnePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTwoPTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowTwoPTwo.setImage(studentImage);
-	}
-	public void printTableStudentThreePTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowThreePTwo.setImage(studentImage);
-	}
-	public void printTableStudentFourPTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowFourPTwo.setImage(studentImage);
-	}
-	public void printTableStudentFivePTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowFivePTwo.setImage(studentImage);
-	}
-	public void printTableStudentSixPTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowSixPTwo.setImage(studentImage);
-	}
-	public void printTableStudentSevenPTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowSevenPTwo.setImage(studentImage);
-	}
-	public void printTableStudentEightPTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowEightPTwo.setImage(studentImage);
-	}
-	public void printTableStudentNinePTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowNinePTwo.setImage(studentImage);
-	}
-	public void printTableStudentTenPTwoYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowTenPTwo.setImage(studentImage);
+	public void printProfessor(ImageView tableStudent, String color){
+		Image profImage = new Image(color + "Prof.png");
+		tableStudent.setImage(profImage);
 	}
 
+	public void printTower(ImageView tower, String color){
+		Image towerImage = new Image(color + "Tower.png");
+		tower.setImage(towerImage);
+	}
 
-
-
-
-	//tables p3
-	public void printTableStudentOnePThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedOnePThree.setImage(studentImage);
-	}
-	public void printTableStudentTwoPThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedTwoPThree.setImage(studentImage);
-	}
-	public void printTableStudentThreePThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedThreePThree.setImage(studentImage);
-	}
-	public void printTableStudentFourPThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedFourPThree.setImage(studentImage);
-	}
-	public void printTableStudentFivePThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedFivePThree.setImage(studentImage);
-	}
-	public void printTableStudentSixPThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedSixPThree.setImage(studentImage);
-	}
-	public void printTableStudentSevenPThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedSevenPThree.setImage(studentImage);
-	}
-	public void printTableStudentEightPThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedEightPThree.setImage(studentImage);
-	}
-	public void printTableStudentNinePThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedNinePThree.setImage(studentImage);
-	}
-	public void printTableStudentTenPThreeRed(){
-		Image studentImage = new Image("REDStud.png");
-		studRedTenPThree.setImage(studentImage);
-	}
-	public void printTableStudentOnePThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenOnePThree.setImage(studentImage);
-	}
-	public void printTableStudentTwoPThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenTwoPThree.setImage(studentImage);
-	}
-	public void printTableStudentThreePThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenThreePThree.setImage(studentImage);
-	}
-	public void printTableStudentFourPThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenFourPThree.setImage(studentImage);
-	}
-	public void printTableStudentFivePThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenFivePThree.setImage(studentImage);
-	}
-	public void printTableStudentSixPThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenSixPThree.setImage(studentImage);
-	}public void printTableStudentSevenPThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenSevenPThree.setImage(studentImage);
-	}
-	public void printTableStudentEightPThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenEightPThree.setImage(studentImage);
-	}
-	public void printTableStudentNinePThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenNinePThree.setImage(studentImage);
-	}
-	public void printTableStudentTenPThreeGreen(){
-		Image studentImage = new Image("GREENStud.png");
-		studGreenTenPThree.setImage(studentImage);
-	}
-	public void printTableStudentOnePThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueOnePThree.setImage(studentImage);
-	}
-	public void printTableStudentTwoPThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueTwoPThree.setImage(studentImage);
-	}
-	public void printTableStudentThreePThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueThreePThree.setImage(studentImage);
-	}
-	public void printTableStudentFourPThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueFourPThree.setImage(studentImage);
-	}
-	public void printTableStudentFivePThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueFivePThree.setImage(studentImage);
-	}
-	public void printTableStudentSixPThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueSixPThree.setImage(studentImage);
-	}
-	public void printTableStudentSevenPThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueSevenPThree.setImage(studentImage);
-	}
-	public void printTableStudentEightPThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueEightPThree.setImage(studentImage);
-	}
-	public void printTableStudentNinePThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueNinePThree.setImage(studentImage);
-	}
-	public void printTableStudentTenPThreeBlue(){
-		Image studentImage = new Image("BLUEStud.png");
-		studBlueTenPThree.setImage(studentImage);
-	}
-	public void printTableStudentOnePThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkOnePThree.setImage(studentImage);
-	}
-	public void printTableStudentTwoPThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkTwoPThree.setImage(studentImage);
-	}
-	public void printTableStudentThreePThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkThreePThree.setImage(studentImage);
-	}
-	public void printTableStudentFourPThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkFourPThree.setImage(studentImage);
-	}
-	public void printTableStudentFivePThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkFivePThree.setImage(studentImage);
-	}
-	public void printTableStudentSixPThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkSixPThree.setImage(studentImage);
-	}
-	public void printTableStudentSevenPThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkSevenPThree.setImage(studentImage);
-	}
-	public void printTableStudentEightPThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkEightPThree.setImage(studentImage);
-	}
-	public void printTableStudentNinePThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkNinePThree.setImage(studentImage);
-	}
-	public void printTableStudentTenPThreePink(){
-		Image studentImage = new Image("PINKStud.png");
-		studPinkTenPThree.setImage(studentImage);
-	}
-	public void printTableStudentOnePThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowOnePThree.setImage(studentImage);
-	}
-	public void printTableStudentTwoPThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowTwoPThree.setImage(studentImage);
-	}
-	public void printTableStudentThreePThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowThreePThree.setImage(studentImage);
-	}
-	public void printTableStudentFourPThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowFourPThree.setImage(studentImage);
-	}
-	public void printTableStudentFivePThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowFivePThree.setImage(studentImage);
-	}
-	public void printTableStudentSixPThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowSixPThree.setImage(studentImage);
-	}
-	public void printTableStudentSevenPThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowSevenPThree.setImage(studentImage);
-	}
-	public void printTableStudentEightPThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowEightPThree.setImage(studentImage);
-	}
-	public void printTableStudentNinePThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowNinePThree.setImage(studentImage);
-	}
-	public void printTableStudentTenPThreeYellow(){
-		Image studentImage = new Image("YELLOWStud.png");
-		studYellowTenPThree.setImage(studentImage);
-	}
-	
 	//assistant cards
+
 	public void insertAssistantImage(ImageView assistantImageView, AssistantCardDTO assistantCardDTO){
 		Image view = new Image(assistantCardDTO.getType() + ".jpg");
 		assistantImageView.setImage(view);
@@ -2323,136 +1221,7 @@ public class PlanningPhaseGUI{
 		ControllerGUI.getInstance().startLoading();
 	}
 
-	public void printRedProfessorPOne(){
-		Image view = new Image("REDProf.png");
-		professorRedPone.setImage(view);
-	}
-
-	public void printGreenProfessorPOne(){
-		Image view = new Image("GREENProf.png");
-		professorGreenPone.setImage(view);
-	}
-
-	public void printBlueProfessorPOne(){
-		Image view = new Image("BLUEProf.png");
-		professorBluePone.setImage(view);
-	}
-
-	public void printPinkProfessorPOne(){
-		Image view = new Image("PINKProf.png");
-		professorPinkPone.setImage(view);
-	}
-
-	public void printYellowProfessorPOne(){
-		Image view = new Image("YELLOWProf.png");
-		professorYellowPone.setImage(view);
-	}
-	public void printRedProfessorPTwo(){
-		Image view = new Image("REDProf.png");
-		professorRedPTwo.setImage(view);
-	}
-
-	public void printGreenProfessorPTwo(){
-		Image view = new Image("GREENProf.png");
-		professorGreenPTwo.setImage(view);
-	}
-
-	public void printBlueProfessorPTwo(){
-		Image view = new Image("BLUEProf.png");
-		professorBluePTwo.setImage(view);
-	}
-
-	public void printPinkProfessorPTwo(){
-		Image view = new Image("PINKProf.png");
-		professorPinkPTwo.setImage(view);
-	}
-
-	public void printYellowProfessorPTwo(){
-		Image view = new Image("YELLOWProf.png");
-		professorYellowPTwo.setImage(view);
-	}
-	public void printRedProfessorPThree(){
-		Image view = new Image("REDProf.png");
-		professorRedPThree.setImage(view);
-	}
-
-	public void printGreenProfessorPThree(){
-		Image view = new Image("GREENProf.png");
-		professorGreenPThree.setImage(view);
-	}
-
-	public void printBlueProfessorPThree(){
-		Image view = new Image("BLUEProf.png");
-		professorBluePThree.setImage(view);
-	}
-
-	public void printPinkProfessorPThree(){
-		Image view = new Image("PINKProf.png");
-		professorPinkPThree.setImage(view);
-	}
-
-	public void printYellowProfessorPThree(){
-		Image view = new Image("YELLOWProf.png");
-		professorYellowPThree.setImage(view);
-	}
-
-
-	//towers
-	public void printTowerOnePOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerOnePone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerTwoPOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerTwoPone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerThreePOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerThreePone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerFourPOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerFourPone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerFivePOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerFivePone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerSixPOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerSixPone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerSevenPOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerSevenPone.setImage(towerImage);
-		}
-	}
-
-	public void printTowerEightPOne(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerEightPone.setImage(towerImage);
-		}
-	}
+	//coins
 
 	public void printCoinsPOne(Integer coins){
 		coinPlayerOne.setText(coins.toString());
@@ -2466,104 +1235,7 @@ public class PlanningPhaseGUI{
 		coinPlayerThree.setText(coins.toString());
 	}
 
-	public void printTowerOnePTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerOnePTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerTwoPTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerTwoPTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerThreePTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerThreePTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerFourPTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerFourPTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerFivePTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerFivePTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerSixPTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerSixPTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerSevenPTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerSevenPTwo.setImage(towerImage);
-		}
-	}
-
-	public void printTowerEightPTwo(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerEightPTwo.setImage(towerImage);
-		}
-	}
-
-
-	public void printTowerOnePThree(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerOnePThree.setImage(towerImage);
-		}
-	}
-
-	public void printTowerTwoPThree(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerTwoPThree.setImage(towerImage);
-		}
-	}
-
-	public void printTowerThreePThree(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerThreePThree.setImage(towerImage);
-		}
-	}
-
-	public void printTowerFourPThree(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerFourPThree.setImage(towerImage);
-		}
-	}
-
-	public void printTowerFivePThree(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerFivePThree.setImage(towerImage);
-		}
-	}
-
-	public void printTowerSixPThree(String color){
-		if(!Objects.equals(color, "")){
-			Image towerImage = new Image(color + "Tower.png");
-			towerSixPThree.setImage(towerImage);
-		}
-	}
+	//hide dashboard
 
 	public void hideDashboardThree(){
 		//dashboard image
@@ -2654,10 +1326,5 @@ public class PlanningPhaseGUI{
 
 		//coins
 		coinPlayerThree.setVisible(false);
-	}
-
-
-	public void chooseAssistant(MouseEvent mouseEvent) {
-
 	}
 }
