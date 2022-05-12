@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="934.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.s3m.launcher.Client.View.GUI.MoveStudentsPhaseGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="934.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.s3m.launcher.Client.View.GUI.MotherNaturePhaseGUI">
    <children>
       <ImageView fx:id="blueScreen" fitHeight="943.0" fitWidth="1500.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -1281,27 +1281,22 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <VBox layoutX="589.0" layoutY="8.0" prefHeight="98.0" prefWidth="327.0" style="-fx-background-color: #1c1c1c;">
+      <VBox layoutX="644.0" layoutY="14.0" prefHeight="98.0" prefWidth="211.0" style="-fx-background-color: #1c1c1c;">
          <children>
-            <GridPane prefHeight="122.0" prefWidth="327.0">
+            <GridPane prefHeight="98.0" prefWidth="333.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="studentOnTable" fitHeight="53.0" fitWidth="72.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                  <ImageView fx:id="moveMotherNature" fitHeight="76.0" fitWidth="71.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@tableIcon.jpg" />
+                        <Image url="@motherNatureIcon.png" />
                      </image></ImageView>
-                  <ImageView fx:id="studentOnIsland" fitHeight="62.0" fitWidth="98.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-                     <image>
-                        <Image url="@islandIcon.png" />
-                     </image></ImageView>
-                  <ImageView fx:id="characterCardList" fitHeight="62.0" fitWidth="98.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <ImageView fx:id="characterCardList" fitHeight="95.0" fitWidth="98.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
                         <Image url="@characterCardIcon.png" />
                      </image></ImageView>
@@ -1311,7 +1306,7 @@
       </VBox>
       <ImageView fx:id="coinImagePlayer2" fitHeight="42.0" fitWidth="50.0" layoutX="394.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Coin.jpeg" />
+         <Image url="@Coin.jpeg" />
          </image>
       </ImageView>
    </children>

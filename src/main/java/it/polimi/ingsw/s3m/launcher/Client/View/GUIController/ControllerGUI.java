@@ -34,6 +34,9 @@ public class ControllerGUI {
 	private PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse();
 	private PlayCharacterCardGUI playCharacterCardGUI;
 	private PlanningPhaseGUI planningPhaseGUI;
+	private MoveStudentsPhaseGUI moveStudentsPhaseGUI;
+	private MotherNaturePhaseGUI motherNaturePhaseGUI;
+	private CloudPhaseGUI cloudPhaseGUI;
 
 	private ControllerGUI() {
 		secondaryStage = new Stage();
@@ -208,21 +211,44 @@ public class ControllerGUI {
 		}
 
 	}
-	public void launchMoveStudentsPhase(PlanningPhaseMessage message){
+	public void launchMoveStudentsPhase(MoveStudentsPhaseMessage message){
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PlanningPhase.fxml"));
-			Parent playCharacterCard = (Parent) loader.load();
-			planningPhaseGUI = loader.getController();
-			planningPhaseGUI.printMessageInformation(message);
-			setScene(playCharacterCard);
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveStudentsPhase.fxml"));
+			Parent moveStudents = (Parent) loader.load();
+			moveStudentsPhaseGUI = loader.getController();
+			moveStudentsPhaseGUI.printMessageInformation(message);
+			setScene(moveStudents);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+	public void launchMotherNaturePhase(MotherNaturePhaseMessage message){
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MotherNaturePhase.fxml"));
+			Parent motherNature = (Parent) loader.load();
+			motherNaturePhaseGUI = loader.getController();
+			motherNaturePhaseGUI.printMessageInformation(message);
+			setScene(motherNature);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void launchCloudPhase(PlanningPhaseMessage message){
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CloudPhase.fxml"));
+			Parent cloud = (Parent) loader.load();
+			cloudPhaseGUI = loader.getController();
+			cloudPhaseGUI.printMessageInformation(message);
+			setScene(cloud);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 
-	public void launchPutStudentOnTable() {
+
+		public void launchPutStudentOnTable() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnTable.fxml"));
 			Parent setStudentOnTableGUI = (Parent) loader.load();
@@ -244,7 +270,7 @@ public class ControllerGUI {
 
 	public void launchMoveMotherNature() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutMotherNatureOnIsland.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveMotherNature.fxml"));
 			Parent setMotherNatureOnIslandGUI = (Parent) loader.load();
 			setScene(setMotherNatureOnIslandGUI);
 		} catch (IOException e) {
