@@ -1293,15 +1293,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="studentOnTable" fitHeight="53.0" fitWidth="72.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                  <ImageView fx:id="studentOnTable" fitHeight="53.0" fitWidth="72.0" onMouseClicked="#studentOnTableAction" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                      <image>
                         <Image url="@tableIcon.jpg" />
                      </image></ImageView>
-                  <ImageView fx:id="studentOnIsland" fitHeight="62.0" fitWidth="98.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <ImageView fx:id="studentOnIsland" fitHeight="62.0" fitWidth="98.0" onMouseClicked="#studentOnIslandAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <image>
                         <Image url="@islandIcon.png" />
                      </image></ImageView>
-                  <ImageView fx:id="characterCardList" fitHeight="62.0" fitWidth="98.0" onMouseClicked="#choiceAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <ImageView fx:id="characterCardList" fitHeight="62.0" fitWidth="98.0" onMouseClicked="#playCharacterCardAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <image>
                         <Image url="@characterCardIcon.png" />
                      </image></ImageView>

@@ -1,5 +1,13 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.CloudResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.MoveMotherNatureResponse;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.CloudDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
+import it.polimi.ingsw.s3m.launcher.Server.Message.CloudPhaseMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+
+import java.util.*;
 
 public class CloudPhaseGUI{
     @FXML
@@ -864,31 +874,342 @@ public class CloudPhaseGUI{
     @FXML
     Label numRedStudentsIsland11;
 
-	private void choiceCloud(Image image, int cloudChoicePosition){
-		//based on the chosen cloud, an if is activated which places the 4 images of the chosen island on the dashboard hall
-		if(cloudChoicePosition == 0){
-			studentOneCloudOne.setImage(image);
-			studentTwoCloudOne.setImage(image);
-			studentThreeCloudOne.setImage(image);
-			studentFourCloudOne.setImage(image);
-
-		}
-		if(cloudChoicePosition == 1){
-			studentOneCloudTwo.setImage(image);
-			studentTwoCloudTwo.setImage(image);
-			studentThreeCloudTwo.setImage(image);
-			studentFourCloudTwo.setImage(image);
-		}
-		if(cloudChoicePosition == 2){
-			studentOneCloudThree.setImage(image);
-			studentTwoCloudThree.setImage(image);
-			studentThreeCloudThree.setImage(image);
-			studentFourCloudThree.setImage(image);
-		}
-
+	public void printMessageInformation(CloudPhaseMessage cloudPhaseMessage){
+        GameDTO gameState = cloudPhaseMessage.getGameState();
+        setGameState(gameState);
 	}
 
-
     public void submitCloudChosen(ActionEvent actionEvent) {
+        int cloudChoice;
+        try{
+            cloudChoice = Integer.parseInt(numOfCloud.getText());
+        }catch(NumberFormatException e){
+            cloudChoice = 0;
+        }
+        ControllerGUI.getInstance().sendResponse(new CloudResponse(cloudChoice));
+        ControllerGUI.getInstance().startLoading();
+    }
+
+
+    public void setGameState(GameDTO gameState){
+        List<IslandGUI> islandInfoList = Arrays.asList(
+                new IslandGUI(islandZero, redStudentsIsland0, greenStudentsIsland0, blueStudentsIsland0, pinkStudentsIsland0, yellowStudentsIsland0, numRedStudentsIsland0, numGreenStudentsIsland0, numBlueStudentsIsland0, numPinkStudentsIsland0, numYellowStudentsIsland0, towersIsland0, numTowersIsland0),
+                new IslandGUI(islandOne, redStudentsIsland1, greenStudentsIsland1, blueStudentsIsland1, pinkStudentsIsland1, yellowStudentsIsland1, numRedStudentsIsland1, numGreenStudentsIsland1, numBlueStudentsIsland1, numPinkStudentsIsland1, numYellowStudentsIsland1, towersIsland1, numTowersIsland1),
+                new IslandGUI(islandTwo, redStudentsIsland2, greenStudentsIsland2, blueStudentsIsland2, pinkStudentsIsland2, yellowStudentsIsland2, numRedStudentsIsland2, numGreenStudentsIsland2, numBlueStudentsIsland2, numPinkStudentsIsland2, numYellowStudentsIsland2, towersIsland2, numTowersIsland2),
+                new IslandGUI(islandThree, redStudentsIsland3, greenStudentsIsland3, blueStudentsIsland3, pinkStudentsIsland3, yellowStudentsIsland3, numRedStudentsIsland3, numGreenStudentsIsland3, numBlueStudentsIsland3, numPinkStudentsIsland3, numYellowStudentsIsland3, towersIsland3, numTowersIsland3),
+                new IslandGUI(islandFour, redStudentsIsland4, greenStudentsIsland4, blueStudentsIsland4, pinkStudentsIsland4, yellowStudentsIsland4, numRedStudentsIsland4, numGreenStudentsIsland4, numBlueStudentsIsland4, numPinkStudentsIsland4, numYellowStudentsIsland4, towersIsland4, numTowersIsland4),
+                new IslandGUI(islandFive, redStudentsIsland5, greenStudentsIsland5, blueStudentsIsland5, pinkStudentsIsland5, yellowStudentsIsland5, numRedStudentsIsland5, numGreenStudentsIsland5, numBlueStudentsIsland5, numPinkStudentsIsland5, numYellowStudentsIsland5, towersIsland5, numTowersIsland5),
+                new IslandGUI(islandSix, redStudentsIsland6, greenStudentsIsland6, blueStudentsIsland6, pinkStudentsIsland6, yellowStudentsIsland6, numRedStudentsIsland6, numGreenStudentsIsland6, numBlueStudentsIsland6, numPinkStudentsIsland6, numYellowStudentsIsland6, towersIsland6, numTowersIsland6),
+                new IslandGUI(islandSeven, redStudentsIsland7, greenStudentsIsland7, blueStudentsIsland7, pinkStudentsIsland7, yellowStudentsIsland7, numRedStudentsIsland7, numGreenStudentsIsland7, numBlueStudentsIsland7, numPinkStudentsIsland7, numYellowStudentsIsland7, towersIsland7, numTowersIsland7),
+                new IslandGUI(islandEight, redStudentsIsland8, greenStudentsIsland8, blueStudentsIsland8, pinkStudentsIsland8, yellowStudentsIsland8, numRedStudentsIsland8, numGreenStudentsIsland8, numBlueStudentsIsland8, numPinkStudentsIsland8, numYellowStudentsIsland8, towersIsland8, numTowersIsland8),
+                new IslandGUI(islandNine, redStudentsIsland9, greenStudentsIsland9, blueStudentsIsland9, pinkStudentsIsland9, yellowStudentsIsland9, numRedStudentsIsland9, numGreenStudentsIsland9, numBlueStudentsIsland9, numPinkStudentsIsland9, numYellowStudentsIsland9, towersIsland9, numTowersIsland9),
+                new IslandGUI(islandTen, redStudentsIsland10, greenStudentsIsland10, blueStudentsIsland10, pinkStudentsIsland10, yellowStudentsIsland10, numRedStudentsIsland10, numGreenStudentsIsland10, numBlueStudentsIsland10, numPinkStudentsIsland10, numYellowStudentsIsland10, towersIsland10, numTowersIsland10),
+                new IslandGUI(islandEleven, redStudentsIsland11, greenStudentsIsland11, blueStudentsIsland11, pinkStudentsIsland11, yellowStudentsIsland11, numRedStudentsIsland11, numGreenStudentsIsland11, numBlueStudentsIsland11, numPinkStudentsIsland11, numYellowStudentsIsland11, towersIsland11, numTowersIsland11)
+        );
+
+        List<ImageView> motherIslandImageView = Arrays.asList(motherNatureIsland0, motherNatureIsland1, motherNatureIsland2,
+                motherNatureIsland3, motherNatureIsland4, motherNatureIsland5, motherNatureIsland6, motherNatureIsland7,
+                motherNatureIsland8, motherNatureIsland9, motherNatureIsland10, motherNatureIsland11);
+
+        //dashboard player two
+
+        List<ImageView> entranceImagesPone = Arrays.asList(hallStudentOnePone,hallStudentTwoPone,hallStudentThreePone,
+                hallStudentFourPone,hallStudentFivePone,hallStudentSixPone,hallStudentSevenPone,
+                hallStudentEightPone,hallStudentNinePone);
+
+        List<ImageView> redStudentsTablePone = Arrays.asList(studRedOnePone,studRedTwoPone,studRedThreePone,studRedFourPone,
+                studRedFivePone,studRedSixPone,studRedSevenPone,studRedEightPone,studRedNinePone,studRedTenPone);
+        List<ImageView> greenStudentsTablePone = Arrays.asList(studGreenOnePone,studGreenTwoPone,studGreenThreePone,studGreenFourPone,
+                studGreenFivePone,studGreenSixPone,studGreenSevenPone,studGreenEightPone,studGreenNinePone,studGreenTenPone);
+        List<ImageView> blueStudentsTablePone = Arrays.asList(studBlueOnePone,studBlueTwoPone,studBlueThreePone,studBlueFourPone,
+                studBlueFivePone,studBlueSixPone,studBlueSevenPone,studBlueEightPone,studBlueNinePone,studBlueTenPone);
+        List<ImageView> pinkStudentsTablePone = Arrays.asList(studPinkOnePone,studPinkTwoPone,studPinkThreePone,studPinkFourPone,
+                studPinkFivePone,studPinkSixPone,studPinkSevenPone,studPinkEightPone,studPinkNinePone,studPinkTenPone);
+        List<ImageView> yellowStudentsTablePone = Arrays.asList(studYellowOnePone,studYellowTwoPone,studYellowThreePone,studYellowFourPone,
+                studYellowFivePone,studYellowSixPone,studYellowSevenPone,studYellowEightPone,studYellowNinePone,studYellowTenPone);
+
+        HashMap<String, ImageView> professorsPone = new HashMap<>();
+        professorsPone.put("RED", professorRedPone);
+        professorsPone.put("GREEN", professorGreenPone);
+        professorsPone.put("BLUE", professorBluePone);
+        professorsPone.put("PINK", professorPinkPone);
+        professorsPone.put("YELLOW", professorYellowPone);
+
+        List<ImageView> towerImagesPone = Arrays.asList(towerOnePone,towerTwoPone,towerThreePone,towerFourPone,
+                towerFivePone,towerSixPone,towerSevenPone,towerEightPone);
+
+
+        //dashboard player two
+
+        List<ImageView> entranceImagesPTwo = Arrays.asList(hallStudentOnePTwo,hallStudentTwoPTwo,hallStudentThreePTwo,
+                hallStudentFourPTwo,hallStudentFivePTwo,hallStudentSixPTwo,hallStudentSevenPTwo,
+                hallStudentEightPTwo,hallStudentNinePTwo);
+
+        List<ImageView> redStudentsTablePTwo = Arrays.asList(studRedOnePTwo,studRedTwoPTwo,studRedThreePTwo,studRedFourPTwo,
+                studRedFivePTwo,studRedSixPTwo,studRedSevenPTwo,studRedEightPTwo,studRedNinePTwo,studRedTenPTwo);
+        List<ImageView> greenStudentsTablePTwo = Arrays.asList(studGreenOnePTwo,studGreenTwoPTwo,studGreenThreePTwo,studGreenFourPTwo,
+                studGreenFivePTwo,studGreenSixPTwo,studGreenSevenPTwo,studGreenEightPTwo,studGreenNinePTwo,studGreenTenPTwo);
+        List<ImageView> blueStudentsTablePTwo = Arrays.asList(studBlueOnePTwo,studBlueTwoPTwo,studBlueThreePTwo,studBlueFourPTwo,
+                studBlueFivePTwo,studBlueSixPTwo,studBlueSevenPTwo,studBlueEightPTwo,studBlueNinePTwo,studBlueTenPTwo);
+        List<ImageView> pinkStudentsTablePTwo = Arrays.asList(studPinkOnePTwo,studPinkTwoPTwo,studPinkThreePTwo,studPinkFourPTwo,
+                studPinkFivePTwo,studPinkSixPTwo,studPinkSevenPTwo,studPinkEightPTwo,studPinkNinePTwo,studPinkTenPTwo);
+        List<ImageView> yellowStudentsTablePTwo = Arrays.asList(studYellowOnePTwo,studYellowTwoPTwo,studYellowThreePTwo,studYellowFourPTwo,
+                studYellowFivePTwo,studYellowSixPTwo,studYellowSevenPTwo,studYellowEightPTwo,studYellowNinePTwo,studYellowTenPTwo);
+
+        HashMap<String, ImageView> professorsPTwo = new HashMap<>();
+        professorsPTwo.put("RED", professorRedPTwo);
+        professorsPTwo.put("GREEN", professorGreenPTwo);
+        professorsPTwo.put("BLUE", professorBluePTwo);
+        professorsPTwo.put("PINK", professorPinkPTwo);
+        professorsPTwo.put("YELLOW", professorYellowPTwo);
+
+        List<ImageView> towerImagesPTwo = Arrays.asList(towerOnePTwo,towerTwoPTwo,towerThreePTwo,towerFourPTwo,
+                towerFivePTwo,towerSixPTwo,towerSevenPTwo,towerEightPTwo);
+
+        //dashboard player three
+
+        List<ImageView> entranceImagesPThree = Arrays.asList(hallStudentOnePThree,hallStudentTwoPThree,hallStudentThreePThree,
+                hallStudentFourPThree,hallStudentFivePThree,hallStudentSixPThree,hallStudentSevenPThree,
+                hallStudentEightPThree,hallStudentNinePThree);
+
+        List<ImageView> redStudentsTablePThree = Arrays.asList(studRedOnePThree,studRedTwoPThree,studRedThreePThree,studRedFourPThree,
+                studRedFivePThree,studRedSixPThree,studRedSevenPThree,studRedEightPThree,studRedNinePThree,studRedTenPThree);
+        List<ImageView> greenStudentsTablePThree = Arrays.asList(studGreenOnePThree,studGreenTwoPThree,studGreenThreePThree,studGreenFourPThree,
+                studGreenFivePThree,studGreenSixPThree,studGreenSevenPThree,studGreenEightPThree,studGreenNinePThree,studGreenTenPThree);
+        List<ImageView> blueStudentsTablePThree = Arrays.asList(studBlueOnePThree,studBlueTwoPThree,studBlueThreePThree,studBlueFourPThree,
+                studBlueFivePThree,studBlueSixPThree,studBlueSevenPThree,studBlueEightPThree,studBlueNinePThree,studBlueTenPThree);
+        List<ImageView> pinkStudentsTablePThree = Arrays.asList(studPinkOnePThree,studPinkTwoPThree,studPinkThreePThree,studPinkFourPThree,
+                studPinkFivePThree,studPinkSixPThree,studPinkSevenPThree,studPinkEightPThree,studPinkNinePThree,studPinkTenPThree);
+        List<ImageView> yellowStudentsTablePThree = Arrays.asList(studYellowOnePThree,studYellowTwoPThree,studYellowThreePThree,studYellowFourPThree,
+                studYellowFivePThree,studYellowSixPThree,studYellowSevenPThree,studYellowEightPThree,studYellowNinePThree,studYellowTenPThree);
+
+        HashMap<String, ImageView> professorsPThree = new HashMap<>();
+        professorsPThree.put("RED", professorRedPThree);
+        professorsPThree.put("GREEN", professorGreenPThree);
+        professorsPThree.put("BLUE", professorBluePThree);
+        professorsPThree.put("PINK", professorPinkPThree);
+        professorsPThree.put("YELLOW", professorYellowPThree);
+
+        List<ImageView> towerImagesPThree = Arrays.asList(towerOnePThree,towerTwoPThree,towerThreePThree,towerFourPThree,
+                towerFivePThree,towerSixPThree);
+
+        List<ImageView> cloudOne = Arrays.asList(studentOneCloudOne, studentTwoCloudOne, studentThreeCloudOne, studentFourCloudOne);
+        List<ImageView> cloudTwo = Arrays.asList(studentOneCloudTwo, studentTwoCloudTwo, studentThreeCloudTwo, studentFourCloudTwo);
+        List<ImageView> cloudThree = Arrays.asList(studentOneCloudThree, studentTwoCloudThree, studentThreeCloudThree, studentFourCloudThree);
+
+        List<List<ImageView>> cloudList = Arrays.asList(cloudOne, cloudTwo, cloudThree);
+
+        //TODO character cards???
+
+
+        //print islands
+        ArrayList<IslandDTO> islandList = gameState.getIslands();
+
+        int index = 0;
+        for(; index < islandList.size(); index++){
+            printIsland(islandInfoList.get(index), islandList.get(index));
+        }
+        for(; index < 11; index++){
+            setIslandNotVisible(islandInfoList.get(index));
+        }
+
+        //mother nature
+
+        Image motherNatureImage = new Image("MotherNature.png");
+        motherIslandImageView.get(gameState.getMotherNaturePosition()).setImage(motherNatureImage);
+
+        //dashboards
+
+        ArrayList<String> nicknameList = gameState.getPlayerNicknames();
+        HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
+        HashMap<String, DashboardGUI> dashboardGUIList = new HashMap<>();
+
+
+        dashboardGUIList.put(nicknameList.get(0), new DashboardGUI(entranceImagesPone, redStudentsTablePone, greenStudentsTablePone, blueStudentsTablePone, pinkStudentsTablePone, yellowStudentsTablePone, professorsPone, towerImagesPone));
+        dashboardGUIList.put(nicknameList.get(1), new DashboardGUI(entranceImagesPTwo, redStudentsTablePTwo, greenStudentsTablePTwo, blueStudentsTablePTwo, pinkStudentsTablePTwo, yellowStudentsTablePTwo, professorsPTwo, towerImagesPTwo));
+        dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
+
+        HashMap<String, String> towerColors = gameState.getTowerColor();
+
+        String firstPlayerNick = nicknameList.get(0);
+        String secondPlayerNick = nicknameList.get(1);
+
+        printDashboard(dashboardList.get(firstPlayerNick), dashboardGUIList.get(firstPlayerNick), firstPlayerNick,
+                gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(firstPlayerNick));
+
+        printDashboard(dashboardList.get(secondPlayerNick), dashboardGUIList.get(secondPlayerNick), secondPlayerNick,
+                gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(secondPlayerNick));
+
+        if(gameState.getPlayersNumber() == 3){
+            String thirdPlayerNick = nicknameList.get(2);
+            printDashboard(dashboardList.get(thirdPlayerNick), dashboardGUIList.get(thirdPlayerNick), thirdPlayerNick,
+                    gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(thirdPlayerNick));
+        }
+        else
+            hidePlayerThree(dashboardGUIList.get(nicknameList.get(2)));
+
+
+        HashMap<String, Integer> coins = gameState.getCoins();
+        printCoinsPOne(coins.get(nicknameList.get(0)));
+        printCoinsPTwo(coins.get(nicknameList.get(1)));
+        if(gameState.getPlayersNumber() == 3)
+            printCoinsPThree(coins.get(nicknameList.get(2)));
+
+        //clouds
+        ArrayList<CloudDTO> clouds = gameState.getClouds();
+
+        for(int i = 0; i < clouds.size(); i++){
+            CloudDTO currentCloud = clouds.get(i);
+            List<ImageView> currentCloudGUI = cloudList.get(i);
+
+            for(int j = 0; j < currentCloud.getStudents().size(); j++){
+                printCloud(currentCloudGUI.get(j), currentCloud.getStudents().get(j));
+            }
+        }
+    }
+
+    //islands
+
+    public void printIsland(IslandGUI islandGUI, IslandDTO islandDTO){
+        HashMap<String, Integer> studentsOnIsland = islandDTO.getStudents();
+        islandGUI.getStudentsLabel().get("RED").setText(studentsOnIsland.get("RED").toString());
+        islandGUI.getStudentsLabel().get("GREEN").setText(studentsOnIsland.get("GREEN").toString());
+        islandGUI.getStudentsLabel().get("BLUE").setText(studentsOnIsland.get("BLUE").toString());
+        islandGUI.getStudentsLabel().get("PINK").setText(studentsOnIsland.get("PINK").toString());
+        islandGUI.getStudentsLabel().get("YELLOW").setText(studentsOnIsland.get("YELLOW").toString());
+
+        if(!Objects.equals(islandDTO.getDominatorColor(), "")){
+            Image towerImage = new Image(islandDTO.getDominatorColor() + "Tower.png");
+            islandGUI.getTowerImage().setImage(towerImage);
+        }
+
+        islandGUI.getTowerLabel().setText(String.valueOf(islandDTO.getNumberOfTowers()));
+    }
+
+    public void setIslandNotVisible(IslandGUI islandGUI){
+        islandGUI.getIsland().setVisible(false);
+
+        islandGUI.getStudentsImage().forEach((color, image) -> image.setVisible(false));
+        islandGUI.getStudentsLabel().forEach((color, label) -> label.setVisible(false));
+
+        islandGUI.getTowerImage().setVisible(false);
+        islandGUI.getTowerLabel().setVisible(false);
+    }
+
+    //dashboards
+
+    public void printDashboard(DashboardDTO dashboardDTO, DashboardGUI dashboardGUI, String playerNickname, int playersNumber, HashMap<String, String> professors, String towerColor){
+        //entrance
+        List<ImageView> entranceStudentImages = dashboardGUI.getEntranceImages();
+        ArrayList<String> entranceStudentColors = new ArrayList<>();
+        dashboardDTO.getEntrance().forEach((color, value) -> {
+            for(int i = 0; i < value; i++){
+                entranceStudentColors.add(color);
+            }
+        });
+
+        int maxEntranceStudents = 7;
+        if(playersNumber == 3)
+            maxEntranceStudents = 9;
+
+        for(int i = 0; i < maxEntranceStudents; i++){
+            printEntranceStudent(entranceStudentImages.get(i), entranceStudentColors.get(i));
+        }
+
+        //tables
+        HashMap<String, List<ImageView>> tablesStudentImages = dashboardGUI.getTablesImages();
+        HashMap<String, Integer> tablesStudents = dashboardDTO.getTables();
+
+        tablesStudents.forEach((color, value) -> {
+            List<ImageView> currentColorTable = tablesStudentImages.get(color);
+            for(int i = 0; i < value; i++){
+                printTableStudent(currentColorTable.get(i), color);
+            }
+        });
+
+        //professors
+        HashMap<String, ImageView> professorsImages = dashboardGUI.getProfessorsImages();
+        professors.forEach((color, nickname) -> {
+            if(playerNickname.equals(nickname))
+                printProfessor(professorsImages.get(color), color);
+        });
+
+        //towers
+        List<ImageView> towerImages = dashboardGUI.getTowerImages();
+        int numberOfTowers = dashboardDTO.getNumberOfTowers();
+
+        for(int i = 0; i < numberOfTowers; i++){
+            printTower(towerImages.get(i), towerColor);
+        }
+    }
+
+    //dashboards
+
+    public void printEntranceStudent(ImageView entranceStudent, String color){
+        Image studentImage = new Image(color + "Stud.png");
+        entranceStudent.setImage(studentImage);
+    }
+
+    public void printTableStudent(ImageView tableStudent, String color){
+        Image studentImage = new Image(color + "Stud.png");
+        tableStudent.setImage(studentImage);
+    }
+
+    public void printProfessor(ImageView tableStudent, String color){
+        Image profImage = new Image(color + "Prof.png");
+        tableStudent.setImage(profImage);
+    }
+
+    public void printTower(ImageView tower, String color){
+        Image towerImage = new Image(color + "Tower.png");
+        tower.setImage(towerImage);
+    }
+
+    public void printCloud(ImageView cloud, String color){
+        Image studImage = new Image(color + "Stud.png");
+        cloud.setImage(studImage);
+    }
+
+    //coins
+
+    public void printCoinsPOne(Integer coins){
+        coinPlayerOne.setText(coins.toString());
+    }
+
+    public void printCoinsPTwo(Integer coins){
+        coinPlayerTwo.setText(coins.toString());
+    }
+
+    public void printCoinsPThree(Integer coins){
+        coinPlayerThree.setText(coins.toString());
+    }
+
+    //hide dashboard
+
+    public void hidePlayerThree(DashboardGUI dashboardGUI){
+        //dashboard image
+        dashboardPlayerThree.setVisible(false);
+
+        //cloud image
+        cloudThree.setVisible(false);
+
+        //coin image
+        coinPlayer3.setVisible(false);
+        coinPlayerThree.setVisible(false);
+        coinImagePlayer3.setVisible(false);
+
+        //entrance
+        dashboardGUI.getEntranceImages().forEach(image -> image.setVisible(false));
+
+        //tables
+        dashboardGUI.getTablesImages().forEach((color, imageList) -> {
+            imageList.forEach(image -> image.setVisible(false));
+        });
+
+        //towers
+        dashboardGUI.getTowerImages().forEach(image -> image.setVisible(false));
+
+        //coins
+        coinPlayerThree.setVisible(false);
     }
 }

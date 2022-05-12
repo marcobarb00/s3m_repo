@@ -2,10 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -908,6 +905,61 @@ public class PlanningPhaseGUI{
 		}
 	}
 
+	//assistant cards
+
+	public void insertAssistantImage(ImageView assistantImageView, AssistantCardDTO assistantCardDTO){
+		Image view = new Image(assistantCardDTO.getType() + ".jpg");
+		assistantImageView.setImage(view);
+	}
+
+	public void chooseAssistantCard(MouseEvent event){
+		String name = event.getPickResult().getIntersectedNode().getId();
+		int chosenNumber = -1;
+
+		if(name.equals("assistantZero")){
+			chosenNumber = 0;
+			assistantZero.setVisible(false);
+		}
+		if(name.equals("assistantOne")){
+			chosenNumber = 1;
+			assistantOne.setVisible(false);
+		}
+		if(name.equals("assistantTwo")){
+			chosenNumber = 2;
+			assistantTwo.setVisible(false);
+		}
+		if(name.equals("assistantThree")){
+			chosenNumber = 3;
+			assistantThree.setVisible(false);
+		}
+		if(name.equals("assistantFour")){
+			chosenNumber = 4;
+			assistantFour.setVisible(false);
+		}
+		if(name.equals("assistantFive")){
+			chosenNumber = 5;
+			assistantFive.setVisible(false);
+		}
+		if(name.equals("assistantSix")){
+			chosenNumber = 6;
+			assistantSix.setVisible(false);
+		}
+		if(name.equals("assistantSeven")){
+			chosenNumber = 7;
+			assistantSeven.setVisible(false);
+		}
+		if(name.equals("assistantEight")){
+			chosenNumber = 8;
+			assistantEight.setVisible(false);
+		}
+		if(name.equals("assistantNine")){
+			chosenNumber = 9;
+			assistantNine.setVisible(false);
+		}
+
+		ControllerGUI.getInstance().sendResponse(new PlayAssistantCardResponse(chosenNumber));
+		ControllerGUI.getInstance().startLoading();
+	}
 	public void setGameState(GameDTO gameState){
 		List<IslandGUI> islandInfoList = Arrays.asList(
 				new IslandGUI(islandZero, redStudentsIsland0, greenStudentsIsland0, blueStudentsIsland0, pinkStudentsIsland0, yellowStudentsIsland0, numRedStudentsIsland0, numGreenStudentsIsland0, numBlueStudentsIsland0, numPinkStudentsIsland0, numYellowStudentsIsland0, towersIsland0, numTowersIsland0),
@@ -954,8 +1006,8 @@ public class PlanningPhaseGUI{
 
 		List<ImageView> towerImagesPone = Arrays.asList(towerOnePone,towerTwoPone,towerThreePone,towerFourPone,
 				towerFivePone,towerSixPone,towerSevenPone,towerEightPone);
-		
-		
+
+
 		//dashboard player two
 
 		List<ImageView> entranceImagesPTwo = Arrays.asList(hallStudentOnePTwo,hallStudentTwoPTwo,hallStudentThreePTwo,
@@ -982,7 +1034,7 @@ public class PlanningPhaseGUI{
 
 		List<ImageView> towerImagesPTwo = Arrays.asList(towerOnePTwo,towerTwoPTwo,towerThreePTwo,towerFourPTwo,
 				towerFivePTwo,towerSixPTwo,towerSevenPTwo,towerEightPTwo);
-		
+
 		//dashboard player three
 
 		List<ImageView> entranceImagesPThree = Arrays.asList(hallStudentOnePThree,hallStudentTwoPThree,hallStudentThreePThree,
@@ -999,7 +1051,7 @@ public class PlanningPhaseGUI{
 				studPinkFivePThree,studPinkSixPThree,studPinkSevenPThree,studPinkEightPThree,studPinkNinePThree,studPinkTenPThree);
 		List<ImageView> yellowStudentsTablePThree = Arrays.asList(studYellowOnePThree,studYellowTwoPThree,studYellowThreePThree,studYellowFourPThree,
 				studYellowFivePThree,studYellowSixPThree,studYellowSevenPThree,studYellowEightPThree,studYellowNinePThree,studYellowTenPThree);
-		
+
 		HashMap<String, ImageView> professorsPThree = new HashMap<>();
 		professorsPThree.put("RED", professorRedPThree);
 		professorsPThree.put("GREEN", professorGreenPThree);
@@ -1009,6 +1061,12 @@ public class PlanningPhaseGUI{
 
 		List<ImageView> towerImagesPThree = Arrays.asList(towerOnePThree,towerTwoPThree,towerThreePThree,towerFourPThree,
 				towerFivePThree,towerSixPThree);
+
+		List<ImageView> cloudOne = Arrays.asList(studentOneCloudOne, studentTwoCloudOne, studentThreeCloudOne, studentFourCloudOne);
+		List<ImageView> cloudTwo = Arrays.asList(studentOneCloudTwo, studentTwoCloudTwo, studentThreeCloudTwo, studentFourCloudTwo);
+		List<ImageView> cloudThree = Arrays.asList(studentOneCloudThree, studentTwoCloudThree, studentThreeCloudThree, studentFourCloudThree);
+
+		List<List<ImageView>> cloudList = Arrays.asList(cloudOne, cloudTwo, cloudThree);
 
 		//TODO character cards???
 
@@ -1028,18 +1086,18 @@ public class PlanningPhaseGUI{
 
 		Image motherNatureImage = new Image("MotherNature.png");
 		motherIslandImageView.get(gameState.getMotherNaturePosition()).setImage(motherNatureImage);
-		
+
 		//dashboards
 
 		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
 		HashMap<String, DashboardDTO> dashboardList = gameState.getDashboards();
 		HashMap<String, DashboardGUI> dashboardGUIList = new HashMap<>();
-		
-		
+
+
 		dashboardGUIList.put(nicknameList.get(0), new DashboardGUI(entranceImagesPone, redStudentsTablePone, greenStudentsTablePone, blueStudentsTablePone, pinkStudentsTablePone, yellowStudentsTablePone, professorsPone, towerImagesPone));
 		dashboardGUIList.put(nicknameList.get(1), new DashboardGUI(entranceImagesPTwo, redStudentsTablePTwo, greenStudentsTablePTwo, blueStudentsTablePTwo, pinkStudentsTablePTwo, yellowStudentsTablePTwo, professorsPTwo, towerImagesPTwo));
 		dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
-		
+
 		HashMap<String, String> towerColors = gameState.getTowerColor();
 
 		String firstPlayerNick = nicknameList.get(0);
@@ -1057,7 +1115,7 @@ public class PlanningPhaseGUI{
 					gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(thirdPlayerNick));
 		}
 		else
-			hidePlayerThree(dashboardGUIList.get(2));
+			hidePlayerThree(dashboardGUIList.get(nicknameList.get(2)));
 
 
 		HashMap<String, Integer> coins = gameState.getCoins();
@@ -1065,6 +1123,18 @@ public class PlanningPhaseGUI{
 		printCoinsPTwo(coins.get(nicknameList.get(1)));
 		if(gameState.getPlayersNumber() == 3)
 			printCoinsPThree(coins.get(nicknameList.get(2)));
+
+		//clouds
+		ArrayList<CloudDTO> clouds = gameState.getClouds();
+
+		for(int i = 0; i < clouds.size(); i++){
+			CloudDTO currentCloud = clouds.get(i);
+			List<ImageView> currentCloudGUI = cloudList.get(i);
+
+			for(int j = 0; j < currentCloud.getStudents().size(); j++){
+				printCloud(currentCloudGUI.get(j), currentCloud.getStudents().get(j));
+			}
+		}
 	}
 
 	//islands
@@ -1164,60 +1234,9 @@ public class PlanningPhaseGUI{
 		tower.setImage(towerImage);
 	}
 
-	//assistant cards
-
-	public void insertAssistantImage(ImageView assistantImageView, AssistantCardDTO assistantCardDTO){
-		Image view = new Image(assistantCardDTO.getType() + ".jpg");
-		assistantImageView.setImage(view);
-	}
-
-	public void chooseAssistantCard(MouseEvent event){
-		String name = event.getPickResult().getIntersectedNode().getId();
-		int chosenNumber = -1;
-
-		if(name.equals("assistantZero")){
-			chosenNumber = 0;
-			assistantZero.setVisible(false);
-		}
-		if(name.equals("assistantOne")){
-			chosenNumber = 1;
-			assistantOne.setVisible(false);
-		}
-		if(name.equals("assistantTwo")){
-			chosenNumber = 2;
-			assistantTwo.setVisible(false);
-		}
-		if(name.equals("assistantThree")){
-			chosenNumber = 3;
-			assistantThree.setVisible(false);
-		}
-		if(name.equals("assistantFour")){
-			chosenNumber = 4;
-			assistantFour.setVisible(false);
-		}
-		if(name.equals("assistantFive")){
-			chosenNumber = 5;
-			assistantFive.setVisible(false);
-		}
-		if(name.equals("assistantSix")){
-			chosenNumber = 6;
-			assistantSix.setVisible(false);
-		}
-		if(name.equals("assistantSeven")){
-			chosenNumber = 7;
-			assistantSeven.setVisible(false);
-		}
-		if(name.equals("assistantEight")){
-			chosenNumber = 8;
-			assistantEight.setVisible(false);
-		}
-		if(name.equals("assistantNine")){
-			chosenNumber = 9;
-			assistantNine.setVisible(false);
-		}
-
-		ControllerGUI.getInstance().sendResponse(new PlayAssistantCardResponse(chosenNumber));
-		ControllerGUI.getInstance().startLoading();
+	public void printCloud(ImageView cloud, String color){
+		Image studImage = new Image(color + "Stud.png");
+		cloud.setImage(studImage);
 	}
 
 	//coins

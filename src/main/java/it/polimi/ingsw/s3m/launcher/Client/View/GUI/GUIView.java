@@ -42,7 +42,7 @@ public class GUIView extends View{
 
 	@Override
 	public void moveStudentsPhase(StudentsPhaseMessage moveStudentsPhaseMessage){
-
+		controllerGUI.launchMoveStudentsPhase(moveStudentsPhaseMessage);
 	}
 
 	@Override
@@ -62,12 +62,12 @@ public class GUIView extends View{
 
 	@Override
 	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
-
+		controllerGUI.launchMotherNaturePhase(motherNaturePhaseMessage);
 	}
 
 	@Override
 	public void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage){
-
+		controllerGUI.launchCloudPhase(cloudPhaseMessage);
 	}
 
 	@Override
