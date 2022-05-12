@@ -1038,8 +1038,7 @@ public class PlanningPhaseGUI{
 		
 		dashboardGUIList.put(nicknameList.get(0), new DashboardGUI(entranceImagesPone, redStudentsTablePone, greenStudentsTablePone, blueStudentsTablePone, pinkStudentsTablePone, yellowStudentsTablePone, professorsPone, towerImagesPone));
 		dashboardGUIList.put(nicknameList.get(1), new DashboardGUI(entranceImagesPTwo, redStudentsTablePTwo, greenStudentsTablePTwo, blueStudentsTablePTwo, pinkStudentsTablePTwo, yellowStudentsTablePTwo, professorsPTwo, towerImagesPTwo));
-		if(gameState.getPlayersNumber() == 3)
-			dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
+		dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
 		
 		HashMap<String, String> towerColors = gameState.getTowerColor();
 
@@ -1058,7 +1057,7 @@ public class PlanningPhaseGUI{
 					gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(thirdPlayerNick));
 		}
 		else
-			hideDashboardThree();
+			hidePlayerThree(dashboardGUIList.get(2));
 
 
 		HashMap<String, Integer> coins = gameState.getCoins();
@@ -1237,7 +1236,7 @@ public class PlanningPhaseGUI{
 
 	//hide dashboard
 
-	public void hideDashboardThree(){
+	public void hidePlayerThree(DashboardGUI dashboardGUI){
 		//dashboard image
 		dashboardPlayerThree.setVisible(false);
 
@@ -1250,79 +1249,15 @@ public class PlanningPhaseGUI{
 		coinImagePlayer3.setVisible(false);
 
 		//entrance
-		hallStudentOnePThree.setVisible(false);
-		hallStudentTwoPThree.setVisible(false);
-		hallStudentThreePThree.setVisible(false);
-		hallStudentFourPThree.setVisible(false);
-		hallStudentFivePThree.setVisible(false);
-		hallStudentSixPThree.setVisible(false);
-		hallStudentSevenPThree.setVisible(false);
-		hallStudentEightPThree.setVisible(false);
-		hallStudentNinePThree.setVisible(false);
+		dashboardGUI.getEntranceImages().forEach(image -> image.setVisible(false));
 
 		//tables
-		studRedOnePThree.setVisible(false);
-		studRedTwoPThree.setVisible(false);
-		studRedThreePThree.setVisible(false);
-		studRedFourPThree.setVisible(false);
-		studRedFivePThree.setVisible(false);
-		studRedSixPThree.setVisible(false);
-		studRedSevenPThree.setVisible(false);
-		studRedEightPThree.setVisible(false);
-		studRedNinePThree.setVisible(false);
-		studRedTenPThree.setVisible(false);
-
-		studBlueOnePThree.setVisible(false);
-		studBlueTwoPThree.setVisible(false);
-		studBlueThreePThree.setVisible(false);
-		studBlueFourPThree.setVisible(false);
-		studBlueFivePThree.setVisible(false);
-		studBlueSixPThree.setVisible(false);
-		studBlueSevenPThree.setVisible(false);
-		studBlueEightPThree.setVisible(false);
-		studBlueNinePThree.setVisible(false);
-		studBlueTenPThree.setVisible(false);
-
-		studGreenOnePThree.setVisible(false);
-		studGreenTwoPThree.setVisible(false);
-		studGreenThreePThree.setVisible(false);
-		studGreenFourPThree.setVisible(false);
-		studGreenFivePThree.setVisible(false);
-		studGreenSixPThree.setVisible(false);
-		studGreenSevenPThree.setVisible(false);
-		studGreenEightPThree.setVisible(false);
-		studGreenNinePThree.setVisible(false);
-		studGreenTenPThree.setVisible(false);
-
-		studPinkOnePThree.setVisible(false);
-		studPinkTwoPThree.setVisible(false);
-		studPinkThreePThree.setVisible(false);
-		studPinkFourPThree.setVisible(false);
-		studPinkFivePThree.setVisible(false);
-		studPinkSixPThree.setVisible(false);
-		studPinkSevenPThree.setVisible(false);
-		studPinkEightPThree.setVisible(false);
-		studPinkNinePThree.setVisible(false);
-		studPinkTenPThree.setVisible(false);
-
-		studYellowOnePThree.setVisible(false);
-		studYellowTwoPThree.setVisible(false);
-		studYellowThreePThree.setVisible(false);
-		studYellowFourPThree.setVisible(false);
-		studYellowFivePThree.setVisible(false);
-		studYellowSixPThree.setVisible(false);
-		studYellowSevenPThree.setVisible(false);
-		studYellowEightPThree.setVisible(false);
-		studYellowNinePThree.setVisible(false);
-		studYellowTenPThree.setVisible(false);
+		dashboardGUI.getTablesImages().forEach((color, imageList) -> {
+			imageList.forEach(image -> image.setVisible(false));
+		});
 
 		//towers
-		towerOnePThree.setVisible(false);
-		towerTwoPThree.setVisible(false);
-		towerThreePThree.setVisible(false);
-		towerFourPThree.setVisible(false);
-		towerFivePThree.setVisible(false);
-		towerSixPThree.setVisible(false);
+		dashboardGUI.getTowerImages().forEach(image -> image.setVisible(false));
 
 		//coins
 		coinPlayerThree.setVisible(false);
