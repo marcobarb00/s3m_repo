@@ -7,6 +7,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +20,7 @@ public class PutStudentOnTableGUI {
     @FXML
     ImageView backgroundImage;
     @FXML
-    TextField colorOfStudent;
+    ComboBox<String> colorOfStudent;
     @FXML
     GridPane gridPane;
     @FXML
