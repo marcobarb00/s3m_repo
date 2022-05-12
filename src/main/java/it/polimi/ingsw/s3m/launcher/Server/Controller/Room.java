@@ -272,7 +272,6 @@ public class Room{
 				playCharacterCard(player, playCharacterCardResponse);
 				//successful play of character card
 				sendNotificationToPlayer(player, "character card activated successfully");
-				gameState.getTurn().setActivatedCharacterCard(true);
 				break;
 			default:
 				throw new IncorrectOperationException("invalid input");
