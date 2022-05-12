@@ -4,6 +4,8 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnTableResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class PutStudentOnTableGUI {
+    ObservableList<String> colorList = FXCollections.observableArrayList("Choose the student color", "RED", "GREEN", "BLUE", "PINK", "YELLOW");
+
     @FXML
     ImageView backgroundImage;
     @FXML
@@ -27,8 +31,10 @@ public class PutStudentOnTableGUI {
     Button back;
 
     public void submitOnTable(ActionEvent event){
-        String colorStud = colorOfStudent.getText();
-        ControllerGUI.getInstance().sendResponse(new PutStudentOnTableResponse(colorStud.toUpperCase(Locale.ROOT)));
+        colorOfStudent.setValue("Choose the student color");
+        colorOfStudent.setItems(colorList);
+
+        ControllerGUI.getInstance().sendResponse(new PutStudentOnTableResponse(colorOfStudent.getValue()));
         ControllerGUI.getInstance().startLoading();
     }
 

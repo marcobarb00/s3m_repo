@@ -887,6 +887,7 @@ public class MotherNaturePhaseGUI{
 		ControllerGUI.getInstance().sendResponse(new MotherNaturePhaseResponse(2));
 		ControllerGUI.getInstance().startLoading();
 	}
+
 	public void setGameState(GameDTO gameState){
 		List<IslandGUI> islandInfoList = Arrays.asList(
 				new IslandGUI(islandZero, redStudentsIsland0, greenStudentsIsland0, blueStudentsIsland0, pinkStudentsIsland0, yellowStudentsIsland0, numRedStudentsIsland0, numGreenStudentsIsland0, numBlueStudentsIsland0, numPinkStudentsIsland0, numYellowStudentsIsland0, towersIsland0, numTowersIsland0),
@@ -1023,7 +1024,10 @@ public class MotherNaturePhaseGUI{
 
 		dashboardGUIList.put(nicknameList.get(0), new DashboardGUI(entranceImagesPone, redStudentsTablePone, greenStudentsTablePone, blueStudentsTablePone, pinkStudentsTablePone, yellowStudentsTablePone, professorsPone, towerImagesPone));
 		dashboardGUIList.put(nicknameList.get(1), new DashboardGUI(entranceImagesPTwo, redStudentsTablePTwo, greenStudentsTablePTwo, blueStudentsTablePTwo, pinkStudentsTablePTwo, yellowStudentsTablePTwo, professorsPTwo, towerImagesPTwo));
-		dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
+		if(gameState.getPlayersNumber() == 3)
+			dashboardGUIList.put(nicknameList.get(2), new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
+		else
+			dashboardGUIList.put(null, new DashboardGUI(entranceImagesPThree, redStudentsTablePThree, greenStudentsTablePThree, blueStudentsTablePThree, pinkStudentsTablePThree, yellowStudentsTablePThree, professorsPThree, towerImagesPThree));
 
 		HashMap<String, String> towerColors = gameState.getTowerColor();
 
@@ -1042,7 +1046,7 @@ public class MotherNaturePhaseGUI{
 					gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(thirdPlayerNick));
 		}
 		else
-			hidePlayerThree(dashboardGUIList.get(nicknameList.get(2)));
+			hidePlayerThree(dashboardGUIList.get(null));
 
 
 		HashMap<String, Integer> coins = gameState.getCoins();

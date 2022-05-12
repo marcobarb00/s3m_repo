@@ -279,7 +279,10 @@ public class Room{
 		}
 	}
 
-	public void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
+	public void putStudentOnTable(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException, BackException{
+		if(response instanceof BackResponse)
+			throw new BackException();
+
 		if(!(response instanceof PutStudentOnTableResponse))
 			throw new IncorrectOperationException();
 
@@ -290,7 +293,10 @@ public class Room{
 		putStudentOnTableOperation.executeOperation();
 	}
 
-	public void putStudentOnIsland(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException{
+	public void putStudentOnIsland(PlayerController player, Response response) throws IncorrectOperationException, PlayerNotInListException, BackException{
+		if(response instanceof BackResponse)
+			throw new BackException();
+
 		if(!(response instanceof PutStudentOnIslandResponse))
 			throw new IncorrectOperationException();
 
