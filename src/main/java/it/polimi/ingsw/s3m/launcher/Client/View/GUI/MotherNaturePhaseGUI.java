@@ -1108,11 +1108,7 @@ public class MotherNaturePhaseGUI{
 			}
 		});
 
-		int maxEntranceStudents = 7;
-		if(playersNumber == 3)
-			maxEntranceStudents = 9;
-
-		for(int i = 0; i < maxEntranceStudents; i++){
+		for(int i = 0; i < entranceStudentColors.size(); i++){
 			printEntranceStudent(entranceStudentImages.get(i), entranceStudentColors.get(i));
 		}
 

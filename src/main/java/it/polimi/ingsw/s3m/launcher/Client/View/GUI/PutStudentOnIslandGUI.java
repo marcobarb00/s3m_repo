@@ -30,10 +30,12 @@ public class PutStudentOnIslandGUI {
     @FXML
     Button back;
 
-    public void submitOnIsland(ActionEvent event) {
+    public void putStudentOnIsland(){
         colorOfStudent.setValue("Choose the student color");
         colorOfStudent.setItems(colorList);
+    }
 
+    public void submitOnIsland(ActionEvent event) {
         int numIsland;
         try{
             numIsland = Integer.parseInt(numOfIsland.getText());

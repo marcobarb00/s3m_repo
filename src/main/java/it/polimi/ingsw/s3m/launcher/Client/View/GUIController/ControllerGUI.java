@@ -34,6 +34,8 @@ public class ControllerGUI {
 	private PlayCharacterCardGUI playCharacterCardGUI;
 	private PlanningPhaseGUI planningPhaseGUI;
 	private MoveStudentsPhaseGUI moveStudentsPhaseGUI;
+	private PutStudentOnTableGUI putStudentOnTableGUI;
+	private PutStudentOnIslandGUI putStudentOnIslandGUI;
 	private MotherNaturePhaseGUI motherNaturePhaseGUI;
 	private CloudPhaseGUI cloudPhaseGUI;
 
@@ -254,6 +256,8 @@ public class ControllerGUI {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnTable.fxml"));
 			Parent setStudentOnTableGUI = (Parent) loader.load();
 			setScene(setStudentOnTableGUI);
+			putStudentOnTableGUI = loader.getController();
+			putStudentOnTableGUI.putStudentOnTable();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -264,6 +268,8 @@ public class ControllerGUI {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnIsland.fxml"));
 			Parent setStudentOnIslandGUI = (Parent) loader.load();
 			setScene(setStudentOnIslandGUI);
+			putStudentOnIslandGUI = loader.getController();
+			putStudentOnIslandGUI.putStudentOnIsland();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

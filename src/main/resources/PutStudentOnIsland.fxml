@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/17" fx:controller="it.polimi.ingsw.s3m.launcher.Client.View.GUI.PutStudentOnIslandGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.s3m.launcher.Client.View.GUI.PutStudentOnIslandGUI">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true">
          <image>
@@ -59,7 +59,7 @@
                   <Font name="Times New Roman Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="colorOfStudent" prefWidth="150.0" promptText="Select" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <ComboBox fx:id="colorOfStudent" prefWidth="150.0" promptText="Select" GridPane.columnIndex="1" />
             <TextField fx:id="numOfIsland" maxWidth="200.0" prefHeight="26.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
          </children>
          <effect>

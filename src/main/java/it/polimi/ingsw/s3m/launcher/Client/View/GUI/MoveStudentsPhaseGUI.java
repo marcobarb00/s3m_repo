@@ -915,7 +915,7 @@ public class MoveStudentsPhaseGUI{
                 motherNatureIsland3, motherNatureIsland4, motherNatureIsland5, motherNatureIsland6, motherNatureIsland7,
                 motherNatureIsland8, motherNatureIsland9, motherNatureIsland10, motherNatureIsland11);
 
-        //dashboard player two
+        //dashboard player one
 
         List<ImageView> entranceImagesPone = Arrays.asList(hallStudentOnePone,hallStudentTwoPone,hallStudentThreePone,
                 hallStudentFourPone,hallStudentFivePone,hallStudentSixPone,hallStudentSevenPone,
@@ -1115,11 +1115,7 @@ public class MoveStudentsPhaseGUI{
             }
         });
 
-        int maxEntranceStudents = 7;
-        if(playersNumber == 3)
-            maxEntranceStudents = 9;
-
-        for(int i = 0; i < maxEntranceStudents; i++){
+        for(int i = 0; i < entranceStudentColors.size(); i++){
             printEntranceStudent(entranceStudentImages.get(i), entranceStudentColors.get(i));
         }
 

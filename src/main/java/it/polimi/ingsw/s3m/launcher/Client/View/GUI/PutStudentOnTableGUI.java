@@ -3,7 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnTableResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,10 +29,12 @@ public class PutStudentOnTableGUI {
     @FXML
     Button back;
 
-    public void submitOnTable(ActionEvent event){
+    public void putStudentOnTable(){
         colorOfStudent.setValue("Choose the student color");
         colorOfStudent.setItems(colorList);
+    }
 
+    public void submitOnTable(ActionEvent event){
         ControllerGUI.getInstance().sendResponse(new PutStudentOnTableResponse(colorOfStudent.getValue()));
         ControllerGUI.getInstance().startLoading();
     }
