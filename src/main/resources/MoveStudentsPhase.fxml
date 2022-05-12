@@ -11,173 +11,120 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="925.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="934.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.s3m.launcher.Client.View.GUI.MoveStudentsPhaseGUI">
    <children>
-      <ImageView fx:id="blueScreen" fitHeight="948.0" fitWidth="1500.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueScreen" fitHeight="943.0" fitWidth="1500.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@sfondoveroazzurro.jpg" />
          </image>
       </ImageView>
       <GridPane hgap="10.0" layoutX="534.0" layoutY="148.0" vgap="10.0">
-        <columnConstraints>
+         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="50.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="50.0" />
-        </columnConstraints>
-        <rowConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="50.0" />
+         </columnConstraints>
+         <rowConstraints>
             <RowConstraints minHeight="100.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="100.79998779296875" minHeight="93.5999755859375" prefHeight="100.79998779296875" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="106.4000244140625" minHeight="99.20001220703125" prefHeight="99.20001220703125" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="100.0" prefHeight="50.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <RowConstraints maxHeight="100.79998779296875" minHeight="93.5999755859375" prefHeight="100.79998779296875" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="106.4000244140625" minHeight="99.20001220703125" prefHeight="99.20001220703125" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="100.0" prefHeight="50.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <ImageView fx:id="islandZero" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Far%20Island/Island1.jpeg" />
+                  <Image url="@Island1.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandOne" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@Far%20Island/Island2.jpeg" />
+                  <Image url="@Island2.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandTwo" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@Far%20Island/Island3.jpeg" />
+                  <Image url="@Island3.jpeg" />
                </image>
             </ImageView>
-            <ImageView fx:id="IslandThree" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fx:id="islandThree" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
-                  <Image url="@Far%20Island/Island1.jpeg" />
+                  <Image url="@Island1.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandFour" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
-                  <Image url="@Far%20Island/Island2.jpeg" />
+                  <Image url="@Island2.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandFive" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <image>
-                  <Image url="@Far%20Island/Island3.jpeg" />
+                  <Image url="@Island3.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandSix" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
-                  <Image url="@Far%20Island/Island1.jpeg" />
+                  <Image url="@Island1.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandSeven" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
-                  <Image url="@Far%20Island/Island2.jpeg" />
+                  <Image url="@Island2.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandEight" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
-                  <Image url="@Far%20Island/Island3.jpeg" />
+                  <Image url="@Island3.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandNine" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@Far%20Island/Island1.jpeg" />
+                  <Image url="@Island1.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandTen" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@Far%20Island/Island2.jpeg" />
+                  <Image url="@Island2.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="islandEleven" fitHeight="97.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@Far%20Island/Island3.jpeg" />
+                  <Image url="@Island3.jpeg" />
                </image>
             </ImageView>
             <ImageView fx:id="cloudOne" fitHeight="79.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
-                  <Image url="@Coin%20and%20Cloud/Cloud.jpeg" />
+                  <Image url="@Cloud.jpeg" />
                </image></ImageView>
             <ImageView fx:id="cloudTwo" fitHeight="79.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <image>
-                  <Image url="@Coin%20and%20Cloud/Cloud.jpeg" />
+                  <Image url="@Cloud.jpeg" />
                </image></ImageView>
-            <ImageView fitHeight="90.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <ImageView fitHeight="90.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@Far%20Island/sacchetto.jpeg" />
+                  <Image url="@bag.png" />
                </image>
             </ImageView>
             <ImageView fx:id="cloudThree" fitHeight="79.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
-                  <Image url="@Coin%20and%20Cloud/Cloud.jpeg" />
+                  <Image url="@Cloud.jpeg" />
                </image>
             </ImageView>
-            <ImageView fx:id="studentOneCloudThree" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets top="-75.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fx:id="studentTwoCloudThree" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets top="75.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fx:id="studentThreeCloudThree" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="75.0" top="-75.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fx:id="studentFourCloudThree" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="75.0" top="75.0" />
-               </GridPane.margin>
-            </ImageView>
             <GridPane>
-              <columnConstraints>
+               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Students/blueStud.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="greenStudentsIsland0" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
-                        <Image url="@Students/greenStud.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="yellowStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-                     <image>
-                        <Image url="@Students/yellowStud.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="pinkStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@Students/pinkStud.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="redStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@Students/redStud.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="towersIsland0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-                  <ImageView fx:id="motherNatureIsland0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="numBlueStudentsIsland0" text="0" GridPane.columnIndex="1" />
-                  <Label fx:id="numGreenStudentsIsland0" text="0" GridPane.columnIndex="3" />
-                  <Label fx:id="numPinkStudentsIsland0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="numRedStudentsIsland0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Label fx:id="numYellowStudentsIsland0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="numTowersIsland0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
                </children>
             </GridPane>
             <GridPane fx:id="gridPaneIsland0">
@@ -194,29 +141,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland0" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -243,29 +190,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland1" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -292,29 +239,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland2" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland2" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -341,29 +288,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland3" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland3" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -390,29 +337,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland4" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland4" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -439,29 +386,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland5" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland5" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -488,29 +435,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland6" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland6" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -537,29 +484,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland7" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland7" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -586,29 +533,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland8" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland8" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -635,29 +582,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland9" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland9" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -684,29 +631,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland10" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland10" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -719,7 +666,7 @@
                   <Label fx:id="numTowersIsland10" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <GridPane fx:id="gridPaneIsland101" GridPane.rowIndex="1">
+            <GridPane fx:id="gridPaneIsland11" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -733,29 +680,29 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="blueStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Students/blueStud.jpeg" />
+                        <Image url="@BLUEStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="greenStudents" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="greenStudentsIsland11" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@Students/greenStud.jpeg" />
+                        <Image url="@GREENStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="yellowStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="yellowStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@Students/yellowStud.jpeg" />
+                        <Image url="@YELLOWStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pinkStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="pinkStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/pinkStud.jpeg" />
+                        <Image url="@PINKStud.jpeg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="redStudents" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="redStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@Students/redStud.jpeg" />
+                        <Image url="@REDStud.jpeg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland11" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -769,14 +716,14 @@
                </children>
             </GridPane>
             <GridPane fx:id="gridPaneCloudOne" GridPane.columnIndex="1" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <ImageView fx:id="studentOneCloudOne" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <GridPane.margin>
@@ -868,12 +815,12 @@
       </GridPane>
       <ImageView fx:id="dashboardPlayerOne" fitHeight="400.0" fitWidth="600.0" layoutX="-104.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../UNIVERISTA'/3%5E%20ANNO/SECONDO%20SEMESTRE/PROGETTO%20ING.%20DEL%20SW/MATRIALE%20ERYANTIS%202022/2022-ingsw-lab/materiale%20eriantys/risorse%20grafiche/PLANCIA%20GIOCO_2.jpg" />
+            <Image url="@PLANCIAGIOCO_2.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="dashboardPlayerTwo" fitHeight="400.0" fitWidth="600.0" layoutX="444.0" layoutY="652.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../UNIVERISTA'/3%5E%20ANNO/SECONDO%20SEMESTRE/PROGETTO%20ING.%20DEL%20SW/MATRIALE%20ERYANTIS%202022/2022-ingsw-lab/materiale%20eriantys/risorse%20grafiche/PLANCIA%20GIOCO_2.jpg" />
+            <Image url="@PLANCIAGIOCO_2.jpg" />
          </image>
       </ImageView>
       <GridPane layoutX="545.0" layoutY="682.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="300.0">
@@ -915,7 +862,7 @@
             <ImageView fx:id="studRedSixPTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <ImageView fx:id="studRedSevenPTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <ImageView fx:id="studRedEightPTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <ImageView fx:id="studRedNine" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <ImageView fx:id="studRedNinePTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1" />
             <ImageView fx:id="studRedTenPTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1" />
             <ImageView fx:id="studYellowOnePTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
             <ImageView fx:id="studYellowTwoPTwo" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -1153,29 +1100,25 @@
             <ImageView fx:id="professorBluePone" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="66.0" layoutY="705.0" text="Coin Player 1:">
+      <Label layoutX="66.0" layoutY="705.0" text="CoinPlayer1:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="444.0" layoutY="630.0" text="Coin Player 2:">
+      <Label layoutX="444.0" layoutY="630.0" text="CoinPlayer2:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ImageView fx:id="coinImagePlayer1" fitHeight="42.0" fitWidth="50.0" layoutX="14.0" layoutY="698.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Coin%20and%20Cloud/Coin.jpeg" />
+            <Image url="@Coin.jpeg" />
          </image>
       </ImageView>
-      <ImageView fx:id="coinImagePlayer2" fitHeight="42.0" fitWidth="50.0" layoutX="396.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Coin%20and%20Cloud/Coin.jpeg" />
-         </image>
-      </ImageView>
+
       <ImageView fx:id="dashboardPlayerThree" fitHeight="400.0" fitWidth="600.0" layoutX="1010.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
          <image>
-            <Image url="@../UNIVERISTA'/3%5E%20ANNO/SECONDO%20SEMESTRE/PROGETTO%20ING.%20DEL%20SW/MATRIALE%20ERYANTIS%202022/2022-ingsw-lab/materiale%20eriantys/risorse%20grafiche/PLANCIA%20GIOCO_2.jpg" />
+            <Image url="@PLANCIAGIOCO_2.jpg" />
          </image>
       </ImageView>
       <GridPane layoutX="1260.0" layoutY="58.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="200.0" prefWidth="100.0" rotate="270.0">
@@ -1216,14 +1159,14 @@
             <ImageView fx:id="professorBluePThree" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="coinPlayer3" layoutX="1021.0" layoutY="236.0" text="Coin PLayer 3:">
+      <Label fx:id="coinPlayer3" layoutX="1021.0" layoutY="236.0" text="CoinPLayer3:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ImageView fx:id="coinImagePlayer3" fitHeight="42.0" fitWidth="50.0" layoutX="1077.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Coin%20and%20Cloud/Coin.jpeg" />
+            <Image url="@Coin.jpeg" />
          </image>
       </ImageView>
       <GridPane layoutX="1259.0" layoutY="552.0" maxHeight="200.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="200.0" prefWidth="100.0" rotate="270.0">
