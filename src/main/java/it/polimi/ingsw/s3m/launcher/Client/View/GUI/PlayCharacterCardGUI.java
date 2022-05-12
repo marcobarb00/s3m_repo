@@ -12,7 +12,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -34,8 +33,7 @@ public class PlayCharacterCardGUI{
     ImageView secondCharacter;
     @FXML
     ImageView thirdCharacter;
-    @FXML
-    GridPane gridPane;
+
     @FXML
     RadioButton active1;
     @FXML
