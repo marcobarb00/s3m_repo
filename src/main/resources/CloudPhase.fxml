@@ -145,27 +145,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland0" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland0" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -194,27 +194,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland1" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -243,27 +243,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland2" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland2" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -292,27 +292,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland3" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland3" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -341,27 +341,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland4" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland4" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -390,27 +390,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland5" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland5" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -439,27 +439,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland6" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland6" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -488,27 +488,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland7" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland7" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland7" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -537,27 +537,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland8" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland8" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland8" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -586,27 +586,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland9" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland9" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland9" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -635,27 +635,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland10" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland10" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
@@ -684,27 +684,27 @@
                <children>
                   <ImageView fx:id="blueStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@BLUEStud.jpeg" />
+                        <Image url="@BLUEStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="greenStudentsIsland11" fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@GREENStud.jpeg" />
+                        <Image url="@GREENStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="yellowStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@YELLOWStud.jpeg" />
+                        <Image url="@YELLOWStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="pinkStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@PINKStud.jpeg" />
+                        <Image url="@PINKStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="redStudentsIsland11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@REDStud.jpeg" />
+                        <Image url="@REDStud_whiteBG.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="towersIsland11" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />

@@ -42,7 +42,7 @@ public class MoveMotherNatureOperation extends Operation{
 		int maxMoves = lastPlayedAssistantCard.getMovements();
 		boolean checkMoves = 0 < movements && movements <= maxMoves;
 		if(!checkMoves){
-			throw new IncorrectOperationException("Incorrect motherNatureMoves value");
+			throw new IncorrectOperationException("Incorrect mother nature moves value");
 		}
 
 		//these exceptions are handled in Room

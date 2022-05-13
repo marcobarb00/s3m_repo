@@ -42,7 +42,7 @@ public class PlayAssistantCardOperation extends Operation{
 		//check if already played in turn
 		boolean checkCard = checkPlayableCard();
 		if(!checkCard){
-			throw new IncorrectOperationException("AssistantCard already played");
+			throw new IncorrectOperationException("Assistant card already played");
 		}
 
 		game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
