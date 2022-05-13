@@ -99,10 +99,11 @@ public class Mapper{
 		}
 
 		if(island.getDominator() == null){
-			return new IslandDTO(students, "", 0);
+			return new IslandDTO(students, "", "",  0);
 		}
 
-		return new IslandDTO(students, island.getDominator().getColor().name(), island.getNumberOfTowers());
+		return new IslandDTO(students, island.getDominator().getNickname(),
+				island.getDominator().getColor().name(), island.getNumberOfTowers());
 	}
 
 	public ArrayList<IslandDTO> islandListToDTO(ArrayList<Island> islandsList){
@@ -182,9 +183,15 @@ public class Mapper{
 		HashMap<String, String> towerColor = new HashMap<>();
 		game.getPlayersNicknames().forEach((nickname) -> towerColor.put(nickname, game.getPlayerHashMap().get(nickname).getColor().name()));
 
+		HashMap<String, AssistantCard> playedCards = game.getTurn().getPlayedCards();
+		HashMap<String, AssistantCardDTO> playedCardsDTO = new HashMap<>();
+		playedCards.forEach((player,card) -> playedCardsDTO.put(player, assistantCardToDTO(card)));
+
+		//TODO create a new Hashmap<String playerNickname, AssistantCard lastPlayedCard>
 		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(),
 				currentPlayer, game.getPlayersNicknames(), dashboards, coins, towerColor, cloudListToDTO(game.getCloudsList()),
 				professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()),
-				turnToDTO(game.getTurn()));
+				turnToDTO(game.getTurn()), playedCardsDTO);
 	}
+
 }

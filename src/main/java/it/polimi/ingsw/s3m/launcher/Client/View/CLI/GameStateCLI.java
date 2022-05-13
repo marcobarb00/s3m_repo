@@ -37,13 +37,15 @@ public class GameStateCLI{
 		gameState.getDashboards().forEach((nickname, dashboard) -> {
 			System.out.println("\n" + nickname + "'s dashboard:");
 			printDashboard(dashboard);
+			AssistantCardDTO lastPlayedCard = gameState.getLastPlayedCards().get(nickname);
+			if(lastPlayedCard != null){
+				System.out.println("last played card:	" + lastPlayedCard.getType());
+			}
 		});
-		System.out.println("==================================================================================="+
-				"==============================================");
+		System.out.println("\n==================================================================================="+
+				"==============================================\n");
 	}
 
-	//FIXME
-	//	islands do not merge as meant
 	private void printIslands(){
 		ArrayList<IslandDTO> islands = gameState.getIslands();
 		int islandsNumber = islands.size();
@@ -51,17 +53,10 @@ public class GameStateCLI{
 			System.out.print("Island " + (i+1) + "	");
 			HashMap<String, Integer> studentsOnIsland = islands.get(i).getStudents();
 			studentsOnIsland.forEach((color, number) -> System.out.print(color + ":	" + number + "	"));
-			System.out.print("dominator:	" + islands.get(i).getDominator());
+			System.out.print("towers:	" + islands.get(i).getNumberOfTowers());
+			System.out.print("	dominator:	" + islands.get(i).getDominator());
 			System.out.print("\n");
 		}
-	}
-	//TODO print last played assistant card
-
-
-	//TODO printing dominator as player color make cli the gameplay even slower
-	//	ask to add in GameDTO something to
-	private String dominantColorToDominator(String color){
-		return null;
 	}
 
 	private void printCharacterCards(){
@@ -79,7 +74,6 @@ public class GameStateCLI{
 	}
 
 	private void printDashboard(DashboardDTO dashboard){
-
 		HashMap<String, Integer> entrance = dashboard.getEntrance();
 		HashMap<String, Integer> hall = dashboard.getTables();
 		System.out.println("ENTRANCE				HALL");
@@ -88,8 +82,7 @@ public class GameStateCLI{
 								+ ":	" + hall.get(color));
 
 		}
-		System.out.println("\nlast played assistant card:	" + "");
-		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left\n");
+		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left");
 	}
 
 	private void printClouds(){

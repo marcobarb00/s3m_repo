@@ -6,11 +6,13 @@ import java.util.HashMap;
 public class IslandDTO implements Serializable{
 	private HashMap<String, Integer> students;
 	private String dominatorColor;
+	private String dominator;
 	private int numberOfTowers;
 
-	public IslandDTO(HashMap<String, Integer> students, String dominatorColor, int numberOfTowers){
+	public IslandDTO(HashMap<String, Integer> students, String dominator, String dominatorColor, int numberOfTowers){
 		this.students = students;
 		this.dominatorColor = dominatorColor;
+		this.dominator = dominator;
 		this.numberOfTowers = numberOfTowers;
 	}
 
@@ -18,8 +20,10 @@ public class IslandDTO implements Serializable{
 		return students;
 	}
 
-	public String getDominatorColor(){
-		return dominatorColor;
+	public String getDominatorColor(){ return dominatorColor; }
+
+	public String getDominator(){
+		return dominator;
 	}
 
 	public int getNumberOfTowers(){
