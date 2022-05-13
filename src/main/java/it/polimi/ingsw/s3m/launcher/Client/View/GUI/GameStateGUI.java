@@ -1029,10 +1029,15 @@ public class GameStateGUI{
 
 
 		HashMap<String, Integer> coins = gameState.getCoins();
-		printCoinsPOne(coins.get(nicknameList.get(0)));
-		printCoinsPTwo(coins.get(nicknameList.get(1)));
-		if(gameState.getPlayersNumber() == 3)
-			printCoinsPThree(coins.get(nicknameList.get(2)));
+		printCoinsPOne(coins.get(firstPlayerNick));
+		CoinNicknamePlayer1.setText(firstPlayerNick + "'s coins");
+		printCoinsPTwo(coins.get(secondPlayerNick));
+		CoinNicknamePlayer2.setText(secondPlayerNick + "'s coins");
+		if(gameState.getPlayersNumber() == 3){
+			String thirdPlayerNick = nicknameList.get(2);
+			printCoinsPThree(coins.get(thirdPlayerNick));
+			coinNicknamePlayer3.setText(thirdPlayerNick + "'s coins");
+		}
 
 		//clouds
 		ArrayList<CloudDTO> clouds = gameState.getClouds();
