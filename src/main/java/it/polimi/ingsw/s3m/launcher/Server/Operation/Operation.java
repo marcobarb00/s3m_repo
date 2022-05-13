@@ -46,7 +46,8 @@ public abstract class Operation{
 		return playerController.getNickname().equals(currentPlayer);
 	}
 
-	public void checkMovableStudent(){
+	public void checkMovableStudent() throws IncorrectOperationException {
+		// TODO talk about this
 		//3 players mode check
 		int maxMovableStudents = 3;
 		boolean threePlayersMode = game.getNumberOfPlayers() == 3;
@@ -54,8 +55,8 @@ public abstract class Operation{
 			maxMovableStudents = 4;
 		}
 		int movedStudentsInTurn = game.getTurnMovedStudents();
-		if(movedStudentsInTurn > maxMovableStudents){
-			throw new IllegalArgumentException("Cannot move another student");
+		if(movedStudentsInTurn >= maxMovableStudents){
+			throw new IncorrectOperationException("Cannot move another student");
 		}
 	}
 }
