@@ -9,12 +9,10 @@ import javafx.application.Platform;
 
 public class ClientGUI extends Thread{
 	private final Client client;
-	private final ControllerGUI controllerGUI;
 	private final GUIView view;
 
-	public ClientGUI(ControllerGUI controllerGUI){
-		this.view = new GUIView(this, controllerGUI);
-		this.controllerGUI = controllerGUI;
+	public ClientGUI(){
+		this.view = new GUIView(this);
 		this.client = new Client();
 		this.client.start();
 	}
@@ -23,9 +21,8 @@ public class ClientGUI extends Thread{
 	public void run(){
 		while(true){
 			try{
-				Message msg;
-				msg = client.receiveMessage();
-				msg.apply(view);
+				Message receivedMessage = client.receiveMessage();
+				receivedMessage.apply(view);
 			}catch(Exception e){
 				try{
 					Thread.sleep(3000);

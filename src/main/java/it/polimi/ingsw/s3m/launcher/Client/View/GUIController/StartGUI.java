@@ -6,9 +6,8 @@ import javafx.stage.Stage;
 public class StartGUI extends Application{
 
 	@Override
-	public void start(Stage primaryStage) throws Exception{
-		ControllerGUI instance = ControllerGUI.getInstance();
-		instance.startGame(primaryStage);
+	public void start(Stage primaryStage){
+		ControllerGUI.getInstance().startGame(primaryStage);
 	}
 
 	public void startGUI(){
