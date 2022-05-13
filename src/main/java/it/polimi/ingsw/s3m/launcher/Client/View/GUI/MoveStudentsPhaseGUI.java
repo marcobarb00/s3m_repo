@@ -1013,7 +1013,7 @@ public class MoveStudentsPhaseGUI{
         for(; index < islandList.size(); index++){
             printIsland(islandInfoList.get(index), islandList.get(index));
         }
-        for(; index < 11; index++){
+        for(; index < 12; index++){
             setIslandNotVisible(islandInfoList.get(index));
         }
 
