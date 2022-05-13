@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PutStudentOnTableCLI extends MessageCLI{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public PutStudentOnTableCLI(PutStudentOnTableMessage putStudentOnTableMessage){
 		this.gameState = putStudentOnTableMessage.getGameState();

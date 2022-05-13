@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class CharacterCardDTO implements Serializable{
-	private String name;
-	private int cost;
-	private HashMap<String, Integer> studentsOnCard;
+	private final String name;
+	private final int cost;
+	private final HashMap<String, Integer> studentsOnCard;
 
 	public CharacterCardDTO(String name, int cost, HashMap<String, Integer> studentsOnCard){
 		this.name = name;

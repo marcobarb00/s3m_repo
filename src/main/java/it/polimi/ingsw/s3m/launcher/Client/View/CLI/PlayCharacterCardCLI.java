@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlayCharacterCardCLI extends MessageCLI{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 	private ArrayList<String> studentsToPutOnJester;
 	private ArrayList<String> studentsToGetFromJester;
 

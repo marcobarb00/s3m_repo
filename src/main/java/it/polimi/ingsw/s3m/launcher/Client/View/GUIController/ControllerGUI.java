@@ -20,7 +20,7 @@ public class ControllerGUI {
 	private ClientGUI thread;
 	private static ControllerGUI INSTANCE;
 	private Stage primaryStage;
-	private Stage secondaryStage;
+	private final Stage secondaryStage;
 	private LoadingScreenGUI loadingScreenGUI;
 	private ErrorGUI errorGui;
 	private NewRoomGUI newRoomGUI;
@@ -29,7 +29,7 @@ public class ControllerGUI {
 	private JesterGUI jesterGUI;
 	private MinstrelGUI minstrelGUI;
 	private MushroomerGUI mushroomerGUI;
-	private NewRoomResponse newRoomResponse = new NewRoomResponse();
+	private final NewRoomResponse newRoomResponse = new NewRoomResponse();
 	private PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse();
 	private PlayCharacterCardGUI playCharacterCardGUI;
 	private PlanningPhaseGUI planningPhaseGUI;
@@ -109,7 +109,7 @@ public class ControllerGUI {
 	public void launchNotification(NotificationMessage message) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Notification.fxml"));
-			Parent notificationGui = (Parent) loader.load();
+			Parent notificationGui = loader.load();
 			this.notificationGUI = loader.getController();
 			this.notificationGUI.insert(message);
 			setScene(notificationGui);
@@ -121,7 +121,7 @@ public class ControllerGUI {
 	public void launchLogin(LoginMessage message) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
-			Parent loginGUI = (Parent) loader.load();
+			Parent loginGUI = loader.load();
 			setScene(loginGUI);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -135,7 +135,7 @@ public class ControllerGUI {
 	public void launchNumOfPlayerGui() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("NumOfPlayers.fxml"));
-			Parent showNumOfPlayers = (Parent) loader.load();
+			Parent showNumOfPlayers = loader.load();
 			setScene(showNumOfPlayers);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -145,7 +145,7 @@ public class ControllerGUI {
 	public void launchGameConfigMessage() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GameConfig.fxml"));
-			Parent gameConfigGUI = (Parent) loader.load();
+			Parent gameConfigGUI = loader.load();
 			setScene(gameConfigGUI);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -155,7 +155,7 @@ public class ControllerGUI {
 	public void launchSetNickname() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("SetNickname.fxml"));
-			Parent setNicknameGUI = (Parent) loader.load();
+			Parent setNicknameGUI = loader.load();
 			setScene(setNicknameGUI);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -165,7 +165,7 @@ public class ControllerGUI {
 	public void launchEnterRoom(EnterRoomMessage enterRoomMessage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("EnterRoom.fxml"));
-			Parent enterRoom = (Parent) loader.load();
+			Parent enterRoom = loader.load();
 			enterRoomGUI = loader.getController();
 			enterRoomGUI.setCreatedRoom(enterRoomMessage);
 			setScene(enterRoom);
@@ -191,7 +191,7 @@ public class ControllerGUI {
 	public void launchError(ErrorMessage message) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Error.fxml"));
-			Parent error = (Parent) loader.load();
+			Parent error = loader.load();
 			this.errorGui = loader.getController();
 			this.errorGui.insert(message);
 			setScene(error);
@@ -203,7 +203,7 @@ public class ControllerGUI {
 	public void launchPlanningPhase(PlanningPhaseMessage message){
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PlanningPhase.fxml"));
-			Parent playCharacterCard = (Parent) loader.load();
+			Parent playCharacterCard = loader.load();
 			planningPhaseGUI = loader.getController();
 			planningPhaseGUI.printMessageInformation(message);
 			setScene(playCharacterCard);
@@ -216,7 +216,7 @@ public class ControllerGUI {
 	public void launchMoveStudentsPhase(StudentsPhaseMessage message){
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveStudentsPhase.fxml"));
-			Parent moveStudents = (Parent) loader.load();
+			Parent moveStudents = loader.load();
 			moveStudentsPhaseGUI = loader.getController();
 			moveStudentsPhaseGUI.printMessageInformation(message);
 			setScene(moveStudents);
@@ -229,7 +229,7 @@ public class ControllerGUI {
 	public void launchMotherNaturePhase(MotherNaturePhaseMessage message){
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MotherNaturePhase.fxml"));
-			Parent motherNature = (Parent) loader.load();
+			Parent motherNature = loader.load();
 			motherNaturePhaseGUI = loader.getController();
 			motherNaturePhaseGUI.printMessageInformation(message);
 			setScene(motherNature);
@@ -242,7 +242,7 @@ public class ControllerGUI {
 	public void launchCloudPhase(CloudPhaseMessage message){
 		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CloudPhase.fxml"));
-			Parent cloud = (Parent) loader.load();
+			Parent cloud = loader.load();
 			cloudPhaseGUI = loader.getController();
 			cloudPhaseGUI.printMessageInformation(message);
 			setScene(cloud);
@@ -254,7 +254,7 @@ public class ControllerGUI {
 	public void launchPutStudentOnTable() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnTable.fxml"));
-			Parent setStudentOnTableGUI = (Parent) loader.load();
+			Parent setStudentOnTableGUI = loader.load();
 			setScene(setStudentOnTableGUI);
 			putStudentOnTableGUI = loader.getController();
 			putStudentOnTableGUI.putStudentOnTable();
@@ -266,7 +266,7 @@ public class ControllerGUI {
 	public void launchPutStudentOnIsland() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnIsland.fxml"));
-			Parent setStudentOnIslandGUI = (Parent) loader.load();
+			Parent setStudentOnIslandGUI = loader.load();
 			setScene(setStudentOnIslandGUI);
 			putStudentOnIslandGUI = loader.getController();
 			putStudentOnIslandGUI.putStudentOnIsland();
@@ -278,7 +278,7 @@ public class ControllerGUI {
 	public void launchMoveMotherNature() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveMotherNature.fxml"));
-			Parent setMotherNatureOnIslandGUI = (Parent) loader.load();
+			Parent setMotherNatureOnIslandGUI = loader.load();
 			setScene(setMotherNatureOnIslandGUI);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -289,7 +289,7 @@ public class ControllerGUI {
 		playCharacterCardResponse = new PlayCharacterCardResponse();
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CharacterCardActivation.fxml"));
-			Parent playCharacterCard = (Parent) loader.load();
+			Parent playCharacterCard = loader.load();
 			playCharacterCardGUI = loader.getController();
 			playCharacterCardGUI.inizialize(message);
 			setScene(playCharacterCard);
@@ -306,7 +306,7 @@ public class ControllerGUI {
 	public void launchMushroomer() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Mushroomer.fxml"));
-			Parent setMushroomerGUI = (Parent) loader.load();
+			Parent setMushroomerGUI = loader.load();
 			mushroomerGUI = loader.getController();
 			mushroomerGUI.showMushroomerInfo();
 			setScene(setMushroomerGUI);
@@ -318,7 +318,7 @@ public class ControllerGUI {
 	public void launchMinstrel() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Minstrel.fxml"));
-			Parent setMinstrelGUI = (Parent) loader.load();
+			Parent setMinstrelGUI = loader.load();
 			minstrelGUI = loader.getController();
 			minstrelGUI.showMinstrelInfo();
 			setScene(setMinstrelGUI);
@@ -330,7 +330,7 @@ public class ControllerGUI {
 	public void launchJester() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Jester.fxml"));
-			Parent setJesterGUI = (Parent) loader.load();
+			Parent setJesterGUI = loader.load();
 			jesterGUI = loader.getController();
 			jesterGUI.showJesterInfo();
 			setScene(setJesterGUI);

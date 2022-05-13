@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PlayerDTO implements Serializable{
-	private String nickname;
-	private String color;
-	private DashboardDTO dashboard;
-	private ArrayList<AssistantCardDTO> hand;
-	private AssistantCardDTO lastCardPlayed;
+	private final String nickname;
+	private final String color;
+	private final DashboardDTO dashboard;
+	private final ArrayList<AssistantCardDTO> hand;
+	private final AssistantCardDTO lastCardPlayed;
 
 	public PlayerDTO(String nickname, String color, DashboardDTO dashboard, ArrayList<AssistantCardDTO> hand, AssistantCardDTO lastCardPlayed){
 		this.nickname = nickname;

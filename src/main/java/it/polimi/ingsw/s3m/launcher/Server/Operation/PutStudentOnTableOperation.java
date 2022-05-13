@@ -11,7 +11,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 import java.util.HashMap;
 
 public class PutStudentOnTableOperation extends Operation{
-	private PawnColor studentColor;
+	private final PawnColor studentColor;
 
 	public PutStudentOnTableOperation(Game game, PlayerController playerController, PawnColor studentColor){
 		super(game, playerController);

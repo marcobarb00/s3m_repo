@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 //Done
 public class PlayAssistantCardOperation extends Operation{
-	private int assistantCardPosition;
+	private final int assistantCardPosition;
 
 	public PlayAssistantCardOperation(Game game, PlayerController playerController, int assistantCardPosition){
 		super(game, playerController);

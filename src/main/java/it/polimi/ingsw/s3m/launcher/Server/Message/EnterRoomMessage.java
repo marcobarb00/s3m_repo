@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Message;
 import java.util.ArrayList;
 
 public class EnterRoomMessage implements Message{
-	private ArrayList<Integer> availableRoomsID;
+	private final ArrayList<Integer> availableRoomsID;
 
 	public EnterRoomMessage(ArrayList<Integer> availableRoomsID){
 		this.availableRoomsID = availableRoomsID;

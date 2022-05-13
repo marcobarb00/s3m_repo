@@ -11,8 +11,8 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 import java.util.HashMap;
 
 public class PutStudentOnIslandOperation extends Operation{
-	private int islandPosition;
-	private PawnColor studentColor;
+	private final int islandPosition;
+	private final PawnColor studentColor;
 
 	public PutStudentOnIslandOperation(Game game, PlayerController playerController,
 									   int islandPosition, PawnColor studentColor){

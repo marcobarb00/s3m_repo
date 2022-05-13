@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DashboardGUI{
-	private List<ImageView> entranceImages;
-	private HashMap<String, List<ImageView>> tablesImages;
-	private HashMap<String, ImageView> professorsImages;
-	private List<ImageView> towerImages;
+	private final List<ImageView> entranceImages;
+	private final HashMap<String, List<ImageView>> tablesImages;
+	private final HashMap<String, ImageView> professorsImages;
+	private final List<ImageView> towerImages;
 
 	public DashboardGUI(List<ImageView> entranceImages, List<ImageView> redStudentsTable, List<ImageView> greenStudentsTable,
 						List<ImageView> blueStudentsTable, List<ImageView> pinkStudentsTable, List<ImageView> yellowStudentsTable,

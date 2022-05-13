@@ -13,9 +13,9 @@ import javafx.stage.StageStyle;
 
 public class LoadingScreenGUI{
 
-	private Stage loadingStage;
-	private ProgressIndicator loading;
-	private TextArea notification;
+	private final Stage loadingStage;
+	private final ProgressIndicator loading;
+	private final TextArea notification;
 
 	public LoadingScreenGUI(Stage secondaryStage){
 		loadingStage = new Stage();

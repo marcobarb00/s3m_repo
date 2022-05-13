@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EnterRoomCLI extends MessageCLI{
-	private ArrayList<Integer> availableRoomsID;
+	private final ArrayList<Integer> availableRoomsID;
 
 	public EnterRoomCLI(EnterRoomMessage enterRoomMessage){
 		this.availableRoomsID = enterRoomMessage.getAvailableRoomsID();

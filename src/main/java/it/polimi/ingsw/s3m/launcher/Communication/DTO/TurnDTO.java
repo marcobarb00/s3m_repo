@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TurnDTO implements Serializable{
-	private String firstPlayerNickname;
-	private String currentPlayerNickname;
-	private String currentPhase;
-	private ArrayList<AssistantCardDTO> playedCards;
-	private boolean CharacterCardActivated;
+	private final String firstPlayerNickname;
+	private final String currentPlayerNickname;
+	private final String currentPhase;
+	private final ArrayList<AssistantCardDTO> playedCards;
+	private final boolean CharacterCardActivated;
 
 	public TurnDTO(String firstPlayerNickname, String currentPlayerNickname, String currentPhase, ArrayList<AssistantCardDTO> playedCards, boolean CharacterCardActivated){
 		this.firstPlayerNickname = firstPlayerNickname;

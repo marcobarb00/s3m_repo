@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 public class MotherNaturePhaseMessage implements Message{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public MotherNaturePhaseMessage(GameDTO gameState){
 		this.gameState = gameState;

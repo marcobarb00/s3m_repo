@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 
 public class ActivateMushroomerEffectOperation extends Operation{
-	private PawnColor notInfluencingColor;
+	private final PawnColor notInfluencingColor;
 
 	public ActivateMushroomerEffectOperation(Game game, PlayerController playerController, PawnColor notInfluencingColor){
 		super(game, playerController);

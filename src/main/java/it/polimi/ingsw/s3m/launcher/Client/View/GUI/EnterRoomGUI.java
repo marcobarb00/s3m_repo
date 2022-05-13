@@ -23,7 +23,7 @@ public class EnterRoomGUI{
 	@FXML
 	GridPane gridPane;
 
-	private EnterRoomResponse enterRoomResponse = new EnterRoomResponse();
+	private final EnterRoomResponse enterRoomResponse = new EnterRoomResponse();
 
 	public void enterGame(ActionEvent event){
 		String nick = nickname.getText();

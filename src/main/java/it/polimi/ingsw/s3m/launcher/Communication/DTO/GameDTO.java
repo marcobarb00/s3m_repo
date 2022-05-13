@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDTO implements Serializable{
-	private int playersNumber;
-	private boolean expertMode;
-	private int motherNaturePosition;
-	private PlayerDTO currentPlayer;
-	private ArrayList<String> playerNicknames;
-	private HashMap<String, DashboardDTO> dashboards;
-	private HashMap<String, Integer> coins;
-	private HashMap<String, String> towerColor;
-	private ArrayList<CloudDTO> clouds;
-	private HashMap<String, String> professors;
-	private ArrayList<IslandDTO> islands;
-	private ArrayList<CharacterCardDTO> characterCards;
-	private TurnDTO turn;
+	private final int playersNumber;
+	private final boolean expertMode;
+	private final int motherNaturePosition;
+	private final PlayerDTO currentPlayer;
+	private final ArrayList<String> playerNicknames;
+	private final HashMap<String, DashboardDTO> dashboards;
+	private final HashMap<String, Integer> coins;
+	private final HashMap<String, String> towerColor;
+	private final ArrayList<CloudDTO> clouds;
+	private final HashMap<String, String> professors;
+	private final ArrayList<IslandDTO> islands;
+	private final ArrayList<CharacterCardDTO> characterCards;
+	private final TurnDTO turn;
 
 	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, PlayerDTO currentPlayer,
 				   ArrayList<String> playerNicknames, HashMap<String, DashboardDTO> dashboards,

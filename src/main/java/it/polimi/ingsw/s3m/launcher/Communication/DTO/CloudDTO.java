@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CloudDTO implements Serializable{
-	private ArrayList<String> students;
+	private final ArrayList<String> students;
 
 	public CloudDTO(ArrayList<String> students){
 		this.students = students;
