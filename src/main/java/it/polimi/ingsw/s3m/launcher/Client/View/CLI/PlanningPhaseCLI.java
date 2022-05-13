@@ -7,6 +7,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PlanningPhaseCLI extends MessageCLI{
 	GameDTO gameState;
@@ -20,15 +21,15 @@ public class PlanningPhaseCLI extends MessageCLI{
 		GameStateCLI gameStateCLI = new GameStateCLI(gameState);
 		gameStateCLI.printState();
 
-		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
+		HashMap<String, AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
 		ArrayList<AssistantCardDTO> hand = gameState.getCurrentPlayer().getHand();
 
-		if(playedAssistantCards.size() != 0){
+		if(playedAssistantCards.isEmpty()){
 			System.out.println("\ncards played by the other players:");
-			for(AssistantCardDTO assistantCard : playedAssistantCards){
+			playedAssistantCards.forEach((nickname, assistantCard) -> {
 				System.out.println("name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() +
 						"\tmovements: " + assistantCard.getMovements());
-			}
+			});
 		}
 
 		System.out.println("\nyour hand:");

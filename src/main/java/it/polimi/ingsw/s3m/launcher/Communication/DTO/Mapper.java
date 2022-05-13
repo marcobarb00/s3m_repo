@@ -160,8 +160,8 @@ public class Mapper{
 	}
 
 	public TurnDTO turnToDTO(Turn turn){
-		ArrayList<AssistantCardDTO> playedCards = new ArrayList<>();
-		turn.getPlayedCards().forEach((nickname, card) -> playedCards.add(assistantCardToDTO(card)));
+		HashMap<String, AssistantCardDTO> playedCards = new HashMap<>();
+		turn.getPlayedCards().forEach((nickname, card) -> playedCards.put(nickname, assistantCardToDTO(card)));
 
 		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard());
 	}
@@ -190,7 +190,6 @@ public class Mapper{
 		HashMap<String, AssistantCardDTO> playedCardsDTO = new HashMap<>();
 		playedCards.forEach((player,card) -> playedCardsDTO.put(player, assistantCardToDTO(card)));
 
-		//TODO create a new Hashmap<String playerNickname, AssistantCard lastPlayedCard>
 		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(),
 				currentPlayer, game.getPlayersNicknames(), dashboards, coins, towerColor, cloudListToDTO(game.getCloudsList()),
 				professors, islandListToDTO(game.getIslandsList()), characterCardListToDTO(game.getCharacterCardsList()),
