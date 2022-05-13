@@ -300,15 +300,19 @@ public class Game{
 		Player winner = null;
 		int maxTowers = 10;
 		for(Player player : playerHashMap.values()){
-			if(player.getDashboard().getNumberOfTowers() < maxTowers)
+			if(player.getDashboard().getNumberOfTowers() < maxTowers){
 				winner = player;
-			else if(player.getDashboard().getNumberOfTowers() == maxTowers)
-				if(playerInfluenceOnProfessors(player) > playerInfluenceOnProfessors(winner))
+				maxTowers = player.getDashboard().getNumberOfTowers();
+			}else if(player.getDashboard().getNumberOfTowers() == maxTowers){
+				if(playerInfluenceOnProfessors(player) > playerInfluenceOnProfessors(winner)){
 					winner = player;
+					maxTowers = player.getDashboard().getNumberOfTowers();
+				}
 				else if(playerInfluenceOnProfessors(player) == playerInfluenceOnProfessors(winner)){
 					assert winner != null;
 					throw new TieException(player.getNickname(), winner.getNickname());
 				}
+			}
 		}
 		if(winner == null) throw new NullWinnerException();
 		return winner.getNickname();
