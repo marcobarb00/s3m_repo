@@ -318,12 +318,14 @@ public class Room{
 
 		PlayCharacterCardResponse playCharacterCardResponse = (PlayCharacterCardResponse) response;
 
+		//TODO controls on the position
 		CharacterCard playedCharacterCard;
 		try{
 			playedCharacterCard = gameState.getCharacterCardsList().get(playCharacterCardResponse.getCharacterCardPosition());
 		}catch(ArrayIndexOutOfBoundsException e){
 			throw new IncorrectOperationException();
 		}
+
 		Operation characterCardOperation;
 		switch(playedCharacterCard.getName()){
 			case "Centaur":
