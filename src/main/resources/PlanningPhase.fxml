@@ -1324,5 +1324,8 @@
             <Image url="@Coin.jpeg" />
          </image>
       </ImageView>
+      <ImageView fx:id="assistantCardPlayed1" fitHeight="81.0" fitWidth="100.0" layoutX="65.0" layoutY="741.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="assistantCardPlayed2" fitHeight="81.0" fitWidth="100.0" layoutX="1039.0" layoutY="742.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="assistantCardPlayed3" fitHeight="81.0" fitWidth="100.0" layoutX="1027.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
