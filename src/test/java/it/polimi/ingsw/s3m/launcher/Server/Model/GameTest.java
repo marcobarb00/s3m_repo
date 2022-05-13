@@ -6,6 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.NullWinnerException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.TieException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Centaur;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 import org.junit.jupiter.api.Test;
 
@@ -429,25 +430,52 @@ class GameTest {
         ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
         Game game = new Game(players, true);
         game.getCharacterCardsList().clear();
+
+        //checking no character card
         assertEquals(0 ,game.getCharacterCardsList().size());
         game.getCharacterCardsList().add(new Centaur());
         Player player1 = game.getPlayerHashMap().get("player1");
+        //check state before call
         player1.addCoins(2);
         assertEquals(3, player1.getCoins());
         assertFalse(game.getTurn().isActivatedCharacterCard());
         game.activateCentaurEffect("player1");
+        //check state before call
         assertEquals(0, player1.getCoins());
         assertEquals(4, game.getCharacterCardsList().get(0).getCost());
         assertTrue(game.getTurn().isActivatedCharacterCard());
     }
 
+    @Test
+    void activateJesterEffect() throws EmptyBagException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        game.getCharacterCardsList().clear();
+        ArrayList<PawnColor> studentsGive;
+        ArrayList<PawnColor> studentsTake;
 
+        //checking no character card
+        assertEquals(0 ,game.getCharacterCardsList().size());
+        game.getCharacterCardsList().add(new Jester());
+        Player player1 = game.getPlayerHashMap().get("player1");
+        HashMap<PawnColor,Integer> entrance = player1.getDashboard().getEntrance();
+        entrance.replace(PawnColor.RED,1);
+        entrance.replace(PawnColor.PINK,2);
+        entrance.replace(PawnColor.GREEN,3);
+        entrance.replace(PawnColor.BLUE,1);
+        entrance.replace(PawnColor.YELLOW,0);
 
+        //game.getCharacterCardsList().get(0);
 
-
-
-
-    /**/
-
+        //check state before call
+        assertFalse(game.getTurn().isActivatedCharacterCard());
+        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.GREEN,PawnColor.GREEN,PawnColor.GREEN));;
+        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.GREEN,PawnColor.GREEN,PawnColor.GREEN));;
+        //game.activateJesterEffect("player1");
+        //check state before call
+        assertEquals(0, player1.getCoins());
+        assertEquals(4, game.getCharacterCardsList().get(0).getCost());
+        assertTrue(game.getTurn().isActivatedCharacterCard());
+    }
 
 }
