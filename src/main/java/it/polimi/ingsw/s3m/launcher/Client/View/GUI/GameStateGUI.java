@@ -18,8 +18,6 @@ public class GameStateGUI{
 	@FXML
 	Label CoinNicknamePlayer2;
 	@FXML
-	ImageView blueScreen;
-	@FXML
 	ImageView islandZero;
 	@FXML
 	ImageView islandOne;
