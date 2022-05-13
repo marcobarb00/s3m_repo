@@ -47,7 +47,6 @@ public abstract class Operation{
 	}
 
 	public void checkMovableStudent() throws IncorrectOperationException {
-		// TODO talk about this
 		//3 players mode check
 		int maxMovableStudents = 3;
 		boolean threePlayersMode = game.getNumberOfPlayers() == 3;
