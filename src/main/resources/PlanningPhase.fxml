@@ -1281,7 +1281,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="14.0" text="AssistantCard:">
+      <Label layoutX="14.0" layoutY="14.0" text="Your Hand:">
          <font>
             <Font size="28.0" />
          </font>

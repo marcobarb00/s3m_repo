@@ -37,6 +37,7 @@
          <rowConstraints>
             <RowConstraints maxHeight="244.0" minHeight="0.0" prefHeight="61.19999084472656" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="244.0" minHeight="10.0" prefHeight="61.19999084472656" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="244.0" minHeight="10.0" prefHeight="61.19999084472656" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#submitMotherNatureOnIsland" prefHeight="21.0" prefWidth="180.0" text="Submit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -59,6 +60,12 @@
             </TextField>
             <Label text="Num of Steps Allowed:" GridPane.rowIndex="1" />
             <Label fx:id="stepsLimit" prefHeight="19.0" prefWidth="228.0" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label prefHeight="18.0" prefWidth="368.0" text="(if no island has yet been merged, count the islands from 0 to 11)" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets top="-70.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="(if the islands have been merged, count the islands from 0 to 11- n, where n is the number of islands already eliminated)" wrapText="true" GridPane.rowIndex="2" />
          </children>
          <effect>
             <DropShadow />
