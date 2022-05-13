@@ -4,9 +4,12 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NullWinnerException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.TieException;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Centaur;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -339,7 +342,7 @@ class GameTest {
     }
 
     @Test
-    void checkWinConditionTest() throws EmptyBagException, TieException, NullWinnerException {
+    void checkWinCondition2PlayersLessTowers() throws EmptyBagException, TieException, NullWinnerException {
         //one winner 2 players
         ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
         Game game = new Game(players, true);
@@ -348,29 +351,103 @@ class GameTest {
         player1.getDashboard().setNumberOfTowers(2);
         player2.getDashboard().setNumberOfTowers(3);
         assertEquals("player1", game.checkWinCondition());
+    }
 
+    @Test
+    void checkWinCondition3PlayersTest() throws EmptyBagException, TieException, NullWinnerException {
         //one winner 3 player
-        players = new ArrayList<>(Arrays.asList("player1", "player2", "player3"));
-        game = new Game(players, true);
-        player1 = game.getPlayerHashMap().get("player1");
-        player2 = game.getPlayerHashMap().get("player2");
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2", "player3"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
         Player player3 = game.getPlayerHashMap().get("player3");
         player1.getDashboard().setNumberOfTowers(2);
         player2.getDashboard().setNumberOfTowers(3);
         player3.getDashboard().setNumberOfTowers(1);
         assertEquals("player3", game.checkWinCondition());
+    }
 
+    @Test
+    void checkWinCondition2PlayersTestTowerTie() throws EmptyBagException, TieException, NullWinnerException {
         //tie 2 players
-        players = new ArrayList<>(Arrays.asList("player1", "player2"));
-        game = new Game(players, true);
-        player1 = game.getPlayerHashMap().get("player1");
-        player2 = game.getPlayerHashMap().get("player2");
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
         player1.getDashboard().setNumberOfTowers(2);
         player2.getDashboard().setNumberOfTowers(2);
         HashMap<PawnColor,Player> professors = game.getProfessorsHashMap();
-
+        professors.replace(PawnColor.RED, player1);
+        professors.replace(PawnColor.BLUE, player1);
         assertEquals("player1", game.checkWinCondition());
     }
+
+    @Test
+    void checkWinCondition3PlayersTestTowerTie() throws EmptyBagException, TieException, NullWinnerException {
+        //tie 3 players
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2", "player3"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
+        Player player3 = game.getPlayerHashMap().get("player3");
+        player1.getDashboard().setNumberOfTowers(2);
+        player2.getDashboard().setNumberOfTowers(2);
+        player3.getDashboard().setNumberOfTowers(2);
+        HashMap<PawnColor,Player> professors = game.getProfessorsHashMap();
+        professors.replace(PawnColor.RED, player1);
+        professors.replace(PawnColor.BLUE, player1);
+        assertEquals("player1", game.checkWinCondition());
+    }
+
+    @Test
+    void zeroTowersLeftWinCondition2Players() throws EmptyBagException, TieException, NullWinnerException {
+        //2 players
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
+        player1.getDashboard().setNumberOfTowers(0);
+        player2.getDashboard().setNumberOfTowers(2);
+        assertEquals("player1", game.zeroTowersLeftWinCondition());
+    }
+
+    @Test
+    void zeroTowersLeftWinCondition2PlayersNoOneWithZeroTowers() throws EmptyBagException, NullWinnerException {
+        //2 players
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
+        player1.getDashboard().setNumberOfTowers(1);
+        player2.getDashboard().setNumberOfTowers(1);
+        Exception e = assertThrows(NullWinnerException.class, () -> game.zeroTowersLeftWinCondition());
+        assertEquals("Winner computation error", e.getMessage());
+    }
+
+    @Test
+    void activateCentaurEffectTest() throws EmptyBagException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        game.getCharacterCardsList().clear();
+        assertEquals(0 ,game.getCharacterCardsList().size());
+        game.getCharacterCardsList().add(new Centaur());
+        Player player1 = game.getPlayerHashMap().get("player1");
+        player1.addCoins(2);
+        assertEquals(3, player1.getCoins());
+        assertFalse(game.getTurn().isActivatedCharacterCard());
+        game.activateCentaurEffect("player1");
+        assertEquals(0, player1.getCoins());
+        assertEquals(4, game.getCharacterCardsList().get(0).getCost());
+        assertTrue(game.getTurn().isActivatedCharacterCard());
+    }
+
+
+
+
+
+
+
+    /**/
 
 
 }

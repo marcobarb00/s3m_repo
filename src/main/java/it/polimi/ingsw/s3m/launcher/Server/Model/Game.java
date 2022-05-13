@@ -251,8 +251,9 @@ public class Game{
 	 */
 	private int playerInfluenceOnProfessors(Player player){
 		int influenceCounter = 0;
-		for(Player dominator : professorsHashMap.values())
-			if(player.getNickname().equals(dominator.getNickname())) influenceCounter++;
+		for(Player professorDominator : professorsHashMap.values())
+			if(professorDominator != null && player.getNickname().equals(professorDominator.getNickname()))
+				influenceCounter++;
 		return influenceCounter;
 	}
 
