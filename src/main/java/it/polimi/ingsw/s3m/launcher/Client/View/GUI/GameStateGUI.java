@@ -14,6 +14,10 @@ import java.util.*;
 
 public class GameStateGUI{
 	@FXML
+	Label CoinNicknamePlayer1;
+	@FXML
+	Label CoinNicknamePlayer2;
+	@FXML
 	ImageView blueScreen;
 	@FXML
 	ImageView islandZero;

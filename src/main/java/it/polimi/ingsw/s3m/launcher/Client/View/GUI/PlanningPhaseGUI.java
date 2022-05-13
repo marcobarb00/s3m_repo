@@ -41,6 +41,7 @@ public class PlanningPhaseGUI extends GameStateGUI{
 	@FXML
 	ImageView assistantNine;
 
+
 	public void printMessageInformation(PlanningPhaseMessage planningPhaseMessage){
 		List<ImageView> assistantCardsImageView = Arrays.asList(assistantZero, assistantOne, assistantTwo,
 				assistantThree, assistantFour, assistantFive, assistantSix, assistantSeven, assistantEight, assistantNine);

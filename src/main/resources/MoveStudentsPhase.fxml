@@ -1100,12 +1100,12 @@
             <ImageView fx:id="professorBluePone" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="66.0" layoutY="705.0" text="CoinPlayer1:">
+      <Label fx:id="CoinNicknamePlayer1" layoutX="66.0" layoutY="705.0" text="CoinPlayer1:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="444.0" layoutY="630.0" text="CoinPlayer2:">
+      <Label fx:id="CoinNicknamePlayer2" layoutX="444.0" layoutY="630.0" text="CoinPlayer2:">
          <font>
             <Font size="18.0" />
          </font>
