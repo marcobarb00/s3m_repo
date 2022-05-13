@@ -2,11 +2,14 @@ package it.polimi.ingsw.s3m.launcher.Server.Model;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.NullWinnerException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.TieException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -336,8 +339,37 @@ class GameTest {
     }
 
     @Test
-    void checkWinCondition() {
+    void checkWinConditionTest() throws EmptyBagException, TieException, NullWinnerException {
+        //one winner 2 players
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
+        player1.getDashboard().setNumberOfTowers(2);
+        player2.getDashboard().setNumberOfTowers(3);
+        assertEquals("player1", game.checkWinCondition());
 
+        //one winner 3 player
+        players = new ArrayList<>(Arrays.asList("player1", "player2", "player3"));
+        game = new Game(players, true);
+        player1 = game.getPlayerHashMap().get("player1");
+        player2 = game.getPlayerHashMap().get("player2");
+        Player player3 = game.getPlayerHashMap().get("player3");
+        player1.getDashboard().setNumberOfTowers(2);
+        player2.getDashboard().setNumberOfTowers(3);
+        player3.getDashboard().setNumberOfTowers(1);
+        assertEquals("player3", game.checkWinCondition());
+
+        //tie 2 players
+        players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        game = new Game(players, true);
+        player1 = game.getPlayerHashMap().get("player1");
+        player2 = game.getPlayerHashMap().get("player2");
+        player1.getDashboard().setNumberOfTowers(2);
+        player2.getDashboard().setNumberOfTowers(2);
+        HashMap<PawnColor,Player> professors = game.getProfessorsHashMap();
+
+        assertEquals("player1", game.checkWinCondition());
     }
 
 
