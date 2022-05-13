@@ -254,7 +254,7 @@ public class GameStateGUI{
 	@FXML
 	ImageView motherNatureIsland11;
 	@FXML
-	Label coinPlayer3;
+	Label coinNicknamePlayer3;
 	@FXML
 	Label numTowersIsland0;
 	@FXML
@@ -1169,8 +1169,7 @@ public class GameStateGUI{
 		cloudThree.setVisible(false);
 
 		//coin image
-		coinPlayer3.setVisible(false);
-		coinPlayerThree.setVisible(false);
+		coinNicknamePlayer3.setVisible(false);
 		coinImagePlayer3.setVisible(false);
 
 		//entrance

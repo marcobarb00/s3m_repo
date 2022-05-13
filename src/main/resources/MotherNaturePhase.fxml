@@ -1159,7 +1159,7 @@
             <ImageView fx:id="professorBluePThree" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="coinPlayer3" layoutX="1021.0" layoutY="236.0" text="CoinPLayer3:">
+      <Label fx:id="coinNicknamePlayer3" layoutX="1021.0" layoutY="236.0" text="CoinPLayer3:">
          <font>
             <Font size="18.0" />
          </font>
