@@ -13,7 +13,7 @@ public class GUIView extends View{
 
 	@Override
 	public void login(LoginMessage loginMessage){
-		ControllerGUI.getInstance().threadSleep(1000);
+		ControllerGUI.getInstance().threadSleep(2000);
 		ControllerGUI.getInstance().launchLogin(loginMessage);
 		ControllerGUI.getInstance().closePrimaryStage();
 	}
@@ -31,6 +31,7 @@ public class GUIView extends View{
 	@Override
 	public void notification(NotificationMessage notification){
 		ControllerGUI.getInstance().launchNotification(notification);
+		ControllerGUI.getInstance().threadSleep(1500);
 	}
 
 	@Override
