@@ -50,10 +50,21 @@ public class PlanningPhaseGUI extends GameStateGUI{
 		List<ImageView> assistantCardsImageView = Arrays.asList(assistantZero, assistantOne, assistantTwo,
 				assistantThree, assistantFour, assistantFive, assistantSix, assistantSeven, assistantEight, assistantNine);
 
+		List<ImageView> playedAssistantCardImages = Arrays.asList(assistantCardPlayed1, assistantCardPlayed2, assistantCardPlayed3);
+
 		GameDTO gameState = planningPhaseMessage.getGameState();
 		setGameState(gameState);
 
-		ArrayList<AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
+		HashMap<String, AssistantCardDTO> playedAssistantCards = gameState.getTurn().getPlayedCards();
+		ArrayList<String> nicknameList = gameState.getPlayerNicknames();
+
+		for(int i = 0; i < nicknameList.size(); i++){
+			AssistantCardDTO currentCard = playedAssistantCards.get(nicknameList.get(i));
+			if (currentCard != null){
+				insertAssistantImage(playedAssistantCardImages.get(i), currentCard);
+			}
+		}
+
 		ArrayList<AssistantCardDTO> hand = gameState.getCurrentPlayer().getHand();
 
 		for(int i = 0; i < hand.size(); i++){
