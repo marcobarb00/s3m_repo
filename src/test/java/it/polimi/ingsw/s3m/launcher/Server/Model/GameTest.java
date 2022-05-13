@@ -225,7 +225,7 @@ class GameTest {
         assertEquals(5, game.getIslandsList().get(5).getTotalNumberOfStudents());
         Island eliminatingIsland = game.getIslandsList().get(5);
 
-        game.mergeIsland(game.getIslandsList().get(4), game.getIslandsList().get(5));
+        game.mergeIsland(game.getIslandsList().get(4), game.getIslandsList().get(5), false);
         assertEquals(11, game.getIslandsList().size());
         assertEquals(3, game.getIslandsList().get(4).getNumberOfTowers());
         assertEquals(10, game.getIslandsList().get(4).getTotalNumberOfStudents());

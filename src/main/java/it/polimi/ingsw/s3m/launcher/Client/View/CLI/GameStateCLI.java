@@ -25,7 +25,7 @@ public class GameStateCLI{
 
 		System.out.println("\nMother Nature position: " + (gameState.getMotherNaturePosition() + 1));
 
-		System.out.println("\nprofessors:");
+		System.out.println("\nProfessors:");
 		gameState.getProfessors().forEach((color, nickname) -> {
 			if(nickname == null)
 				System.out.println(color + ":");
@@ -33,20 +33,28 @@ public class GameStateCLI{
 				System.out.println(color + ": " + nickname);
 		});
 
-		System.out.println("\ndashboards:");
+		System.out.println("\nDashboards:");
 		gameState.getDashboards().forEach((nickname, dashboard) -> {
 			System.out.println("\n" + nickname + "'s dashboard:");
 			printDashboard(dashboard);
+			AssistantCardDTO lastPlayedCard = gameState.getLastPlayedCards().get(nickname);
+			if(lastPlayedCard != null){
+				System.out.println("last played card:	" + lastPlayedCard.getType());
+			}
 		});
+		System.out.println("\n==================================================================================="+
+				"==============================================\n");
 	}
 
 	private void printIslands(){
 		ArrayList<IslandDTO> islands = gameState.getIslands();
 		int islandsNumber = islands.size();
 		for (int i = 0; i < islandsNumber; i++) {
-			System.out.print("island " + (i+1) + "	");
+			System.out.print("Island " + (i+1) + "	");
 			HashMap<String, Integer> studentsOnIsland = islands.get(i).getStudents();
 			studentsOnIsland.forEach((color, number) -> System.out.print(color + ":	" + number + "	"));
+			System.out.print("towers:	" + islands.get(i).getNumberOfTowers());
+			System.out.print("	dominator:	" + islands.get(i).getDominator());
 			System.out.print("\n");
 		}
 	}
@@ -66,9 +74,6 @@ public class GameStateCLI{
 	}
 
 	private void printDashboard(DashboardDTO dashboard){
-		StringBuilder students;
-
-		//System.out.println("\nentrance:");
 		HashMap<String, Integer> entrance = dashboard.getEntrance();
 		HashMap<String, Integer> hall = dashboard.getTables();
 		System.out.println("ENTRANCE				HALL");
@@ -77,8 +82,7 @@ public class GameStateCLI{
 								+ ":	" + hall.get(color));
 
 		}
-
-		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left\n");
+		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left");
 	}
 
 	private void printClouds(){

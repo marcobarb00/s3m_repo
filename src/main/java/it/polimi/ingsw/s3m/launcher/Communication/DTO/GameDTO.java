@@ -5,25 +5,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDTO implements Serializable{
-	private final int playersNumber;
-	private final boolean expertMode;
-	private final int motherNaturePosition;
-	private final PlayerDTO currentPlayer;
-	private final ArrayList<String> playerNicknames;
-	private final HashMap<String, DashboardDTO> dashboards;
-	private final HashMap<String, Integer> coins;
-	private final HashMap<String, String> towerColor;
-	private final ArrayList<CloudDTO> clouds;
-	private final HashMap<String, String> professors;
-	private final ArrayList<IslandDTO> islands;
-	private final ArrayList<CharacterCardDTO> characterCards;
-	private final TurnDTO turn;
+	private int playersNumber;
+	private boolean expertMode;
+	private int motherNaturePosition;
+	private PlayerDTO currentPlayer;
+	private ArrayList<String> playerNicknames;
+	private HashMap<String, DashboardDTO> dashboards;
+	private HashMap<String, Integer> coins;
+	private HashMap<String, String> towerColor;
+	private ArrayList<CloudDTO> clouds;
+	private HashMap<String, String> professors;
+	private ArrayList<IslandDTO> islands;
+	private ArrayList<CharacterCardDTO> characterCards;
+	private TurnDTO turn;
+	private HashMap<String, AssistantCardDTO> lastPlayedCards;
 
 	public GameDTO(int playersNumber, boolean expertMode, int motherNaturePosition, PlayerDTO currentPlayer,
 				   ArrayList<String> playerNicknames, HashMap<String, DashboardDTO> dashboards,
 				   HashMap<String, Integer> coins, HashMap<String, String> towerColor, ArrayList<CloudDTO> clouds,
 				   HashMap<String, String> professors, ArrayList<IslandDTO> islands, ArrayList<CharacterCardDTO> characterCards,
-				   TurnDTO turn){
+				   TurnDTO turn, HashMap<String, AssistantCardDTO> lastPlayedCards){
 		this.expertMode = expertMode;
 		this.motherNaturePosition = motherNaturePosition;
 		this.currentPlayer = currentPlayer;
@@ -37,6 +38,11 @@ public class GameDTO implements Serializable{
 		this.characterCards = characterCards;
 		this.turn = turn;
 		this.playersNumber = playersNumber;
+		this.lastPlayedCards = lastPlayedCards;
+	}
+
+	public HashMap<String, AssistantCardDTO> getLastPlayedCards() {
+		return lastPlayedCards;
 	}
 
 	public int getPlayersNumber(){

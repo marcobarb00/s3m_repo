@@ -26,14 +26,16 @@ public class PlanningPhaseCLI extends MessageCLI{
 		if(playedAssistantCards.size() != 0){
 			System.out.println("\ncards played by the other players:");
 			for(AssistantCardDTO assistantCard : playedAssistantCards){
-				System.out.println("name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
+				System.out.println("name: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() +
+						"\tmovements: " + assistantCard.getMovements());
 			}
 		}
 
 		System.out.println("\nyour hand:");
 		for(int i = 0; i < hand.size(); i++){
 			AssistantCardDTO assistantCard = hand.get(i);
-			System.out.println("index: " + (i + 1) + "\tname: " + assistantCard.getType() + "\tvalue: " + assistantCard.getValue() + "\tmovements: " + assistantCard.getMovements());
+			System.out.println("index: " + (i + 1) + "\tname:	" + String.format("%-12s", assistantCard.getType()) +
+					"value: " + assistantCard.getValue() + "	moves: " + assistantCard.getMovements());
 		}
 
 		System.out.println("\nselect the index of the assistant card you want to play");
