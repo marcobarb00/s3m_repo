@@ -265,6 +265,8 @@ public class Room{
 				sendNotificationToPlayer(player, "student moved successfully");
 				break;
 			case 3:
+				if(!gameState.isExpertMode())
+					throw new IncorrectOperationException("you cannot play a character card in normal mode");
 				if(gameState.isCharacterCardActivated())
 					throw new CharacterCardAlreadyActivatedException();
 
@@ -377,6 +379,8 @@ public class Room{
 				sendNotificationToPlayer(player, "mother nature moved successfully");
 				return true;
 			case 2:
+				if(!gameState.isExpertMode())
+					throw new IncorrectOperationException("you cannot play a character card in normal mode");
 				if(gameState.isCharacterCardActivated())
 					throw new CharacterCardAlreadyActivatedException();
 
