@@ -1,6 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnIslandResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
@@ -38,17 +39,10 @@ public class PlanningPhaseResponseTest{
 	}
 
 	@Test
-	void chooseAnInvalidPositionToPlayAnAssistantCardThrowsIncorrectOperationException(){
-		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(-1);
-		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
-		assertEquals("Incorrect card position value", e.getMessage());
-	}
-
-	@Test
-	void correctResponseReturnsTrue() throws NotEnoughAssistantCardsException, PlayerNotInListException, IncorrectOperationException {
-		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(0);
-		assertTrue(room.planningPhaseResponse(player, playAssistantCardResponse));
-		assertEquals(9, room.getGameState().getPlayerHashMap().get("FirstPlayer").getHand().size());
+	void playerResponseNotEqualsToPlayAssistantCardResponseThrowsIncorrectOperationException(){
+		PutStudentOnIslandResponse putStudentOnIslandResponse = new PutStudentOnIslandResponse("RED", 0);
+		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, putStudentOnIslandResponse));
+		assertEquals("the operation received is not the correct type", e.getMessage());
 	}
 
 	@Test
@@ -65,6 +59,20 @@ public class PlanningPhaseResponseTest{
 		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(0);
 		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals("Invalid arguments", e.getMessage());
+	}
+
+	@Test
+	void correctResponseReturnsTrue() throws NotEnoughAssistantCardsException, PlayerNotInListException, IncorrectOperationException {
+		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(0);
+		assertTrue(room.planningPhaseResponse(player, playAssistantCardResponse));
+		assertEquals(9, room.getGameState().getPlayerHashMap().get("FirstPlayer").getHand().size());
+	}
+
+	@Test
+	void chooseAnInvalidPositionToPlayAnAssistantCardThrowsIncorrectOperationException(){
+		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(-1);
+		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
+		assertEquals("Incorrect card position value", e.getMessage());
 	}
 
 	@Test
@@ -85,6 +93,6 @@ public class PlanningPhaseResponseTest{
 
 		player.setNickname("SecondPlayer");
 		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
-		assertEquals("AssistantCard already played", e.getMessage());
+		assertEquals("Assistant card already played", e.getMessage());
 	}
 }
