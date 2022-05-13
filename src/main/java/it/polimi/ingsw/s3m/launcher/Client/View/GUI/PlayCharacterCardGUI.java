@@ -82,6 +82,14 @@ public class PlayCharacterCardGUI{
         String characterName = cards.get(characterCardPosition).getName();
         switch(characterName){
             case "Jester":
+                ArrayList<String> studentsOnJester = new ArrayList<>();
+                cards.get(characterCardPosition).getStudentsOnCard().forEach((color, value) -> {
+                    for(int i = 0; i < value; i++){
+                        studentsOnJester.add(color);
+                    }
+                });
+
+                ControllerGUI.getInstance().setJesterStudents(studentsOnJester);
                 ControllerGUI.getInstance().launchJester();
                 break;
             case "Minstrel":

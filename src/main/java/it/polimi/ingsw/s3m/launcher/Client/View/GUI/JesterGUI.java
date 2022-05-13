@@ -8,11 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class JesterGUI {
     ObservableList<String> colorList = FXCollections.observableArrayList("Choose the student color", "RED", "GREEN", "BLUE", "PINK", "YELLOW");
@@ -70,6 +74,16 @@ public class JesterGUI {
 
         colorOfChange3.setValue("Choose the student color");
         colorOfChange3.setItems(colorList);
+
+        List<ImageView> jesterStudentsImageView = Arrays.asList(jesterStudentOne, jesterStudentTwo, jesterStudentThree,
+                jesterStudentFour, jesterStudentFive, jesterStudentSix);
+
+        ArrayList<String> studentsOnJester = ControllerGUI.getInstance().getJesterStudents();
+
+        for(int i = 0; i < studentsOnJester.size(); i++){
+            Image studentImage = new Image(studentsOnJester.get(i) + "Stud.png");
+            jesterStudentsImageView.get(i).setImage(studentImage);
+        }
     }
 
     public void submitJester(ActionEvent action){

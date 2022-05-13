@@ -40,7 +40,7 @@ public class CloudPhaseGUI extends GameStateGUI{
         try{
             cloudChoice = Integer.parseInt(numOfCloud.getText());
         }catch(NumberFormatException e){
-            cloudChoice = 0;
+            cloudChoice = -1;
         }
         ControllerGUI.getInstance().sendResponse(new CloudResponse(cloudChoice));
         ControllerGUI.getInstance().startLoading();

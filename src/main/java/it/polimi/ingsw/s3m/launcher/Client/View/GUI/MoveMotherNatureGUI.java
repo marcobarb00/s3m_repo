@@ -26,6 +26,13 @@ public class MoveMotherNatureGUI{
     @FXML
     Label stepsLimit;
 
+    public void printMessageInformation(MoveMotherNatureMessage message){
+        GameDTO gameState = message.getGameState();
+        int motherNatureMaxSteps = gameState.getCurrentPlayer().getLastCardPlayed().getMovements();
+
+        stepsLimit.setText(String.valueOf(motherNatureMaxSteps));
+    }
+
     public void submitMotherNatureOnIsland(ActionEvent event){
         int steps;
         try{

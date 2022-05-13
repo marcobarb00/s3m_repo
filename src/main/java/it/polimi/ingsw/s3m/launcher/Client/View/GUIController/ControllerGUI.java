@@ -3,6 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
+import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import javafx.application.Platform;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControllerGUI {
 
@@ -27,6 +29,7 @@ public class ControllerGUI {
 	private EnterRoomGUI enterRoomGUI;
 	private NotificationGUI notificationGUI;
 	private JesterGUI jesterGUI;
+	private ArrayList<String> jesterStudents;
 	private MinstrelGUI minstrelGUI;
 	private MushroomerGUI mushroomerGUI;
 	private final NewRoomResponse newRoomResponse = new NewRoomResponse();
@@ -37,6 +40,7 @@ public class ControllerGUI {
 	private PutStudentOnTableGUI putStudentOnTableGUI;
 	private PutStudentOnIslandGUI putStudentOnIslandGUI;
 	private MotherNaturePhaseGUI motherNaturePhaseGUI;
+	private MoveMotherNatureGUI moveMotherNatureGUI;
 	private CloudPhaseGUI cloudPhaseGUI;
 
 	private ControllerGUI() {
@@ -79,6 +83,14 @@ public class ControllerGUI {
 
 	public PlayCharacterCardResponse getPlayCharacterCardResponse(){
 		return playCharacterCardResponse;
+	}
+
+	public void setJesterStudents(ArrayList<String> jesterStudents){
+		this.jesterStudents = jesterStudents;
+	}
+
+	public ArrayList<String> getJesterStudents(){
+		return jesterStudents;
 	}
 
 	public void threadSleep(int millis) {
@@ -275,11 +287,13 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launchMoveMotherNature() {
+	public void launchMoveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveMotherNature.fxml"));
 			Parent setMotherNatureOnIslandGUI = loader.load();
 			setScene(setMotherNatureOnIslandGUI);
+			moveMotherNatureGUI = loader.getController();
+			moveMotherNatureGUI.printMessageInformation(moveMotherNatureMessage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

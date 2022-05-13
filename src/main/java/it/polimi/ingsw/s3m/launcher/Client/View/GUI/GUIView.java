@@ -72,6 +72,6 @@ public class GUIView extends View{
 
 	@Override
 	public void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage){
-		controllerGUI.launchMoveMotherNature();
+		controllerGUI.launchMoveMotherNature(moveMotherNatureMessage);
 	}
 }
