@@ -3,12 +3,16 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 import it.polimi.ingsw.s3m.launcher.Client.Response.EnterRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+
+import java.util.ArrayList;
 
 public class EnterRoomGUI{
 
@@ -28,9 +32,9 @@ public class EnterRoomGUI{
 	public void enterGame(ActionEvent event){
 		String nick = nickname.getText();
 		enterRoomResponse.setNickname(nick);
-		Integer roomIDChoice;
+		int roomIDChoice;
 		try{
-			roomIDChoice = Integer.parseInt(roomID.getText());
+			roomIDChoice = Integer.parseInt(otherIDRoom.getValue());
 		}catch(NumberFormatException e){
 			roomIDChoice = 0;
 		}
@@ -40,11 +44,13 @@ public class EnterRoomGUI{
 	}
 
 	public void setCreatedRoom(EnterRoomMessage message){
-		StringBuilder availableRoomList = new StringBuilder();
-		if(message.getAvailableRoomsID() != null){
-			for(Integer roomID : message.getAvailableRoomsID())
-				availableRoomList.append(roomID).append("\n");
-		}
-		otherIDRoom.setText(availableRoomList.toString());
+		ArrayList<String> availableRoom = new ArrayList<>();
+		message.getAvailableRoomsID().forEach((roomID) -> {
+			availableRoom.add(roomID.toString());
+		});
+		ObservableList<String> availableRoomFXStringList = FXCollections.observableArrayList(availableRoom);
+
+		otherIDRoom.setValue("choose the room ID");
+		otherIDRoom.setItems(availableRoomFXStringList);
 	}
 }
