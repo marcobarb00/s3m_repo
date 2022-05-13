@@ -3,9 +3,9 @@ package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 import java.io.Serializable;
 
 public class AssistantCardDTO implements Serializable{
-	private String type;
-	private int value;
-	private int movements;
+	private final String type;
+	private final int value;
+	private final int movements;
 
 	public AssistantCardDTO(String type, int value, int movements){
 		this.type = type;

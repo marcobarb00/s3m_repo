@@ -6,8 +6,8 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MotherNaturePhaseMessage;
 
 public class MotherNaturePhaseCLI extends MessageCLI{
-	private GameDTO gameState;
-	private boolean characterCardActivated;
+	private final GameDTO gameState;
+	private final boolean characterCardActivated;
 
 	public MotherNaturePhaseCLI(MotherNaturePhaseMessage motherNaturePhaseMessage){
 		this.gameState = motherNaturePhaseMessage.getGameState();

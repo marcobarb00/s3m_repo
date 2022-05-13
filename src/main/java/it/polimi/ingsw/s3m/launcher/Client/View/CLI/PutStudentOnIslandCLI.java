@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PutStudentOnIslandCLI extends MessageCLI{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public PutStudentOnIslandCLI(PutStudentOnIslandMessage putStudentOnIslandMessage){
 		this.gameState = putStudentOnIslandMessage.getGameState();

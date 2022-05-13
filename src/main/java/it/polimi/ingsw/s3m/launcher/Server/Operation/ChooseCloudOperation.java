@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 //DONE
 public class ChooseCloudOperation extends Operation{
-	private int cloudPosition;
+	private final int cloudPosition;
 
 	//Position is meant as arraylist index (0 to cloudList.size)
 	public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){

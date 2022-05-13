@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 public class CloudPhaseMessage implements Message{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public CloudPhaseMessage(GameDTO gameState){
 		this.gameState = gameState;

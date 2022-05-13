@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class DashboardDTO implements Serializable{
-	private HashMap<String, Integer> entrance;
-	private HashMap<String, Integer> tables;
-	private int numberOfTowers;
+	private final HashMap<String, Integer> entrance;
+	private final HashMap<String, Integer> tables;
+	private final int numberOfTowers;
 
 	public DashboardDTO(HashMap<String, Integer> entrance, HashMap<String, Integer> tables, int numberOfTowers){
 		this.entrance = entrance;

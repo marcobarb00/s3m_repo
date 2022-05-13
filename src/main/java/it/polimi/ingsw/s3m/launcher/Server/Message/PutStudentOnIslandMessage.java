@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Message;
 
 public class PutStudentOnIslandMessage implements Message{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public PutStudentOnIslandMessage(GameDTO gameState){
 		this.gameState = gameState;

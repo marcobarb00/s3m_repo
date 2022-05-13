@@ -12,8 +12,8 @@ import java.util.HashMap;
 
 // DONE
 public class ActivateJesterEffectOperation extends Operation{
-	private ArrayList<PawnColor> requiredStudents;
-	private ArrayList<PawnColor> givenStudents;
+	private final ArrayList<PawnColor> requiredStudents;
+	private final ArrayList<PawnColor> givenStudents;
 
 	/**
 	 * Checks if activateJesterEffect method has safe parameters.

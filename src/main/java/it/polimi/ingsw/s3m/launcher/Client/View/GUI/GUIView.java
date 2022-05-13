@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 
 public class GUIView extends View{
 	ClientGUI client;
-	private ControllerGUI controllerGUI;
+	private final ControllerGUI controllerGUI;
 
 	public GUIView(ClientGUI client, ControllerGUI controllerGUI){
 		this.client = client;

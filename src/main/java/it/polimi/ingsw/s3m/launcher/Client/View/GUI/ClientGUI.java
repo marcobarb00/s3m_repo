@@ -8,9 +8,9 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException
 import javafx.application.Platform;
 
 public class ClientGUI extends Thread{
-	private Client client;
-	private ControllerGUI controllerGUI;
-	private GUIView view;
+	private final Client client;
+	private final ControllerGUI controllerGUI;
+	private final GUIView view;
 
 	public ClientGUI(ControllerGUI controllerGUI){
 		this.view = new GUIView(this, controllerGUI);

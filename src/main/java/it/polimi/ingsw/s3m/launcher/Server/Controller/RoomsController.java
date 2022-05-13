@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class RoomsController{
-	private static RoomsController instance = null;
+	private static final RoomsController instance = null;
 	private final static HashMap<Integer, Room> rooms = new HashMap<>();
 
 	private RoomsController(){}

@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 
 public class MoveMotherNatureOperation extends Operation{
-	private int movements;
+	private final int movements;
 
 	public MoveMotherNatureOperation(Game game, PlayerController playerController, int movements){
 		super(game, playerController);

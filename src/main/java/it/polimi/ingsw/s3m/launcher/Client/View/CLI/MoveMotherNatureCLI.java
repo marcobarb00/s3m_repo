@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveMotherNatureMessage;
 
 public class MoveMotherNatureCLI extends MessageCLI{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public MoveMotherNatureCLI(MoveMotherNatureMessage moveMotherNatureMessage){
 		this.gameState = moveMotherNatureMessage.getGameState();

@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.CloudPhaseMessage;
 
 public class CloudPhaseCLI extends MessageCLI{
-	private GameDTO gameState;
+	private final GameDTO gameState;
 
 	public CloudPhaseCLI(CloudPhaseMessage cloudPhaseMessage){
 		this.gameState = cloudPhaseMessage.getGameState();

@@ -5,7 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 
 public class PlayerController{
-	private ClientHandler client;
+	private final ClientHandler client;
 	private String nickname;
 	private int roomID;
 
