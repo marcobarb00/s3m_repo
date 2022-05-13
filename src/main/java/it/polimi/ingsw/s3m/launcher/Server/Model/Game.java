@@ -147,7 +147,7 @@ public class Game{
 
 		if (nextIslandDominator == null) return;
 		if(currentIslandDominator.getNickname().equals(nextIslandDominator.getNickname()))
-			mergeIsland(currentIsland, nextIsland);
+			mergeIsland(currentIsland, nextIsland, false);
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class Game{
 
 		if (previousIslandDominator == null) return;
 		if(currentIslandDominator.getNickname().equals(previousIslandDominator.getNickname()))
-			mergeIsland(currentIsland, previousIsland);
+			mergeIsland(currentIsland, previousIsland, true);
 	}
 
 	/**
@@ -177,8 +177,10 @@ public class Game{
 	 *                        from the other island
 	 * @param mergingOutIsland island in which take students and towers to
 	 *                         transfer on the other island
+	 * @param previous boolean that indicates if the mergingOutIsland is the previous (true)
+	 *                 or the next one (false)
 	 */
-	public void mergeIsland(Island mergingInIsland, Island mergingOutIsland){
+	public void mergeIsland(Island mergingInIsland, Island mergingOutIsland, boolean previous){
 		for(PawnColor color : PawnColor.values()){
 			int studentsPerColor = mergingInIsland.getStudentsPerColor(color);
 			mergingInIsland.getStudents().replace(color, studentsPerColor + mergingOutIsland.getStudentsPerColor(color));
@@ -186,6 +188,12 @@ public class Game{
 		mergingInIsland.sumTower(mergingOutIsland.getNumberOfTowers());
 
 		islandsList.remove(mergingOutIsland);
+
+		if (previous) {
+			if (motherNature.getCurrentPosition() != 0) motherNature.setCurrentPosition(motherNature.getCurrentPosition()-1);
+		} else {
+			if (motherNature.getCurrentPosition() == islandsList.size()) motherNature.setCurrentPosition(motherNature.getCurrentPosition()-1);
+		}
 	}
 
 	// JESTER

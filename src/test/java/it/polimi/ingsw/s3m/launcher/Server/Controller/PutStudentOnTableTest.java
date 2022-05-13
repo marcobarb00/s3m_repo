@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.net.Socket;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PutStudentOnTableTest {
@@ -35,18 +34,5 @@ public class PutStudentOnTableTest {
     @Test
     void nullResponseThrowsIncorrectOperation(){
         assertThrows(IncorrectOperationException.class, () -> room.putStudentOnTable(player, null));
-    }
-
-    @Test
-    void playerPutStudentOnTableResponseColorWithZeroStudentsThrowsIncorrectOperationException(){
-        PutStudentOnTableResponse putStudentOnTableResponse = new PutStudentOnTableResponse("RED");
-        if (room.getGameState().getPlayerHashMap().get(player.getNickname()).getDashboard().getEntrance().get(PawnColor.RED) != 0) {
-            System.out.println("The player has some red students in his entrance");
-            assertTrue(true);
-        } else {
-            System.out.println("The player has no red students in his entrance");
-            Exception e = assertThrows(IncorrectOperationException.class, () -> room.putStudentOnTable(player, putStudentOnTableResponse));
-            assertEquals("Student not in entrance", e.getMessage());
-        }
     }
 }
