@@ -32,7 +32,6 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="244.0" minHeight="0.0" prefHeight="133.0" vgrow="SOMETIMES" />
          </rowConstraints>
@@ -42,12 +41,12 @@
                   <Font name="Times New Roman Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="List of Available Rooms ID:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label text="List of Available Rooms ID:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="Times New Roman Bold" size="14.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterGame" prefHeight="32.0" prefWidth="180.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterGame" prefHeight="32.0" prefWidth="180.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -63,20 +62,7 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="roomID" prefHeight="26.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Times New Roman" size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </TextField>
-            <Label text="Insert Room ID:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Times New Roman Bold" size="14.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="otherIDRoom" prefWidth="150.0" promptText="Room ID" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <ComboBox fx:id="otherIDRoom" prefWidth="150.0" promptText="Room ID" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
          </children>
          <effect>
             <DropShadow />
