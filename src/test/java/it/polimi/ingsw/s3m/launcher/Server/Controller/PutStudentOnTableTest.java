@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnIslandResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnTableResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.BackException;
@@ -38,6 +39,12 @@ public class PutStudentOnTableTest {
     @Test
     void nullResponseThrowsIncorrectOperation(){
         assertThrows(IncorrectOperationException.class, () -> room.putStudentOnTable(player, null));
+    }
+
+    @Test
+    void playerResponseInstanceOfBackResponseThrowsBackException(){
+        BackResponse backResponse = new BackResponse();
+        assertThrows(BackException.class, () -> room.putStudentOnTable(player, backResponse));
     }
 
     @Test
