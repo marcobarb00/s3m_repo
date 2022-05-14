@@ -4,17 +4,18 @@ import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnTableResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Centaur;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.CentaurComputeDominance;
+import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.KnightComputeDominance;
+import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.MushroomerComputeDominance;
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.StandardComputeDominance;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.net.Socket;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayCharacterCardTest {
@@ -83,7 +84,8 @@ public class PlayCharacterCardTest {
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
-        assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
     }
 
     @Test
@@ -134,7 +136,7 @@ public class PlayCharacterCardTest {
     }
 
     @Test
-    void activatingCentaurEffectChangesActivatedCharacterCardToTrueAndComputeDominanceInstance() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
+    void activatingCentaurEffectChangesComputeDominanceInstance() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
         ArrayList<String> nicknames = new ArrayList<>();
         nicknames.add("FirstPlayer");
         nicknames.add("SecondPlayer");
@@ -158,5 +160,272 @@ public class PlayCharacterCardTest {
         assertEquals(4, room.getGameState().getCharacterCardsList().get(0).getCost());
         assertTrue(room.getGameState().isCharacterCardActivated());
         assertInstanceOf(CentaurComputeDominance.class, room.getGameState().getComputeDominanceStrategy());
+    }
+
+    // KNIGHT
+    @Test
+    void nullPlayerControllerChoosingKnightThrowsIncorrectOperationException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Knight());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void choosingKnightInNotExpertModeGameThrowsNotExpertModeException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Knight());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(NotExpertModeException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you cannot do this operation in normal mode", e.getMessage());
+    }
+
+    @Test
+    void choosingKnightWhenACharacterCardIsAlreadyActivatedThrowsCharacterCardAlreadyActivatedException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Knight());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getTurn().setActivatedCharacterCard(true);
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you already activated a character card", e.getMessage());
+    }
+
+    @Test
+    void choosingKnightWithoutEnoughCoinsThrowsNotEnoughCoinsException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Knight());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you don't have enough coins", e.getMessage());
+    }
+
+    @Test
+    void activatingKnightEffectChangesComputeDominanceInstance() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Knight());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").addCoins(1);
+
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(2, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertFalse(room.getGameState().isCharacterCardActivated());
+        assertInstanceOf(StandardComputeDominance.class, room.getGameState().getComputeDominanceStrategy());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        room.playCharacterCard(player, playCharacterCardResponse);
+
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(3, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertTrue(room.getGameState().isCharacterCardActivated());
+        assertInstanceOf(KnightComputeDominance.class, room.getGameState().getComputeDominanceStrategy());
+    }
+
+    // MINSTREL
+
+    // MUSHROOMER
+    @Test
+    void nullPlayerControllerChoosingMushroomerThrowsIncorrectOperationException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Mushroomer());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, "RED");
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void choosingMushroomerInNotExpertModeGameThrowsNotExpertModeException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Mushroomer());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, "RED");
+        Exception e = assertThrows(NotExpertModeException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you cannot do this operation in normal mode", e.getMessage());
+    }
+
+    @Test
+    void choosingMushroomerWhenACharacterCardIsAlreadyActivatedThrowsCharacterCardAlreadyActivatedException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Mushroomer());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getTurn().setActivatedCharacterCard(true);
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, "RED");
+        Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you already activated a character card", e.getMessage());
+    }
+
+    @Test
+    void choosingMushroomerWithoutEnoughCoinsThrowsNotEnoughCoinsException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Mushroomer());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, "RED");
+        Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you don't have enough coins", e.getMessage());
+    }
+
+    @Test
+    void activatingMushroomerEffectChangesComputeDominanceInstance() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Mushroomer());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").addCoins(2);
+
+        assertEquals(3, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(3, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertFalse(room.getGameState().isCharacterCardActivated());
+        assertInstanceOf(StandardComputeDominance.class, room.getGameState().getComputeDominanceStrategy());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, "RED");
+        room.playCharacterCard(player, playCharacterCardResponse);
+
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(4, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertTrue(room.getGameState().isCharacterCardActivated());
+        assertInstanceOf(MushroomerComputeDominance.class, room.getGameState().getComputeDominanceStrategy());
+    }
+
+    // JESTER
+
+    // MAGIC POSTMAN
+    @Test
+    void nullPlayerControllerChoosingMagicPostmanThrowsIncorrectOperationException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new MagicPostman());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void choosingMagicPostmanInNotExpertModeGameThrowsNotExpertModeException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new MagicPostman());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(NotExpertModeException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you cannot do this operation in normal mode", e.getMessage());
+    }
+
+    @Test
+    void choosingMagicPostmanWhenACharacterCardIsAlreadyActivatedThrowsCharacterCardAlreadyActivatedException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new MagicPostman());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getTurn().setActivatedCharacterCard(true);
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you already activated a character card", e.getMessage());
+    }
+
+    @Test
+    void choosingMagicPostmanWithoutEnoughCoinsThrowsNotEnoughCoinsException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new MagicPostman());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").removeCoins(1);
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you don't have enough coins", e.getMessage());
+    }
+
+    @Test
+    void activatingMagicPostmanEffectAddTwoMovementPointsToTheLastPlayedAssistantCardFromThePlayer() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new MagicPostman());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").setLastPlayedCard(AssistantCard.DOG);
+
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getLastPlayedCard().getMovements());
+        assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(1, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertFalse(room.getGameState().isCharacterCardActivated());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        room.playCharacterCard(player, playCharacterCardResponse);
+
+        assertEquals(4, room.getGameState().getPlayerHashMap().get("FirstPlayer").getLastPlayedCard().getMovements());
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(2, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertTrue(room.getGameState().isCharacterCardActivated());
     }
 }
