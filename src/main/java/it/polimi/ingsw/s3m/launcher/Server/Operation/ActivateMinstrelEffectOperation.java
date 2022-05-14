@@ -55,7 +55,8 @@ public class ActivateMinstrelEffectOperation extends Operation{
 			throw new NotEnoughCoinsException();
 		}
 
-		boolean checkStudentsNumber = enteringEntranceStudents.size() == 2 && enteringTablesStudents.size() == 2;
+		boolean checkStudentsNumber = (enteringEntranceStudents.size() == 2 && enteringTablesStudents.size() == 2)
+				|| (enteringEntranceStudents.size() == 1 && enteringTablesStudents.size() == 1);
 		if(!checkStudentsNumber){
 			throw new IncorrectOperationException("Incorrect students value");
 		}

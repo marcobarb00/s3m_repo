@@ -67,8 +67,8 @@ public class ActivateJesterEffectOperation extends Operation{
 			throw new NotEnoughCoinsException();
 		}
 
-		boolean checkRequired = requiredStudents.size() <= 3;
-		boolean checkGiven = givenStudents.size() <= 3;
+		boolean checkRequired = requiredStudents.size() > 0 && requiredStudents.size() <= 3;
+		boolean checkGiven = givenStudents.size() > 0 && givenStudents.size() <= 3;
 		boolean checkStudents = (givenStudents.size() == requiredStudents.size()) &&
 				checkGiven && checkRequired;
 		if(!checkStudents){

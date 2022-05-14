@@ -251,6 +251,105 @@ public class PlayCharacterCardTest {
 
     // MINSTREL
 
+    @Test
+    void nullPlayerControllerChoosingMinstrelThrowsIncorrectOperationException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void nullStudentsToGetFromChoosingMinstrelThrowsIncorrectOperationException(){
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, null, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void nullStudentsToPutOnChoosingMinstrelThrowsIncorrectOperationException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, null);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelInNotExpertModeGameThrowsNotExpertModeException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(NotExpertModeException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you cannot do this operation in normal mode", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelWhenACharacterCardIsAlreadyActivatedThrowsCharacterCardAlreadyActivatedException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getTurn().setActivatedCharacterCard(true);
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you already activated a character card", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelWithoutEnoughCoinsThrowsNotEnoughCoinsException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").removeCoins(1);
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you don't have enough coins", e.getMessage());
+    }
+
     // MUSHROOMER
     @Test
     void nullPlayerControllerChoosingMushroomerThrowsIncorrectOperationException(){

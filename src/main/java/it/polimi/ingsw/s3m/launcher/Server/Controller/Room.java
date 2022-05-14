@@ -114,7 +114,7 @@ public class Room{
 				gameState.setTurnFirstPlayer();
 
 				startingIndex = nicknameList.indexOf(gameState.getFirstPlayerNickname());
-				//cycle all the players to let them play the planning phase
+				//cycle all the players to let them play the action phase
 				for(int i = 0; i < playersNumber; i++){
 					PlayerController currentPlayer = playersList.get((startingIndex + i) % playersNumber);
 					gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
@@ -192,6 +192,8 @@ public class Room{
 		sendNotificationToAllButOne(player, player.getNickname() + "'s turn to execute the action phase");
 
 		sendNotificationToPlayer(player, "it's your turn to move the students");
+
+		gameState.getTurn().setActivatedCharacterCard(false);
 
 		gameState.getTurn().resetMovedStudents();
 		int studentsToBeMoved = 3;
