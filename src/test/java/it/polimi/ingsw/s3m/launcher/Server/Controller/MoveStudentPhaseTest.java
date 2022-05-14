@@ -37,18 +37,6 @@ public class MoveStudentPhaseTest {
     }
 
     @Test
-    void playerStudentsPhaseResponseGetOperationChoiceEquals1ExecuteCase1(){
-        StudentsPhaseResponse studentsPhaseResponse = new StudentsPhaseResponse(1);
-        //assertDoesNotThrow(() -> room.moveStudentPhase(player, studentsPhaseResponse));
-    }
-
-    @Test
-    void playerStudentsPhaseResponseGetOperationChoiceEquals2ExecuteCase2(){
-        StudentsPhaseResponse studentsPhaseResponse = new StudentsPhaseResponse(2);
-        //TODO
-    }
-
-    @Test
     void playerStudentsPhaseResponseGetOperationChoiceEquals3ButACharacterCardHasBeenAlreadyActivatedThrowsCharacterCardAlreadyActivatedException(){
         StudentsPhaseResponse studentsPhaseResponse = new StudentsPhaseResponse(3);
         room.getGameState().getTurn().setActivatedCharacterCard(true);

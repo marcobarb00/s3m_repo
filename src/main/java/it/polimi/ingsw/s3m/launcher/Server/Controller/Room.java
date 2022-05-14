@@ -320,13 +320,12 @@ public class Room{
 
 		PlayCharacterCardResponse playCharacterCardResponse = (PlayCharacterCardResponse) response;
 
-		//TODO controls on the position
 		CharacterCard playedCharacterCard;
-		try{
-			playedCharacterCard = gameState.getCharacterCardsList().get(playCharacterCardResponse.getCharacterCardPosition());
-		}catch(ArrayIndexOutOfBoundsException e){
-			throw new IncorrectOperationException();
-		}
+		int cardPosition = playCharacterCardResponse.getCharacterCardPosition();
+		if (cardPosition < 0 || cardPosition > 3)
+			throw new IncorrectOperationException("Invalid character card position");
+		else
+			playedCharacterCard = gameState.getCharacterCardsList().get(cardPosition);
 
 		Operation characterCardOperation;
 		switch(playedCharacterCard.getName()){

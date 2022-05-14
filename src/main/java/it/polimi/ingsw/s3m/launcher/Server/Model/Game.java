@@ -663,4 +663,8 @@ public class Game{
 	public ArrayList<CharacterCard> getCharacterCardsList(){
 		return characterCardsList;
 	}
+
+	public ComputeDominanceStrategy getComputeDominanceStrategy() {
+		return computeDominanceStrategy;
+	}
 }
