@@ -11,6 +11,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.MushroomerComp
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.StandardComputeDominance;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -349,6 +350,227 @@ public class PlayCharacterCardTest {
         Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("you don't have enough coins", e.getMessage());
     }
+
+    @Test
+    void choosingMinstrelWithIncorrectStudentsToGetFromSizeThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("GREEN");
+        studentsToGetFrom.add("YELLOW");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("RED");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Incorrect students value", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelWithIncorrectStudentsToPutOnSizeThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("RED");
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("YELLOW");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Incorrect students value", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelWithCorrectButNotEqualsStudentsToGetFromAndStudentsToPutOnSizesThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("RED");
+        studentsToPutOn.add("GREEN");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Incorrect students value", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelWithoutStudentsInEntranceThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 0);
+            assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Not enough students in entrance", e.getMessage());
+    }
+
+    @Test
+    void choosingMinstrelWithoutEnoughStudentsInEntranceThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 1);
+            assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Not enough students in entrance", e.getMessage());
+    }
+
+   @Test
+   void choosingMinstrelWithoutStudentsOnTablesThrowsIncorrectOperationException() throws EmptyBagException {
+       ArrayList<String> nicknames = new ArrayList<>();
+       nicknames.add("FirstPlayer");
+       nicknames.add("SecondPlayer");
+       room.setGameState(new Game(nicknames, true));
+       ArrayList<String> studentsToGetFrom = new ArrayList<>();
+       studentsToGetFrom.add("RED");
+       ArrayList<String> studentsToPutOn = new ArrayList<>();
+       studentsToPutOn.add("GREEN");
+
+       room.getGameState().getCharacterCardsList().clear();
+       assertEquals(0, room.getGameState().getCharacterCardsList().size());
+       room.getGameState().getCharacterCardsList().add(new Minstrel());
+       assertEquals(1, room.getGameState().getCharacterCardsList().size());
+       for (PawnColor color : PawnColor.values()) {
+           room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 1);
+           assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+           room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().replace(color, 0);
+           assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(color));
+       }
+
+       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+       Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+       assertEquals("Not enough students on tables", e.getMessage());
+   }
+
+   @Test
+   void choosingMinstrelWithoutEnoughStudentsOnTablesThrowsIncorrectOperationException() throws EmptyBagException {
+       ArrayList<String> nicknames = new ArrayList<>();
+       nicknames.add("FirstPlayer");
+       nicknames.add("SecondPlayer");
+       room.setGameState(new Game(nicknames, true));
+       ArrayList<String> studentsToGetFrom = new ArrayList<>();
+       studentsToGetFrom.add("RED");
+       studentsToGetFrom.add("RED");
+       ArrayList<String> studentsToPutOn = new ArrayList<>();
+       studentsToPutOn.add("GREEN");
+       studentsToPutOn.add("GREEN");
+
+       room.getGameState().getCharacterCardsList().clear();
+       assertEquals(0, room.getGameState().getCharacterCardsList().size());
+       room.getGameState().getCharacterCardsList().add(new Minstrel());
+       assertEquals(1, room.getGameState().getCharacterCardsList().size());
+       for (PawnColor color : PawnColor.values()) {
+           room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 2);
+           assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+           room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().replace(color, 1);
+           assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(color));
+       }
+
+       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+       Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+       assertEquals("Not enough students on tables", e.getMessage());
+   }
+
+   @Test
+   void activatingMinstrelEffectChangesEntranceAndTablesState() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
+       ArrayList<String> nicknames = new ArrayList<>();
+       nicknames.add("FirstPlayer");
+       nicknames.add("SecondPlayer");
+       room.setGameState(new Game(nicknames, true));
+       ArrayList<String> studentsToGetFrom = new ArrayList<>();
+       studentsToGetFrom.add("GREEN");
+       studentsToGetFrom.add("GREEN");
+       ArrayList<String> studentsToPutOn = new ArrayList<>();
+       studentsToPutOn.add("RED");
+       studentsToPutOn.add("RED");
+
+       room.getGameState().getCharacterCardsList().clear();
+       assertEquals(0, room.getGameState().getCharacterCardsList().size());
+       room.getGameState().getCharacterCardsList().add(new Minstrel());
+       assertEquals(1, room.getGameState().getCharacterCardsList().size());
+       for (PawnColor color : PawnColor.values()) {
+           room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 0);
+           assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+           room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().replace(color, 0);
+           assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(color));
+       }
+
+       room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(PawnColor.GREEN, 2);
+       assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.GREEN));
+       room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().replace(PawnColor.RED, 2);
+       assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(PawnColor.RED));
+
+       assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+       assertEquals(1, room.getGameState().getCharacterCardsList().get(0).getCost());
+       assertFalse(room.getGameState().isCharacterCardActivated());
+
+       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+       room.playCharacterCard(player, playCharacterCardResponse);
+
+       assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+       assertEquals(2, room.getGameState().getCharacterCardsList().get(0).getCost());
+       assertTrue(room.getGameState().isCharacterCardActivated());
+       assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.GREEN));
+       assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.RED));
+       assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(PawnColor.RED));
+       assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(PawnColor.GREEN));
+   }
 
     // MUSHROOMER
     @Test
