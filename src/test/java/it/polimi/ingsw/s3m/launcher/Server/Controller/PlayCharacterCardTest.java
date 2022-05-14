@@ -661,6 +661,21 @@ public class PlayCharacterCardTest {
 
     // JESTER
 
+    @Test
+    void nullPlayerControllerChoosingJesterThrowsIncorrectOperationException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
     // MAGIC POSTMAN
     @Test
     void nullPlayerControllerChoosingMagicPostmanThrowsIncorrectOperationException(){
