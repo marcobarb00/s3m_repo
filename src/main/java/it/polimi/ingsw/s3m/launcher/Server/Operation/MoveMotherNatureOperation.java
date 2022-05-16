@@ -26,16 +26,12 @@ public class MoveMotherNatureOperation extends Operation{
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList) throw new PlayerNotInListException();
 
-		//check current player in turn
-		boolean playerControllersTurn = checkCurrentPlayer();
-		if(!playerControllersTurn) throw new NotPlayerTurnException();
-
 		//check if movements are legal given currentPlayer's assistantCard
 		String playerNickname = playerController.getNickname();
 		AssistantCard lastPlayedAssistantCard = game.getPlayerHashMap().get(playerNickname).getLastPlayedCard();
 		int maxMoves = lastPlayedAssistantCard.getMovements();
 		boolean checkMoves = 0 < movements && movements <= maxMoves;
-		if(!checkMoves) throw new IncorrectOperationException("Incorrect mother nature moves value");
+		if(!checkMoves) throw new IncorrectOperationException("Incorrect mother nature movement value");
 
 		//these exceptions are handled in Room
 		game.moveMotherNature(movements);
