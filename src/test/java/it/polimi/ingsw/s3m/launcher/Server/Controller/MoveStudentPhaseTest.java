@@ -1,5 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
+import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnTableResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.StudentsPhaseResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
@@ -32,6 +33,20 @@ public class MoveStudentPhaseTest {
     @Test
     void nullResponseThrowsIncorrectOperation(){
         assertThrows(IncorrectOperationException.class, () -> room.moveStudentPhase(player, null));
+    }
+
+    @Test
+    void playerResponseNotEqualsToStudentsPhaseThrowsIncorrectOperationException(){
+        PutStudentOnTableResponse putStudentOnTableResponse = new PutStudentOnTableResponse("RED");
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.moveStudentPhase(player, putStudentOnTableResponse));
+        assertEquals("the operation received is not the correct type", e.getMessage());
+    }
+
+    @Test
+    void playerStudentsPhaseResponseGetOperationChoiceEquals3ButGameIsNotInExpertModeThrowsIncorrectOperationException(){
+        StudentsPhaseResponse studentsPhaseResponse = new StudentsPhaseResponse(3);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.moveStudentPhase(player, studentsPhaseResponse));
+        assertEquals("you cannot play a character card in normal mode", e.getMessage());
     }
 
     @Test

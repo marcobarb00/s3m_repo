@@ -42,7 +42,7 @@ public class ChooseCloudPhaseTest {
     }
 
     @Test
-    void playerResponseNotEqualsToCloudResponseThrowsIncorrectOperationException(){
+    void playerResponseNotEqualsToCloudThrowsIncorrectOperationException(){
         PutStudentOnTableResponse putStudentOnTableResponse = new PutStudentOnTableResponse("RED");
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.chooseCloudPhase(player, putStudentOnTableResponse));
         assertEquals("the operation received is not the correct type", e.getMessage());
