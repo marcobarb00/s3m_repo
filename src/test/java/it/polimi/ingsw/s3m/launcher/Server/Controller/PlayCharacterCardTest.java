@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayCharacterCardTest {
@@ -262,7 +263,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
     }
@@ -276,7 +277,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, null, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, null);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
     }
@@ -290,7 +291,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, null);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, null, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
     }
@@ -305,7 +306,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(NotExpertModeException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("you cannot do this operation in normal mode", e.getMessage());
     }
@@ -325,7 +326,7 @@ public class PlayCharacterCardTest {
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
         room.getGameState().getTurn().setActivatedCharacterCard(true);
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("you already activated a character card", e.getMessage());
     }
@@ -346,7 +347,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getPlayerHashMap().get("FirstPlayer").removeCoins(1);
         assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("you don't have enough coins", e.getMessage());
     }
@@ -369,7 +370,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Incorrect students value", e.getMessage());
     }
@@ -392,7 +393,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Incorrect students value", e.getMessage());
     }
@@ -414,7 +415,7 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new Minstrel());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Incorrect students value", e.getMessage());
     }
@@ -439,7 +440,7 @@ public class PlayCharacterCardTest {
             assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
         }
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Not enough students in entrance", e.getMessage());
     }
@@ -466,7 +467,7 @@ public class PlayCharacterCardTest {
             assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
         }
 
-        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Not enough students in entrance", e.getMessage());
     }
@@ -493,7 +494,7 @@ public class PlayCharacterCardTest {
            assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(color));
        }
 
-       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
        assertEquals("Not enough students on tables", e.getMessage());
    }
@@ -522,7 +523,7 @@ public class PlayCharacterCardTest {
            assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getTables().get(color));
        }
 
-       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
        assertEquals("Not enough students on tables", e.getMessage());
    }
@@ -534,11 +535,11 @@ public class PlayCharacterCardTest {
        nicknames.add("SecondPlayer");
        room.setGameState(new Game(nicknames, true));
        ArrayList<String> studentsToGetFrom = new ArrayList<>();
-       studentsToGetFrom.add("GREEN");
-       studentsToGetFrom.add("GREEN");
+       studentsToGetFrom.add("RED");
+       studentsToGetFrom.add("RED");
        ArrayList<String> studentsToPutOn = new ArrayList<>();
-       studentsToPutOn.add("RED");
-       studentsToPutOn.add("RED");
+       studentsToPutOn.add("GREEN");
+       studentsToPutOn.add("GREEN");
 
        room.getGameState().getCharacterCardsList().clear();
        assertEquals(0, room.getGameState().getCharacterCardsList().size());
@@ -560,7 +561,7 @@ public class PlayCharacterCardTest {
        assertEquals(1, room.getGameState().getCharacterCardsList().get(0).getCost());
        assertFalse(room.getGameState().isCharacterCardActivated());
 
-       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+       PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
        room.playCharacterCard(player, playCharacterCardResponse);
 
        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
@@ -674,6 +675,345 @@ public class PlayCharacterCardTest {
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void nullStudentsToGetFromChoosingJesterThrowsIncorrectOperationException(){
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, null);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void nullStudentsToPutOnChoosingJesterThrowsIncorrectOperationException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, null, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterInNotExpertModeGameThrowsNotExpertModeException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToGetFrom, studentsToPutOn);
+        Exception e = assertThrows(NotExpertModeException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you cannot do this operation in normal mode", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWhenACharacterCardIsAlreadyActivatedThrowsCharacterCardAlreadyActivatedException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getTurn().setActivatedCharacterCard(true);
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you already activated a character card", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithoutEnoughCoinsThrowsNotEnoughCoinsException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").removeCoins(1);
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(NotEnoughCoinsException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("you don't have enough coins", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithIncorrectStudentsToGetFromSizeThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("GREEN");
+        studentsToGetFrom.add("YELLOW");
+        studentsToGetFrom.add("PINK");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("RED");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Incorrect exchange students value", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithIncorrectStudentsToPutOnSizeThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("RED");
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("YELLOW");
+        studentsToPutOn.add("PINK");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Incorrect exchange students value", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithCorrectButNotEqualsStudentsToGetFromAndStudentsToPutOnSizesThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("RED");
+        studentsToPutOn.add("GREEN");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Incorrect exchange students value", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithoutStudentsOnCardThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 0);
+            assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Not enough students on jester card", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithoutEnoughStudentsOnCardThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("RED");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        HashMap<PawnColor, Integer> studentsOnCard = new HashMap<>();
+        for (PawnColor color : PawnColor.values())
+            studentsOnCard.put(color, 0);
+        studentsOnCard.replace(PawnColor.RED, 1);
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        ((Jester) room.getGameState().getCharacterCardsList().get(0)).setStudentsOnCard(studentsOnCard);
+        assertEquals(1, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(PawnColor.RED));
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 0);
+            assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Not enough students on jester card", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithoutStudentsInEntranceThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("PINK");
+        studentsToGetFrom.add("YELLOW");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        HashMap<PawnColor, Integer> studentsOnCard = new HashMap<>();
+        for (PawnColor color : PawnColor.values())
+            studentsOnCard.put(color, 1);
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        ((Jester) room.getGameState().getCharacterCardsList().get(0)).setStudentsOnCard(studentsOnCard);
+        for (PawnColor color : PawnColor.values())
+            assertEquals(1, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(color));
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 0);
+            assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Not enough students in entrance", e.getMessage());
+    }
+
+    @Test
+    void choosingJesterWithoutEnoughStudentsInEntranceThrowsIncorrectOperationException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("PINK");
+        studentsToGetFrom.add("YELLOW");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        HashMap<PawnColor, Integer> studentsOnCard = new HashMap<>();
+        for (PawnColor color : PawnColor.values())
+            studentsOnCard.put(color, 1);
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        ((Jester) room.getGameState().getCharacterCardsList().get(0)).setStudentsOnCard(studentsOnCard);
+        for (PawnColor color : PawnColor.values())
+            assertEquals(1, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(color));
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 1);
+            assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("Not enough students in entrance", e.getMessage());
+    }
+
+    @Test
+    void activatingJesterEffectChangesEntranceAndStudentsOnCardState() throws EmptyBagException, NotEnoughCoinsException, NotPlayerTurnException, NotEnoughAssistantCardsException, BackException, CharacterCardAlreadyActivatedException, ZeroTowersRemainedException, NotExpertModeException, CloudNotInListException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        studentsToGetFrom.add("RED");
+        studentsToGetFrom.add("PINK");
+        studentsToGetFrom.add("YELLOW");
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("GREEN");
+        studentsToPutOn.add("BLUE");
+        HashMap<PawnColor, Integer> studentsOnCard = new HashMap<>();
+        for (PawnColor color : PawnColor.values())
+            studentsOnCard.put(color, 1);
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        ((Jester) room.getGameState().getCharacterCardsList().get(0)).setStudentsOnCard(studentsOnCard);
+        for (PawnColor color : PawnColor.values())
+                assertEquals(1, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(color));
+        for (PawnColor color : PawnColor.values()) {
+            room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(color, 1);
+            assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(color));
+        }
+        room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().replace(PawnColor.GREEN, 2);
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.GREEN));
+
+        assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(1, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertFalse(room.getGameState().isCharacterCardActivated());
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        room.playCharacterCard(player, playCharacterCardResponse);
+
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
+        assertEquals(2, room.getGameState().getCharacterCardsList().get(0).getCost());
+        assertTrue(room.getGameState().isCharacterCardActivated());
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.BLUE));
+        assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.GREEN));
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.PINK));
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.RED));
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getDashboard().getEntrance().get(PawnColor.YELLOW));
+
+        assertEquals(2, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(PawnColor.BLUE));
+        assertEquals(3, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(PawnColor.GREEN));
+        assertEquals(0, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(PawnColor.PINK));
+        assertEquals(0, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(PawnColor.RED));
+        assertEquals(0, ((Jester) room.getGameState().getCharacterCardsList().get(0)).getStudentsOnCard().get(PawnColor.YELLOW));
     }
 
     // MAGIC POSTMAN
