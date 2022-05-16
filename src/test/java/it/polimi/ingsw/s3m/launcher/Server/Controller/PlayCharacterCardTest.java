@@ -91,6 +91,19 @@ public class PlayCharacterCardTest {
     }
 
     @Test
+    void responseFromAPlayerNotInListChoosingCentaurThrowsPlayerNotInListException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Centaur());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        player.setNickname("IncorrectPlayer");
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("player is not in list", e.getMessage());
+    }
+
+    @Test
     void choosingCentaurInNotExpertModeGameThrowsNotExpertModeException(){
         room.getGameState().getCharacterCardsList().clear();
         assertEquals(0, room.getGameState().getCharacterCardsList().size());
@@ -175,6 +188,19 @@ public class PlayCharacterCardTest {
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void responseFromAPlayerNotInListChoosingKnightThrowsPlayerNotInListException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Knight());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        player.setNickname("IncorrectPlayer");
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("player is not in list", e.getMessage());
     }
 
     @Test
@@ -294,6 +320,22 @@ public class PlayCharacterCardTest {
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, null, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void responseFromAPlayerNotInListChoosingMinstrelThrowsPlayerNotInListException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Minstrel());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        player.setNickname("IncorrectPlayer");
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("player is not in list", e.getMessage());
     }
 
     @Test
@@ -587,6 +629,19 @@ public class PlayCharacterCardTest {
     }
 
     @Test
+    void responseFromAPlayerNotInListChoosingMushroomerThrowsPlayerNotInListException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Mushroomer());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        player.setNickname("IncorrectPlayer");
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, "RED");
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("player is not in list", e.getMessage());
+    }
+
+    @Test
     void choosingMushroomerInNotExpertModeGameThrowsNotExpertModeException(){
         room.getGameState().getCharacterCardsList().clear();
         assertEquals(0, room.getGameState().getCharacterCardsList().size());
@@ -703,6 +758,22 @@ public class PlayCharacterCardTest {
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, null, studentsToGetFrom);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void responseFromAPlayerNotInListChoosingJesterThrowsPlayerNotInListException(){
+        ArrayList<String> studentsToGetFrom = new ArrayList<>();
+        ArrayList<String> studentsToPutOn = new ArrayList<>();
+
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new Jester());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        player.setNickname("IncorrectPlayer");
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0, studentsToPutOn, studentsToGetFrom);
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("player is not in list", e.getMessage());
     }
 
     @Test
@@ -1027,6 +1098,19 @@ public class PlayCharacterCardTest {
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
         Exception e = assertThrows(IncorrectOperationException.class, () -> room.playCharacterCard(null, playCharacterCardResponse));
         assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void responseFromAPlayerNotInListChoosingMagicPostmanThrowsPlayerNotInListException(){
+        room.getGameState().getCharacterCardsList().clear();
+        assertEquals(0, room.getGameState().getCharacterCardsList().size());
+        room.getGameState().getCharacterCardsList().add(new MagicPostman());
+        assertEquals(1, room.getGameState().getCharacterCardsList().size());
+        player.setNickname("IncorrectPlayer");
+
+        PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.playCharacterCard(player, playCharacterCardResponse));
+        assertEquals("player is not in list", e.getMessage());
     }
 
     @Test
