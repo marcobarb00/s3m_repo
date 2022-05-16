@@ -9,7 +9,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;

@@ -12,7 +12,12 @@ import java.util.ArrayList;
 public class ChooseCloudOperation extends Operation{
 	private final int cloudPosition;
 
-	//Position is meant as arraylist index (0 to cloudList.size)
+	/**
+	 * Constructor used to create an operation of choosing a cloud based on player's response
+	 * @param game game in which a cloud is chosen
+	 * @param playerController player choosing a cloud
+	 * @param cloudPosition position of the chosen cloud
+	 */
 	public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){
 		super(game, playerController);
 		this.cloudPosition = cloudPosition;
@@ -26,11 +31,11 @@ public class ChooseCloudOperation extends Operation{
 	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, CloudNotInListException, IncorrectOperationException {
-		ArrayList<Cloud> cloudsList = super.game.getCloudsList();
-
 		//check args
 		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
+
+		ArrayList<Cloud> cloudsList = super.game.getCloudsList();
 
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList) throw new PlayerNotInListException();
