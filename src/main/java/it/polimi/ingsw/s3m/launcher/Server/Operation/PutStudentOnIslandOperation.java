@@ -25,15 +25,10 @@ public class PutStudentOnIslandOperation extends Operation{
 	public void executeOperation() throws PlayerNotInListException, IncorrectOperationException {
 		//check null
 		boolean checkArgs = studentColor != null && game != null && playerController != null;
-		if(!checkArgs){
-			throw new IncorrectOperationException("Invalid arguments");
-		}
+		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
-		//
 		boolean playerControllerInList = checkNickname();
-		if(!playerControllerInList){
-			throw new PlayerNotInListException();
-		}
+		if(!playerControllerInList) throw new PlayerNotInListException();
 
 		//check if student can be moved
 		checkMovableStudent();
@@ -41,11 +36,8 @@ public class PutStudentOnIslandOperation extends Operation{
 		//Checks if there are the selected students in entrance
 		searchStudentsInEntrance();
 
-		//TODO changing every Illegal arg exception in custom exception (a class for each)
 		boolean checkIsland = 0 <= islandPosition && islandPosition < game.getIslandsList().size();
-		if(!checkIsland){
-			throw new IncorrectOperationException("Incorrect island value");
-		}
+		if(!checkIsland) throw new IncorrectOperationException("Incorrect island value");
 
 		game.putStudentOnIslands(playerController.getNickname(), islandPosition, studentColor);
 	}
@@ -56,9 +48,8 @@ public class PutStudentOnIslandOperation extends Operation{
 
 		//Check if at least one student of that color is present in hall
 		boolean studentInEntrance = entrance.get(studentColor) > 0;
-		if(!studentInEntrance){
+		if(!studentInEntrance)
 			throw new IncorrectOperationException("Student not in entrance");
-		}
 	}
 
 }

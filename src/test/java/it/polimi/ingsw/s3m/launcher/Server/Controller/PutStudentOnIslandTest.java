@@ -72,6 +72,15 @@ public class PutStudentOnIslandTest {
     }
 
     @Test
+    void responseFromAPlayerNotInListThrowsPlayerNotInListException(){
+        player.setNickname("IncorrectPlayer");
+
+        PutStudentOnIslandResponse putStudentOnIslandResponse = new PutStudentOnIslandResponse("RED", 0);
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.putStudentOnIsland(player, putStudentOnIslandResponse));
+        assertEquals("player is not in list", e.getMessage());
+    }
+
+    @Test
     void TwoPlayersGameMovedStudentsInCurrentActionPhaseEquals3ThrowsIncorrectOperationException(){
         for (int i = 0; i < 3; i++)
             room.getGameState().getTurn().incrementMovedStudents();

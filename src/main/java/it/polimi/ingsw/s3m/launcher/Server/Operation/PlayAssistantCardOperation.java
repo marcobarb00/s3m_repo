@@ -7,7 +7,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
-
 import java.util.ArrayList;
 
 //Done
@@ -24,26 +23,18 @@ public class PlayAssistantCardOperation extends Operation{
 			NotEnoughAssistantCardsException, IncorrectOperationException {
 		//check args
 		boolean checkArgs = game != null && playerController != null;
-		if(!checkArgs){
-			throw new IncorrectOperationException("Invalid arguments");
-		}
+		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
 		boolean playerControllerInList = checkNickname();
-		if(!playerControllerInList){
-			throw new PlayerNotInListException();
-		}
+		if(!playerControllerInList) throw new PlayerNotInListException();
 
 		ArrayList<AssistantCard> hand = game.getPlayerHand(playerController.getNickname());
 		boolean checkAssistantCard = 0 <= assistantCardPosition && assistantCardPosition < hand.size();
-		if(!checkAssistantCard){
-			throw new IncorrectOperationException("Incorrect card position value");
-		}
+		if(!checkAssistantCard) throw new IncorrectOperationException("Incorrect card position value");
 
 		//check if already played in turn
 		boolean checkCard = checkPlayableCard();
-		if(!checkCard){
-			throw new IncorrectOperationException("Assistant card already played");
-		}
+		if(!checkCard) throw new IncorrectOperationException("Assistant card already played");
 
 		game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
 	}
@@ -56,6 +47,4 @@ public class PlayAssistantCardOperation extends Operation{
 		return cardsPlayedInTurn.stream().map(AssistantCard::getType).
 				noneMatch(type -> type.equals(handCardType));
 	}
-
-
 }

@@ -35,7 +35,12 @@ public class MoveStudentPhaseTest {
     }
 
     @Test
-    void playerStudentsPhaseResponseGetOperationChoiceEquals3ButACharacterCardHasBeenAlreadyActivatedThrowsCharacterCardAlreadyActivatedException(){
+    void playerStudentsPhaseResponseGetOperationChoiceEquals3ButACharacterCardHasBeenAlreadyActivatedThrowsCharacterCardAlreadyActivatedException() throws EmptyBagException {
+        ArrayList<String> nicknames = new ArrayList<>();
+        nicknames.add("FirstPlayer");
+        nicknames.add("SecondPlayer");
+        room.setGameState(new Game(nicknames, true));
+
         StudentsPhaseResponse studentsPhaseResponse = new StudentsPhaseResponse(3);
         room.getGameState().getTurn().setActivatedCharacterCard(true);
         Exception e = assertThrows(CharacterCardAlreadyActivatedException.class, () -> room.moveStudentPhase(player, studentsPhaseResponse));

@@ -21,14 +21,13 @@ public class PutStudentOnTableOperation extends Operation{
 	@Override
 	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, IncorrectOperationException {
 		boolean checkArgs = game != null && playerController != null && studentColor != null;
-		if(!checkArgs){
-			throw new IncorrectOperationException("Invalid arguments");
-		}
+		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
 		boolean playerControllerInList = checkNickname();
-		if(!playerControllerInList){
-			throw new PlayerNotInListException();
-		}
+		if(!playerControllerInList) throw new PlayerNotInListException();
+
+		boolean fullTable = game.getPlayerHashMap().get(playerController.getNickname()).getDashboard().getTables().get(studentColor) >= 10;
+		if (fullTable) throw new IncorrectOperationException("Table of this color is full");
 
 		//check movable student
 		checkMovableStudent();
@@ -45,8 +44,7 @@ public class PutStudentOnTableOperation extends Operation{
 
 		//Check if at least one student of that color is present in entrance
 		boolean studentInEntrance = entrance.get(studentColor) > 0;
-		if(!studentInEntrance){
+		if(!studentInEntrance)
 			throw new IncorrectOperationException("Student not in entrance");
-		}
 	}
 }

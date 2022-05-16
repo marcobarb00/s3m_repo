@@ -71,6 +71,31 @@ public class PutStudentOnTableTest {
     }
 
     @Test
+    void nullStudentColorThrowsIncorrectOperationException(){
+        PutStudentOnTableResponse putStudentOnTableResponse = new PutStudentOnTableResponse(null);
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.putStudentOnTable(player, putStudentOnTableResponse));
+        assertEquals("Invalid arguments", e.getMessage());
+    }
+
+    @Test
+    void responseFromAPlayerNotInListThrowsPlayerNotInListException(){
+        player.setNickname("IncorrectPlayer");
+
+        PutStudentOnTableResponse putStudentOnTableResponse = new PutStudentOnTableResponse("RED");
+        Exception e = assertThrows(PlayerNotInListException.class, () -> room.putStudentOnTable(player, putStudentOnTableResponse));
+        assertEquals("player is not in list", e.getMessage());
+    }
+
+    @Test
+    void fullTableOfTheResponseColorThrowsIncorrectOperationException(){
+        room.getGameState().getPlayerHashMap().get(player.getNickname()).getDashboard().getTables().replace(PawnColor.RED, 10);
+
+        PutStudentOnTableResponse putStudentOnTableResponse = new PutStudentOnTableResponse("RED");
+        Exception e = assertThrows(IncorrectOperationException.class, () -> room.putStudentOnTable(player, putStudentOnTableResponse));
+        assertEquals("Table of this color is full", e.getMessage());
+    }
+
+    @Test
     void TwoPlayersGameMovedStudentsInCurrentActionPhaseEquals3ThrowsIncorrectOperationException(){
         for (int i = 0; i < 3; i++)
             room.getGameState().getTurn().incrementMovedStudents();

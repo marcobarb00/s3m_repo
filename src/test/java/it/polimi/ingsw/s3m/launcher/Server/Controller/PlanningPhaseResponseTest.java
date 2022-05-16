@@ -2,6 +2,7 @@ package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnIslandResponse;
+import it.polimi.ingsw.s3m.launcher.Client.Response.PutStudentOnTableResponse;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
@@ -59,6 +60,15 @@ public class PlanningPhaseResponseTest{
 		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(0);
 		Exception e = assertThrows(IncorrectOperationException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
 		assertEquals("Invalid arguments", e.getMessage());
+	}
+
+	@Test
+	void responseFromAPlayerNotInListThrowsPlayerNotInListException(){
+		player.setNickname("IncorrectPlayer");
+
+		PlayAssistantCardResponse playAssistantCardResponse = new PlayAssistantCardResponse(0);
+		Exception e = assertThrows(PlayerNotInListException.class, () -> room.planningPhaseResponse(player, playAssistantCardResponse));
+		assertEquals("player is not in list", e.getMessage());
 	}
 
 	@Test

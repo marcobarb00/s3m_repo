@@ -6,7 +6,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Cloud;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
-
 import java.util.ArrayList;
 
 //DONE
@@ -31,22 +30,14 @@ public class ChooseCloudOperation extends Operation{
 
 		//check args
 		boolean checkArgs = game != null && playerController != null;
-		if(!checkArgs){
-			throw new IncorrectOperationException("Invalid arguments");
-		}
+		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
 		boolean playerControllerInList = checkNickname();
-		if(!playerControllerInList){
-			throw new PlayerNotInListException();
-		}
+		if(!playerControllerInList) throw new PlayerNotInListException();
 
 		boolean cloudInList = 0 <= cloudPosition && cloudPosition < cloudsList.size();
-		if(!cloudInList){
-			throw new CloudNotInListException();
-		}
+		if(!cloudInList) throw new CloudNotInListException();
 
-		if(playerControllerInList && cloudInList){
-			super.game.chooseCloud(playerController.getNickname(), cloudPosition);
-		}
+		super.game.chooseCloud(playerController.getNickname(), cloudPosition);
 	}
 }

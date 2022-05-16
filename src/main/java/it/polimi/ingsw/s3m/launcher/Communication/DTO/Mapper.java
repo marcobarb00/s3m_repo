@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class Mapper{
 	public PawnColor stringToColor(String colorString){
+		if (colorString == null) return null;
 		switch(colorString.toUpperCase(Locale.ENGLISH)){
 			case "RED":
 				return PawnColor.RED;

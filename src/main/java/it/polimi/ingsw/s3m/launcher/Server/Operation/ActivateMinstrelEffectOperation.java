@@ -29,7 +29,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
 				!enteringTablesStudents.contains(null);
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
-		//Check for double nicknames
+		//Check players
 		boolean playerControllerInList = checkNickname();
 		if(!playerControllerInList) throw new PlayerNotInListException();
 
@@ -50,6 +50,7 @@ public class ActivateMinstrelEffectOperation extends Operation{
 
 		searchStudentsInEntrance();
 		searchStudentsInTables();
+		checkTablesAreNotFull();
 
 		game.activateMinstrelEffect(playerController.getNickname(), enteringEntranceStudents,
 				enteringTablesStudents);
@@ -87,4 +88,20 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		}
 	}
 
+	private void checkTablesAreNotFull() throws IncorrectOperationException {
+		Player player = game.getPlayerHashMap().get(playerController.getNickname());
+		HashMap<PawnColor, Integer> tables = player.getDashboard().getTables();
+		HashMap<PawnColor, Integer> colorInfluence = new HashMap<>();
+		for (PawnColor color : PawnColor.values())
+			colorInfluence.put(color, 0);
+
+		for (PawnColor color : enteringTablesStudents)
+			colorInfluence.replace(color, colorInfluence.get(color) + 1);
+		for (PawnColor color : enteringEntranceStudents)
+			colorInfluence.replace(color, colorInfluence.get(color) - 1);
+
+		for (PawnColor color : PawnColor.values())
+			if (tables.get(color) + colorInfluence.get(color) > 10)
+				throw new IncorrectOperationException("Too much students moving on tables");
+	}
 }

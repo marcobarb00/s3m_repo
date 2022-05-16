@@ -446,6 +446,7 @@ class GameTest {
         assertTrue(game.getTurn().isActivatedCharacterCard());
     }
 
+    /*
     @Test
     void activateJesterEffect() throws EmptyBagException {
         ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
@@ -471,11 +472,11 @@ class GameTest {
         assertFalse(game.getTurn().isActivatedCharacterCard());
         studentsGive = new ArrayList<>(Arrays.asList(PawnColor.GREEN,PawnColor.GREEN,PawnColor.GREEN));;
         studentsGive = new ArrayList<>(Arrays.asList(PawnColor.GREEN,PawnColor.GREEN,PawnColor.GREEN));;
-        //game.activateJesterEffect("player1");
+        game.activateJesterEffect("player1", studentsTake, studentsGive);
         //check state before call
         assertEquals(0, player1.getCoins());
         assertEquals(4, game.getCharacterCardsList().get(0).getCost());
         assertTrue(game.getTurn().isActivatedCharacterCard());
-    }
+    }*/
 
 }
