@@ -7,6 +7,7 @@ import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlayCharacterCardMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -18,15 +19,16 @@ import java.util.ArrayList;
 
 
 public class PlayCharacterCardGUI{
-    public ToggleGroup activeRadios;
     @FXML
     ImageView backgroundImage;
     @FXML
     VBox vBox;
     @FXML
-    Button submit;
+    Label cardCost1;
     @FXML
-    ToggleGroup activeRadios1;
+    Label cardCost2;
+    @FXML
+    Label cardCost3;
     @FXML
     ImageView firstCharacter;
     @FXML
@@ -107,5 +109,8 @@ public class PlayCharacterCardGUI{
     public void back(MouseEvent mouseEvent) {
         ControllerGUI.getInstance().sendResponse(new BackResponse());
         ControllerGUI.getInstance().startLoading();
+    }
+
+    public void chooseCharacter(MouseEvent mouseEvent) {
     }
 }
