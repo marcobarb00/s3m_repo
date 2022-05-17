@@ -16,6 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class PlayCharacterCardGUI{
@@ -35,13 +37,6 @@ public class PlayCharacterCardGUI{
     ImageView secondCharacter;
     @FXML
     ImageView thirdCharacter;
-
-    @FXML
-    RadioButton active1;
-    @FXML
-    RadioButton active2;
-    @FXML
-    RadioButton active3;
     @FXML
     Button back;
 
@@ -49,35 +44,35 @@ public class PlayCharacterCardGUI{
     private Integer characterCardPosition;
 
     public void inizialize(PlayCharacterCardMessage playCharacterCardMessage) {
+        List<ImageView> characterCardList = Arrays.asList(firstCharacter, secondCharacter, thirdCharacter);
+        List<Label> costList = Arrays.asList(cardCost1, cardCost2, cardCost3);
         GameDTO gameState = playCharacterCardMessage.getGameState();
         cards = gameState.getCharacterCards();
 
-        insertFirstCharacter(cards.get(0).getName());
-        insertSecondCharacter(cards.get(1).getName());
-        insertThirdCharacter(cards.get(2).getName());
+        for(int i = 0; i < 3; i++){
+            CharacterCardDTO currentCard = cards.get(i);
+            insertCharacter(characterCardList.get(i), currentCard.getName());
+            costList.get(i).setText(String.valueOf(currentCard.getCost()));
+        }
     }
 
-    public void insertFirstCharacter(String cardName) {
+    public void insertCharacter(ImageView cardImage, String cardName) {
         Image view = new Image(cardName + ".jpg");
-        firstCharacter.setImage(view);
+        cardImage.setImage(view);
     }
 
-    public void insertSecondCharacter(String cardName) {
-        Image view = new Image(cardName + ".jpg");
-        secondCharacter.setImage(view);
+    public void back(MouseEvent mouseEvent) {
+        ControllerGUI.getInstance().sendResponse(new BackResponse());
+        ControllerGUI.getInstance().startLoading();
     }
 
-    public void insertThirdCharacter(String cardName) {
-        Image view = new Image(cardName + ".jpg");
-        thirdCharacter.setImage(view);
-    }
-
-    public void submit(MouseEvent mouseEvent) {
-        if(active1.isSelected())
+    public void chooseCharacter(MouseEvent mouseEvent) {
+        String name = mouseEvent.getPickResult().getIntersectedNode().getId();
+        if(name.equals("firstCharacter"))
             characterCardPosition = 0;
-        if(active2.isSelected())
+        if(name.equals("secondCharacter"))
             characterCardPosition = 1;
-        if(active3.isSelected())
+        if(name.equals("thirdCharacter"))
             characterCardPosition = 2;
 
         ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
@@ -104,13 +99,5 @@ public class PlayCharacterCardGUI{
                 ControllerGUI.getInstance().sendCharacterCardResponse();
                 break;
         }
-    }
-
-    public void back(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().sendResponse(new BackResponse());
-        ControllerGUI.getInstance().startLoading();
-    }
-
-    public void chooseCharacter(MouseEvent mouseEvent) {
     }
 }
