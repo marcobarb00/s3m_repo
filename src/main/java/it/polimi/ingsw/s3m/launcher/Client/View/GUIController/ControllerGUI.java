@@ -47,7 +47,7 @@ public class ControllerGUI {
 		secondaryStage = new Stage();
 		secondaryStage.setTitle("Eriantys");
 		secondaryStage.getIcons().add(new Image("eriantysImage.png"));
-		secondaryStage.setResizable(false);
+		//secondaryStage.setResizable(false);
 	}
 
 	public static ControllerGUI getInstance() {
@@ -114,8 +114,8 @@ public class ControllerGUI {
 		Scene gameScene = new Scene(root);
 		Platform.runLater(() -> {
 			secondaryStage.setScene(gameScene);
-			secondaryStage.centerOnScreen();
-			secondaryStage.setResizable(false);
+			//secondaryStage.centerOnScreen();
+			//secondaryStage.setResizable(false);
 			secondaryStage.show();
 			loadingScreenGUI.stop();
 		});
