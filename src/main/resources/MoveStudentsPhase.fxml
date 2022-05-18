@@ -1261,17 +1261,17 @@
             <ImageView fx:id="studBlueTenPThree" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="coinPlayerThree" layoutX="1139.0" layoutY="241.0" text="1">
+      <Label fx:id="coinPlayerThree" layoutX="1032.0" layoutY="263.0" text="1">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="coinPlayerTwo" layoutX="563.0" layoutY="635.0" text="1">
+      <Label fx:id="coinPlayerTwo" layoutX="675.0" layoutY="634.0" text="1">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="coinPlayerOne" layoutX="182.0" layoutY="710.0" text="1">
+      <Label fx:id="coinPlayerOne" layoutX="111.0" layoutY="740.0" text="1">
          <font>
             <Font size="14.0" />
          </font>
@@ -1309,5 +1309,7 @@
             <Image url="@Coin.jpeg" />
          </image>
       </ImageView>
+      <Label layoutX="1110.0" layoutY="873.0" prefHeight="18.0" prefWidth="368.0" text="(if no island has yet been merged, count the islands from 0 to 11)" />
+      <Label layoutX="1110.0" layoutY="891.0" prefHeight="37.0" prefWidth="386.0" text="(if the islands have been merged, count the islands from 0 to 11- n, where n is the number of islands already eliminated)" wrapText="true" />
    </children>
 </AnchorPane>

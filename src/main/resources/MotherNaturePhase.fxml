@@ -1261,17 +1261,17 @@
             <ImageView fx:id="studBlueTenPThree" fitHeight="37.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="coinPlayerThree" layoutX="1139.0" layoutY="241.0" text="1">
+      <Label fx:id="coinPlayerThree" layoutX="1032.0" layoutY="263.0" text="1">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="coinPlayerTwo" layoutX="563.0" layoutY="635.0" text="1">
+      <Label fx:id="coinPlayerTwo" layoutX="675.0" layoutY="634.0" text="1">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="coinPlayerOne" layoutX="182.0" layoutY="710.0" text="1">
+      <Label fx:id="coinPlayerOne" layoutX="111.0" layoutY="740.0" text="1">
          <font>
             <Font size="14.0" />
          </font>
