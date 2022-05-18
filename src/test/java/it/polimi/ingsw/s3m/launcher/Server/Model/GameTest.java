@@ -4,10 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NullWinnerException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.TieException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Centaur;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
-import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Knight;
+import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.CentaurComputeDominance;
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.KnightComputeDominance;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
@@ -552,7 +549,114 @@ class GameTest {
         assertTrue(game.getComputeDominanceStrategy() instanceof KnightComputeDominance);
     }
 
-    
+    @Test
+    void activateMagicPostmanEffect2Players() throws EmptyBagException, NotEnoughAssistantCardsException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        game.getCharacterCardsList().clear();
+
+        //checking no character card
+        assertEquals(0 ,game.getCharacterCardsList().size());
+        game.getCharacterCardsList().add(new Knight());
+        Player player1 = game.getPlayerHashMap().get("player1");
+        game.playAssistantCard("player1", 9);           //cheetah
+
+        //check state before call
+        player1.addCoins(2);
+        assertEquals(3, player1.getCoins());
+        assertFalse(game.getTurn().isActivatedCharacterCard());
+
+        game.activateMagicPostmanEffect("player1");
+
+        //check state after call
+        assertEquals(2, player1.getCoins());
+        assertEquals(2, game.getCharacterCardsList().get(0).getCost());
+        assertTrue(game.getTurn().isActivatedCharacterCard());
+        assertEquals(7, player1.getLastPlayedCard().getMovements());
+    }
+
+    @Test
+    void activateMinstrelEffect() throws EmptyBagException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        game.getCharacterCardsList().clear();
+        ArrayList<PawnColor> studentsGive;
+        ArrayList<PawnColor> studentsGet;
+
+        //checking no character card
+        assertEquals(0, game.getCharacterCardsList().size());
+        Minstrel minstrel = new Minstrel();
+        game.getCharacterCardsList().add(minstrel);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        HashMap<PawnColor, Integer> entrance = player1.getDashboard().getEntrance();
+        entrance.replace(PawnColor.RED, 1);             //7 students
+        entrance.replace(PawnColor.PINK, 2);
+        entrance.replace(PawnColor.GREEN, 3);
+        entrance.replace(PawnColor.BLUE, 1);
+        entrance.replace(PawnColor.YELLOW, 0);
+
+        HashMap<PawnColor, Integer> studentsInHall = player1.getDashboard().getTables();
+        studentsInHall.replace(PawnColor.RED, 1);             //6 students
+        studentsInHall.replace(PawnColor.PINK, 0);
+        studentsInHall.replace(PawnColor.GREEN, 1);
+        studentsInHall.replace(PawnColor.BLUE, 2);
+        studentsInHall.replace(PawnColor.YELLOW, 2);
+
+        //check before call
+        assertFalse(game.getTurn().isActivatedCharacterCard());
+
+        studentsGet = new ArrayList<>(Arrays.asList(PawnColor.BLUE,PawnColor.BLUE,PawnColor.YELLOW));;
+        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.RED,PawnColor.GREEN,PawnColor.GREEN));;
+
+        game.activateMinstrelEffect("player1", studentsGet, studentsGive);
+
+        //check after call
+        assertEquals(1, player1.getCoins());
+        assertEquals(2, game.getCharacterCardsList().get(0).getCost());
+        assertTrue(game.getTurn().isActivatedCharacterCard());
+
+        //checking entrance
+        assertEquals(0, player1.getDashboard().getEntrance().get(PawnColor.RED));
+        assertEquals(2, player1.getDashboard().getEntrance().get(PawnColor.PINK));
+        assertEquals(1, player1.getDashboard().getEntrance().get(PawnColor.GREEN));
+        assertEquals(3, player1.getDashboard().getEntrance().get(PawnColor.BLUE));
+        assertEquals(1, player1.getDashboard().getEntrance().get(PawnColor.YELLOW));
+
+        //checking in tables
+        assertEquals(2, player1.getDashboard().getTables().get(PawnColor.RED));
+        assertEquals(0, player1.getDashboard().getTables().get(PawnColor.PINK));
+        assertEquals(3, player1.getDashboard().getTables().get(PawnColor.GREEN));
+        assertEquals(0, player1.getDashboard().getTables().get(PawnColor.BLUE));
+        assertEquals(1, player1.getDashboard().getTables().get(PawnColor.YELLOW));
+    }
+
+    //TODO Test not finished yet
+    @Test
+    void activateMushroomerEffect2Players() throws EmptyBagException, NotEnoughAssistantCardsException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        game.getCharacterCardsList().clear();
+
+        //checking no character card
+        assertEquals(0 ,game.getCharacterCardsList().size());
+        game.getCharacterCardsList().add(new Mushroomer());
+        Player player1 = game.getPlayerHashMap().get("player1");
+
+        //check state before call
+        player1.addCoins(2);
+        assertEquals(3, player1.getCoins());
+        assertFalse(game.getTurn().isActivatedCharacterCard());
+
+        game.activateMushroomerEffect("player1", PawnColor.BLUE);
+
+        //check state after call
+        assertEquals(2, player1.getCoins());
+        assertEquals(2, game.getCharacterCardsList().get(0).getCost());
+        assertTrue(game.getTurn().isActivatedCharacterCard());
+        assertEquals(7, player1.getLastPlayedCard().getMovements());
+    }
+
+
 
 
 
