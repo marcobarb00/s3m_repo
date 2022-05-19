@@ -643,6 +643,7 @@ class GameTest {
         Player player1 = game.getPlayerHashMap().get("player1");
 
         //check state before call
+        game.playAssistantCard("player1", 9);
         player1.addCoins(2);
         assertEquals(3, player1.getCoins());
         assertFalse(game.getTurn().isActivatedCharacterCard());
@@ -650,16 +651,111 @@ class GameTest {
         game.activateMushroomerEffect("player1", PawnColor.BLUE);
 
         //check state after call
-        assertEquals(2, player1.getCoins());
-        assertEquals(2, game.getCharacterCardsList().get(0).getCost());
+        assertEquals(0, player1.getCoins());
+        assertEquals(4, game.getCharacterCardsList().get(0).getCost());
         assertTrue(game.getTurn().isActivatedCharacterCard());
-        assertEquals(7, player1.getLastPlayedCard().getMovements());
     }
 
+    @Test
+    void chooseCloud2playersTest() throws EmptyBagException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
 
+        //4 students in entrance before choosing cloud
+        HashMap<PawnColor, Integer> entrance = player1.getDashboard().getEntrance();
+        entrance.replace(PawnColor.RED, 1);
+        entrance.replace(PawnColor.PINK, 2);
+        entrance.replace(PawnColor.GREEN, 0);
+        entrance.replace(PawnColor.BLUE, 1);
+        entrance.replace(PawnColor.YELLOW, 0);
 
+        Cloud cloud = game.getCloudsList().get(0);
+        ArrayList<Student> studentsGet = new ArrayList<>(
+                Arrays.asList(
+                    new Student(PawnColor.BLUE),
+                    new Student(PawnColor.BLUE),
+                    new Student(PawnColor.YELLOW)
+                )
+        );
+        cloud.setStudents(studentsGet);
 
+        game.chooseCloud("player1", 0);
 
+        //checking entrance
+        assertEquals(1, player1.getDashboard().getEntrance().get(PawnColor.RED));
+        assertEquals(2, player1.getDashboard().getEntrance().get(PawnColor.PINK));
+        assertEquals(0, player1.getDashboard().getEntrance().get(PawnColor.GREEN));
+        assertEquals(3, player1.getDashboard().getEntrance().get(PawnColor.BLUE));
+        assertEquals(1, player1.getDashboard().getEntrance().get(PawnColor.YELLOW));
+    }
 
+    @Test
+    void putStudentsOnTablesTest() throws EmptyBagException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+
+        //set state before call
+        HashMap<PawnColor, Integer> studentsInHall = player1.getDashboard().getTables();
+        studentsInHall.replace(PawnColor.RED, 1);             //6 students
+        studentsInHall.replace(PawnColor.PINK, 0);
+        studentsInHall.replace(PawnColor.GREEN, 1);
+        studentsInHall.replace(PawnColor.BLUE, 2);
+        studentsInHall.replace(PawnColor.YELLOW, 2);
+
+        game.putStudentOnTables("player1", PawnColor.BLUE);
+
+        //check after call
+        //checking in tables
+        assertEquals(1, player1.getDashboard().getTables().get(PawnColor.RED));
+        assertEquals(0, player1.getDashboard().getTables().get(PawnColor.PINK));
+        assertEquals(1, player1.getDashboard().getTables().get(PawnColor.GREEN));
+        assertEquals(3, player1.getDashboard().getTables().get(PawnColor.BLUE));
+        assertEquals(2, player1.getDashboard().getTables().get(PawnColor.YELLOW));
+
+        //checking coins
+        assertEquals(2, player1.getCoins());
+    }
+
+    @Test
+    void putStudentsOnIslandsTest() throws EmptyBagException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+
+        //set state before call
+        HashMap<PawnColor, Integer> entrance = player1.getDashboard().getEntrance();
+        entrance.replace(PawnColor.RED,         1);         //7 students
+        entrance.replace(PawnColor.PINK,        2);
+        entrance.replace(PawnColor.GREEN,       0);
+        entrance.replace(PawnColor.BLUE,        1);
+        entrance.replace(PawnColor.YELLOW,      3);
+
+        Island island = game.getIslandsList().get(0);
+        HashMap<PawnColor, Integer> studentsOnIsland = island.getStudents();
+        studentsOnIsland.replace(PawnColor.RED,       0);
+        studentsOnIsland.replace(PawnColor.PINK,      0);
+        studentsOnIsland.replace(PawnColor.GREEN,     0);
+        studentsOnIsland.replace(PawnColor.BLUE,      0);
+        studentsOnIsland.replace(PawnColor.YELLOW,    0);
+
+        game.putStudentOnIslands("player1", 0,PawnColor.BLUE);
+
+        //check after call
+        //checking on island
+        assertEquals(0, island.getStudents().get(PawnColor.RED));
+        assertEquals(0, island.getStudents().get(PawnColor.PINK));
+        assertEquals(0, island.getStudents().get(PawnColor.GREEN));
+        assertEquals(1, island.getStudents().get(PawnColor.BLUE));
+        assertEquals(0, island.getStudents().get(PawnColor.YELLOW));
+
+        //checking in entrance
+        assertEquals(1, player1.getDashboard().getEntrance().get(PawnColor.RED));
+        assertEquals(2, player1.getDashboard().getEntrance().get(PawnColor.PINK));
+        assertEquals(0, player1.getDashboard().getEntrance().get(PawnColor.GREEN));
+        assertEquals(0, player1.getDashboard().getEntrance().get(PawnColor.BLUE));
+        assertEquals(3, player1.getDashboard().getEntrance().get(PawnColor.YELLOW));
+    }
 
 }

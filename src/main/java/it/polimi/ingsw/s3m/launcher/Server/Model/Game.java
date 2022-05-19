@@ -479,7 +479,8 @@ public class Game{
 		Island currentIsland = islandsList.get(motherNature.getCurrentPosition());
 		Player currentPlayer = currentIsland.getDominator();
 
-		Player newDominatingPlayer = computeDominanceStrategy.computeDominance(currentIsland, professorsHashMap);
+		Player newDominatingPlayer = computeDominanceStrategy.computeDominance(
+				currentIsland, professorsHashMap);
 
 		if(newDominatingPlayer != null){
 			if(currentPlayer == null){
