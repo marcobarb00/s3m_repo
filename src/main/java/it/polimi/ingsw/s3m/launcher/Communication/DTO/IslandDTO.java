@@ -20,7 +20,9 @@ public class IslandDTO implements Serializable{
 		return students;
 	}
 
-	public String getDominatorColor(){ return dominatorColor; }
+	public String getDominatorColor(){
+		return dominatorColor;
+	}
 
 	public String getDominator(){
 		return dominator;

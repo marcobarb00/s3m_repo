@@ -42,15 +42,15 @@ public class GameStateCLI{
 				System.out.println("last played card:	" + lastPlayedCard.getType());
 			}
 		});
-		System.out.println("\n==================================================================================="+
+		System.out.println("\n===================================================================================" +
 				"==============================================\n");
 	}
 
 	private void printIslands(){
 		ArrayList<IslandDTO> islands = gameState.getIslands();
 		int islandsNumber = islands.size();
-		for (int i = 0; i < islandsNumber; i++) {
-			System.out.print("Island " + (i+1) + "	");
+		for(int i = 0; i < islandsNumber; i++){
+			System.out.print("Island " + (i + 1) + "	");
 			HashMap<String, Integer> studentsOnIsland = islands.get(i).getStudents();
 			studentsOnIsland.forEach((color, number) -> System.out.print(color + ":	" + number + "	"));
 			System.out.print("towers:	" + islands.get(i).getNumberOfTowers());
@@ -79,7 +79,7 @@ public class GameStateCLI{
 		System.out.println("ENTRANCE				HALL");
 		for(String color : entrance.keySet()){
 			System.out.println(color + ":	" + entrance.get(color) + "				" + color
-								+ ":	" + hall.get(color));
+					+ ":	" + hall.get(color));
 
 		}
 		System.out.println("\nyou have " + dashboard.getNumberOfTowers() + " towers left");
@@ -89,8 +89,8 @@ public class GameStateCLI{
 		ArrayList<CloudDTO> cloudsDTO = gameState.getClouds();
 		int cloudsNumber = cloudsDTO.size();
 		StringBuilder stringToPrint = new StringBuilder();
-		for (int i = 0; i < cloudsNumber; i++) {
-			stringToPrint.append("CLOUD " + (i+1) + "				");
+		for(int i = 0; i < cloudsNumber; i++){
+			stringToPrint.append("CLOUD " + (i + 1) + "				");
 		}
 		System.out.println(stringToPrint);
 		stringToPrint.setLength(0);

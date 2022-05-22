@@ -1,9 +1,10 @@
 package it.polimi.ingsw.s3m.launcher.Communication.DTO;
 
-import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class Mapper{
 	public PawnColor stringToColor(String colorString){
-		if (colorString == null) return null;
+		if(colorString == null) return null;
 		switch(colorString.toUpperCase(Locale.ENGLISH)){
 			case "RED":
 				return PawnColor.RED;
@@ -42,7 +43,7 @@ public class Mapper{
 	}
 
 	public ArrayList<AssistantCardDTO> assistantCardListToDTO(ArrayList<AssistantCard> assistantCardList){
-		if (assistantCardList == null) return null;
+		if(assistantCardList == null) return null;
 
 		ArrayList<AssistantCardDTO> assistantCardDTOList = new ArrayList<>();
 		for(AssistantCard assistantCard : assistantCardList)
@@ -52,7 +53,7 @@ public class Mapper{
 	}
 
 	public DashboardDTO dashboardToDTO(Dashboard dashboard){
-		if (dashboard == null) return null;
+		if(dashboard == null) return null;
 
 		HashMap<String, Integer> entrance = new HashMap<>();
 		dashboard.getEntrance().forEach((color, value) -> entrance.put(color.name(), value));
@@ -77,7 +78,7 @@ public class Mapper{
 		}
 
 		if(island.getDominator() == null){
-			return new IslandDTO(students, "", "",  0);
+			return new IslandDTO(students, "", "", 0);
 		}
 
 		return new IslandDTO(students, island.getDominator().getNickname(),
@@ -135,7 +136,7 @@ public class Mapper{
 	}
 
 	public TurnDTO turnToDTO(Turn turn){
-		if (turn == null) return null;
+		if(turn == null) return null;
 
 		HashMap<String, AssistantCardDTO> playedCards = new HashMap<>();
 		turn.getPlayedCards().forEach((nickname, card) -> playedCards.put(nickname, assistantCardToDTO(card)));
@@ -165,7 +166,7 @@ public class Mapper{
 
 		HashMap<String, AssistantCard> playedCards = game.getTurn().getPlayedCards();
 		HashMap<String, AssistantCardDTO> playedCardsDTO = new HashMap<>();
-		playedCards.forEach((player,card) -> playedCardsDTO.put(player, assistantCardToDTO(card)));
+		playedCards.forEach((player, card) -> playedCardsDTO.put(player, assistantCardToDTO(card)));
 
 		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(),
 				currentPlayer, game.getPlayersNicknames(), dashboards, coins, towerColor, cloudListToDTO(game.getCloudsList()),

@@ -39,7 +39,7 @@ public abstract class GameInitializer{
 			firstStudentsOnIslands.add(new Student(color));
 		}
 		for(int i = 1; i < game.getIslandsList().size(); i++){
-			if (i != 6) {
+			if(i != 6){
 				Student student = extractStudent(firstStudentsOnIslands);
 				game.getIslandsList().get(i).addStudent(student.getColor());
 			}
@@ -49,8 +49,8 @@ public abstract class GameInitializer{
 	private Student extractStudent(ArrayList<Student> students){
 		Student returnedStudent;
 		int extractedNumber;
-		if (students.size() <= 1) extractedNumber = 0;
-		else extractedNumber = ThreadLocalRandom.current().nextInt(0, students.size()-1);
+		if(students.size() <= 1) extractedNumber = 0;
+		else extractedNumber = ThreadLocalRandom.current().nextInt(0, students.size() - 1);
 		returnedStudent = students.get(extractedNumber);
 		students.remove(extractedNumber);
 		return returnedStudent;

@@ -9,7 +9,7 @@ public class TurnDTO implements Serializable{
 	private final String currentPhase;
 	private final HashMap<String, AssistantCardDTO> playedCards;
 	private final boolean CharacterCardActivated;
-	private int motherNatureMaxAllowedMovements;
+	private final int motherNatureMaxAllowedMovements;
 
 	public TurnDTO(String firstPlayerNickname, String currentPlayerNickname, String currentPhase, HashMap<String, AssistantCardDTO> playedCards, boolean CharacterCardActivated, int motherNatureMaxAllowedMovements){
 		this.firstPlayerNickname = firstPlayerNickname;

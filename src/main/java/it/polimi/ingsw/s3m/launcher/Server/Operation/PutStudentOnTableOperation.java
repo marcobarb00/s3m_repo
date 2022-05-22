@@ -6,7 +6,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 
 import java.util.HashMap;
 
@@ -22,7 +21,7 @@ public class PutStudentOnTableOperation extends Operation{
 	 * checks if the arguments of the operation are valid, if so the game put the student on the tables
 	 */
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, IncorrectOperationException {
+	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, IncorrectOperationException{
 		boolean checkArgs = game != null && playerController != null && studentColor != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
@@ -30,7 +29,7 @@ public class PutStudentOnTableOperation extends Operation{
 		if(!playerControllerInList) throw new PlayerNotInListException();
 
 		boolean fullTable = game.getPlayerHashMap().get(playerController.getNickname()).getDashboard().getTables().get(studentColor) >= 10;
-		if (fullTable) throw new IncorrectOperationException("Table of this color is full");
+		if(fullTable) throw new IncorrectOperationException("Table of this color is full");
 
 		//check movable student
 		checkMovableStudent();
@@ -43,9 +42,10 @@ public class PutStudentOnTableOperation extends Operation{
 
 	/**
 	 * checks if the selected student is in the entrance
+	 *
 	 * @throws IncorrectOperationException thrown if the selected student is not in the entrance
 	 */
-	private void searchStudentsInEntrance() throws IncorrectOperationException {
+	private void searchStudentsInEntrance() throws IncorrectOperationException{
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 

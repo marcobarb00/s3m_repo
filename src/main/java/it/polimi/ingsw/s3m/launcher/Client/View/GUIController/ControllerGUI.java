@@ -3,7 +3,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
 import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
 import it.polimi.ingsw.s3m.launcher.Communication.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import javafx.application.Platform;
@@ -17,7 +16,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerGUI {
+public class ControllerGUI{
 
 	private ClientGUI thread;
 	private static ControllerGUI INSTANCE;
@@ -43,24 +42,24 @@ public class ControllerGUI {
 	private MoveMotherNatureGUI moveMotherNatureGUI;
 	private CloudPhaseGUI cloudPhaseGUI;
 
-	private ControllerGUI() {
+	private ControllerGUI(){
 		secondaryStage = new Stage();
 		secondaryStage.setTitle("Eriantys");
 		secondaryStage.getIcons().add(new Image("eriantysImage.png"));
 		//secondaryStage.setResizable(false);
 	}
 
-	public static ControllerGUI getInstance() {
-		if (INSTANCE == null)
+	public static ControllerGUI getInstance(){
+		if(INSTANCE == null)
 			INSTANCE = new ControllerGUI();
 		return INSTANCE;
 	}
 
-	public NewRoomResponse getNewRoomResponse() {
+	public NewRoomResponse getNewRoomResponse(){
 		return newRoomResponse;
 	}
 
-	public void startGame(Stage primaryStage) {
+	public void startGame(Stage primaryStage){
 
 		this.primaryStage = primaryStage;
 		primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -96,21 +95,21 @@ public class ControllerGUI {
 		return jesterStudents;
 	}
 
-	public void threadSleep(int millis) {
-		try {
+	public void threadSleep(int millis){
+		try{
 			Thread.sleep(millis);
-		} catch (InterruptedException e) {
+		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void closePrimaryStage() {
+	public void closePrimaryStage(){
 		Platform.runLater(() -> {
 			primaryStage.close();
 		});
 	}
 
-	private void setScene(Parent root) {
+	private void setScene(Parent root){
 		Scene gameScene = new Scene(root);
 		Platform.runLater(() -> {
 			secondaryStage.setScene(gameScene);
@@ -121,134 +120,134 @@ public class ControllerGUI {
 		});
 	}
 
-	public void launchNotification(NotificationMessage message) {
-		try {
+	public void launchNotification(NotificationMessage message){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Notification.fxml"));
 			Parent notificationGui = loader.load();
 			this.notificationGUI = loader.getController();
 			this.notificationGUI.insert(message);
 			setScene(notificationGui);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchLogin(LoginMessage message) {
-		try {
+	public void launchLogin(LoginMessage message){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
 			Parent loginGUI = loader.load();
 			setScene(loginGUI);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchNewRoom(NewRoomMessage message) {
+	public void launchNewRoom(NewRoomMessage message){
 		launchNumOfPlayerGui();
 	}
 
-	public void launchNumOfPlayerGui() {
-		try {
+	public void launchNumOfPlayerGui(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("NumOfPlayers.fxml"));
 			Parent showNumOfPlayers = loader.load();
 			setScene(showNumOfPlayers);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchGameConfigMessage() {
-		try {
+	public void launchGameConfigMessage(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GameConfig.fxml"));
 			Parent gameConfigGUI = loader.load();
 			setScene(gameConfigGUI);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchSetNickname() {
-		try {
+	public void launchSetNickname(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("SetNickname.fxml"));
 			Parent setNicknameGUI = loader.load();
 			setScene(setNicknameGUI);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchEnterRoom(EnterRoomMessage enterRoomMessage) {
-		try {
+	public void launchEnterRoom(EnterRoomMessage enterRoomMessage){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("EnterRoom.fxml"));
 			Parent enterRoom = loader.load();
 			enterRoomGUI = loader.getController();
 			enterRoomGUI.setCreatedRoom(enterRoomMessage);
 			setScene(enterRoom);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void closeSocket() {
+	public void closeSocket(){
 		thread.close();
 	}
 
 
-	public void sendResponse(Response response) {
+	public void sendResponse(Response response){
 		thread.communicate(response);
 
 	}
 
-	public void startLoading() {
+	public void startLoading(){
 		loadingScreenGUI.start();
 	}
 
-	public void launchError(ErrorMessage message) {
-		try {
+	public void launchError(ErrorMessage message){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Error.fxml"));
 			Parent error = loader.load();
 			this.errorGui = loader.getController();
 			this.errorGui.insert(message);
 			setScene(error);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
 	public void launchPlanningPhase(PlanningPhaseMessage message){
-		try {
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PlanningPhase.fxml"));
 			Parent playCharacterCard = loader.load();
 			planningPhaseGUI = loader.getController();
 			planningPhaseGUI.printMessageInformation(message);
 			setScene(playCharacterCard);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 
 	}
 
 	public void launchMoveStudentsPhase(StudentsPhaseMessage message){
-		try {
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveStudentsPhase.fxml"));
 			Parent moveStudents = loader.load();
 			moveStudentsPhaseGUI = loader.getController();
 			moveStudentsPhaseGUI.printMessageInformation(message);
 			setScene(moveStudents);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 
 	}
 
 	public void launchMotherNaturePhase(MotherNaturePhaseMessage message){
-		try {
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MotherNaturePhase.fxml"));
 			Parent motherNature = loader.load();
 			motherNaturePhaseGUI = loader.getController();
 			motherNaturePhaseGUI.printMessageInformation(message);
 			setScene(motherNature);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 
@@ -266,51 +265,51 @@ public class ControllerGUI {
 		}
 	}
 
-	public void launchPutStudentOnTable() {
-		try {
+	public void launchPutStudentOnTable(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnTable.fxml"));
 			Parent setStudentOnTableGUI = loader.load();
 			setScene(setStudentOnTableGUI);
 			putStudentOnTableGUI = loader.getController();
 			putStudentOnTableGUI.putStudentOnTable();
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchPutStudentOnIsland() {
-		try {
+	public void launchPutStudentOnIsland(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("PutStudentOnIsland.fxml"));
 			Parent setStudentOnIslandGUI = loader.load();
 			setScene(setStudentOnIslandGUI);
 			putStudentOnIslandGUI = loader.getController();
 			putStudentOnIslandGUI.putStudentOnIsland();
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchMoveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage) {
-		try {
+	public void launchMoveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MoveMotherNature.fxml"));
 			Parent setMotherNatureOnIslandGUI = loader.load();
 			setScene(setMotherNatureOnIslandGUI);
 			moveMotherNatureGUI = loader.getController();
 			moveMotherNatureGUI.printMessageInformation(moveMotherNatureMessage);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchPlayCharacterCard(PlayCharacterCardMessage message) {
+	public void launchPlayCharacterCard(PlayCharacterCardMessage message){
 		playCharacterCardResponse = new PlayCharacterCardResponse();
-		try {
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CharacterCardActivation.fxml"));
 			Parent playCharacterCard = loader.load();
 			playCharacterCardGUI = loader.getController();
 			playCharacterCardGUI.inizialize(message);
 			setScene(playCharacterCard);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
@@ -320,38 +319,38 @@ public class ControllerGUI {
 		this.startLoading();
 	}
 
-	public void launchMushroomer() {
-		try {
+	public void launchMushroomer(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Mushroomer.fxml"));
 			Parent setMushroomerGUI = loader.load();
 			mushroomerGUI = loader.getController();
 			mushroomerGUI.showMushroomerInfo();
 			setScene(setMushroomerGUI);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchMinstrel() {
-		try {
+	public void launchMinstrel(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Minstrel.fxml"));
 			Parent setMinstrelGUI = loader.load();
 			minstrelGUI = loader.getController();
 			minstrelGUI.showMinstrelInfo();
 			setScene(setMinstrelGUI);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 
-	public void launchJester() {
-		try {
+	public void launchJester(){
+		try{
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Jester.fxml"));
 			Parent setJesterGUI = loader.load();
 			jesterGUI = loader.getController();
 			jesterGUI.showJesterInfo();
 			setScene(setJesterGUI);
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}

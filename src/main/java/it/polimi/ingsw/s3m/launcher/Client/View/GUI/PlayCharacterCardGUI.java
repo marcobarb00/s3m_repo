@@ -8,8 +8,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Message.PlayCharacterCardMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,83 +19,83 @@ import java.util.List;
 
 
 public class PlayCharacterCardGUI{
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    VBox vBox;
-    @FXML
-    Label cardCost1;
-    @FXML
-    Label cardCost2;
-    @FXML
-    Label cardCost3;
-    @FXML
-    ImageView firstCharacter;
-    @FXML
-    ImageView secondCharacter;
-    @FXML
-    ImageView thirdCharacter;
-    @FXML
-    Button back;
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	VBox vBox;
+	@FXML
+	Label cardCost1;
+	@FXML
+	Label cardCost2;
+	@FXML
+	Label cardCost3;
+	@FXML
+	ImageView firstCharacter;
+	@FXML
+	ImageView secondCharacter;
+	@FXML
+	ImageView thirdCharacter;
+	@FXML
+	Button back;
 
-    private ArrayList<CharacterCardDTO> cards;
-    private Integer characterCardPosition;
+	private ArrayList<CharacterCardDTO> cards;
+	private Integer characterCardPosition;
 
-    public void inizialize(PlayCharacterCardMessage playCharacterCardMessage) {
-        List<ImageView> characterCardList = Arrays.asList(firstCharacter, secondCharacter, thirdCharacter);
-        List<Label> costList = Arrays.asList(cardCost1, cardCost2, cardCost3);
-        GameDTO gameState = playCharacterCardMessage.getGameState();
-        cards = gameState.getCharacterCards();
+	public void inizialize(PlayCharacterCardMessage playCharacterCardMessage){
+		List<ImageView> characterCardList = Arrays.asList(firstCharacter, secondCharacter, thirdCharacter);
+		List<Label> costList = Arrays.asList(cardCost1, cardCost2, cardCost3);
+		GameDTO gameState = playCharacterCardMessage.getGameState();
+		cards = gameState.getCharacterCards();
 
-        for(int i = 0; i < 3; i++){
-            CharacterCardDTO currentCard = cards.get(i);
-            insertCharacter(characterCardList.get(i), currentCard.getName());
-            costList.get(i).setText(String.valueOf(currentCard.getCost()));
-        }
-    }
+		for(int i = 0; i < 3; i++){
+			CharacterCardDTO currentCard = cards.get(i);
+			insertCharacter(characterCardList.get(i), currentCard.getName());
+			costList.get(i).setText(String.valueOf(currentCard.getCost()));
+		}
+	}
 
-    public void insertCharacter(ImageView cardImage, String cardName) {
-        Image view = new Image(cardName + ".jpg");
-        cardImage.setImage(view);
-    }
+	public void insertCharacter(ImageView cardImage, String cardName){
+		Image view = new Image(cardName + ".jpg");
+		cardImage.setImage(view);
+	}
 
-    public void back(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().sendResponse(new BackResponse());
-        ControllerGUI.getInstance().startLoading();
-    }
+	public void back(MouseEvent mouseEvent){
+		ControllerGUI.getInstance().sendResponse(new BackResponse());
+		ControllerGUI.getInstance().startLoading();
+	}
 
-    public void chooseCharacter(MouseEvent mouseEvent) {
-        String name = mouseEvent.getPickResult().getIntersectedNode().getId();
-        if(name.equals("firstCharacter"))
-            characterCardPosition = 0;
-        if(name.equals("secondCharacter"))
-            characterCardPosition = 1;
-        if(name.equals("thirdCharacter"))
-            characterCardPosition = 2;
+	public void chooseCharacter(MouseEvent mouseEvent){
+		String name = mouseEvent.getPickResult().getIntersectedNode().getId();
+		if(name.equals("firstCharacter"))
+			characterCardPosition = 0;
+		if(name.equals("secondCharacter"))
+			characterCardPosition = 1;
+		if(name.equals("thirdCharacter"))
+			characterCardPosition = 2;
 
-        ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
-        String characterName = cards.get(characterCardPosition).getName();
-        switch(characterName){
-            case "Jester":
-                ArrayList<String> studentsOnJester = new ArrayList<>();
-                cards.get(characterCardPosition).getStudentsOnCard().forEach((color, value) -> {
-                    for(int i = 0; i < value; i++){
-                        studentsOnJester.add(color);
-                    }
-                });
+		ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
+		String characterName = cards.get(characterCardPosition).getName();
+		switch(characterName){
+			case "Jester":
+				ArrayList<String> studentsOnJester = new ArrayList<>();
+				cards.get(characterCardPosition).getStudentsOnCard().forEach((color, value) -> {
+					for(int i = 0; i < value; i++){
+						studentsOnJester.add(color);
+					}
+				});
 
-                ControllerGUI.getInstance().setJesterStudents(studentsOnJester);
-                ControllerGUI.getInstance().launchJester();
-                break;
-            case "Minstrel":
-                ControllerGUI.getInstance().launchMinstrel();
-                break;
-            case "Mushroomer":
-                ControllerGUI.getInstance().launchMushroomer();
-                break;
-            default:
-                ControllerGUI.getInstance().sendCharacterCardResponse();
-                break;
-        }
-    }
+				ControllerGUI.getInstance().setJesterStudents(studentsOnJester);
+				ControllerGUI.getInstance().launchJester();
+				break;
+			case "Minstrel":
+				ControllerGUI.getInstance().launchMinstrel();
+				break;
+			case "Mushroomer":
+				ControllerGUI.getInstance().launchMushroomer();
+				break;
+			default:
+				ControllerGUI.getInstance().sendCharacterCardResponse();
+				break;
+		}
+	}
 }

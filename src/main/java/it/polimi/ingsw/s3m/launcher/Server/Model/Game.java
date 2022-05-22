@@ -8,6 +8,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ExpertModeInitiali
 import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.GameInitializer;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.ThreePlayersGameInitializer;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Initializers.TwoPlayersGameInitializer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -29,10 +30,11 @@ public class Game{
 
 	/**
 	 * Constructor used to initialize the game attributes
+	 *
 	 * @param playersNicknameList list of players' nicknames
-	 * @param expertMode boolean for the expert mode
+	 * @param expertMode          boolean for the expert mode
 	 */
-	public Game(ArrayList<String> playersNicknameList, boolean expertMode) throws EmptyBagException {
+	public Game(ArrayList<String> playersNicknameList, boolean expertMode) throws EmptyBagException{
 		this.numberOfPlayers = playersNicknameList.size();
 		this.expertMode = expertMode;
 		// Professors
@@ -56,6 +58,7 @@ public class Game{
 
 	/**
 	 * Method used to extract a random color student from the bag
+	 *
 	 * @return the extracted student
 	 * @throws EmptyBagException exception if the bag is empty
 	 */
@@ -72,6 +75,7 @@ public class Game{
 
 	/**
 	 * Method used to extract a random color
+	 *
 	 * @return a random extracted color
 	 */
 	private PawnColor extractColor(){
@@ -105,9 +109,10 @@ public class Game{
 	/**
 	 * Method used to refill all the clouds with a number of
 	 * students based on the number of players of the game
+	 *
 	 * @throws EmptyBagException exception if the bag is empty
 	 */
-	public void refillClouds() throws EmptyBagException {
+	public void refillClouds() throws EmptyBagException{
 		int numberOfStudents;
 		numberOfStudents = 3;
 		if(numberOfPlayers == 3) numberOfStudents = 4;
@@ -117,7 +122,8 @@ public class Game{
 
 	/**
 	 * Method used to refill a single cloud
-	 * @param cloud cloud to be refilled
+	 *
+	 * @param cloud            cloud to be refilled
 	 * @param numberOfStudents number of students to refill the cloud with
 	 * @throws EmptyBagException exception if the bag is empty
 	 */
@@ -132,6 +138,7 @@ public class Game{
 	/**
 	 * Method used to check if the current island's dominating player is
 	 * the same as the next island's
+	 *
 	 * @param currentIsland island to check
 	 */
 	public void samePlayerCheckInNextIsland(Island currentIsland){
@@ -145,7 +152,7 @@ public class Game{
 			nextIsland = islandsList.get(islandIndex + 1);
 		Player nextIslandDominator = nextIsland.getDominator();
 
-		if (nextIslandDominator == null) return;
+		if(nextIslandDominator == null) return;
 		if(currentIslandDominator.getNickname().equals(nextIslandDominator.getNickname()))
 			mergeIsland(currentIsland, nextIsland, false);
 	}
@@ -153,6 +160,7 @@ public class Game{
 	/**
 	 * Method used to check if the current island's dominating player is
 	 * the same as the previous island's
+	 *
 	 * @param currentIsland island to check
 	 */
 	public void samePlayerCheckInPreviousIsland(Island currentIsland){
@@ -166,19 +174,20 @@ public class Game{
 			previousIsland = islandsList.get(islandIndex - 1);
 		Player previousIslandDominator = previousIsland.getDominator();
 
-		if (previousIslandDominator == null) return;
+		if(previousIslandDominator == null) return;
 		if(currentIslandDominator.getNickname().equals(previousIslandDominator.getNickname()))
 			mergeIsland(currentIsland, previousIsland, true);
 	}
 
 	/**
 	 * Method used to merge two island and deleting one of them
-	 * @param mergingInIsland island in which transfer students and towers
-	 *                        from the other island
+	 *
+	 * @param mergingInIsland  island in which transfer students and towers
+	 *                         from the other island
 	 * @param mergingOutIsland island in which take students and towers to
 	 *                         transfer on the other island
-	 * @param previous boolean that indicates if the mergingOutIsland is the previous (true)
-	 *                 or the next one (false)
+	 * @param previous         boolean that indicates if the mergingOutIsland is the previous (true)
+	 *                         or the next one (false)
 	 */
 	public void mergeIsland(Island mergingInIsland, Island mergingOutIsland, boolean previous){
 		for(PawnColor color : PawnColor.values()){
@@ -189,10 +198,12 @@ public class Game{
 
 		islandsList.remove(mergingOutIsland);
 
-		if (previous) {
-			if (motherNature.getCurrentPosition() != 0) motherNature.setCurrentPosition(motherNature.getCurrentPosition()-1);
-		} else {
-			if (motherNature.getCurrentPosition() == islandsList.size()) motherNature.setCurrentPosition(motherNature.getCurrentPosition()-1);
+		if(previous){
+			if(motherNature.getCurrentPosition() != 0)
+				motherNature.setCurrentPosition(motherNature.getCurrentPosition() - 1);
+		}else{
+			if(motherNature.getCurrentPosition() == islandsList.size())
+				motherNature.setCurrentPosition(motherNature.getCurrentPosition() - 1);
 		}
 	}
 
@@ -200,16 +211,17 @@ public class Game{
 
 	/**
 	 * Method used to initialize the six students of the card
+	 *
 	 * @param jester jester card to initialize
 	 */
-	public void initializeJesterStudents(Jester jester) throws EmptyBagException {
+	public void initializeJesterStudents(Jester jester) throws EmptyBagException{
 		HashMap<PawnColor, Integer> initialingStudents = new HashMap<>();
 		for(PawnColor color : PawnColor.values())
 			initialingStudents.put(color, 0);
 		for(int i = 0; i < 6; i++){
-				Student student = extractStudent();
-				PawnColor color = student.getColor();
-				initialingStudents.replace(color, initialingStudents.get(color) + 1);
+			Student student = extractStudent();
+			PawnColor color = student.getColor();
+			initialingStudents.replace(color, initialingStudents.get(color) + 1);
 		}
 		jester.setStudentsOnCard(initialingStudents);
 	}
@@ -218,6 +230,7 @@ public class Game{
 
 	/**
 	 * Method used to update mother nature's position
+	 *
 	 * @param jump number of jumps
 	 */
 	public void updateMotherNaturePosition(int jump){
@@ -246,6 +259,7 @@ public class Game{
 
 	/**
 	 * Method used to calculate how many professors are controlled by a player
+	 *
 	 * @param player player to check
 	 * @return the number of professors controller by the player
 	 */
@@ -271,7 +285,7 @@ public class Game{
 	 * and to recreate clouds
 	 */
 	public void resetTurn(){
-		for (int i = 0; i < numberOfPlayers; i++)
+		for(int i = 0; i < numberOfPlayers; i++)
 			cloudsList.add(new Cloud());
 		turn.setCurrentPlayerNickname(turn.getFirstPlayerNickname());
 		turn.setPhaseName("PlanningPhase");
@@ -303,9 +317,10 @@ public class Game{
 
 	/**
 	 * Method used to calculate the winner
+	 *
 	 * @return the nickname of the winning player
 	 * @throws NullWinnerException exception if nobody wins
-	 * @throws TieException exception if a tie occurs
+	 * @throws TieException        exception if a tie occurs
 	 */
 	public String checkWinCondition() throws NullWinnerException, TieException{
 		Player winner = null;
@@ -318,8 +333,7 @@ public class Game{
 				if(playerInfluenceOnProfessors(player) > playerInfluenceOnProfessors(winner)){
 					winner = player;
 					maxTowers = player.getDashboard().getNumberOfTowers();
-				}
-				else if(playerInfluenceOnProfessors(player) == playerInfluenceOnProfessors(winner)){
+				}else if(playerInfluenceOnProfessors(player) == playerInfluenceOnProfessors(winner)){
 					assert winner != null;
 					throw new TieException(player.getNickname(), winner.getNickname());
 				}
@@ -331,6 +345,7 @@ public class Game{
 
 	/**
 	 * Method used to get the winner in the scenario of zero towers left
+	 *
 	 * @return the nickname of the winning player
 	 * @throws NullWinnerException exception if nobody wins
 	 */
@@ -347,6 +362,7 @@ public class Game{
 
 	/**
 	 * Method used to activate the Centaur character card effect
+	 *
 	 * @param playerNickname nickname of the player who activated the card
 	 */
 	public void activateCentaurEffect(String playerNickname){
@@ -362,9 +378,10 @@ public class Game{
 
 	/**
 	 * Method used to activate the Jester character card effect
+	 *
 	 * @param playerNickname nickname of the player who activated the card
 	 * @param requiredColors colors of the students required from the player
-	 * @param givenColors colors of the students given from the player
+	 * @param givenColors    colors of the students given from the player
 	 */
 	public void activateJesterEffect(String playerNickname, ArrayList<PawnColor> requiredColors, ArrayList<PawnColor> givenColors){
 		CharacterCard jester = new Jester();
@@ -372,10 +389,10 @@ public class Game{
 			if(characterCard instanceof Jester) jester = characterCard;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		ArrayList<Student> givenStudents = new ArrayList<>();
-		for (PawnColor color : givenColors)
+		for(PawnColor color : givenColors)
 			givenStudents.add(new Student(color));
 		ArrayList<Student> requiredStudents = new ArrayList<>();
-		for (PawnColor color : requiredColors)
+		for(PawnColor color : requiredColors)
 			requiredStudents.add(new Student(color));
 
 		chosenPlayer.getDashboard().deleteStudentsFromEntrance(givenStudents);
@@ -388,6 +405,7 @@ public class Game{
 
 	/**
 	 * Method used to activate the Knight character card effect
+	 *
 	 * @param playerNickname nickname of the player who activated the card
 	 */
 	public void activateKnightEffect(String playerNickname){
@@ -404,6 +422,7 @@ public class Game{
 
 	/**
 	 * Method used to activate the Magic Postman character card effect
+	 *
 	 * @param playerNickname nickname of the player who activated the card
 	 */
 	public void activateMagicPostmanEffect(String playerNickname){
@@ -419,9 +438,10 @@ public class Game{
 
 	/**
 	 * Method used to activate the Minstrel character card effect
-	 * @param playerNickname nickname of the player who activated the card
+	 *
+	 * @param playerNickname         nickname of the player who activated the card
 	 * @param enteringEntranceColors colors of the students entering the entrance
-	 * @param enteringTablesColors colors of the students entering the tables
+	 * @param enteringTablesColors   colors of the students entering the tables
 	 */
 	public void activateMinstrelEffect(String playerNickname, ArrayList<PawnColor> enteringEntranceColors, ArrayList<PawnColor> enteringTablesColors){
 		int additionalCoins;
@@ -430,10 +450,10 @@ public class Game{
 			if(characterCard instanceof Minstrel) minstrel = characterCard;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		ArrayList<Student> enteringEntranceStudents = new ArrayList<>();
-		for (PawnColor color : enteringEntranceColors)
+		for(PawnColor color : enteringEntranceColors)
 			enteringEntranceStudents.add(new Student(color));
 		ArrayList<Student> enteringTablesStudents = new ArrayList<>();
-		for (PawnColor color : enteringTablesColors)
+		for(PawnColor color : enteringTablesColors)
 			enteringTablesStudents.add(new Student(color));
 
 		chosenPlayer.getDashboard().addStudentsInEntrance(enteringEntranceStudents);
@@ -448,8 +468,9 @@ public class Game{
 
 	/**
 	 * Method used to activate Mushroomer character card effect
+	 *
 	 * @param playerNickname nickname of the player who activated the card
-	 * @param chosenColor chosen color to deactivate
+	 * @param chosenColor    chosen color to deactivate
 	 */
 	public void activateMushroomerEffect(String playerNickname, PawnColor chosenColor){
 		CharacterCard mushroomer = new Mushroomer();
@@ -466,8 +487,9 @@ public class Game{
 	/**
 	 * Method used to transfer the students on the chosen cloud into the
 	 * player's entrance
+	 *
 	 * @param playerNickname nickname of the player who choose the cloud
-	 * @param position position of the chosen cloud
+	 * @param position       position of the chosen cloud
 	 */
 	public void chooseCloud(String playerNickname, int position){
 		Player chosenPlayer = playerHashMap.get(playerNickname);
@@ -479,8 +501,9 @@ public class Game{
 	/**
 	 * Method used to move mother nature with the chosen distance and to activate
 	 * the computeDominance with eventual merging of islands
+	 *
 	 * @param movement movements chosen by the player
-	 * @throws NotEnoughIslandsException exception if the number of islands is less or equal three
+	 * @throws NotEnoughIslandsException   exception if the number of islands is less or equal three
 	 * @throws ZeroTowersRemainedException exception if a players remains with zero towers left
 	 */
 	public void moveMotherNature(int movement) throws NotEnoughIslandsException, ZeroTowersRemainedException{
@@ -518,10 +541,11 @@ public class Game{
 
 	/**
 	 * Method used to play the chosen assistant card by the player
+	 *
 	 * @param playerNickname nickname of the player who played an assistant card
-	 * @param position position of the played assistant card in the player's hand
+	 * @param position       position of the played assistant card in the player's hand
 	 * @throws NotEnoughAssistantCardsException exception if the player has no assistant
-	 * cards left
+	 *                                          cards left
 	 */
 	public void playAssistantCard(String playerNickname, int position) throws NotEnoughAssistantCardsException{
 		Player chosenPlayer = playerHashMap.get(playerNickname);
@@ -534,8 +558,9 @@ public class Game{
 
 	/**
 	 * Method used to move a single student from entrance to tables
+	 *
 	 * @param playerNickname nickname of the player who moved the student
-	 * @param studentColor color of the student to be moved
+	 * @param studentColor   color of the student to be moved
 	 */
 	public void putStudentOnTables(String playerNickname, PawnColor studentColor){
 		int additionalCoins;
@@ -548,9 +573,10 @@ public class Game{
 
 	/**
 	 * Method used to move a single student from entrance to a chosen island
+	 *
 	 * @param playerNickname nickname of the player who moved the student
-	 * @param position position of the chosen island
-	 * @param studentColor color of the student to be moved
+	 * @param position       position of the chosen island
+	 * @param studentColor   color of the student to be moved
 	 */
 	public void putStudentOnIslands(String playerNickname, int position, PawnColor studentColor){
 		Player chosenPlayer = playerHashMap.get(playerNickname);
@@ -644,7 +670,9 @@ public class Game{
 		turn.setPhaseName(phaseName);
 	}
 
-	public void resetTurnMovedStudents() { turn.resetMovedStudents(); }
+	public void resetTurnMovedStudents(){
+		turn.resetMovedStudents();
+	}
 
 	// GETTER
 	public boolean isExpertMode(){
@@ -675,7 +703,7 @@ public class Game{
 		return characterCardsList;
 	}
 
-	public ComputeDominanceStrategy getComputeDominanceStrategy() {
+	public ComputeDominanceStrategy getComputeDominanceStrategy(){
 		return computeDominanceStrategy;
 	}
 }
