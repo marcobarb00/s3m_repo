@@ -1109,7 +1109,7 @@
       </Label>
       <ImageView fx:id="coinImagePlayer1" fitHeight="42.0" fitWidth="50.0" layoutX="14.0" layoutY="698.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Coin.jpeg" />
+            <Image url="@Coin.png" />
          </image>
       </ImageView>
 
@@ -1163,7 +1163,7 @@
       </Label>
       <ImageView fx:id="coinImagePlayer3" fitHeight="42.0" fitWidth="50.0" layoutX="1077.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Coin.jpeg" />
+            <Image url="@Coin.png" />
          </image>
       </ImageView>
       <GridPane layoutX="1259.0" layoutY="552.0" maxHeight="200.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="200.0" prefWidth="100.0" rotate="270.0">
@@ -1323,7 +1323,7 @@
       </GridPane>
       <ImageView fx:id="coinImagePlayer2" fitHeight="42.0" fitWidth="50.0" layoutX="394.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Coin.jpeg" />
+            <Image url="@Coin.png" />
          </image>
       </ImageView>
 
