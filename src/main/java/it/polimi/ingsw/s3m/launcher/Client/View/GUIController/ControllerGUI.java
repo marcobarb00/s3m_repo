@@ -64,17 +64,6 @@ public class ControllerGUI {
 
 		this.primaryStage = primaryStage;
 		primaryStage.initStyle(StageStyle.UNDECORATED);
-		/*
-		Parent root = null;
-		try {
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("FirstImage.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		primaryStage.setScene(new Scene(root));
-		primaryStage.centerOnScreen();
-		primaryStage.show();
-		*/
 		thread = new ClientGUI();
 		thread.start();
 		loadingScreenGUI = new LoadingScreenGUI(secondaryStage);
