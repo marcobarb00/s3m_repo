@@ -14,7 +14,7 @@ public enum AssistantCard{
 
 	private final String type;
 	private final int value;
-	private int movements;
+	private final int movements;
 
 	AssistantCard(String type, int value, int movements){
 		this.type = type;
