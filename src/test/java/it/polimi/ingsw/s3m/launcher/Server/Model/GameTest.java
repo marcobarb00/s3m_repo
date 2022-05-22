@@ -497,8 +497,8 @@ class GameTest {
         //check before call
         assertFalse(game.getTurn().isActivatedCharacterCard());
 
-        studentsGet = new ArrayList<>(Arrays.asList(PawnColor.BLUE,PawnColor.BLUE,PawnColor.YELLOW));;
-        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.RED,PawnColor.GREEN,PawnColor.GREEN));;
+        studentsGet = new ArrayList<>(Arrays.asList(PawnColor.BLUE,PawnColor.BLUE,PawnColor.YELLOW));
+        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.RED,PawnColor.GREEN,PawnColor.GREEN));
 
         game.activateJesterEffect("player1", studentsGet, studentsGive);
 
@@ -602,8 +602,8 @@ class GameTest {
         //check before call
         assertFalse(game.getTurn().isActivatedCharacterCard());
 
-        studentsGet = new ArrayList<>(Arrays.asList(PawnColor.BLUE,PawnColor.BLUE,PawnColor.YELLOW));;
-        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.RED,PawnColor.GREEN,PawnColor.GREEN));;
+        studentsGet = new ArrayList<>(Arrays.asList(PawnColor.BLUE,PawnColor.BLUE,PawnColor.YELLOW));
+        studentsGive = new ArrayList<>(Arrays.asList(PawnColor.RED,PawnColor.GREEN,PawnColor.GREEN));
 
         game.activateMinstrelEffect("player1", studentsGet, studentsGive);
 
