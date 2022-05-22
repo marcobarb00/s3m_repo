@@ -2,7 +2,6 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveMotherNatureResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveMotherNatureMessage;
 import javafx.event.ActionEvent;
@@ -40,8 +39,8 @@ public class MoveMotherNatureGUI{
 		}catch(NumberFormatException e){
 			steps = -1;
 		}
-		ControllerGUI.getInstance().sendResponse(new MoveMotherNatureResponse(steps));
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new MoveMotherNatureResponse(steps));
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 
 	public void insert(MoveMotherNatureMessage message){
@@ -50,7 +49,7 @@ public class MoveMotherNatureGUI{
 	}
 
 	public void back(MouseEvent mouseEvent){
-		ControllerGUI.getInstance().sendResponse(new BackResponse());
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new BackResponse());
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 }

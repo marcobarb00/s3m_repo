@@ -1,6 +1,5 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 
@@ -13,64 +12,64 @@ public class GUIView extends View{
 
 	@Override
 	public void login(LoginMessage loginMessage){
-		ControllerGUI.getInstance().threadSleep(2000);
-		ControllerGUI.getInstance().launchLogin(loginMessage);
-		ControllerGUI.getInstance().closePrimaryStage();
+		SceneHandlerGUI.getInstance().threadSleep(2000);
+		SceneHandlerGUI.getInstance().launchLogin(loginMessage);
+		SceneHandlerGUI.getInstance().closePrimaryStage();
 	}
 
 	@Override
 	public void enterRoom(EnterRoomMessage enterRoomMessage){
-		ControllerGUI.getInstance().launchEnterRoom(enterRoomMessage);
+		SceneHandlerGUI.getInstance().launchEnterRoom(enterRoomMessage);
 	}
 
 	@Override
 	public void newRoom(NewRoomMessage newRoomMessage){
-		ControllerGUI.getInstance().launchNewRoom(newRoomMessage);
+		SceneHandlerGUI.getInstance().launchNewRoom(newRoomMessage);
 	}
 
 	@Override
 	public void notification(NotificationMessage notification){
-		ControllerGUI.getInstance().launchNotification(notification);
-		ControllerGUI.getInstance().threadSleep(1500);
+		SceneHandlerGUI.getInstance().launchNotification(notification);
+		SceneHandlerGUI.getInstance().threadSleep(1500);
 	}
 
 	@Override
 	public void planningPhase(PlanningPhaseMessage planningPhaseMessage){
-		ControllerGUI.getInstance().launchPlanningPhase(planningPhaseMessage);
+		SceneHandlerGUI.getInstance().launchPlanningPhase(planningPhaseMessage);
 	}
 
 	@Override
 	public void moveStudentsPhase(StudentsPhaseMessage moveStudentsPhaseMessage){
-		ControllerGUI.getInstance().launchMoveStudentsPhase(moveStudentsPhaseMessage);
+		SceneHandlerGUI.getInstance().launchMoveStudentsPhase(moveStudentsPhaseMessage);
 	}
 
 	@Override
 	public void playCharacterCard(PlayCharacterCardMessage playCharacterCardMessage){
-		ControllerGUI.getInstance().launchPlayCharacterCard(playCharacterCardMessage);
+		SceneHandlerGUI.getInstance().launchPlayCharacterCard(playCharacterCardMessage);
 	}
 
 	@Override
 	public void putStudentOnTable(PutStudentOnTableMessage putStudentOnTableMessage){
-		ControllerGUI.getInstance().launchPutStudentOnTable();
+		SceneHandlerGUI.getInstance().launchPutStudentOnTable();
 	}
 
 	@Override
 	public void putStudentOnIsland(PutStudentOnIslandMessage putStudentOnIslandMessage){
-		ControllerGUI.getInstance().launchPutStudentOnIsland();
+		SceneHandlerGUI.getInstance().launchPutStudentOnIsland();
 	}
 
 	@Override
 	public void motherNaturePhase(MotherNaturePhaseMessage motherNaturePhaseMessage){
-		ControllerGUI.getInstance().launchMotherNaturePhase(motherNaturePhaseMessage);
+		SceneHandlerGUI.getInstance().launchMotherNaturePhase(motherNaturePhaseMessage);
 	}
 
 	@Override
 	public void chooseCloudPhase(CloudPhaseMessage cloudPhaseMessage){
-		ControllerGUI.getInstance().launchCloudPhase(cloudPhaseMessage);
+		SceneHandlerGUI.getInstance().launchCloudPhase(cloudPhaseMessage);
 	}
 
 	@Override
 	public void moveMotherNature(MoveMotherNatureMessage moveMotherNatureMessage){
-		ControllerGUI.getInstance().launchMoveMotherNature(moveMotherNatureMessage);
+		SceneHandlerGUI.getInstance().launchMoveMotherNature(moveMotherNatureMessage);
 	}
 }

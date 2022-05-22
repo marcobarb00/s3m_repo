@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,9 +60,9 @@ public class MinstrelGUI{
 		if(isAColor(colorOfChange2.getValue()))
 			studentsToPutOnTable.add(colorOfChange2.getValue());
 
-		ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToPutOn(studentsToPutOnTable);
-		ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToGetFrom(studentsToGetFromTable);
-		ControllerGUI.getInstance().sendCharacterCardResponse();
+		SceneHandlerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToPutOn(studentsToPutOnTable);
+		SceneHandlerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToGetFrom(studentsToGetFromTable);
+		SceneHandlerGUI.getInstance().sendCharacterCardResponse();
 	}
 
 	private boolean isAColor(String string){
@@ -73,8 +72,8 @@ public class MinstrelGUI{
 	}
 
 	public void back(MouseEvent mouseEvent){
-		ControllerGUI.getInstance().sendResponse(new BackResponse());
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new BackResponse());
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 
 }

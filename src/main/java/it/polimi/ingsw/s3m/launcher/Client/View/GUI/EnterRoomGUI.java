@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.EnterRoomResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,8 +38,8 @@ public class EnterRoomGUI{
 			roomIDChoice = 0;
 		}
 		enterRoomResponse.setRoomID(roomIDChoice);
-		ControllerGUI.getInstance().startLoading();
-		ControllerGUI.getInstance().sendResponse(enterRoomResponse);
+		SceneHandlerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(enterRoomResponse);
 	}
 
 	public void setCreatedRoom(EnterRoomMessage message){

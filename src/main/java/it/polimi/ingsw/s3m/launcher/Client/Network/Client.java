@@ -1,7 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.Network;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.CLI.ClientCLI;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.StartGUI;
+import it.polimi.ingsw.s3m.launcher.Client.View.GUI.StartGUI;
 import it.polimi.ingsw.s3m.launcher.Server.Message.Message;
 import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.Server;
