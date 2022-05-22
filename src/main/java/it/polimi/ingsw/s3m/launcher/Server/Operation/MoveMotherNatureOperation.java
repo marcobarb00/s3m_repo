@@ -36,8 +36,7 @@ public class MoveMotherNatureOperation extends Operation{
 
 		//check if movements are legal given currentPlayer's assistantCard
 		String playerNickname = playerController.getNickname();
-		AssistantCard lastPlayedAssistantCard = game.getPlayerHashMap().get(playerNickname).getLastPlayedCard();
-		int maxMoves = lastPlayedAssistantCard.getMovements();
+		int maxMoves = game.getTurn().getMotherNatureMaxAllowedMovements();
 		boolean checkMoves = 0 < movements && movements <= maxMoves;
 		if(!checkMoves) throw new IncorrectOperationException("Incorrect mother nature movement value");
 

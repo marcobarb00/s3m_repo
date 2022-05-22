@@ -164,7 +164,7 @@ public class Mapper{
 		HashMap<String, AssistantCardDTO> playedCards = new HashMap<>();
 		turn.getPlayedCards().forEach((nickname, card) -> playedCards.put(nickname, assistantCardToDTO(card)));
 
-		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard());
+		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard(), turn.getMotherNatureMaxAllowedMovements());
 	}
 
 	public GameDTO gameToDTO(Game game){

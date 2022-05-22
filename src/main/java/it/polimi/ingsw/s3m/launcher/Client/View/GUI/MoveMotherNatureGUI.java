@@ -28,7 +28,7 @@ public class MoveMotherNatureGUI{
 
     public void printMessageInformation(MoveMotherNatureMessage message){
         GameDTO gameState = message.getGameState();
-        int motherNatureMaxSteps = gameState.getCurrentPlayer().getLastCardPlayed().getMovements();
+        int motherNatureMaxSteps = gameState.getTurn().getMotherNatureMaxAllowedMovements();
 
         stepsLimit.setText(String.valueOf(motherNatureMaxSteps));
     }

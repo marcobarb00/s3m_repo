@@ -14,7 +14,7 @@ public class MoveMotherNatureCLI extends MessageCLI{
 
 	@Override
 	public Response execute(){
-		int maxMoves = gameState.getCurrentPlayer().getLastCardPlayed().getMovements();
+		int maxMoves = gameState.getTurn().getMotherNatureMaxAllowedMovements();
 		System.out.println("select how many moves to make from 1 to " + maxMoves);
 
 		int moves = getOperation(maxMoves);
