@@ -4,9 +4,10 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.AssistantCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
+
 import java.util.ArrayList;
 
 //Done
@@ -18,9 +19,12 @@ public class PlayAssistantCardOperation extends Operation{
 		this.assistantCardPosition = assistantCardPosition;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game plays the selected assistant card
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException,
-			NotEnoughAssistantCardsException, IncorrectOperationException {
+			NotEnoughAssistantCardsException, IncorrectOperationException{
 		//check args
 		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
@@ -39,6 +43,9 @@ public class PlayAssistantCardOperation extends Operation{
 		game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
 	}
 
+	/**
+	 * @return true if the selected assistant card is playable by the player
+	 */
 	private boolean checkPlayableCard(){
 		ArrayList<AssistantCard> cardsPlayedInTurn = game.getTurnPlayedCards();
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());

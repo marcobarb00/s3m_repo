@@ -2,7 +2,8 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.*;
+import it.polimi.ingsw.s3m.launcher.DTOs.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -11,7 +12,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class PlanningPhaseGUI extends GameStateGUI{
@@ -39,7 +43,7 @@ public class PlanningPhaseGUI extends GameStateGUI{
 	ImageView assistantEight;
 	@FXML
 	ImageView assistantNine;
-    @FXML
+	@FXML
 	ImageView assistantCardPlayed1;
 	@FXML
 	ImageView assistantCardPlayed2;
@@ -60,7 +64,7 @@ public class PlanningPhaseGUI extends GameStateGUI{
 
 		for(int i = 0; i < nicknameList.size(); i++){
 			AssistantCardDTO currentCard = playedAssistantCards.get(nicknameList.get(i));
-			if (currentCard != null){
+			if(currentCard != null){
 				insertAssistantImage(playedAssistantCardImages.get(i), currentCard);
 			}
 		}

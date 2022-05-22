@@ -1,7 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.Server.Message.Message;
+import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Network.ClientHandler;
 
 public class PlayerController{

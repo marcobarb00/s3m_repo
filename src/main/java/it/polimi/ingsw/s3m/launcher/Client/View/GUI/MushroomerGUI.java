@@ -12,41 +12,41 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class MushroomerGUI {
-    ObservableList<String> colorList = FXCollections.observableArrayList("Choose the student color", "RED", "GREEN", "BLUE", "PINK", "YELLOW");
+public class MushroomerGUI{
+	ObservableList<String> colorList = FXCollections.observableArrayList("Choose the student color", "RED", "GREEN", "BLUE", "PINK", "YELLOW");
 
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    GridPane gridPane;
-    @FXML
-    Button back;
-    @FXML
-    ComboBox<String> colorOfStudent1;
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	GridPane gridPane;
+	@FXML
+	Button back;
+	@FXML
+	ComboBox<String> colorOfStudent1;
 
-    public void showMushroomerInfo(){
-        colorOfStudent1.setValue("Choose the student color");
-        colorOfStudent1.setItems(colorList);
-    }
+	public void showMushroomerInfo(){
+		colorOfStudent1.setValue("Choose the student color");
+		colorOfStudent1.setItems(colorList);
+	}
 
-    public void submitMushroomer(ActionEvent action){
-        String nonInfluencingColor = null;
+	public void submitMushroomer(ActionEvent action){
+		String nonInfluencingColor = null;
 
-        if(isAColor(colorOfStudent1.getValue()))
-            nonInfluencingColor = colorOfStudent1.getValue();
+		if(isAColor(colorOfStudent1.getValue()))
+			nonInfluencingColor = colorOfStudent1.getValue();
 
-        ControllerGUI.getInstance().getPlayCharacterCardResponse().setNonInfluencingColor(nonInfluencingColor);
-        ControllerGUI.getInstance().sendCharacterCardResponse();
-    }
+		ControllerGUI.getInstance().getPlayCharacterCardResponse().setNonInfluencingColor(nonInfluencingColor);
+		ControllerGUI.getInstance().sendCharacterCardResponse();
+	}
 
-    private boolean isAColor(String string){
-        return string.equalsIgnoreCase("RED") || string.equalsIgnoreCase("GREEN") ||
-                string.equalsIgnoreCase("BLUE") || string.equalsIgnoreCase("PINK") ||
-                string.equalsIgnoreCase("YELLOW");
-    }
+	private boolean isAColor(String string){
+		return string.equalsIgnoreCase("RED") || string.equalsIgnoreCase("GREEN") ||
+				string.equalsIgnoreCase("BLUE") || string.equalsIgnoreCase("PINK") ||
+				string.equalsIgnoreCase("YELLOW");
+	}
 
-    public void back(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().sendResponse(new BackResponse());
-        ControllerGUI.getInstance().startLoading();
-    }
+	public void back(MouseEvent mouseEvent){
+		ControllerGUI.getInstance().sendResponse(new BackResponse());
+		ControllerGUI.getInstance().startLoading();
+	}
 }

@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
 
 import java.util.HashMap;
 
-public class CentaurComputeDominance implements ComputeDominanceStrategy {
+public class CentaurComputeDominance implements ComputeDominanceStrategy{
 	/**
 	 * Method used to calculate the dominance of an island without counting
 	 * the towers on the island

@@ -1,9 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayAssistantCardResponse;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.AssistantCardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.DTOs.AssistantCardDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
+import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlanningPhaseMessage;
 
 import java.util.ArrayList;

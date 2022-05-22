@@ -1,14 +1,15 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.*;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.DTOs.Mapper;
+import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -119,6 +120,7 @@ public class Room{
 					gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
 
 					try{
+						gameState.setPlayerMotherNatureMaxAllowedMovements(currentPlayer.getNickname());
 						actionPhase(currentPlayer);
 						gameState.resetComputeDominance();
 					}catch(NotEnoughAssistantCardsException e){
@@ -324,7 +326,7 @@ public class Room{
 
 		CharacterCard playedCharacterCard;
 		int cardPosition = playCharacterCardResponse.getCharacterCardPosition();
-		if (cardPosition < 0 || cardPosition > 3)
+		if(cardPosition < 0 || cardPosition > 3)
 			throw new IncorrectOperationException("Invalid character card position");
 		else
 			playedCharacterCard = gameState.getCharacterCardsList().get(cardPosition);
@@ -338,8 +340,8 @@ public class Room{
 				characterCardOperation = new ActivateKnightEffectOperation(gameState, player);
 				break;
 			case "Minstrel":
-				ArrayList<PawnColor> studentsToPutOnEntrance = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
-				ArrayList<PawnColor> studentsToPutOnTables = mapper.StringListToColor(playCharacterCardResponse.getStudentsToPutOn());
+				ArrayList<PawnColor> studentsToPutOnEntrance = mapper.stringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
+				ArrayList<PawnColor> studentsToPutOnTables = mapper.stringListToColor(playCharacterCardResponse.getStudentsToPutOn());
 				characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player, studentsToPutOnEntrance, studentsToPutOnTables);
 				break;
 			case "Mushroomer":
@@ -347,8 +349,8 @@ public class Room{
 						mapper.stringToColor(playCharacterCardResponse.getNonInfluencingColor()));
 				break;
 			case "Jester":
-				ArrayList<PawnColor> studentsToGetFromJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
-				ArrayList<PawnColor> studentsToPutOnJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToPutOn());
+				ArrayList<PawnColor> studentsToGetFromJester = mapper.stringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
+				ArrayList<PawnColor> studentsToPutOnJester = mapper.stringListToColor(playCharacterCardResponse.getStudentsToPutOn());
 				characterCardOperation = new ActivateJesterEffectOperation(gameState, player, studentsToGetFromJester, studentsToPutOnJester);
 				break;
 			case "MagicPostman":
@@ -447,15 +449,16 @@ public class Room{
 	}
 
 	// GETTER
-	public Game getGameState() {
+	public Game getGameState(){
 		return gameState;
 	}
-	public boolean isExpertMode() {
+
+	public boolean isExpertMode(){
 		return expertMode;
 	}
 
 	// SETTER
-	public void setGameState(Game gameState) {
+	public void setGameState(Game gameState){
 		this.gameState = gameState;
 	}
 }

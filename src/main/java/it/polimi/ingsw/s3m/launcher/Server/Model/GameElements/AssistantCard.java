@@ -14,21 +14,12 @@ public enum AssistantCard{
 
 	private final String type;
 	private final int value;
-	private int movements;
+	private final int movements;
 
 	AssistantCard(String type, int value, int movements){
 		this.type = type;
 		this.value = value;
 		this.movements = movements;
-	}
-
-	/**
-	 * Method called in the activation of the MagicPostman character card.
-	 * The method increases the maximum allowed movement of an assistant
-	 * card by two.
-	 */
-	public void incrementMovementsByTwo(){
-		movements += 2;
 	}
 
 	// GETTER

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Communication.DTO;
+package it.polimi.ingsw.s3m.launcher.DTOs;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class GameDTO implements Serializable{
 		this.lastPlayedCards = lastPlayedCards;
 	}
 
-	public HashMap<String, AssistantCardDTO> getLastPlayedCards() {
+	public HashMap<String, AssistantCardDTO> getLastPlayedCards(){
 		return lastPlayedCards;
 	}
 

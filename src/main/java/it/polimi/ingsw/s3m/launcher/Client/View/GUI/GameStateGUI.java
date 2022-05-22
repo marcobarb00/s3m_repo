@@ -1,9 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.CloudDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.CloudDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.DashboardDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.IslandDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -887,20 +887,20 @@ public class GameStateGUI{
 
 		//dashboard player two
 
-		List<ImageView> entranceImagesPone = Arrays.asList(hallStudentOnePone,hallStudentTwoPone,hallStudentThreePone,
-				hallStudentFourPone,hallStudentFivePone,hallStudentSixPone,hallStudentSevenPone,
-				hallStudentEightPone,hallStudentNinePone);
+		List<ImageView> entranceImagesPone = Arrays.asList(hallStudentOnePone, hallStudentTwoPone, hallStudentThreePone,
+				hallStudentFourPone, hallStudentFivePone, hallStudentSixPone, hallStudentSevenPone,
+				hallStudentEightPone, hallStudentNinePone);
 
-		List<ImageView> redStudentsTablePone = Arrays.asList(studRedOnePone,studRedTwoPone,studRedThreePone,studRedFourPone,
-				studRedFivePone,studRedSixPone,studRedSevenPone,studRedEightPone,studRedNinePone,studRedTenPone);
-		List<ImageView> greenStudentsTablePone = Arrays.asList(studGreenOnePone,studGreenTwoPone,studGreenThreePone,studGreenFourPone,
-				studGreenFivePone,studGreenSixPone,studGreenSevenPone,studGreenEightPone,studGreenNinePone,studGreenTenPone);
-		List<ImageView> blueStudentsTablePone = Arrays.asList(studBlueOnePone,studBlueTwoPone,studBlueThreePone,studBlueFourPone,
-				studBlueFivePone,studBlueSixPone,studBlueSevenPone,studBlueEightPone,studBlueNinePone,studBlueTenPone);
-		List<ImageView> pinkStudentsTablePone = Arrays.asList(studPinkOnePone,studPinkTwoPone,studPinkThreePone,studPinkFourPone,
-				studPinkFivePone,studPinkSixPone,studPinkSevenPone,studPinkEightPone,studPinkNinePone,studPinkTenPone);
-		List<ImageView> yellowStudentsTablePone = Arrays.asList(studYellowOnePone,studYellowTwoPone,studYellowThreePone,studYellowFourPone,
-				studYellowFivePone,studYellowSixPone,studYellowSevenPone,studYellowEightPone,studYellowNinePone,studYellowTenPone);
+		List<ImageView> redStudentsTablePone = Arrays.asList(studRedOnePone, studRedTwoPone, studRedThreePone, studRedFourPone,
+				studRedFivePone, studRedSixPone, studRedSevenPone, studRedEightPone, studRedNinePone, studRedTenPone);
+		List<ImageView> greenStudentsTablePone = Arrays.asList(studGreenOnePone, studGreenTwoPone, studGreenThreePone, studGreenFourPone,
+				studGreenFivePone, studGreenSixPone, studGreenSevenPone, studGreenEightPone, studGreenNinePone, studGreenTenPone);
+		List<ImageView> blueStudentsTablePone = Arrays.asList(studBlueOnePone, studBlueTwoPone, studBlueThreePone, studBlueFourPone,
+				studBlueFivePone, studBlueSixPone, studBlueSevenPone, studBlueEightPone, studBlueNinePone, studBlueTenPone);
+		List<ImageView> pinkStudentsTablePone = Arrays.asList(studPinkOnePone, studPinkTwoPone, studPinkThreePone, studPinkFourPone,
+				studPinkFivePone, studPinkSixPone, studPinkSevenPone, studPinkEightPone, studPinkNinePone, studPinkTenPone);
+		List<ImageView> yellowStudentsTablePone = Arrays.asList(studYellowOnePone, studYellowTwoPone, studYellowThreePone, studYellowFourPone,
+				studYellowFivePone, studYellowSixPone, studYellowSevenPone, studYellowEightPone, studYellowNinePone, studYellowTenPone);
 
 		HashMap<String, ImageView> professorsPone = new HashMap<>();
 		professorsPone.put("RED", professorRedPone);
@@ -909,26 +909,26 @@ public class GameStateGUI{
 		professorsPone.put("PINK", professorPinkPone);
 		professorsPone.put("YELLOW", professorYellowPone);
 
-		List<ImageView> towerImagesPone = Arrays.asList(towerOnePone,towerTwoPone,towerThreePone,towerFourPone,
-				towerFivePone,towerSixPone,towerSevenPone,towerEightPone);
+		List<ImageView> towerImagesPone = Arrays.asList(towerOnePone, towerTwoPone, towerThreePone, towerFourPone,
+				towerFivePone, towerSixPone, towerSevenPone, towerEightPone);
 
 
 		//dashboard player two
 
-		List<ImageView> entranceImagesPTwo = Arrays.asList(hallStudentOnePTwo,hallStudentTwoPTwo,hallStudentThreePTwo,
-				hallStudentFourPTwo,hallStudentFivePTwo,hallStudentSixPTwo,hallStudentSevenPTwo,
-				hallStudentEightPTwo,hallStudentNinePTwo);
+		List<ImageView> entranceImagesPTwo = Arrays.asList(hallStudentOnePTwo, hallStudentTwoPTwo, hallStudentThreePTwo,
+				hallStudentFourPTwo, hallStudentFivePTwo, hallStudentSixPTwo, hallStudentSevenPTwo,
+				hallStudentEightPTwo, hallStudentNinePTwo);
 
-		List<ImageView> redStudentsTablePTwo = Arrays.asList(studRedOnePTwo,studRedTwoPTwo,studRedThreePTwo,studRedFourPTwo,
-				studRedFivePTwo,studRedSixPTwo,studRedSevenPTwo,studRedEightPTwo,studRedNinePTwo,studRedTenPTwo);
-		List<ImageView> greenStudentsTablePTwo = Arrays.asList(studGreenOnePTwo,studGreenTwoPTwo,studGreenThreePTwo,studGreenFourPTwo,
-				studGreenFivePTwo,studGreenSixPTwo,studGreenSevenPTwo,studGreenEightPTwo,studGreenNinePTwo,studGreenTenPTwo);
-		List<ImageView> blueStudentsTablePTwo = Arrays.asList(studBlueOnePTwo,studBlueTwoPTwo,studBlueThreePTwo,studBlueFourPTwo,
-				studBlueFivePTwo,studBlueSixPTwo,studBlueSevenPTwo,studBlueEightPTwo,studBlueNinePTwo,studBlueTenPTwo);
-		List<ImageView> pinkStudentsTablePTwo = Arrays.asList(studPinkOnePTwo,studPinkTwoPTwo,studPinkThreePTwo,studPinkFourPTwo,
-				studPinkFivePTwo,studPinkSixPTwo,studPinkSevenPTwo,studPinkEightPTwo,studPinkNinePTwo,studPinkTenPTwo);
-		List<ImageView> yellowStudentsTablePTwo = Arrays.asList(studYellowOnePTwo,studYellowTwoPTwo,studYellowThreePTwo,studYellowFourPTwo,
-				studYellowFivePTwo,studYellowSixPTwo,studYellowSevenPTwo,studYellowEightPTwo,studYellowNinePTwo,studYellowTenPTwo);
+		List<ImageView> redStudentsTablePTwo = Arrays.asList(studRedOnePTwo, studRedTwoPTwo, studRedThreePTwo, studRedFourPTwo,
+				studRedFivePTwo, studRedSixPTwo, studRedSevenPTwo, studRedEightPTwo, studRedNinePTwo, studRedTenPTwo);
+		List<ImageView> greenStudentsTablePTwo = Arrays.asList(studGreenOnePTwo, studGreenTwoPTwo, studGreenThreePTwo, studGreenFourPTwo,
+				studGreenFivePTwo, studGreenSixPTwo, studGreenSevenPTwo, studGreenEightPTwo, studGreenNinePTwo, studGreenTenPTwo);
+		List<ImageView> blueStudentsTablePTwo = Arrays.asList(studBlueOnePTwo, studBlueTwoPTwo, studBlueThreePTwo, studBlueFourPTwo,
+				studBlueFivePTwo, studBlueSixPTwo, studBlueSevenPTwo, studBlueEightPTwo, studBlueNinePTwo, studBlueTenPTwo);
+		List<ImageView> pinkStudentsTablePTwo = Arrays.asList(studPinkOnePTwo, studPinkTwoPTwo, studPinkThreePTwo, studPinkFourPTwo,
+				studPinkFivePTwo, studPinkSixPTwo, studPinkSevenPTwo, studPinkEightPTwo, studPinkNinePTwo, studPinkTenPTwo);
+		List<ImageView> yellowStudentsTablePTwo = Arrays.asList(studYellowOnePTwo, studYellowTwoPTwo, studYellowThreePTwo, studYellowFourPTwo,
+				studYellowFivePTwo, studYellowSixPTwo, studYellowSevenPTwo, studYellowEightPTwo, studYellowNinePTwo, studYellowTenPTwo);
 
 		HashMap<String, ImageView> professorsPTwo = new HashMap<>();
 		professorsPTwo.put("RED", professorRedPTwo);
@@ -937,25 +937,25 @@ public class GameStateGUI{
 		professorsPTwo.put("PINK", professorPinkPTwo);
 		professorsPTwo.put("YELLOW", professorYellowPTwo);
 
-		List<ImageView> towerImagesPTwo = Arrays.asList(towerOnePTwo,towerTwoPTwo,towerThreePTwo,towerFourPTwo,
-				towerFivePTwo,towerSixPTwo,towerSevenPTwo,towerEightPTwo);
+		List<ImageView> towerImagesPTwo = Arrays.asList(towerOnePTwo, towerTwoPTwo, towerThreePTwo, towerFourPTwo,
+				towerFivePTwo, towerSixPTwo, towerSevenPTwo, towerEightPTwo);
 
 		//dashboard player three
 
-		List<ImageView> entranceImagesPThree = Arrays.asList(hallStudentOnePThree,hallStudentTwoPThree,hallStudentThreePThree,
-				hallStudentFourPThree,hallStudentFivePThree,hallStudentSixPThree,hallStudentSevenPThree,
-				hallStudentEightPThree,hallStudentNinePThree);
+		List<ImageView> entranceImagesPThree = Arrays.asList(hallStudentOnePThree, hallStudentTwoPThree, hallStudentThreePThree,
+				hallStudentFourPThree, hallStudentFivePThree, hallStudentSixPThree, hallStudentSevenPThree,
+				hallStudentEightPThree, hallStudentNinePThree);
 
-		List<ImageView> redStudentsTablePThree = Arrays.asList(studRedOnePThree,studRedTwoPThree,studRedThreePThree,studRedFourPThree,
-				studRedFivePThree,studRedSixPThree,studRedSevenPThree,studRedEightPThree,studRedNinePThree,studRedTenPThree);
-		List<ImageView> greenStudentsTablePThree = Arrays.asList(studGreenOnePThree,studGreenTwoPThree,studGreenThreePThree,studGreenFourPThree,
-				studGreenFivePThree,studGreenSixPThree,studGreenSevenPThree,studGreenEightPThree,studGreenNinePThree,studGreenTenPThree);
-		List<ImageView> blueStudentsTablePThree = Arrays.asList(studBlueOnePThree,studBlueTwoPThree,studBlueThreePThree,studBlueFourPThree,
-				studBlueFivePThree,studBlueSixPThree,studBlueSevenPThree,studBlueEightPThree,studBlueNinePThree,studBlueTenPThree);
-		List<ImageView> pinkStudentsTablePThree = Arrays.asList(studPinkOnePThree,studPinkTwoPThree,studPinkThreePThree,studPinkFourPThree,
-				studPinkFivePThree,studPinkSixPThree,studPinkSevenPThree,studPinkEightPThree,studPinkNinePThree,studPinkTenPThree);
-		List<ImageView> yellowStudentsTablePThree = Arrays.asList(studYellowOnePThree,studYellowTwoPThree,studYellowThreePThree,studYellowFourPThree,
-				studYellowFivePThree,studYellowSixPThree,studYellowSevenPThree,studYellowEightPThree,studYellowNinePThree,studYellowTenPThree);
+		List<ImageView> redStudentsTablePThree = Arrays.asList(studRedOnePThree, studRedTwoPThree, studRedThreePThree, studRedFourPThree,
+				studRedFivePThree, studRedSixPThree, studRedSevenPThree, studRedEightPThree, studRedNinePThree, studRedTenPThree);
+		List<ImageView> greenStudentsTablePThree = Arrays.asList(studGreenOnePThree, studGreenTwoPThree, studGreenThreePThree, studGreenFourPThree,
+				studGreenFivePThree, studGreenSixPThree, studGreenSevenPThree, studGreenEightPThree, studGreenNinePThree, studGreenTenPThree);
+		List<ImageView> blueStudentsTablePThree = Arrays.asList(studBlueOnePThree, studBlueTwoPThree, studBlueThreePThree, studBlueFourPThree,
+				studBlueFivePThree, studBlueSixPThree, studBlueSevenPThree, studBlueEightPThree, studBlueNinePThree, studBlueTenPThree);
+		List<ImageView> pinkStudentsTablePThree = Arrays.asList(studPinkOnePThree, studPinkTwoPThree, studPinkThreePThree, studPinkFourPThree,
+				studPinkFivePThree, studPinkSixPThree, studPinkSevenPThree, studPinkEightPThree, studPinkNinePThree, studPinkTenPThree);
+		List<ImageView> yellowStudentsTablePThree = Arrays.asList(studYellowOnePThree, studYellowTwoPThree, studYellowThreePThree, studYellowFourPThree,
+				studYellowFivePThree, studYellowSixPThree, studYellowSevenPThree, studYellowEightPThree, studYellowNinePThree, studYellowTenPThree);
 
 		HashMap<String, ImageView> professorsPThree = new HashMap<>();
 		professorsPThree.put("RED", professorRedPThree);
@@ -964,8 +964,8 @@ public class GameStateGUI{
 		professorsPThree.put("PINK", professorPinkPThree);
 		professorsPThree.put("YELLOW", professorYellowPThree);
 
-		List<ImageView> towerImagesPThree = Arrays.asList(towerOnePThree,towerTwoPThree,towerThreePThree,towerFourPThree,
-				towerFivePThree,towerSixPThree);
+		List<ImageView> towerImagesPThree = Arrays.asList(towerOnePThree, towerTwoPThree, towerThreePThree, towerFourPThree,
+				towerFivePThree, towerSixPThree);
 
 		List<ImageView> cloudOne = Arrays.asList(studentOneCloudOne, studentTwoCloudOne, studentThreeCloudOne, studentFourCloudOne);
 		List<ImageView> cloudTwo = Arrays.asList(studentOneCloudTwo, studentTwoCloudTwo, studentThreeCloudTwo, studentFourCloudTwo);
@@ -1021,8 +1021,7 @@ public class GameStateGUI{
 			String thirdPlayerNick = nicknameList.get(2);
 			printDashboard(dashboardList.get(thirdPlayerNick), dashboardGUIList.get(thirdPlayerNick), thirdPlayerNick,
 					gameState.getPlayersNumber(), gameState.getProfessors(), towerColors.get(thirdPlayerNick));
-		}
-		else
+		}else
 			hidePlayerThree(dashboardGUIList.get(null));
 
 

@@ -11,8 +11,11 @@ public class ActivateKnightEffectOperation extends Operation{
 		super(game, playerController);
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game activates the knight card effect
+	 */
 	@Override
-	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException{
 		//check args
 		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");

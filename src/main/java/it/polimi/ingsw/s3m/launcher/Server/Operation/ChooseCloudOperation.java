@@ -4,8 +4,9 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.CloudNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.IncorrectOperationException;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Cloud;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Cloud;
+
 import java.util.ArrayList;
 
 //DONE
@@ -14,9 +15,10 @@ public class ChooseCloudOperation extends Operation{
 
 	/**
 	 * Constructor used to create an operation of choosing a cloud based on player's response
-	 * @param game game in which a cloud is chosen
-	 * @param playerController player choosing a cloud
-	 * @param cloudPosition position of the chosen cloud
+	 *
+	 * @param game             the game state in which the player is in
+	 * @param playerController the player who's executing the operation
+	 * @param cloudPosition    position of the chosen cloud
 	 */
 	public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){
 		super(game, playerController);
@@ -24,13 +26,10 @@ public class ChooseCloudOperation extends Operation{
 	}
 
 	/**
-	 * Controls if chooseCloud method has safe parameters
-	 *
-	 * @throws PlayerNotInListException
-	 * @throws CloudNotInListException
+	 * checks if the arguments of the operation are valid, if so the game give the students on the cloud to the player
 	 */
 	@Override
-	public void executeOperation() throws PlayerNotInListException, CloudNotInListException, IncorrectOperationException {
+	public void executeOperation() throws PlayerNotInListException, CloudNotInListException, IncorrectOperationException{
 		//check args
 		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");

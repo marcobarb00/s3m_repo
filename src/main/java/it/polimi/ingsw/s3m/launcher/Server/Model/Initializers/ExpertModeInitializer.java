@@ -14,7 +14,7 @@ public class ExpertModeInitializer{
 	 *
 	 * @param game game to initialize to expert mode
 	 */
-	public ExpertModeInitializer(Game game) throws EmptyBagException {
+	public ExpertModeInitializer(Game game) throws EmptyBagException{
 		this.game = game;
 		playersUpdate();
 		// Character cards
@@ -40,7 +40,7 @@ public class ExpertModeInitializer{
 	 * Method used to draw three character cards and to initialize the
 	 * Jester character card if present
 	 */
-	public void characterCardsSetup() throws EmptyBagException {
+	public void characterCardsSetup() throws EmptyBagException{
 		game.drawThreeCharacterCards();
 		for(CharacterCard characterCard : game.getCharacterCardsList()){
 			if(characterCard instanceof Jester){

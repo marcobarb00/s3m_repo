@@ -3,14 +3,12 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
 
 public class NewRoomGUI{
 

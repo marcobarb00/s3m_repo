@@ -1,7 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.CLI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.EnterRoomResponse;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.EnterRoomMessage;
 
 import java.util.ArrayList;

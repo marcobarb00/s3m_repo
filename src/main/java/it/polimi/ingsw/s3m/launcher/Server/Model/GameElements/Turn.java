@@ -11,6 +11,7 @@ public class Turn{
 	private HashMap<String, AssistantCard> playedCards = new HashMap<>();
 	// Action phase
 	private boolean activatedCharacterCard = false;
+	private int motherNatureMaxAllowedMovements = 0;
 
 	public Turn(String firstPlayerNickname){
 		this.firstPlayerNickname = firstPlayerNickname;
@@ -54,6 +55,10 @@ public class Turn{
 		return activatedCharacterCard;
 	}
 
+	public int getMotherNatureMaxAllowedMovements(){
+		return motherNatureMaxAllowedMovements;
+	}
+
 	// SETTER
 	public void setFirstPlayerNickname(String firstPlayerNickname){
 		this.firstPlayerNickname = firstPlayerNickname;
@@ -73,5 +78,9 @@ public class Turn{
 
 	public void setActivatedCharacterCard(boolean activatedCharacterCard){
 		this.activatedCharacterCard = activatedCharacterCard;
+	}
+
+	public void setMotherNatureMaxAllowedMovements(int motherNatureMaxAllowedMovements){
+		this.motherNatureMaxAllowedMovements = motherNatureMaxAllowedMovements;
 	}
 }

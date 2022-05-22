@@ -11,12 +11,15 @@ public class ActivateCentaurEffectOperation extends Operation{
 		super(game, playerController);
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game activates the centaur card effect
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
-			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException{
 
 		//check Args
-		boolean checkArgs = game != null && playerController != null ;
+		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
 		//check player

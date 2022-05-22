@@ -18,7 +18,8 @@ public class RoomsController{
 	private static final RoomsController instance = null;
 	private final static HashMap<Integer, Room> rooms = new HashMap<>();
 
-	private RoomsController(){}
+	private RoomsController(){
+	}
 
 	public static RoomsController instance(){
 		return Objects.requireNonNullElseGet(instance, RoomsController::new);

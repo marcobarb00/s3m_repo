@@ -5,6 +5,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,14 +15,10 @@ public class ActivateJesterEffectOperation extends Operation{
 	private final ArrayList<PawnColor> givenStudents;
 
 	/**
-	 * Checks if activateJesterEffect method has safe parameters.
-	 * Required students are those the player wants from the card,
-	 * given students are those from the player hall.
-	 *
-	 * @param game
-	 * @param playerController
-	 * @param requiredStudents
-	 * @param givenStudents
+	 * @param game             the game state in which the player is in
+	 * @param playerController the player who's executing the operation
+	 * @param requiredStudents the students on the card that the player wants to put on the entrance
+	 * @param givenStudents    the students on the entrance that the player wants to put on the card
 	 */
 	public ActivateJesterEffectOperation(Game game, PlayerController playerController,
 										 ArrayList<PawnColor> requiredStudents,
@@ -31,9 +28,12 @@ public class ActivateJesterEffectOperation extends Operation{
 		this.givenStudents = givenStudents;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game activates the jester card effect
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
-			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException{
 		//check null args
 		boolean checkArgs = game != null && playerController != null && requiredStudents != null
 				&& givenStudents != null && !requiredStudents.contains(null) && !givenStudents.contains(null);
@@ -72,8 +72,10 @@ public class ActivateJesterEffectOperation extends Operation{
 
 	/**
 	 * Checks if on Jester card the students are enough
+	 *
+	 * @throws IncorrectOperationException thrown if there aren't enough students on the jester card
 	 */
-	private void searchStudentsOnCard() throws IncorrectOperationException {
+	private void searchStudentsOnCard() throws IncorrectOperationException{
 		HashMap<PawnColor, Integer> studentsOnJester = game.getJesterStudentsOnCard();
 
 		//checking on Jester card
@@ -87,7 +89,12 @@ public class ActivateJesterEffectOperation extends Operation{
 		}
 	}
 
-	private void searchStudentsInEntrance() throws IncorrectOperationException {
+	/**
+	 * check if the students in the entrance are enough
+	 *
+	 * @throws IncorrectOperationException thrown if there aren't enough students in the entrance
+	 */
+	private void searchStudentsInEntrance() throws IncorrectOperationException{
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 

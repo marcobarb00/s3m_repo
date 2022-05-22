@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Communication.DTO;
+package it.polimi.ingsw.s3m.launcher.DTOs;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -20,7 +20,9 @@ public class IslandDTO implements Serializable{
 		return students;
 	}
 
-	public String getDominatorColor(){ return dominatorColor; }
+	public String getDominatorColor(){
+		return dominatorColor;
+	}
 
 	public String getDominator(){
 		return dominator;

@@ -1,8 +1,8 @@
-package it.polimi.ingsw.s3m.launcher.Communication.DTO;
+package it.polimi.ingsw.s3m.launcher.DTOs;
 
-import it.polimi.ingsw.s3m.launcher.Server.Model.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
+import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class Mapper{
 	public PawnColor stringToColor(String colorString){
-		if (colorString == null) return null;
+		if(colorString == null) return null;
 		switch(colorString.toUpperCase(Locale.ENGLISH)){
 			case "RED":
 				return PawnColor.RED;
@@ -29,9 +29,8 @@ public class Mapper{
 		}
 	}
 
-	public ArrayList<PawnColor> StringListToColor(ArrayList<String> colorStringList){
-		if(colorStringList == null)
-			return null;
+	public ArrayList<PawnColor> stringListToColor(ArrayList<String> colorStringList){
+		if(colorStringList == null) return null;
 
 		ArrayList<PawnColor> colorList = new ArrayList<>();
 		colorStringList.forEach(colorString -> colorList.add(stringToColor(colorString)));
@@ -39,22 +38,23 @@ public class Mapper{
 	}
 
 	public AssistantCardDTO assistantCardToDTO(AssistantCard assistantCard){
-		if(assistantCard == null){
-			return new AssistantCardDTO(null, 0, 0);
-		}
+		if(assistantCard == null) return new AssistantCardDTO(null, 0, 0);
 		return new AssistantCardDTO(assistantCard.getType(), assistantCard.getValue(), assistantCard.getMovements());
 	}
 
 	public ArrayList<AssistantCardDTO> assistantCardListToDTO(ArrayList<AssistantCard> assistantCardList){
+		if(assistantCardList == null) return null;
+
 		ArrayList<AssistantCardDTO> assistantCardDTOList = new ArrayList<>();
-		for(AssistantCard assistantCard : assistantCardList){
+		for(AssistantCard assistantCard : assistantCardList)
 			assistantCardDTOList.add(assistantCardToDTO(assistantCard));
-		}
 
 		return assistantCardDTOList;
 	}
 
 	public DashboardDTO dashboardToDTO(Dashboard dashboard){
+		if(dashboard == null) return null;
+
 		HashMap<String, Integer> entrance = new HashMap<>();
 		dashboard.getEntrance().forEach((color, value) -> entrance.put(color.name(), value));
 
@@ -64,36 +64,11 @@ public class Mapper{
 		return new DashboardDTO(entrance, tables, dashboard.getNumberOfTowers());
 	}
 
-	public ArrayList<DashboardDTO> dashboardListToDTO(ArrayList<Dashboard> dashboardList){
-		ArrayList<DashboardDTO> dashboardDTOList = new ArrayList<>();
-		for(Dashboard dashboard : dashboardList){
-			dashboardDTOList.add(dashboardToDTO(dashboard));
-		}
-
-		return dashboardDTOList;
-	}
-
 	public PlayerDTO playerToDTO(Player player){
 		if(player == null){
 			return new PlayerDTO("", "", null, null, null);
 		}
 		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()), assistantCardListToDTO(player.getHand()), assistantCardToDTO(player.getLastPlayedCard()));
-	}
-
-	public ArrayList<PlayerDTO> playerListToDTO(ArrayList<Player> playerList){
-		ArrayList<PlayerDTO> playerDTOList = new ArrayList<>();
-		for(Player player : playerList){
-			playerDTOList.add(playerToDTO(player));
-		}
-
-		return playerDTOList;
-	}
-
-	public HashMap<String, PlayerDTO> playerHashMapToDTO(HashMap<String, Player> playerHashMap){
-		HashMap<String, PlayerDTO> players = new HashMap<>();
-		playerHashMap.forEach((nickname, player) -> players.put(nickname, playerToDTO(player)));
-
-		return players;
 	}
 
 	public IslandDTO islandToDTO(Island island){
@@ -103,7 +78,7 @@ public class Mapper{
 		}
 
 		if(island.getDominator() == null){
-			return new IslandDTO(students, "", "",  0);
+			return new IslandDTO(students, "", "", 0);
 		}
 
 		return new IslandDTO(students, island.getDominator().getNickname(),
@@ -161,10 +136,12 @@ public class Mapper{
 	}
 
 	public TurnDTO turnToDTO(Turn turn){
+		if(turn == null) return null;
+
 		HashMap<String, AssistantCardDTO> playedCards = new HashMap<>();
 		turn.getPlayedCards().forEach((nickname, card) -> playedCards.put(nickname, assistantCardToDTO(card)));
 
-		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard());
+		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard(), turn.getMotherNatureMaxAllowedMovements());
 	}
 
 	public GameDTO gameToDTO(Game game){
@@ -189,7 +166,7 @@ public class Mapper{
 
 		HashMap<String, AssistantCard> playedCards = game.getTurn().getPlayedCards();
 		HashMap<String, AssistantCardDTO> playedCardsDTO = new HashMap<>();
-		playedCards.forEach((player,card) -> playedCardsDTO.put(player, assistantCardToDTO(card)));
+		playedCards.forEach((player, card) -> playedCardsDTO.put(player, assistantCardToDTO(card)));
 
 		return new GameDTO(game.getNumberOfPlayers(), game.isExpertMode(), game.getMotherNature().getCurrentPosition(),
 				currentPlayer, game.getPlayersNicknames(), dashboards, coins, towerColor, cloudListToDTO(game.getCloudsList()),
