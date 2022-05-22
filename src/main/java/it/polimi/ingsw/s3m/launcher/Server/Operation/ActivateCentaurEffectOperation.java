@@ -12,7 +12,7 @@ public class ActivateCentaurEffectOperation extends Operation{
 	}
 
 	/**
-	 * checks if the arguments of the operation are valid, if so it activates the centaur card effect
+	 * checks if the arguments of the operation are valid, if so the game activates the centaur card effect
 	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,

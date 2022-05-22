@@ -13,6 +13,12 @@ public class ActivateMinstrelEffectOperation extends Operation{
 	ArrayList<PawnColor> enteringEntranceStudents;
 	ArrayList<PawnColor> enteringTablesStudents;
 
+	/**
+	 * @param game the game state in which the player is in
+	 * @param playerController the player who's executing the operation
+	 * @param enteringEntranceStudents selected students to go from the tables to the entrance
+	 * @param enteringTablesStudents selected students to go from the entrance to the tables
+	 */
 	public ActivateMinstrelEffectOperation(Game game, PlayerController playerController,
 										   ArrayList<PawnColor> enteringEntranceStudents,
 										   ArrayList<PawnColor> enteringTablesStudents){
@@ -21,6 +27,9 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		this.enteringTablesStudents = enteringTablesStudents;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game activates the minstrel card effect
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
 		//check args
@@ -56,6 +65,10 @@ public class ActivateMinstrelEffectOperation extends Operation{
 				enteringTablesStudents);
 	}
 
+	/**
+	 * checks if the player selected a valid input for the students in entrance
+	 * @throws IncorrectOperationException thrown if the player selected students from entrance to tables are really in the entrance
+	 */
 	private void searchStudentsInEntrance() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
@@ -72,6 +85,10 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		}
 	}
 
+	/**
+	 * checks if the player selected a valid input for the students on the tables
+	 * @throws IncorrectOperationException thrown if the player selected students from tables to entrance are really on the tables
+	 */
 	private void searchStudentsInTables() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> tables = player.getDashboard().getTables();
@@ -88,6 +105,10 @@ public class ActivateMinstrelEffectOperation extends Operation{
 		}
 	}
 
+	/**
+	 * checks if the tables are full of students (10 students)
+	 * @throws IncorrectOperationException thrown if the tables contains too many students
+	 */
 	private void checkTablesAreNotFull() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> tables = player.getDashboard().getTables();

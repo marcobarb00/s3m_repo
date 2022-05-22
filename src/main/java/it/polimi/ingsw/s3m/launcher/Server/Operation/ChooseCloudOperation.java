@@ -14,8 +14,8 @@ public class ChooseCloudOperation extends Operation{
 
 	/**
 	 * Constructor used to create an operation of choosing a cloud based on player's response
-	 * @param game game in which a cloud is chosen
-	 * @param playerController player choosing a cloud
+	 * @param game the game state in which the player is in
+	 * @param playerController the player who's executing the operation
 	 * @param cloudPosition position of the chosen cloud
 	 */
 	public ChooseCloudOperation(Game game, PlayerController playerController, int cloudPosition){
@@ -24,10 +24,7 @@ public class ChooseCloudOperation extends Operation{
 	}
 
 	/**
-	 * Controls if chooseCloud method has safe parameters
-	 *
-	 * @throws PlayerNotInListException
-	 * @throws CloudNotInListException
+	 * checks if the arguments of the operation are valid, if so the game give the students on the cloud to the player
 	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, CloudNotInListException, IncorrectOperationException {

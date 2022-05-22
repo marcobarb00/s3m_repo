@@ -18,6 +18,9 @@ public class PutStudentOnTableOperation extends Operation{
 		this.studentColor = studentColor;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game put the student on the tables
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, IllegalArgumentException, IncorrectOperationException {
 		boolean checkArgs = game != null && playerController != null && studentColor != null;
@@ -38,6 +41,10 @@ public class PutStudentOnTableOperation extends Operation{
 		game.putStudentOnTables(playerController.getNickname(), studentColor);
 	}
 
+	/**
+	 * checks if the selected student is in the entrance
+	 * @throws IncorrectOperationException thrown if the selected student is not in the entrance
+	 */
 	private void searchStudentsInEntrance() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();

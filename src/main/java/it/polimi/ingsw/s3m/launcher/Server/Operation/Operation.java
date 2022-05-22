@@ -34,11 +34,18 @@ public abstract class Operation{
 			NotEnoughCoinsException, NotPlayerTurnException,
 			ZeroTowersRemainedException, NotEnoughIslandsException, NotEnoughAssistantCardsException, CharacterCardAlreadyActivatedException, IncorrectOperationException;
 
+	/**
+	 * @return true if the player executing the operation is in the list of players of the game, false otherwise
+	 */
 	public boolean checkNickname(){
 		ArrayList<String> playersList = game.getPlayersNicknames();
 		return playersList.contains(playerController.getNickname());
 	}
 
+	/**
+	 * @param cardName the character card selected by the player
+	 * @return true if the player has enough coins to activate the selected character card, false otherwise
+	 */
 	public boolean checkCharacterCardCost(String cardName){
 		ArrayList<CharacterCard> cards = game.getCharacterCardsList();
 		CharacterCard card = null;
@@ -50,11 +57,10 @@ public abstract class Operation{
 		return coins >= card.getCost();
 	}
 
-	public boolean checkCurrentPlayer(){
-		String currentPlayer = game.getTurn().getCurrentPlayerNickname();
-		return playerController.getNickname().equals(currentPlayer);
-	}
-
+	/**
+	 * checks if the player can move another student
+	 * @throws IncorrectOperationException thrown if the player can't move more students
+	 */
 	public void checkMovableStudent() throws IncorrectOperationException {
 		//3 players mode check
 		int maxMovableStudents = 3;

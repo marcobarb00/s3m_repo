@@ -8,11 +8,19 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 public class MoveMotherNatureOperation extends Operation{
 	private final int movements;
 
+	/**
+	 * @param game the game state in which the player is in
+	 * @param playerController the player who's executing the operation
+	 * @param movements movements of mother nature selected by the player
+	 */
 	public MoveMotherNatureOperation(Game game, PlayerController playerController, int movements){
 		super(game, playerController);
 		this.movements = movements;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game moves mother nature
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException,
 			NotPlayerTurnException, ZeroTowersRemainedException,

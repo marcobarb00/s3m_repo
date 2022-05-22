@@ -18,6 +18,9 @@ public class PlayAssistantCardOperation extends Operation{
 		this.assistantCardPosition = assistantCardPosition;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game plays the selected assistant card
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException,
 			NotEnoughAssistantCardsException, IncorrectOperationException {
@@ -39,6 +42,9 @@ public class PlayAssistantCardOperation extends Operation{
 		game.playAssistantCard(playerController.getNickname(), assistantCardPosition);
 	}
 
+	/**
+	 * @return true if the selected assistant card is playable by the player
+	 */
 	private boolean checkPlayableCard(){
 		ArrayList<AssistantCard> cardsPlayedInTurn = game.getTurnPlayedCards();
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());

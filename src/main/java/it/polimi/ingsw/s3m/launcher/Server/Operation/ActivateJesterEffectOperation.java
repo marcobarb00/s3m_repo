@@ -14,10 +14,6 @@ public class ActivateJesterEffectOperation extends Operation{
 	private final ArrayList<PawnColor> givenStudents;
 
 	/**
-	 * Checks if activateJesterEffect method has safe parameters.
-	 * Required students are those the player wants from the card,
-	 * given students are those from the player hall.
-	 *
 	 * @param game the game state in which the player is in
 	 * @param playerController the player who's executing the operation
 	 * @param requiredStudents the students on the card that the player wants to put on the entrance
@@ -31,6 +27,9 @@ public class ActivateJesterEffectOperation extends Operation{
 		this.givenStudents = givenStudents;
 	}
 
+	/**
+	 *checks if the arguments of the operation are valid, if so the game activates the jester card effect
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
 			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
@@ -72,6 +71,7 @@ public class ActivateJesterEffectOperation extends Operation{
 
 	/**
 	 * Checks if on Jester card the students are enough
+	 * @throws IncorrectOperationException thrown if there aren't enough students on the jester card
 	 */
 	private void searchStudentsOnCard() throws IncorrectOperationException {
 		HashMap<PawnColor, Integer> studentsOnJester = game.getJesterStudentsOnCard();
@@ -87,6 +87,10 @@ public class ActivateJesterEffectOperation extends Operation{
 		}
 	}
 
+	/**
+	 * check if the students in the entrance are enough
+	 * @throws IncorrectOperationException thrown if there aren't enough students in the entrance
+	 */
 	private void searchStudentsInEntrance() throws IncorrectOperationException {
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();

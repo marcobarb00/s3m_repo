@@ -21,6 +21,9 @@ public class PutStudentOnIslandOperation extends Operation{
 		this.studentColor = studentColor;
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so the game put the student on the island
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, IncorrectOperationException {
 		//check null
