@@ -260,11 +260,17 @@ public class Game{
 	// TURN
 
 	/**
+	 * Method used to reset the computer dominance at the end of every action phase
+	 */
+	public void resetComputeDominance(){
+		computeDominanceStrategy = new StandardComputeDominance();
+	}
+
+	/**
 	 * Method used to reset the turn's attributes at the end of the action phase
 	 * and to recreate clouds
 	 */
 	public void resetTurn(){
-		computeDominanceStrategy = new StandardComputeDominance();
 		for (int i = 0; i < numberOfPlayers; i++)
 			cloudsList.add(new Cloud());
 		turn.setCurrentPlayerNickname(turn.getFirstPlayerNickname());

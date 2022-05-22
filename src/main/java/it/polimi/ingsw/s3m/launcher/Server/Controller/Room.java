@@ -120,6 +120,7 @@ public class Room{
 
 					try{
 						actionPhase(currentPlayer);
+						gameState.resetComputeDominance();
 					}catch(NotEnoughAssistantCardsException e){
 						sendNotificationToAll(e.getMessage());
 						gameEndingFlag = true;

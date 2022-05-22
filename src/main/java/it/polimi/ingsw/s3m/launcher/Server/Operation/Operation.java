@@ -16,6 +16,19 @@ public abstract class Operation{
 		this.game = game;
 	}
 
+	/**
+	 * common method to execute an operation
+	 * @throws PlayerNotInListException
+	 * @throws CloudNotInListException
+	 * @throws NotExpertModeException
+	 * @throws NotEnoughCoinsException
+	 * @throws NotPlayerTurnException
+	 * @throws ZeroTowersRemainedException
+	 * @throws NotEnoughIslandsException
+	 * @throws NotEnoughAssistantCardsException
+	 * @throws CharacterCardAlreadyActivatedException
+	 * @throws IncorrectOperationException
+	 */
 	public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
 			NotExpertModeException,
 			NotEnoughCoinsException, NotPlayerTurnException,

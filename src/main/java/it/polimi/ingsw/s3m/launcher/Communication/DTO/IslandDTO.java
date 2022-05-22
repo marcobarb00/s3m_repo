@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class IslandDTO implements Serializable{
-	private HashMap<String, Integer> students;
-	private String dominatorColor;
-	private String dominator;
-	private int numberOfTowers;
+	private final HashMap<String, Integer> students;
+	private final String dominatorColor;
+	private final String dominator;
+	private final int numberOfTowers;
 
 	public IslandDTO(HashMap<String, Integer> students, String dominator, String dominatorColor, int numberOfTowers){
 		this.students = students;
