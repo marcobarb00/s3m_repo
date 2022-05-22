@@ -41,7 +41,7 @@ public class GameDTO implements Serializable{
 		this.lastPlayedCards = lastPlayedCards;
 	}
 
-	public HashMap<String, AssistantCardDTO> getLastPlayedCards() {
+	public HashMap<String, AssistantCardDTO> getLastPlayedCards(){
 		return lastPlayedCards;
 	}
 

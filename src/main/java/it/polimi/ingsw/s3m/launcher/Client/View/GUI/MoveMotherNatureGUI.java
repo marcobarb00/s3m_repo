@@ -15,42 +15,42 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class MoveMotherNatureGUI{
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    TextField numOfSteps;
-    @FXML
-    GridPane gridPane;
-    @FXML
-    Button back;
-    @FXML
-    Label stepsLimit;
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	TextField numOfSteps;
+	@FXML
+	GridPane gridPane;
+	@FXML
+	Button back;
+	@FXML
+	Label stepsLimit;
 
-    public void printMessageInformation(MoveMotherNatureMessage message){
-        GameDTO gameState = message.getGameState();
-        int motherNatureMaxSteps = gameState.getTurn().getMotherNatureMaxAllowedMovements();
+	public void printMessageInformation(MoveMotherNatureMessage message){
+		GameDTO gameState = message.getGameState();
+		int motherNatureMaxSteps = gameState.getTurn().getMotherNatureMaxAllowedMovements();
 
-        stepsLimit.setText(String.valueOf(motherNatureMaxSteps));
-    }
+		stepsLimit.setText(String.valueOf(motherNatureMaxSteps));
+	}
 
-    public void submitMotherNatureOnIsland(ActionEvent event){
-        int steps;
-        try{
-            steps = Integer.parseInt(numOfSteps.getText());
-        }catch(NumberFormatException e){
-            steps = -1;
-        }
-        ControllerGUI.getInstance().sendResponse(new MoveMotherNatureResponse(steps));
-        ControllerGUI.getInstance().startLoading();
-    }
+	public void submitMotherNatureOnIsland(ActionEvent event){
+		int steps;
+		try{
+			steps = Integer.parseInt(numOfSteps.getText());
+		}catch(NumberFormatException e){
+			steps = -1;
+		}
+		ControllerGUI.getInstance().sendResponse(new MoveMotherNatureResponse(steps));
+		ControllerGUI.getInstance().startLoading();
+	}
 
-    public void insert(MoveMotherNatureMessage message){
-        GameDTO gameState = message.getGameState();
-        stepsLimit.setText(String.valueOf(gameState.getMotherNaturePosition()));
-    }
+	public void insert(MoveMotherNatureMessage message){
+		GameDTO gameState = message.getGameState();
+		stepsLimit.setText(String.valueOf(gameState.getMotherNaturePosition()));
+	}
 
-    public void back(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().sendResponse(new BackResponse());
-        ControllerGUI.getInstance().startLoading();
-    }
+	public void back(MouseEvent mouseEvent){
+		ControllerGUI.getInstance().sendResponse(new BackResponse());
+		ControllerGUI.getInstance().startLoading();
+	}
 }

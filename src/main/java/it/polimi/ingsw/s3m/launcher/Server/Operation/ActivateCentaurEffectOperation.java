@@ -16,10 +16,10 @@ public class ActivateCentaurEffectOperation extends Operation{
 	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
-			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException{
 
 		//check Args
-		boolean checkArgs = game != null && playerController != null ;
+		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
 
 		//check player

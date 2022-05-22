@@ -9,8 +9,8 @@ public class ActivateMushroomerEffectOperation extends Operation{
 	private final PawnColor notInfluencingColor;
 
 	/**
-	 * @param game the game state in which the player is in
-	 * @param playerController the player who's executing the operation
+	 * @param game                the game state in which the player is in
+	 * @param playerController    the player who's executing the operation
 	 * @param notInfluencingColor color that should not be considered during the calculation of the influence
 	 */
 	public ActivateMushroomerEffectOperation(Game game, PlayerController playerController, PawnColor notInfluencingColor){
@@ -22,7 +22,7 @@ public class ActivateMushroomerEffectOperation extends Operation{
 	 * checks if the arguments of the operation are valid, if so the game activates the mushroomer card effect
 	 */
 	@Override
-	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+	public void executeOperation() throws PlayerNotInListException, NotExpertModeException, NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException{
 		//check args
 		boolean checkArgs = game != null && playerController != null && notInfluencingColor != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");

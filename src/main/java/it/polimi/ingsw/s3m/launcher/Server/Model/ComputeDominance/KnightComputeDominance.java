@@ -6,7 +6,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
 
 import java.util.HashMap;
 
-public class KnightComputeDominance implements ComputeDominanceStrategy {
+public class KnightComputeDominance implements ComputeDominanceStrategy{
 	private Player actingPlayer;
 
 	/**

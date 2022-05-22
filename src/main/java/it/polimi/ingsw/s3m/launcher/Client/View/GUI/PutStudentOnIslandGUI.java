@@ -14,41 +14,39 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.util.List;
+public class PutStudentOnIslandGUI{
+	ObservableList<String> colorList = FXCollections.observableArrayList("Choose the student color", "RED", "GREEN", "BLUE", "PINK", "YELLOW");
 
-public class PutStudentOnIslandGUI {
-    ObservableList<String> colorList = FXCollections.observableArrayList("Choose the student color", "RED", "GREEN", "BLUE", "PINK", "YELLOW");
+	@FXML
+	ImageView backgroundImage;
+	@FXML
+	ComboBox<String> colorOfStudent;
+	@FXML
+	TextField numOfIsland;
+	@FXML
+	GridPane gridPane;
+	@FXML
+	Button back;
 
-    @FXML
-    ImageView backgroundImage;
-    @FXML
-    ComboBox<String> colorOfStudent;
-    @FXML
-    TextField numOfIsland;
-    @FXML
-    GridPane gridPane;
-    @FXML
-    Button back;
+	public void putStudentOnIsland(){
+		colorOfStudent.setValue("Choose the student color");
+		colorOfStudent.setItems(colorList);
+	}
 
-    public void putStudentOnIsland(){
-        colorOfStudent.setValue("Choose the student color");
-        colorOfStudent.setItems(colorList);
-    }
+	public void submitOnIsland(ActionEvent event){
+		int numIsland;
+		try{
+			numIsland = Integer.parseInt(numOfIsland.getText());
+		}catch(NumberFormatException e){
+			numIsland = -1;
+		}
 
-    public void submitOnIsland(ActionEvent event) {
-        int numIsland;
-        try{
-            numIsland = Integer.parseInt(numOfIsland.getText());
-        }catch(NumberFormatException e){
-            numIsland = -1;
-        }
+		ControllerGUI.getInstance().sendResponse(new PutStudentOnIslandResponse(colorOfStudent.getValue(), numIsland));
+		ControllerGUI.getInstance().startLoading();
+	}
 
-        ControllerGUI.getInstance().sendResponse(new PutStudentOnIslandResponse(colorOfStudent.getValue(), numIsland));
-        ControllerGUI.getInstance().startLoading();
-    }
-
-    public void back(MouseEvent mouseEvent) {
-        ControllerGUI.getInstance().sendResponse(new BackResponse());
-        ControllerGUI.getInstance().startLoading();
-    }
+	public void back(MouseEvent mouseEvent){
+		ControllerGUI.getInstance().sendResponse(new BackResponse());
+		ControllerGUI.getInstance().startLoading();
+	}
 }

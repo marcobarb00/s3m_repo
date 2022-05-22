@@ -4,6 +4,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Controller.PlayerController;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
+
 import java.util.ArrayList;
 
 public abstract class Operation{
@@ -18,16 +19,17 @@ public abstract class Operation{
 
 	/**
 	 * common method to execute an operation
-	 * @throws PlayerNotInListException thrown if the player that executed the operation is not in the player list of the room
-	 * @throws CloudNotInListException thrown if the cloud selected is not in the list of clouds in the game
-	 * @throws NotExpertModeException thrown if the player tries to play a character card but the game is not in expert mode
-	 * @throws NotEnoughCoinsException thrown if the player doesn't have enough coins to play the selected character card
-	 * @throws NotPlayerTurnException thrown if the server receives an operation from a player that is not the current player turn
-	 * @throws ZeroTowersRemainedException thrown if a player finishes his towers
-	 * @throws NotEnoughIslandsException thrown if there are less than four islands in the game
-	 * @throws NotEnoughAssistantCardsException thrown if a player finishes his assistant cards
+	 *
+	 * @throws PlayerNotInListException               thrown if the player that executed the operation is not in the player list of the room
+	 * @throws CloudNotInListException                thrown if the cloud selected is not in the list of clouds in the game
+	 * @throws NotExpertModeException                 thrown if the player tries to play a character card but the game is not in expert mode
+	 * @throws NotEnoughCoinsException                thrown if the player doesn't have enough coins to play the selected character card
+	 * @throws NotPlayerTurnException                 thrown if the server receives an operation from a player that is not the current player turn
+	 * @throws ZeroTowersRemainedException            thrown if a player finishes his towers
+	 * @throws NotEnoughIslandsException              thrown if there are less than four islands in the game
+	 * @throws NotEnoughAssistantCardsException       thrown if a player finishes his assistant cards
 	 * @throws CharacterCardAlreadyActivatedException thrown if a player tries to activate a character card that has already been played in the current turn
-	 * @throws IncorrectOperationException thrown if a player tries to do an operation that should not be done in the current phase or the player gives an invalid input
+	 * @throws IncorrectOperationException            thrown if a player tries to do an operation that should not be done in the current phase or the player gives an invalid input
 	 */
 	public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
 			NotExpertModeException,
@@ -59,9 +61,10 @@ public abstract class Operation{
 
 	/**
 	 * checks if the player can move another student
+	 *
 	 * @throws IncorrectOperationException thrown if the player can't move more students
 	 */
-	public void checkMovableStudent() throws IncorrectOperationException {
+	public void checkMovableStudent() throws IncorrectOperationException{
 		//3 players mode check
 		int maxMovableStudents = 3;
 		boolean threePlayersMode = game.getNumberOfPlayers() == 3;

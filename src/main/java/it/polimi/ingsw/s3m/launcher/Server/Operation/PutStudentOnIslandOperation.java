@@ -6,7 +6,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Exception.PlayerNotInListException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Player;
-import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.Student;
 
 import java.util.HashMap;
 
@@ -25,7 +24,7 @@ public class PutStudentOnIslandOperation extends Operation{
 	 * checks if the arguments of the operation are valid, if so the game put the student on the island
 	 */
 	@Override
-	public void executeOperation() throws PlayerNotInListException, IncorrectOperationException {
+	public void executeOperation() throws PlayerNotInListException, IncorrectOperationException{
 		//check null
 		boolean checkArgs = studentColor != null && game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
@@ -45,7 +44,7 @@ public class PutStudentOnIslandOperation extends Operation{
 		game.putStudentOnIslands(playerController.getNickname(), islandPosition, studentColor);
 	}
 
-	private void searchStudentsInEntrance() throws IncorrectOperationException {
+	private void searchStudentsInEntrance() throws IncorrectOperationException{
 		Player player = game.getPlayerHashMap().get(playerController.getNickname());
 		HashMap<PawnColor, Integer> entrance = player.getDashboard().getEntrance();
 

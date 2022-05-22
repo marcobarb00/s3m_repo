@@ -9,6 +9,7 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.PawnColor;
 import it.polimi.ingsw.s3m.launcher.Server.Operation.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -325,7 +326,7 @@ public class Room{
 
 		CharacterCard playedCharacterCard;
 		int cardPosition = playCharacterCardResponse.getCharacterCardPosition();
-		if (cardPosition < 0 || cardPosition > 3)
+		if(cardPosition < 0 || cardPosition > 3)
 			throw new IncorrectOperationException("Invalid character card position");
 		else
 			playedCharacterCard = gameState.getCharacterCardsList().get(cardPosition);
@@ -448,15 +449,16 @@ public class Room{
 	}
 
 	// GETTER
-	public Game getGameState() {
+	public Game getGameState(){
 		return gameState;
 	}
-	public boolean isExpertMode() {
+
+	public boolean isExpertMode(){
 		return expertMode;
 	}
 
 	// SETTER
-	public void setGameState(Game gameState) {
+	public void setGameState(Game gameState){
 		this.gameState = gameState;
 	}
 }

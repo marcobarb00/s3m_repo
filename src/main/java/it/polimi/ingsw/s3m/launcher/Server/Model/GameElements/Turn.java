@@ -55,7 +55,7 @@ public class Turn{
 		return activatedCharacterCard;
 	}
 
-	public int getMotherNatureMaxAllowedMovements() {
+	public int getMotherNatureMaxAllowedMovements(){
 		return motherNatureMaxAllowedMovements;
 	}
 

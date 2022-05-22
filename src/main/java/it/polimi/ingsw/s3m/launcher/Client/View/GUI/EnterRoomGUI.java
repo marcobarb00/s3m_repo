@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class EnterRoomGUI{
 
 	@FXML
-	ComboBox<String >otherIDRoom;
+	ComboBox<String> otherIDRoom;
 	@FXML
 	TextField nickname;
 	@FXML

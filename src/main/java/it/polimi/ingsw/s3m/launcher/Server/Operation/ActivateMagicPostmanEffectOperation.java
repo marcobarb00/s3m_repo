@@ -16,7 +16,7 @@ public class ActivateMagicPostmanEffectOperation extends Operation{
 	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
-			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
+			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException{
 		//check args
 		boolean checkArgs = game != null && playerController != null;
 		if(!checkArgs) throw new IncorrectOperationException("Invalid arguments");
