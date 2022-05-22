@@ -18,10 +18,10 @@ public class ActivateJesterEffectOperation extends Operation{
 	 * Required students are those the player wants from the card,
 	 * given students are those from the player hall.
 	 *
-	 * @param game
-	 * @param playerController
-	 * @param requiredStudents
-	 * @param givenStudents
+	 * @param game the game state in which the player is in
+	 * @param playerController the player who's executing the operation
+	 * @param requiredStudents the students on the card that the player wants to put on the entrance
+	 * @param givenStudents the students on the entrance that the player wants to put on the card
 	 */
 	public ActivateJesterEffectOperation(Game game, PlayerController playerController,
 										 ArrayList<PawnColor> requiredStudents,

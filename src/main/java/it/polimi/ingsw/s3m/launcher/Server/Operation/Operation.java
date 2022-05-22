@@ -18,16 +18,16 @@ public abstract class Operation{
 
 	/**
 	 * common method to execute an operation
-	 * @throws PlayerNotInListException
-	 * @throws CloudNotInListException
-	 * @throws NotExpertModeException
-	 * @throws NotEnoughCoinsException
-	 * @throws NotPlayerTurnException
-	 * @throws ZeroTowersRemainedException
-	 * @throws NotEnoughIslandsException
-	 * @throws NotEnoughAssistantCardsException
-	 * @throws CharacterCardAlreadyActivatedException
-	 * @throws IncorrectOperationException
+	 * @throws PlayerNotInListException thrown if the player that executed the operation is not in the player list of the room
+	 * @throws CloudNotInListException thrown if the cloud selected is not in the list of clouds in the game
+	 * @throws NotExpertModeException thrown if the player tries to play a character card but the game is not in expert mode
+	 * @throws NotEnoughCoinsException thrown if the player doesn't have enough coins to play the selected character card
+	 * @throws NotPlayerTurnException thrown if the server receives an operation from a player that is not the current player turn
+	 * @throws ZeroTowersRemainedException thrown if a player finishes his towers
+	 * @throws NotEnoughIslandsException thrown if there are less than four islands in the game
+	 * @throws NotEnoughAssistantCardsException thrown if a player finishes his assistant cards
+	 * @throws CharacterCardAlreadyActivatedException thrown if a player tries to activate a character card that has already been played in the current turn
+	 * @throws IncorrectOperationException thrown if a player tries to do an operation that should not be done in the current phase or the player gives an invalid input
 	 */
 	public abstract void executeOperation() throws PlayerNotInListException, CloudNotInListException,
 			NotExpertModeException,

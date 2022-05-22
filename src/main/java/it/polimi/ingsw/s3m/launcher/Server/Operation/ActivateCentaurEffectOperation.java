@@ -11,6 +11,9 @@ public class ActivateCentaurEffectOperation extends Operation{
 		super(game, playerController);
 	}
 
+	/**
+	 * checks if the arguments of the operation are valid, if so it activates the centaur card effect
+	 */
 	@Override
 	public void executeOperation() throws PlayerNotInListException, NotExpertModeException,
 			NotEnoughCoinsException, CharacterCardAlreadyActivatedException, IncorrectOperationException {
