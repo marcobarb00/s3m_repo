@@ -295,6 +295,10 @@ public class Game{
 		turn.setPhaseName("ActionPhase");
 	}
 
+	public void setPlayerMotherNatureMaxAllowedMovements(String playerNickname){
+		turn.setMotherNatureMaxAllowedMovements(turn.getPlayedCards().get(playerNickname).getMovements());
+	}
+
 	// WINNING CONDITIONS
 
 	/**
@@ -407,7 +411,7 @@ public class Game{
 		for(CharacterCard characterCard : characterCardsList)
 			if(characterCard instanceof MagicPostman) magicPostman = characterCard;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
-		chosenPlayer.getLastPlayedCard().incrementMovementsByTwo();
+		turn.setMotherNatureMaxAllowedMovements(turn.getMotherNatureMaxAllowedMovements() + 2);
 		chosenPlayer.removeCoins(magicPostman.getCost());
 		magicPostman.incrementCost();
 		turn.setActivatedCharacterCard(true);

@@ -557,11 +557,14 @@ class GameTest {
         game.getCharacterCardsList().add(new Knight());
         Player player1 = game.getPlayerHashMap().get("player1");
         game.playAssistantCard("player1", 9);           //cheetah
+        game.getTurn().setMotherNatureMaxAllowedMovements(AssistantCard.CHEETAH.getMovements());
 
         //check state before call
         player1.addCoins(2);
         assertEquals(3, player1.getCoins());
         assertFalse(game.getTurn().isActivatedCharacterCard());
+        assertEquals(5, player1.getLastPlayedCard().getMovements());
+        assertEquals(5, game.getTurn().getMotherNatureMaxAllowedMovements());
 
         game.activateMagicPostmanEffect("player1");
 
@@ -569,7 +572,8 @@ class GameTest {
         assertEquals(2, player1.getCoins());
         assertEquals(2, game.getCharacterCardsList().get(0).getCost());
         assertTrue(game.getTurn().isActivatedCharacterCard());
-        assertEquals(7, player1.getLastPlayedCard().getMovements());
+        assertEquals(5, player1.getLastPlayedCard().getMovements());
+        assertEquals(7, game.getTurn().getMotherNatureMaxAllowedMovements());
     }
 
     @Test

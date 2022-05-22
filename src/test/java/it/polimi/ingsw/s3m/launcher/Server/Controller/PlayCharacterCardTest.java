@@ -1267,8 +1267,10 @@ public class PlayCharacterCardTest {
         room.getGameState().getCharacterCardsList().add(new MagicPostman());
         assertEquals(1, room.getGameState().getCharacterCardsList().size());
         room.getGameState().getPlayerHashMap().get("FirstPlayer").setLastPlayedCard(AssistantCard.DOG);
+        room.getGameState().getTurn().setMotherNatureMaxAllowedMovements(room.getGameState().getPlayerHashMap().get("FirstPlayer").getLastPlayedCard().getMovements());
 
         assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getLastPlayedCard().getMovements());
+        assertEquals(2, room.getGameState().getTurn().getMotherNatureMaxAllowedMovements());
         assertEquals(1, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
         assertEquals(1, room.getGameState().getCharacterCardsList().get(0).getCost());
         assertFalse(room.getGameState().isCharacterCardActivated());
@@ -1276,7 +1278,8 @@ public class PlayCharacterCardTest {
         PlayCharacterCardResponse playCharacterCardResponse = new PlayCharacterCardResponse(0);
         room.playCharacterCard(player, playCharacterCardResponse);
 
-        assertEquals(4, room.getGameState().getPlayerHashMap().get("FirstPlayer").getLastPlayedCard().getMovements());
+        assertEquals(2, room.getGameState().getPlayerHashMap().get("FirstPlayer").getLastPlayedCard().getMovements());
+        assertEquals(4, room.getGameState().getTurn().getMotherNatureMaxAllowedMovements());
         assertEquals(0, room.getGameState().getPlayerHashMap().get("FirstPlayer").getCoins());
         assertEquals(2, room.getGameState().getCharacterCardsList().get(0).getCost());
         assertTrue(room.getGameState().isCharacterCardActivated());

@@ -119,6 +119,7 @@ public class Room{
 					gameState.setCurrentPlayerNickname(currentPlayer.getNickname());
 
 					try{
+						gameState.setPlayerMotherNatureMaxAllowedMovements(currentPlayer.getNickname());
 						actionPhase(currentPlayer);
 						gameState.resetComputeDominance();
 					}catch(NotEnoughAssistantCardsException e){
