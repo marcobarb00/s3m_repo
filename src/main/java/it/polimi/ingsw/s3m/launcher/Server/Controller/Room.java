@@ -339,8 +339,8 @@ public class Room{
 				characterCardOperation = new ActivateKnightEffectOperation(gameState, player);
 				break;
 			case "Minstrel":
-				ArrayList<PawnColor> studentsToPutOnEntrance = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
-				ArrayList<PawnColor> studentsToPutOnTables = mapper.StringListToColor(playCharacterCardResponse.getStudentsToPutOn());
+				ArrayList<PawnColor> studentsToPutOnEntrance = mapper.stringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
+				ArrayList<PawnColor> studentsToPutOnTables = mapper.stringListToColor(playCharacterCardResponse.getStudentsToPutOn());
 				characterCardOperation = new ActivateMinstrelEffectOperation(gameState, player, studentsToPutOnEntrance, studentsToPutOnTables);
 				break;
 			case "Mushroomer":
@@ -348,8 +348,8 @@ public class Room{
 						mapper.stringToColor(playCharacterCardResponse.getNonInfluencingColor()));
 				break;
 			case "Jester":
-				ArrayList<PawnColor> studentsToGetFromJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
-				ArrayList<PawnColor> studentsToPutOnJester = mapper.StringListToColor(playCharacterCardResponse.getStudentsToPutOn());
+				ArrayList<PawnColor> studentsToGetFromJester = mapper.stringListToColor(playCharacterCardResponse.getStudentsToGetFrom());
+				ArrayList<PawnColor> studentsToPutOnJester = mapper.stringListToColor(playCharacterCardResponse.getStudentsToPutOn());
 				characterCardOperation = new ActivateJesterEffectOperation(gameState, player, studentsToGetFromJester, studentsToPutOnJester);
 				break;
 			case "MagicPostman":
