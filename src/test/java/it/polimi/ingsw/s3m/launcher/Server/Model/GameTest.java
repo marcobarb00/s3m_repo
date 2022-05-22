@@ -1,9 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Model;
 
-import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NotEnoughAssistantCardsException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.NullWinnerException;
-import it.polimi.ingsw.s3m.launcher.Server.Exception.TieException;
+import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.CentaurComputeDominance;
 import it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance.KnightComputeDominance;
@@ -756,6 +753,53 @@ class GameTest {
         assertEquals(0, player1.getDashboard().getEntrance().get(PawnColor.GREEN));
         assertEquals(0, player1.getDashboard().getEntrance().get(PawnColor.BLUE));
         assertEquals(3, player1.getDashboard().getEntrance().get(PawnColor.YELLOW));
+    }
+
+    @Test
+    void moveMotherNatureEasyTest() throws EmptyBagException,
+            ZeroTowersRemainedException, NotEnoughIslandsException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+
+        //setting state
+        HashMap<PawnColor, Player> professors = game.getProfessorsHashMap();
+        professors.replace(PawnColor.RED, player1);
+        Island island1 = game.getIslandsList().get(1);
+        island1.addStudent(PawnColor.RED);
+        player1.getDashboard().getTables().replace(PawnColor.RED,2);
+
+        game.moveMotherNature(1);
+
+        //check after call
+        assertEquals(1, game.getMotherNature().getCurrentPosition());
+        assertEquals(player1, island1.getDominator());
+    }
+
+    @Test
+    void moveMotherNatureHardTest() throws EmptyBagException,
+            ZeroTowersRemainedException, NotEnoughIslandsException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
+        Game game = new Game(players, true);
+        Player player1 = game.getPlayerHashMap().get("player1");
+        Player player2 = game.getPlayerHashMap().get("player2");
+
+        //setting state
+        HashMap<PawnColor, Player> professors = game.getProfessorsHashMap();
+        professors.replace(PawnColor.RED, player1);
+        professors.replace(PawnColor.BLUE, player1);
+        Island island1 = game.getIslandsList().get(1);
+        island1.addStudent(PawnColor.RED);
+        island1.addStudent(PawnColor.RED);
+        island1.addStudent(PawnColor.BLUE);
+        player1.getDashboard().getTables().replace(PawnColor.RED,2);
+        player2.getDashboard().getTables().replace(PawnColor.BLUE,2);
+
+        game.moveMotherNature(1);
+
+        //check after call
+        assertEquals(1, game.getMotherNature().getCurrentPosition());
+        assertEquals(player1, island1.getDominator());
     }
 
 }
