@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Communication.DTO;
+package it.polimi.ingsw.s3m.launcher.DTOs;
 
 import java.io.Serializable;
 

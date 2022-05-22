@@ -22,6 +22,6 @@ module it.polimi.ingsw.s3m.launcher{
     opens it.polimi.ingsw.s3m.launcher.Client.Response to javafx.fxml;
     exports it.polimi.ingsw.s3m.launcher.Client.Response;
 
-    opens it.polimi.ingsw.s3m.launcher.Communication to javafx.fxml;
-    exports it.polimi.ingsw.s3m.launcher.Communication;
+    opens it.polimi.ingsw.s3m.launcher.DTOs to javafx.fxml;
+    exports it.polimi.ingsw.s3m.launcher.DTOs;
 }

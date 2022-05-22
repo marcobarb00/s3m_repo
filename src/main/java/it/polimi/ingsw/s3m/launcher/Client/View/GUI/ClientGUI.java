@@ -1,8 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Network.Client;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.Server.Message.Message;
+import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import javafx.application.Platform;
 
 public class ClientGUI extends Thread{

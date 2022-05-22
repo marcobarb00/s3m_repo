@@ -3,7 +3,7 @@ package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.MoveMotherNatureResponse;
 import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.MoveMotherNatureMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
