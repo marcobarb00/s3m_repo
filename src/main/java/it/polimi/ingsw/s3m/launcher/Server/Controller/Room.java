@@ -1,8 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Server.Controller;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.*;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.Mapper;
-import it.polimi.ingsw.s3m.launcher.Communication.Response;
+import it.polimi.ingsw.s3m.launcher.DTOs.Mapper;
+import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Exception.*;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;

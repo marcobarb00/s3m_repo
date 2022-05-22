@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,8 +34,8 @@ public class MushroomerGUI{
 		if(isAColor(colorOfStudent1.getValue()))
 			nonInfluencingColor = colorOfStudent1.getValue();
 
-		ControllerGUI.getInstance().getPlayCharacterCardResponse().setNonInfluencingColor(nonInfluencingColor);
-		ControllerGUI.getInstance().sendCharacterCardResponse();
+		SceneHandlerGUI.getInstance().getPlayCharacterCardResponse().setNonInfluencingColor(nonInfluencingColor);
+		SceneHandlerGUI.getInstance().sendCharacterCardResponse();
 	}
 
 	private boolean isAColor(String string){
@@ -46,7 +45,7 @@ public class MushroomerGUI{
 	}
 
 	public void back(MouseEvent mouseEvent){
-		ControllerGUI.getInstance().sendResponse(new BackResponse());
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new BackResponse());
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 }

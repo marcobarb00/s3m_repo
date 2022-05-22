@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,7 +76,7 @@ public class JesterGUI{
 		List<ImageView> jesterStudentsImageView = Arrays.asList(jesterStudentOne, jesterStudentTwo, jesterStudentThree,
 				jesterStudentFour, jesterStudentFive, jesterStudentSix);
 
-		ArrayList<String> studentsOnJester = ControllerGUI.getInstance().getJesterStudents();
+		ArrayList<String> studentsOnJester = SceneHandlerGUI.getInstance().getJesterStudents();
 
 		for(int i = 0; i < studentsOnJester.size(); i++){
 			Image studentImage = new Image(studentsOnJester.get(i) + "Stud.png");
@@ -103,9 +102,9 @@ public class JesterGUI{
 		if(isAColor(colorOfChange3.getValue()))
 			studentsToPutOnJester.add(colorOfChange3.getValue());
 
-		ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToPutOn(studentsToPutOnJester);
-		ControllerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToGetFrom(studentsToGetFromJester);
-		ControllerGUI.getInstance().sendCharacterCardResponse();
+		SceneHandlerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToPutOn(studentsToPutOnJester);
+		SceneHandlerGUI.getInstance().getPlayCharacterCardResponse().setStudentsToGetFrom(studentsToGetFromJester);
+		SceneHandlerGUI.getInstance().sendCharacterCardResponse();
 	}
 
 	private boolean isAColor(String string){
@@ -115,7 +114,7 @@ public class JesterGUI{
 	}
 
 	public void back(MouseEvent mouseEvent){
-		ControllerGUI.getInstance().sendResponse(new BackResponse());
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new BackResponse());
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 }

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Server.Message;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
-import it.polimi.ingsw.s3m.launcher.Communication.Notification;
 
 public class NotificationMessage implements Notification{
 	private final String message;

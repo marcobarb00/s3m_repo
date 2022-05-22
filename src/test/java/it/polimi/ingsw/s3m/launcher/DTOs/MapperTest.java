@@ -1,4 +1,4 @@
-package it.polimi.ingsw.s3m.launcher.Communication.DTO;
+package it.polimi.ingsw.s3m.launcher.DTOs;
 
 import it.polimi.ingsw.s3m.launcher.Server.Exception.EmptyBagException;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.*;

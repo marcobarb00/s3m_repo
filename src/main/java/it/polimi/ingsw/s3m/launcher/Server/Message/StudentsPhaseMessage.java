@@ -1,8 +1,7 @@
 package it.polimi.ingsw.s3m.launcher.Server.Message;
 
 import it.polimi.ingsw.s3m.launcher.Client.View.View;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.Message;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
 
 public class StudentsPhaseMessage implements Message{
 	private final GameDTO gameState;

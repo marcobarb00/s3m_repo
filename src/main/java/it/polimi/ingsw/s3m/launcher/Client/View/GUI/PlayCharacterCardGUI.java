@@ -1,9 +1,8 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.BackResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.CharacterCardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.CharacterCardDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.PlayCharacterCardMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,8 +59,8 @@ public class PlayCharacterCardGUI{
 	}
 
 	public void back(MouseEvent mouseEvent){
-		ControllerGUI.getInstance().sendResponse(new BackResponse());
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new BackResponse());
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 
 	public void chooseCharacter(MouseEvent mouseEvent){
@@ -73,7 +72,7 @@ public class PlayCharacterCardGUI{
 		if(name.equals("thirdCharacter"))
 			characterCardPosition = 2;
 
-		ControllerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
+		SceneHandlerGUI.getInstance().getPlayCharacterCardResponse().setCharacterCardPosition(characterCardPosition);
 		String characterName = cards.get(characterCardPosition).getName();
 		switch(characterName){
 			case "Jester":
@@ -84,17 +83,17 @@ public class PlayCharacterCardGUI{
 					}
 				});
 
-				ControllerGUI.getInstance().setJesterStudents(studentsOnJester);
-				ControllerGUI.getInstance().launchJester();
+				SceneHandlerGUI.getInstance().setJesterStudents(studentsOnJester);
+				SceneHandlerGUI.getInstance().launchJester();
 				break;
 			case "Minstrel":
-				ControllerGUI.getInstance().launchMinstrel();
+				SceneHandlerGUI.getInstance().launchMinstrel();
 				break;
 			case "Mushroomer":
-				ControllerGUI.getInstance().launchMushroomer();
+				SceneHandlerGUI.getInstance().launchMushroomer();
 				break;
 			default:
-				ControllerGUI.getInstance().sendCharacterCardResponse();
+				SceneHandlerGUI.getInstance().sendCharacterCardResponse();
 				break;
 		}
 	}

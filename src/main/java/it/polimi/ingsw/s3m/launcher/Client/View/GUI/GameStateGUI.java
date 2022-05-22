@@ -1,9 +1,9 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.CloudDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.DashboardDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.GameDTO;
-import it.polimi.ingsw.s3m.launcher.Communication.DTO.IslandDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.CloudDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.DashboardDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
+import it.polimi.ingsw.s3m.launcher.DTOs.IslandDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
