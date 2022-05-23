@@ -68,7 +68,8 @@ public class Mapper{
 		if(player == null){
 			return new PlayerDTO("", "", null, null, null);
 		}
-		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()), assistantCardListToDTO(player.getHand()), assistantCardToDTO(player.getLastPlayedCard()));
+		return new PlayerDTO(player.getNickname(), player.getColor().name(), dashboardToDTO(player.getDashboard()),
+				assistantCardListToDTO(player.getHand()), assistantCardToDTO(player.getLastPlayedCard()));
 	}
 
 	public IslandDTO islandToDTO(Island island){
@@ -141,7 +142,8 @@ public class Mapper{
 		HashMap<String, AssistantCardDTO> playedCards = new HashMap<>();
 		turn.getPlayedCards().forEach((nickname, card) -> playedCards.put(nickname, assistantCardToDTO(card)));
 
-		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards, turn.isActivatedCharacterCard(), turn.getMotherNatureMaxAllowedMovements());
+		return new TurnDTO(turn.getFirstPlayerNickname(), turn.getCurrentPlayerNickname(), turn.getPhaseName(), playedCards,
+				turn.isActivatedCharacterCard(), turn.getMotherNatureMaxAllowedMovements());
 	}
 
 	public GameDTO gameToDTO(Game game){

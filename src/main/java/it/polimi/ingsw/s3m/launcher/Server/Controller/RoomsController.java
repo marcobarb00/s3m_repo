@@ -15,14 +15,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class RoomsController{
-	private static final RoomsController instance = null;
-	private final static HashMap<Integer, Room> rooms = new HashMap<>();
-
-	private RoomsController(){
-	}
+	private static RoomsController instance = null;
+	private final HashMap<Integer, Room> rooms = new HashMap<>();
 
 	public static RoomsController instance(){
-		return Objects.requireNonNullElseGet(instance, RoomsController::new);
+		if(instance == null){
+			instance = new RoomsController();
+		}
+		return instance;
 	}
 
 	public void login(PlayerController player){
