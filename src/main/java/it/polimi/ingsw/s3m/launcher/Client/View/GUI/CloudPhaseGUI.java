@@ -1,7 +1,6 @@
 package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.CloudResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUIController.ControllerGUI;
 import it.polimi.ingsw.s3m.launcher.DTOs.GameDTO;
 import it.polimi.ingsw.s3m.launcher.Server.Message.CloudPhaseMessage;
 import javafx.event.ActionEvent;
@@ -33,7 +32,7 @@ public class CloudPhaseGUI extends GameStateGUI{
 		}catch(NumberFormatException e){
 			cloudChoice = -1;
 		}
-		ControllerGUI.getInstance().sendResponse(new CloudResponse(cloudChoice));
-		ControllerGUI.getInstance().startLoading();
+		SceneHandlerGUI.getInstance().sendResponse(new CloudResponse(cloudChoice));
+		SceneHandlerGUI.getInstance().startLoading();
 	}
 }

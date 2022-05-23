@@ -4,7 +4,6 @@ import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.CharacterCard;
 import it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards.Jester;
 import it.polimi.ingsw.s3m.launcher.Server.Model.Game;
 import it.polimi.ingsw.s3m.launcher.Server.Model.GameElements.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -53,7 +52,7 @@ public class Mapper{
 	}
 
 	public DashboardDTO dashboardToDTO(Dashboard dashboard){
-		if(dashboard == null) return null;
+		if(dashboard == null) return new DashboardDTO(null, null, 0);
 
 		HashMap<String, Integer> entrance = new HashMap<>();
 		dashboard.getEntrance().forEach((color, value) -> entrance.put(color.name(), value));
@@ -73,35 +72,34 @@ public class Mapper{
 	}
 
 	public IslandDTO islandToDTO(Island island){
+		if (island == null) return new IslandDTO(null, "", "", 0);
 		HashMap<String, Integer> students = new HashMap<>();
-		for(PawnColor color : PawnColor.values()){
+		for(PawnColor color : PawnColor.values())
 			students.put(color.name(), island.getStudents().get(color));
-		}
 
-		if(island.getDominator() == null){
-			return new IslandDTO(students, "", "", 0);
-		}
+		if(island.getDominator() == null) return new IslandDTO(students, "", "", 0);
 
 		return new IslandDTO(students, island.getDominator().getNickname(),
 				island.getDominator().getColor().name(), island.getNumberOfTowers());
 	}
 
 	public ArrayList<IslandDTO> islandListToDTO(ArrayList<Island> islandsList){
+		if (islandsList == null) return null;
 		ArrayList<IslandDTO> islandDTOList = new ArrayList<>();
-		for(Island island : islandsList){
-			islandDTOList.add(islandToDTO(island));
-		}
+		for(Island island : islandsList) islandDTOList.add(islandToDTO(island));
 
 		return islandDTOList;
 	}
 
 	public HashMap<String, Integer> pawnColorHashMapToStringHashMap(HashMap<PawnColor, Integer> pawnColorHashMap){
+		if (pawnColorHashMap == null) return null;
 		HashMap<String, Integer> stringHashMap = new HashMap<>();
 		pawnColorHashMap.forEach(((pawnColor, value) -> stringHashMap.put(pawnColor.name(), value)));
 		return stringHashMap;
 	}
 
 	public CharacterCardDTO characterCardToDTO(CharacterCard characterCard){
+		if (characterCard == null) return new CharacterCardDTO("", 0, null);
 		if(characterCard instanceof Jester){
 			HashMap<String, Integer> studentsOnCard = pawnColorHashMapToStringHashMap(((Jester) characterCard).getStudentsOnCard());
 			return new CharacterCardDTO(characterCard.getName(), characterCard.getCost(), studentsOnCard);
@@ -110,15 +108,16 @@ public class Mapper{
 	}
 
 	public ArrayList<CharacterCardDTO> characterCardListToDTO(ArrayList<CharacterCard> characterCardList){
+		if (characterCardList == null) return null;
 		ArrayList<CharacterCardDTO> characterCardDTOList = new ArrayList<>();
-		for(CharacterCard island : characterCardList){
-			characterCardDTOList.add(characterCardToDTO(island));
-		}
+		for(CharacterCard characterCard : characterCardList)
+			characterCardDTOList.add(characterCardToDTO(characterCard));
 
 		return characterCardDTOList;
 	}
 
 	public CloudDTO cloudToDTO(Cloud cloud){
+		if (cloud == null) return new CloudDTO(null);
 		ArrayList<String> students = cloud.getStudents().stream()
 				.map(Student::getColor)
 				.map(Enum::name)
@@ -128,16 +127,15 @@ public class Mapper{
 	}
 
 	public ArrayList<CloudDTO> cloudListToDTO(ArrayList<Cloud> cloudList){
+		if (cloudList == null) return null;
 		ArrayList<CloudDTO> cloudDTOList = new ArrayList<>();
-		for(Cloud cloud : cloudList){
-			cloudDTOList.add(cloudToDTO(cloud));
-		}
+		for(Cloud cloud : cloudList) cloudDTOList.add(cloudToDTO(cloud));
 
 		return cloudDTOList;
 	}
 
 	public TurnDTO turnToDTO(Turn turn){
-		if(turn == null) return null;
+		if(turn == null) return new TurnDTO("", "", "", null, false, 0);
 
 		HashMap<String, AssistantCardDTO> playedCards = new HashMap<>();
 		turn.getPlayedCards().forEach((nickname, card) -> playedCards.put(nickname, assistantCardToDTO(card)));
@@ -147,6 +145,8 @@ public class Mapper{
 	}
 
 	public GameDTO gameToDTO(Game game){
+		if (game == null) return new GameDTO(0, false, 0, null, null, null, null, null, null, null, null, null, null, null);
+
 		PlayerDTO currentPlayer = playerToDTO(game.getCurrentPlayer());
 
 		HashMap<String, DashboardDTO> dashboards = new HashMap<>();

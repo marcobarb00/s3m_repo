@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Jester extends CharacterCard{
-	private HashMap<PawnColor, Integer> studentsOnCard;
+	private HashMap<PawnColor, Integer> studentsOnCard = new HashMap<>();
 
 	public Jester(){
 		setName("Jester");
 		setCost(1);
-		studentsOnCard = new HashMap<>();
 		for(PawnColor color : PawnColor.values())
 			studentsOnCard.put(color, 0);
 	}

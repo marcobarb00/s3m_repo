@@ -1,8 +1,7 @@
-package it.polimi.ingsw.s3m.launcher.Client.View.GUIController;
+package it.polimi.ingsw.s3m.launcher.Client.View.GUI;
 
 import it.polimi.ingsw.s3m.launcher.Client.Response.NewRoomResponse;
 import it.polimi.ingsw.s3m.launcher.Client.Response.PlayCharacterCardResponse;
-import it.polimi.ingsw.s3m.launcher.Client.View.GUI.*;
 import it.polimi.ingsw.s3m.launcher.Client.Response.Response;
 import it.polimi.ingsw.s3m.launcher.Server.Message.*;
 import javafx.application.Platform;
@@ -16,10 +15,10 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerGUI{
+public class SceneHandlerGUI {
 
 	private ClientGUI thread;
-	private static ControllerGUI INSTANCE;
+	private static SceneHandlerGUI INSTANCE;
 	private Stage primaryStage;
 	private final Stage secondaryStage;
 	private LoadingScreenGUI loadingScreenGUI;
@@ -42,16 +41,16 @@ public class ControllerGUI{
 	private MoveMotherNatureGUI moveMotherNatureGUI;
 	private CloudPhaseGUI cloudPhaseGUI;
 
-	private ControllerGUI(){
+	private SceneHandlerGUI(){
 		secondaryStage = new Stage();
 		secondaryStage.setTitle("Eriantys");
 		secondaryStage.getIcons().add(new Image("eriantysImage.png"));
 		//secondaryStage.setResizable(false);
 	}
 
-	public static ControllerGUI getInstance(){
+	public static SceneHandlerGUI getInstance(){
 		if(INSTANCE == null)
-			INSTANCE = new ControllerGUI();
+			INSTANCE = new SceneHandlerGUI();
 		return INSTANCE;
 	}
 
@@ -63,17 +62,6 @@ public class ControllerGUI{
 
 		this.primaryStage = primaryStage;
 		primaryStage.initStyle(StageStyle.UNDECORATED);
-		/*
-		Parent root = null;
-		try {
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("FirstImage.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		primaryStage.setScene(new Scene(root));
-		primaryStage.centerOnScreen();
-		primaryStage.show();
-		*/
 		thread = new ClientGUI();
 		thread.start();
 		loadingScreenGUI = new LoadingScreenGUI(secondaryStage);
@@ -315,7 +303,7 @@ public class ControllerGUI{
 	}
 
 	public void sendCharacterCardResponse(){
-		this.sendResponse(ControllerGUI.getInstance().getPlayCharacterCardResponse());
+		this.sendResponse(SceneHandlerGUI.getInstance().getPlayCharacterCardResponse());
 		this.startLoading();
 	}
 
