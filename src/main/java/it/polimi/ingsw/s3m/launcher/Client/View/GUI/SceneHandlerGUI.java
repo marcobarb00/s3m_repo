@@ -23,7 +23,6 @@ public class SceneHandlerGUI {
 	private final Stage secondaryStage;
 	private LoadingScreenGUI loadingScreenGUI;
 	private ErrorGUI errorGui;
-	private NewRoomGUI newRoomGUI;
 	private EnterRoomGUI enterRoomGUI;
 	private NotificationGUI notificationGUI;
 	private JesterGUI jesterGUI;
