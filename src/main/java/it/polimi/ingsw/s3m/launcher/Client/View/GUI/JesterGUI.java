@@ -52,8 +52,6 @@ public class JesterGUI{
 	@FXML
 	ImageView jesterStudentSix;
 
-	//TODO SHOW STUDENTS ON CARD
-
 	public void showJesterInfo(){
 		colorOfStudent1.setValue("Choose the student color");
 		colorOfStudent1.setItems(colorList);

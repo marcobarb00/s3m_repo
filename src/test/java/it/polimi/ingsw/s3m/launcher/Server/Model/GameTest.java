@@ -631,7 +631,6 @@ class GameTest {
         assertEquals(1, player1.getDashboard().getTables().get(PawnColor.YELLOW));
     }
 
-    //TODO Test not finished yet
     @Test
     void activateMushroomerEffect2Players() throws EmptyBagException, NotEnoughAssistantCardsException {
         ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
