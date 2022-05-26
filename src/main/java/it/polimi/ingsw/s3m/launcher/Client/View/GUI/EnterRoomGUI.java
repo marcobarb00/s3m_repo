@@ -20,8 +20,6 @@ public class EnterRoomGUI{
 	@FXML
 	TextField nickname;
 	@FXML
-	TextField roomID;
-	@FXML
 	ImageView backgroundImage;
 	@FXML
 	GridPane gridPane;
