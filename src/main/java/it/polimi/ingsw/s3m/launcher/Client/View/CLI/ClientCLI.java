@@ -17,7 +17,6 @@ public class ClientCLI{
 
 		while(true){
 			try{
-				//TODO client read in a thread
 				Message receivedMessage = client.receiveMessage();
 				receivedMessage.apply(view);
 				if(receivedMessage instanceof Notification){

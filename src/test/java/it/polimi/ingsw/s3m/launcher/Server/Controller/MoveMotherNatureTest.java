@@ -100,6 +100,10 @@ public class MoveMotherNatureTest {
     void rightValueOfMotherNatureMovementInPlayerResponseUpdatesMotherNaturePositionInGame() throws NotPlayerTurnException, BackException, ZeroTowersRemainedException, PlayerNotInListException, IncorrectOperationException, NotEnoughIslandsException {
         room.getGameState().getPlayerHashMap().get(player.getNickname()).setLastPlayedCard(AssistantCard.OCTOPUS);
         assertEquals(2, room.getGameState().getPlayerHashMap().get(player.getNickname()).getLastPlayedCard().getMovements());
+        room.getGameState().getTurn().getPlayedCards().put(player.getNickname(), AssistantCard.OCTOPUS);
+        assertEquals(2, room.getGameState().getTurn().getPlayedCards().get(player.getNickname()).getMovements());
+        room.getGameState().setPlayerMotherNatureMaxAllowedMovements(player.getNickname());
+        assertEquals(2, room.getGameState().getTurn().getMotherNatureMaxAllowedMovements());
         assertEquals(0, room.getGameState().getMotherNature().getCurrentPosition());
 
         MoveMotherNatureResponse moveMotherNatureResponse = new MoveMotherNatureResponse(2);
