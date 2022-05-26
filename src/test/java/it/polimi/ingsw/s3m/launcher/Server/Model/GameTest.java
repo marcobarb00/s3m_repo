@@ -398,7 +398,7 @@ class GameTest {
     }
 
     @Test
-    void zeroTowersLeftWinCondition2Players() throws EmptyBagException, TieException, NullWinnerException {
+    void zeroTowersLeftWinCondition2Players() throws EmptyBagException, NullWinnerException {
         //2 players
         ArrayList<String> players = new ArrayList<>(Arrays.asList("player1", "player2"));
         Game game = new Game(players, true);
@@ -441,7 +441,6 @@ class GameTest {
         assertEquals(0, player1.getCoins());
         assertEquals(4, game.getCharacterCardsList().get(0).getCost());
         assertTrue(game.getTurn().isActivatedCharacterCard());
-        assertTrue(game.getComputeDominanceStrategy() instanceof CentaurComputeDominance);
     }
 
     @Test
