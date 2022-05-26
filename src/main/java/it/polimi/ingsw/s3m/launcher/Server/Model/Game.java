@@ -566,7 +566,9 @@ public class Game{
 		int additionalCoins;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		additionalCoins = chosenPlayer.getDashboard().moveSingleStudentFromEntranceToTables(studentColor);
-		chosenPlayer.addCoins(additionalCoins);
+		if(expertMode){
+			chosenPlayer.addCoins(additionalCoins);
+		}
 		computeProfessorsDominance();
 		turn.incrementMovedStudents();
 	}
