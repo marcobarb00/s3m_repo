@@ -973,8 +973,6 @@ public class GameStateGUI{
 
 		List<List<ImageView>> cloudList = Arrays.asList(cloudOne, cloudTwo, cloudThree);
 
-		//TODO character cards???
-
 
 		//print islands
 		ArrayList<IslandDTO> islandList = gameState.getIslands();
