@@ -1,0 +1,10 @@
+it.polimi.ingsw.s3m.launcher.Server.Controller
+it.polimi.ingsw.s3m.launcher.Server.Exception
+it.polimi.ingsw.s3m.launcher.Server.Message
+it.polimi.ingsw.s3m.launcher.Server.Model
+it.polimi.ingsw.s3m.launcher.Server.Model.CharacterCards
+it.polimi.ingsw.s3m.launcher.Server.Model.ComputeDominance
+it.polimi.ingsw.s3m.launcher.Server.Model.GameElements
+it.polimi.ingsw.s3m.launcher.Server.Model.Initializers
+it.polimi.ingsw.s3m.launcher.Server.Network
+it.polimi.ingsw.s3m.launcher.Server.Operation
