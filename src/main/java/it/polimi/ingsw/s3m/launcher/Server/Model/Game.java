@@ -459,7 +459,7 @@ public class Game{
 		chosenPlayer.getDashboard().addStudentsInEntrance(enteringEntranceStudents);
 		chosenPlayer.getDashboard().deleteStudentsFromTables(enteringEntranceStudents);
 		additionalCoins = chosenPlayer.getDashboard().moveStudentsFromEntranceToTables(enteringTablesStudents);
-		chosenPlayer.addCoins(additionalCoins);
+		if (expertMode) chosenPlayer.addCoins(additionalCoins);
 		chosenPlayer.removeCoins(minstrel.getCost());
 		minstrel.incrementCost();
 		turn.setActivatedCharacterCard(true);
@@ -566,9 +566,7 @@ public class Game{
 		int additionalCoins;
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		additionalCoins = chosenPlayer.getDashboard().moveSingleStudentFromEntranceToTables(studentColor);
-		if(expertMode){
-			chosenPlayer.addCoins(additionalCoins);
-		}
+		if (expertMode) chosenPlayer.addCoins(additionalCoins);
 		computeProfessorsDominance();
 		turn.incrementMovedStudents();
 	}
@@ -616,11 +614,6 @@ public class Game{
 		return chosenPlayer.getHand();
 	}
 
-	public AssistantCard getPlayerLastPlayedAssistantCard(String playerNickname){
-		Player chosenPlayer = playerHashMap.get(playerNickname);
-		return chosenPlayer.getLastPlayedCard();
-	}
-
 	public int getPlayerCoins(String playerNickname){
 		Player chosenPlayer = playerHashMap.get(playerNickname);
 		return chosenPlayer.getCoins();
@@ -643,14 +636,6 @@ public class Game{
 		return turn.getFirstPlayerNickname();
 	}
 
-	public String getCurrentPlayerNickname(){
-		return turn.getCurrentPlayerNickname();
-	}
-
-	public String getCurrentPhase(){
-		return turn.getPhaseName();
-	}
-
 	public int getTurnMovedStudents(){
 		return turn.getMovedStudents();
 	}
@@ -666,14 +651,6 @@ public class Game{
 	// SETTER - Turn
 	public void setCurrentPlayerNickname(String nickname){
 		turn.setCurrentPlayerNickname(nickname);
-	}
-
-	public void setCurrentPhase(String phaseName){
-		turn.setPhaseName(phaseName);
-	}
-
-	public void resetTurnMovedStudents(){
-		turn.resetMovedStudents();
 	}
 
 	// GETTER
